@@ -9,6 +9,11 @@ public class Encounter : MonoBehaviour
 
     SpawnManagerSingleton sms;
 
+    void Awake()
+    {
+        if(label == "LABEL_ME!(>:|)="){ Debug.LogError("ENCOUNTER MISSING LABEL!!"); }
+    }
+
     void StartEncounter()
     {
         Debug.Log("Trigger spawn!");
