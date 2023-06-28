@@ -50,7 +50,6 @@ public class EntitySpawnEditor : Editor
         EntitySpawner spawnNode = (EntitySpawner)target;
 
         base.OnInspectorGUI();
-        d
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Spawner Custom Inspector");
         if (enemyNames.Length > 0){
