@@ -1,0 +1,26 @@
+using UnityEngine;
+using UnityEditor;
+
+namespace ThisIsNotMadeByUnity{
+public class CustomInspector
+{
+    public static void Line(Color color, int thickness = 2, int padding = 15)
+    {
+        Rect r = EditorGUILayout.GetControlRect(GUILayout.Height(padding + thickness));
+        r.height = thickness;
+        r.y += padding / 2;
+        r.x -= 2;
+        EditorGUI.DrawRect(r, color);
+    }
+}
+}
+
+namespace GrimEnigma{
+    namespace EnemyStates{ 
+        enum AIState{
+            idle,
+            chase,
+            attack
+        }
+    }
+}
