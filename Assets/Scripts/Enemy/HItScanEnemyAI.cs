@@ -6,13 +6,14 @@ using GrimEnigma.EnemyStates;
 public class HItScanEnemyAI : MonoBehaviour
 {
     [SerializeField] float sightRange;
-    [SerializeField] NavMeshAgent agent;
     Transform target;
     [SerializeField] LayerMask whatIsGround, whatIsTarget;
     [SerializeField] float attackRange;
     [SerializeField] int damage;
     [SerializeField] float drawTime;
     [SerializeField] float attackCoolDown;
+
+    NavMeshAgent agent;
 
     Transform targetTransform;
     Vector3 positionOfCollision;
@@ -25,7 +26,7 @@ public class HItScanEnemyAI : MonoBehaviour
 
     Vector3 walkPoint;
     bool walkPointSet;
-    float walkPointRange;
+    float walkPointRange = 100;
 
     AIState state = AIState.idle;
 
@@ -38,6 +39,7 @@ public class HItScanEnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //https://www.youtube.com/watch?v=UjkSFoLxesw
         switch (state)
         {
             case(AIState.chase):
@@ -50,18 +52,32 @@ public class HItScanEnemyAI : MonoBehaviour
                 Patrol();
                 break;
         }
-        //https://www.youtube.com/watch?v=UjkSFoLxesw
     }
 
     void Patrol()
     {
         Debug.Log("Patroling!");
+        if(!walkPointSet){ GetNewPosition(); }
+        if(walkPointSet){ agent.SetDestination(walkPoint); }
         if(Physics.CheckSphere(transform.position, sightRange, whatIsTarget)){ state = AIState.chase; }
+        if((transform.position - walkPoint).magnitude < 1){ walkPointSet = false; }
+    }
+
+    void GetNewPosition()
+    {
+        walkPoint  = new Vector3(
+                                transform.position.x + Random.Range(-walkPointRange, walkPointRange),
+                                transform.position.y + Random.Range(-walkPointRange, walkPointRange),
+                                transform.position.z + Random.Range(-walkPointRange, walkPointRange)
+                                );
+        
+        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){ walkPointSet = true; }
     }
 
     void ChaseTarget()
     {
         Debug.Log("Chasing!");
+        agent.SetDestination(target.position);
         IsTargetWithinAttackRange();
     }
     
@@ -69,6 +85,9 @@ public class HItScanEnemyAI : MonoBehaviour
     {
         Debug.Log("Attacking!");
         //Debug.Log("Checking attack at" + targetTransform.position);
+        agent.SetDestination(transform.position);
+        transform.LookAt(target);
+
         StartCoroutine(ResetAttackCooldown());
         
         // DO SOMETHING TO CAUSE WAKE UP
