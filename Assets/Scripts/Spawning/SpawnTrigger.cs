@@ -9,7 +9,7 @@ public class SpawnTrigger : MonoBehaviour
 
     SpawnManagerSingleton sms;
 
-    void OnAwake()
+    void Awake()
     {
         sms = GameObject.Find("SpawnMangerSingleton").GetComponent<SpawnManagerSingleton>();
     }
