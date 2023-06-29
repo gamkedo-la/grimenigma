@@ -14,12 +14,26 @@ public class Encounter : MonoBehaviour
         if(label == "LABEL_ME!(>:|)="){ Debug.LogError("ENCOUNTER MISSING LABEL!!"); }
     }
 
+    void OnEnable()
+    {
+        SpawnManagerSingleton.onAnnounceTrigger += CheckEncounter;
+    }
+
+    void OnDisable()
+    {
+        SpawnManagerSingleton.onAnnounceTrigger -= CheckEncounter;
+    }
+
+    public void CheckEncounter(string triggeredLabel)
+    {
+        if(triggeredLabel == label){ StartEncounter(); }
+    }
+
     void StartEncounter()
     {
-        Debug.Log("Trigger spawn!");
+        Debug.Log("Triggered ecounter " + label + "!");
         for(int i=0; i < linkedSpawns.Length; i++){
             linkedSpawns[i].TriggerSpawn();
         }
-        this.gameObject.SetActive(false);
     }
 }
