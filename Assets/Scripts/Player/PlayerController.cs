@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerMovement pBody;
+    [SerializeField] PlayerAttack pAttack;
     [SerializeField] PlayerCameraControl pCamera;
     [SerializeField] PlayerWeaponHandeling pHandeling;
     [SerializeField] HealthController pHealth;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(input.Player.Attack.IsInProgress()){ pAttack.Attack(); }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
         if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){
             pCamera.RotateCamera(input.Player.Camera.ReadValue<Vector2>());
