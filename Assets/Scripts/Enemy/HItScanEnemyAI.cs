@@ -56,7 +56,7 @@ public class HItScanEnemyAI : MonoBehaviour
 
     void Patrol()
     {
-        Debug.Log("Patroling!");
+        //Debug.Log("Patroling!");
         if(!walkPointSet){ GetNewPosition(); }
         if(walkPointSet){ agent.SetDestination(walkPoint); }
         if(Physics.CheckSphere(transform.position, sightRange, whatIsTarget)){ state = AIState.chase; }
@@ -76,14 +76,14 @@ public class HItScanEnemyAI : MonoBehaviour
 
     void ChaseTarget()
     {
-        Debug.Log("Chasing!");
+        //Debug.Log("Chasing!");
         agent.SetDestination(target.position);
         IsTargetWithinAttackRange();
     }
     
     private void AttackStart()
     {
-        Debug.Log("Attacking!");
+        //Debug.Log("Attacking!");
         //Debug.Log("Checking attack at" + targetTransform.position);
         agent.SetDestination(transform.position);
         transform.LookAt(target);
