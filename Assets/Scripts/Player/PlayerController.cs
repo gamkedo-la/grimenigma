@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
         if(input.Player.Attack.IsInProgress()){ pAttack.Attack(); }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
         if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){
-            pCamera.RotateCamera(input.Player.Camera.ReadValue<Vector2>());
             pHandeling.WeaponSway(input.Player.Camera.ReadValue<Vector2>(), input.Player.Movement.ReadValue<Vector2>());
         }
         else{

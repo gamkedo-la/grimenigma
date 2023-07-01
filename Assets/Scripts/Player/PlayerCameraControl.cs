@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCameraControl : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerCameraControl : MonoBehaviour
 
     float xRotation;
     float yRotation;
+    Vector2 mouseDelta;
     float mouseX;
     float mouseY;
     
@@ -24,17 +26,21 @@ public class PlayerCameraControl : MonoBehaviour
     // Update is called once per frame
     void Update(){
         // Move to player position.
+        RotateCamera();
         transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight), player.position.z);
     }
 
-    public void RotateCamera(Vector2 cameraInput){
-        mouseX = cameraInput.x * Time.deltaTime * verticalSense;
-        mouseY = cameraInput.y * Time.deltaTime * horizontalSense;
+    public void RotateCamera()
+    {
+        mouseDelta = Mouse.current.delta.ReadValue();
+        Debug.Log(mouseDelta);
+        mouseX = mouseDelta.x * Time.deltaTime * verticalSense;
+        mouseY = mouseDelta.y * Time.deltaTime * horizontalSense;
 
         yRotation += mouseX;
         xRotation = Mathf.Clamp((xRotation-mouseY), -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
         player.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 }
