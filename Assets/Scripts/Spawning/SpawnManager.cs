@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 public class SpawnManagerSingleton : MonoBehaviour
 {
-    SpawnTrigger[] linkedSpawns;
-    public delegate void AnnounceTrigger(string label);
-    public static event AnnounceTrigger onAnnounceTrigger;
+    Encounter[] encounters;
+    //public delegate void AnnounceTrigger(string label);
+    public static SpawnManagerSingleton sms;
+    public event Action<string> onSpawnTrigger;
 
     void Awake()
     {
-        linkedSpawns = FindObjectsOfType<SpawnTrigger>();
+        encounters = FindObjectsOfType<Encounter>();
+        sms = this;
     }
 
-    public void RecieveTrigger(string label)
+    public void SpawnTrigger(string label)
     {
-        onAnnounceTrigger?.Invoke(label);
+        onSpawnTrigger?.Invoke(label);
     }
 }

@@ -11,7 +11,14 @@ public class SpawnTrigger : MonoBehaviour
 
     void Awake()
     {
-        sms = GameObject.Find("SpawnMangerSingleton").GetComponent<SpawnManagerSingleton>();
+        sms = GameObject.Find("SpawnManagerSingleton").GetComponent<SpawnManagerSingleton>();
+    }
+
+    void OnTriggerEnter(Collider other){
+        if(other.tag == "Player"){
+            Debug.Log("Spawn " + enounterLabel + " triggered!");
+            sms.SpawnTrigger(enounterLabel);
+        }
     }
 
 
