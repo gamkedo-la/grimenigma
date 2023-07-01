@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class EntitySpawner : MonoBehaviour
 {
@@ -20,6 +23,7 @@ public class EntitySpawner : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(EntitySpawner))]
 public class EntitySpawnEditor : Editor
 {
@@ -65,3 +69,4 @@ public class EntitySpawnEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

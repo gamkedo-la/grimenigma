@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class SpawnTrigger : MonoBehaviour
 {
@@ -24,6 +27,7 @@ public class SpawnTrigger : MonoBehaviour
 
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(SpawnTrigger))]
 public class SpawnTriggerEditor : Editor
 {
@@ -59,3 +63,4 @@ public class SpawnTriggerEditor : Editor
         EditorGUILayout.EndHorizontal();
     }
 }
+#endif
