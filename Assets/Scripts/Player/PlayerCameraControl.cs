@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 public class PlayerCameraControl : MonoBehaviour
 {
     [Header("Camera Settings")]
-    [SerializeField] float verticalSense = 400;
-    [SerializeField] float horizontalSense = 400;
+    [SerializeField] float mouseVerticalSense = 5;
+    [SerializeField] float mouseHorizontalSense = 5;
+    [SerializeField] float stickVerticalSense = 200;
+    [SerializeField] float stickHorizontalSense = 200;
     [SerializeField] float cameraHeight = 32;
 
     [Header("Game Object Dependencies")]
@@ -13,18 +15,37 @@ public class PlayerCameraControl : MonoBehaviour
 
     float xRotation;
     float yRotation;
-    Vector2 mouseDelta;
+    Vector2 lookDelta;
     float mouseX;
     float mouseY;
+
+    PlayerInput input;
+
+    void OnEnable()
+    {
+        input.Enable();
+    }
+
+    void OnDisable()
+    {
+        input.Disable();
+    }
+
+    void Awake()
+    {
+        input = new PlayerInput();
+    }
     
     // Start is called before the first frame update
-    void Start(){
+    void Start()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
         // Move to player position.
         RotateCamera();
         transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight), player.position.z);
@@ -32,10 +53,15 @@ public class PlayerCameraControl : MonoBehaviour
 
     public void RotateCamera()
     {
-        mouseDelta = Mouse.current.delta.ReadValue();
-        Debug.Log(mouseDelta);
-        mouseX = mouseDelta.x * Time.deltaTime * verticalSense;
-        mouseY = mouseDelta.y * Time.deltaTime * horizontalSense;
+        // Had to do combine these vector to get the mouse delta working while also listing for controller inputs. A problem to fix later.
+        lookDelta = new Vector2(
+                                (input.Player.Camera.ReadValue<Vector2>().x * stickVerticalSense) + (Mouse.current.delta.ReadValue().x * mouseVerticalSense),
+                                (input.Player.Camera.ReadValue<Vector2>().y * stickHorizontalSense) + (Mouse.current.delta.ReadValue().y * mouseHorizontalSense)
+                               );
+                               
+        //Debug.Log(lookDelta);
+        mouseX = lookDelta.x * Time.deltaTime;
+        mouseY = lookDelta.y * Time.deltaTime;
 
         yRotation += mouseX;
         xRotation = Mathf.Clamp((xRotation-mouseY), -90f, 90f);

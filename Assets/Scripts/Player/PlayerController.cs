@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.K)){ pHealth.Damage(1); }
         if(Input.GetKeyDown(KeyCode.H)){ pHealth.Heal(1); }
+
+        if(input.Player.PauseMenu.IsPressed()){         
+            Application.Quit();
+            Debug.Log("Quit button clicked.");
+        }
     }
 
     void FixedUpdate()
