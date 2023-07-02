@@ -62,7 +62,7 @@ public class EntitySpawnEditor : Editor
                 Debug.LogError("Enemy Index of " + selectedEnemyIndex + " out of bounds. Resetting to 0!");
                 selectedEnemyIndex = 0;
             }
-            Debug.Log(selectedEnemyIndex);
+            //Debug.Log(selectedEnemyIndex);
             selectedEnemyIndex = EditorGUILayout.Popup(selectedEnemyIndex, enemyNames);
             spawnNode.entityToSpawn = enemyNames[selectedEnemyIndex];
         }
