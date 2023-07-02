@@ -1533,8 +1533,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584a5e4a4385cd24eb19f6545404b9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSense: 4.69
-  horizontalSense: 4.99
+  mouseVerticalSense: 5.3
+  mouseHorizontalSense: 5.07
+  stickVerticalSense: 200
+  stickHorizontalSense: 200
   cameraHeight: 2.6
   player: {fileID: 1511096711}
 --- !u!1 &1001398989
@@ -2671,7 +2673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9dee5ef1ec08f147b422a59c5ab0e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 20
   max: 15
   min: 0
 --- !u!114 &1511096722
