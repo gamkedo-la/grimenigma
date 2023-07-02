@@ -58,6 +58,11 @@ public class EntitySpawnEditor : Editor
         EditorGUILayout.LabelField("Spawner Custom Inspector");
         if (enemyNames.Length > 0){
             selectedEnemyIndex = enemyNameList.IndexOf(spawnNode.entityToSpawn);
+            if(selectedEnemyIndex < 0 || selectedEnemyIndex > enemyNames.Length){
+                Debug.LogError("Enemy Index of " + selectedEnemyIndex + " out of bounds. Resetting to 0!");
+                selectedEnemyIndex = 0;
+            }
+            Debug.Log(selectedEnemyIndex);
             selectedEnemyIndex = EditorGUILayout.Popup(selectedEnemyIndex, enemyNames);
             spawnNode.entityToSpawn = enemyNames[selectedEnemyIndex];
         }
