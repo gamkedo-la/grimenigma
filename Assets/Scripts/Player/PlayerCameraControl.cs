@@ -54,10 +54,17 @@ public class PlayerCameraControl : MonoBehaviour
     public void RotateCamera()
     {
         // Had to do combine these vector to get the mouse delta working while also listing for controller inputs. A problem to fix later.
+        /*
         lookDelta = new Vector2(
                                 (input.Player.Camera.ReadValue<Vector2>().x * stickVerticalSense) + (Mouse.current.delta.ReadValue().x * mouseVerticalSense),
                                 (input.Player.Camera.ReadValue<Vector2>().y * stickHorizontalSense) + (Mouse.current.delta.ReadValue().y * mouseHorizontalSense)
                                );
+        */
+
+        lookDelta = new Vector2(
+                                (Mouse.current.delta.ReadValue().x * mouseVerticalSense),
+                                (Mouse.current.delta.ReadValue().y * mouseHorizontalSense)
+                                );
                                
         //Debug.Log(lookDelta);
         mouseX = lookDelta.x * Time.deltaTime;
