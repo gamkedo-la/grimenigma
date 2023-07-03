@@ -53,6 +53,10 @@ public class SpawnTriggerEditor : Editor
         GUILayout.BeginHorizontal();
         if(encounterLabels.Length > 0){
             selectedEncounterIndex = System.Array.IndexOf(encounterLabels, trigger.enounterLabel);
+            if(selectedEncounterIndex < 0 || selectedEncounterIndex > encounterLabels.Length){
+                Debug.LogError("Encounter index of " + selectedEncounterIndex + " out of bounds. Setting to 0!");
+                selectedEncounterIndex = 0;
+            }
             selectedEncounterIndex = EditorGUILayout.Popup(selectedEncounterIndex, encounterLabels);
             trigger.enounterLabel = encounterLabels[selectedEncounterIndex];
         }
