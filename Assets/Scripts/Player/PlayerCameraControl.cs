@@ -47,7 +47,8 @@ public class PlayerCameraControl : MonoBehaviour
     void Update()
     {
         // Move to player position.
-        RotateCamera();
+        
+        if(input.Player.Camera.inProgress){RotateCamera();}
         transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight), player.position.z);
     }
 
@@ -62,8 +63,8 @@ public class PlayerCameraControl : MonoBehaviour
         */
 
         lookDelta = new Vector2(
-                                (Mouse.current.delta.ReadValue().x * mouseVerticalSense),
-                                (Mouse.current.delta.ReadValue().y * mouseHorizontalSense)
+                                (input.Player.Camera.ReadValue<Vector2>().x * mouseVerticalSense),
+                                (input.Player.Camera.ReadValue<Vector2>().y * mouseHorizontalSense)
                                 );
                                
         //Debug.Log(lookDelta);
