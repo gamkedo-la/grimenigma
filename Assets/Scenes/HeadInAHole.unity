@@ -2885,7 +2885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   step: 0.01
-  maxPositionStep: 1.02
+  maxPositionStep: 0.32
+  maxDistanaceFromCamera: 0.33
   smoothing: 10
   rotationStep: 12
   maxRotationStep: 10
