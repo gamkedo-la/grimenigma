@@ -4,12 +4,11 @@ public class PlayerWeaponHandeling : MonoBehaviour
 {
     [Header("Position Sway")]
     [SerializeField] float step = 0.01f;
-    [SerializeField] float maxPositionStep = 0.06f;
+    [SerializeField] float maxPositionStep = 0.3f;
+    [SerializeField] float maxDistanaceFromCamera = 0.3f;
     [SerializeField] float smoothing = 10f;
     Vector3 swayPosition;
-    float maxPositionX; 
-    float maxPositionY;
-    float maxPositonZ;
+    float minX, minY, minZ, maxX, maxY, maxZ;
 
     [Header("Rotation Sway")]
     [SerializeField] float rotationStep = 4f;
@@ -31,24 +30,25 @@ public class PlayerWeaponHandeling : MonoBehaviour
     void Awake(){
         originPosition = transform.localPosition;
         originRotation = transform.localRotation;
-        maxPositionX = originPosition.x + maxPositionStep;
-        maxPositionY = originPosition.y + maxPositionStep;
-        maxPositonZ = originPosition.z + maxPositionStep;
+        minX = transform.localPosition.x - maxPositionStep;
+        minY = transform.localPosition.y - maxPositionStep;
+        minZ = transform.localPosition.z - maxDistanaceFromCamera;
+        maxX = transform.localPosition.x + maxPositionStep;
+        maxY = transform.localPosition.y + maxPositionStep;
+        maxZ = (transform.localPosition.z + maxDistanaceFromCamera)*0.75f;
+
+        //Debug.Log(new Vector3(minX, minY, minZ));
+        //Debug.Log(new Vector3(maxX, maxY, maxZ));
     }
 
     public void WeaponSway(Vector2 cameraInput, Vector2 moveInput){
-        swayPosition = new Vector3(
-            transform.localPosition.x + (cameraInput.x * -step) + (moveInput.x * -moveDrag),
-            transform.localPosition.y + (cameraInput.y * -step),
-            transform.localPosition.z + (moveInput.y * -moveDrag)
-            );
 
-            /*
-            Currently breaks swaying movement.
-            Mathf.Clamp((transform.localPosition.x + (cameraInput.x * -step) + (moveInput.x * -moveDrag)), -maxPositionX, maxPositionX),
-            Mathf.Clamp((transform.localPosition.y + (cameraInput.y * -step)), -maxPositionY, maxPositionY),
-            Mathf.Clamp((transform.localPosition.z + (moveInput.y * -moveDrag)), -maxPositonZ, maxPositonZ));
-            */
+        swayPosition = new Vector3(
+            Mathf.Clamp((originPosition.x + (cameraInput.x * -step) + (moveInput.x * -moveDrag)), minX, maxX),
+            Mathf.Clamp((originPosition.y + (cameraInput.y * -step)), minY, maxY),
+            Mathf.Clamp((originPosition.z + (moveInput.y * -moveDrag)), minZ,maxZ)
+            );
+            
 
         yRotation = transform.localPosition.y + (cameraInput.x * -rotationStep);
         swayEulerRotation = new Vector3(
@@ -57,39 +57,14 @@ public class PlayerWeaponHandeling : MonoBehaviour
             yRotation
             );
         
+        //Debug.Log(swayPosition);
         transform.localPosition = Vector3.Lerp(transform.localPosition, swayPosition, Time.deltaTime * smoothing);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(swayEulerRotation), Time.deltaTime * rotationSmoothing);
     }
 
-/*
-OLD
-    public void CameraSway(Vector2 cameraInput)
-    {
-        swayPosition = new Vector3(transform.localPosition.x + (cameraInput.x * -step),
-                                   transform.localPosition.y + (cameraInput.y * -step),
-                                   transform.localPosition.z);
-
-        yRotation = transform.localPosition.y + (cameraInput.x * -rotationStep);
-        swayEulerRotation = new Vector3(transform.localPosition.x + (cameraInput.y * -rotationStep),
-                                        yRotation,
-                                        yRotation);
-        
-        transform.localPosition = Vector3.Lerp(transform.localPosition, swayPosition, Time.deltaTime * smoothing);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(swayEulerRotation), Time.deltaTime * rotationSmoothing);
-    }
-
-    public void MovementSway(Vector2 moveInput){
-        swayPosition = new Vector3(transform.localPosition.x + (moveInput.x * -moveDrag),
-                                   transform.localPosition.y,
-                                   transform.localPosition.z + (moveInput.y * -moveDrag));
-        
-        transform.localPosition = Vector3.Lerp(transform.localPosition, swayPosition, Time.deltaTime * smoothing);
-    }
-*/
-
-public void IdleAroundOrigin(){
-        // TO DO MAKE SWAY AROUND ORIGIN
-        transform.localPosition = Vector3.Lerp(transform.localPosition, originPosition, Time.deltaTime * smoothing);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, originRotation, Time.deltaTime * rotationSmoothing);
-    }
+    public void IdleAroundOrigin(){
+            // TO DO MAKE SWAY AROUND ORIGIN
+            transform.localPosition = Vector3.Lerp(transform.localPosition, originPosition, Time.deltaTime * smoothing);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, originRotation, Time.deltaTime * rotationSmoothing);
+        }
 }
