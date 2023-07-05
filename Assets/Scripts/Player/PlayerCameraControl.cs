@@ -13,11 +13,8 @@ public class PlayerCameraControl : MonoBehaviour
     [Header("Game Object Dependencies")]
     [SerializeField] Transform player;
 
-    float xRotation;
-    float yRotation;
+    float xRotation, yRotation, mouseX, mouseY, horizontalSenseToUse, verticalSenseToUse;
     Vector2 lookDelta;
-    float mouseX;
-    float mouseY;
 
     PlayerInput input;
 
@@ -34,6 +31,7 @@ public class PlayerCameraControl : MonoBehaviour
     void Awake()
     {
         input = new PlayerInput();
+        input.Player.Camera.performed += RotateCamera;
     }
     
     // Start is called before the first frame update
@@ -48,11 +46,11 @@ public class PlayerCameraControl : MonoBehaviour
     {
         // Move to player position.
         
-        if(input.Player.Camera.inProgress){RotateCamera();}
+        //if(input.Player.Camera.inProgress){ RotateCamera(); }
         transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight), player.position.z);
     }
 
-    public void RotateCamera()
+    public void RotateCamera(InputAction.CallbackContext obj)
     {
         // Had to do combine these vector to get the mouse delta working while also listing for controller inputs. A problem to fix later.
         /*
@@ -62,9 +60,25 @@ public class PlayerCameraControl : MonoBehaviour
                                );
         */
 
+        Debug.Log(obj.control.parent.displayName);
+
+        if(obj.control.parent.displayName == "Mouse"){ 
+            horizontalSenseToUse = mouseHorizontalSense;
+            verticalSenseToUse = mouseVerticalSense;
+        }
+        else if(obj.control.parent.displayName == "whatever string gamepads have"){ 
+            horizontalSenseToUse = stickHorizontalSense;
+             verticalSenseToUse = stickVerticalSense;
+        }
+        // Else statement can be removed after gamepad string is added
+        else{
+            horizontalSenseToUse = stickHorizontalSense;
+            verticalSenseToUse = stickVerticalSense;
+        }
+
         lookDelta = new Vector2(
-                                (input.Player.Camera.ReadValue<Vector2>().x * mouseVerticalSense),
-                                (input.Player.Camera.ReadValue<Vector2>().y * mouseHorizontalSense)
+                                (input.Player.Camera.ReadValue<Vector2>().x * verticalSenseToUse),
+                                (input.Player.Camera.ReadValue<Vector2>().y * horizontalSenseToUse)
                                 );
                                
         //Debug.Log(lookDelta);
