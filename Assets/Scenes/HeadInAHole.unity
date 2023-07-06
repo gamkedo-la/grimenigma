@@ -694,11 +694,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.3
+      value: 61.88
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.31
+      value: 40.43
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: ea1cdf86a274f7a49b4d98a67e1b7fd1, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 97e2ec8d349a8a348bf518b26862fcef, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &814057395
 Transform:
@@ -1129,7 +1129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 67.08
+      value: 67.046
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1521,8 +1521,16 @@ PrefabInstance:
       value: head_in_a_hole_outline 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 924f55268559bd8488b59a42f3b4c08e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 924f55268559bd8488b59a42f3b4c08e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 924f55268559bd8488b59a42f3b4c08e, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1668,7 +1676,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967330400}
   m_LocalRotation: {x: -0, y: 0, z: -0.258819, w: 0.9659259}
-  m_LocalPosition: {x: -557.53, y: 56.15, z: 50.33}
+  m_LocalPosition: {x: -557.47, y: 56.25, z: 50.33}
   m_LocalScale: {x: 20, y: 1, z: 46.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1855,11 +1863,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.3
+      value: 61.88
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 76.44
+      value: 65.86
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2082,11 +2090,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.3
+      value: 61.88
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.31
+      value: 35.38
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2236,11 +2244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.3
+      value: 61.88
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 76.44
+      value: 66.86
       objectReference: {fileID: 0}
     - target: {fileID: 6114475168500754021, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2614,6 +2622,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f06fa2636fe591c49878340d90db000a, type: 3}
       propertyPath: m_Name
       value: head_in_a_hole_outline (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f06fa2636fe591c49878340d90db000a, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f06fa2636fe591c49878340d90db000a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: f06fa2636fe591c49878340d90db000a, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
