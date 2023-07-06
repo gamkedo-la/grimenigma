@@ -19,8 +19,9 @@ public class SpawnTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
         if(other.tag == "Player"){
-            Debug.Log("Spawn " + enounterLabel + " triggered!");
+            //Debug.Log("Spawn " + enounterLabel + " triggered!");
             sms.SpawnTrigger(enounterLabel);
+            this.gameObject.SetActive(false);
         }
     }
 
