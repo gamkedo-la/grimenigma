@@ -32,10 +32,12 @@ public class Encounter : MonoBehaviour
     void StartEncounter(string triggeredLabel)
     {
         if(triggeredLabel == label){
-        Debug.Log("Triggered ecounter " + label + "!");
-        for(int i=0; i < linkedSpawns.Length; i++){
-            linkedSpawns[i].TriggerSpawn();
-        }
+            for(int j=0; j < 10; j++){
+            //Debug.Log("Triggered ecounter " + label + "!");
+                for(int i=0; i < linkedSpawns.Length; i++){
+                    linkedSpawns[i].TriggerSpawn();
+                }
+            }
         }
     }
 }
