@@ -14,6 +14,7 @@ public class Rail : MonoBehaviour
     public void Attack()
     {
         if (shouldAttack && Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out attackHit, range)){
+            StartCoroutine(ResetAttackCooldown());
             //Debug.Log("Attack!");
             //Debug.DrawRay(pCamera.transform.position, pCamera.transform.forward, Color.blue, 2f);
             attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(damage);
@@ -22,6 +23,7 @@ public class Rail : MonoBehaviour
 
     IEnumerator ResetAttackCooldown()
     {
+        //Debug.Log("Started attack cooldown!");
         shouldAttack = false;
         yield return new WaitForSeconds(attackCoolDown);
         shouldAttack = true;
