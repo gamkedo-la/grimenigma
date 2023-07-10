@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] int hp = 1;
+    [SerializeField] public int hp{get; private set;}
     [SerializeField] int max = 1;
     [SerializeField] int min = 0;
 
