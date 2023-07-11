@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] Rail CurrentWeapon;
+    [SerializeField] AttackController CurrentWeapon;
     public void Attack()
     {
         CurrentWeapon.Attack();
