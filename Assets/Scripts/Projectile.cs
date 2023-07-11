@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] public int damage = 1;
-    [SerializeField] public float speed = 1f;
-
-    [HideInInspector] public float range = 5000f;
-    [HideInInspector] public Vector3 direction;
+    [SerializeField] int damage = 1;
+    [SerializeField] float speed = 1f;
+    [SerializeField] float range = 5000f;
 
     // Start is called before the first frame update
     void Start()
