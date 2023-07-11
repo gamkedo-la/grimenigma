@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] int damage = 1;
-    [SerializeField] float speed = 1f;
+    [SerializeField] public int damage = 1;
+    [SerializeField] public float speed = 1f;
 
     [HideInInspector] public float range = 5000f;
     [HideInInspector] public Vector3 direction;
