@@ -21,19 +21,14 @@ public class EncounterListener : MonoBehaviour
         sms = GameObject.Find("SpawnManagerSingleton").GetComponent<SpawnManagerSingleton>();
     }
 
-    void Start()
+    void OnEnable()
     {
         sms.onSpawnTrigger += StartEncounter;
     }
 
-    void OnEnable()
-    {
-        //SpawnManagerSingleton.onAnnounceTrigger += CheckEncounter;
-    }
-
     void OnDisable()
     {
-        //SpawnManagerSingleton.onAnnounceTrigger -= CheckEncounter;
+        sms.onSpawnTrigger -= StartEncounter;
     }
 
     void StartEncounter(string triggeredLabel)
