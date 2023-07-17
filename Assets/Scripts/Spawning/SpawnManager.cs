@@ -5,15 +5,18 @@ using System;
 
 public class SpawnManagerSingleton : MonoBehaviour
 {
-    Encounter[] encounters;
+    EncounterTrigger[] events;
     //public delegate void AnnounceTrigger(string label);
     public static SpawnManagerSingleton sms;
     public event Action<string> onSpawnTrigger;
 
     void Awake()
     {
-        encounters = FindObjectsOfType<Encounter>();
-        sms = this;
+        events = FindObjectsOfType<EncounterTrigger>();
+        foreach (EncounterTrigger trig in events)
+        {
+            trig.OnEventTrigger += SpawnTrigger;
+        }
     }
 
     public void SpawnTrigger(string label)

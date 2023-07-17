@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6114475168500754021}
   - component: {fileID: 7166671010859592128}
   - component: {fileID: 4940965672192630026}
+  - component: {fileID: -6985026809836818430}
   - component: {fileID: 5601597582109007885}
   m_Layer: 0
   m_Name: SpawnNode
@@ -85,6 +86,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-6985026809836818430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4719128660127669596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367b8dbaa0508eb48858b64c452b043f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: 
 --- !u!114 &5601597582109007885
 MonoBehaviour:
   m_ObjectHideFlags: 0

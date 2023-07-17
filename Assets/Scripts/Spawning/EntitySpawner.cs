@@ -10,6 +10,13 @@ public class EntitySpawner : MonoBehaviour
 {
     [SerializeField, HideInInspector] public string entityToSpawn;
     Object entityPrefab;
+    EncounterListener listener;
+
+    void Awake()
+    {
+        listener = GetComponent<EncounterListener>();
+        listener.onEvent += TriggerSpawn;
+    }
 
     void Start()
     {
