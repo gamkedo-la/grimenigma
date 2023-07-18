@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
-        range -= speed;
+        range -= speed * Time.deltaTime;
         if(range <= 0) { UnityEngine.Object.Destroy(this.gameObject); }
     }
 
