@@ -2,14 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackTypes{
-    Automatic,
-    Burst,
-    Melee,
-    Hitscan,
-    Explosive
-}
-
 public class AttackController : MonoBehaviour
 {
     [SerializeField] AttackTypes attackType;
@@ -20,8 +12,10 @@ public class AttackController : MonoBehaviour
     [SerializeField] float spread = 0f;
     [SerializeField] float patternSteps = 0f;
     [SerializeField] int ammount = 1;
+    [SerializeField] string ownerTag;
     [SerializeField] PlayerCameraControl pCamera;
 
+    ProjectilePooler poolerSingleton;
     Object projectilePrefab;
     Object clonedProjectile;
     RaycastHit attackHit;
@@ -53,6 +47,8 @@ public class AttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        poolerSingleton = FindObjectOfType<ProjectilePooler>().gameObject.GetComponent<ProjectilePooler>();
+
         switch (attackType)
         {
             case AttackTypes.Automatic:
@@ -79,7 +75,12 @@ public class AttackController : MonoBehaviour
                         pCamera.transform.position.z
             );
             //Debug.Log("Instatiating projectile!");
-            clonedProjectile = Instantiate(projectile, position, pCamera.transform.rotation);
+            GameObject rentedProjectile = poolerSingleton.GetObjectFromPool(projectile);
+            rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
+            rentedProjectile.transform.position = position;
+            rentedProjectile.transform.rotation = pCamera.transform.rotation;
+            rentedProjectile.gameObject.SetActive(true);
+
         }
     }
 
