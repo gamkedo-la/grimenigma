@@ -28,8 +28,9 @@ public class AttackController : MonoBehaviour
 
     public void Attack()
     {
+        // Listen, checking the weapon every attack was the fastest way to implement this...
         if(shouldAttack){
-            Debug.Log("Attacking!");
+            //Debug.Log("Attacking!");
             switch (attackType)
             {
                 case AttackTypes.Automatic:
