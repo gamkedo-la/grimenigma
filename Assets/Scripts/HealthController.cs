@@ -3,6 +3,7 @@ using UnityEngine;
 public class HealthController : MonoBehaviour
 {
     [SerializeField] public int hp{get; private set;}
+    [SerializeField] bool godMode = false;
     [SerializeField] int max = 1;
     [SerializeField] int min = 0;
 
@@ -14,13 +15,16 @@ public class HealthController : MonoBehaviour
 
     public void Damage(int ammount)
     {
-        hp -= ammount;
-        Debug.Log("Recieved " + ammount + " damage!");
+        if(!godMode){
+            hp -= ammount;
+            Debug.Log("Recieved " + ammount + " damage!");
 
-        if(hp < 1){
-            //Debug.Log("I am dead!");
-            UnityEngine.Object.Destroy(this.gameObject);
+            if(hp < 1){
+                //Debug.Log("I am dead!");
+                UnityEngine.Object.Destroy(this.gameObject);
+            }
         }
+        else{ Debug.Log("Reminder! God mode is enabled."); }
     }
 
     public void Heal(int ammount)
