@@ -35,9 +35,9 @@ public class ProjectilePooler : MonoBehaviour
         return null;
     }
 
-    private void AddNewBulletTypeToPool(GameObject _prefab)
+    private void AddNewBulletTypeToPool(GameObject prefab)
     {
-        if (!_allPools.ContainsKey(_prefab)) { _allPools.Add(_prefab, new List<GameObject>()); }
+        if (!_allPools.ContainsKey(prefab)) { _allPools.Add(prefab, new List<GameObject>()); }
     }
 
     private GameObject MakeNewGameObject(GameObject newGameObject)
