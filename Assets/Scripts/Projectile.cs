@@ -21,4 +21,11 @@ public class Projectile : MonoBehaviour
         range -= speed;
         if(range <= 0) { UnityEngine.Object.Destroy(this.gameObject); }
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("Projectile collision!");
+        other.transform.gameObject.GetComponent<HealthController>()?.Damage(damage);
+        this.gameObject.SetActive(false);
+    }
 }
