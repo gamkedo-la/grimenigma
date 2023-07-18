@@ -13,36 +13,38 @@ public enum AttackTypes{
 public class AttackController : MonoBehaviour
 {
     [SerializeField] AttackTypes attackType;
+    [SerializeField] GameObject projectile;
     [SerializeField] int hitScanDamage = 1;
     [SerializeField] float range = 500;
     [SerializeField] float cooldown = 0.2f;
-    [SerializeField] float coneDegrees = 0f;
+    [SerializeField] float spread = 0f;
     [SerializeField] float patternSteps = 0f;
-    [SerializeField] int projectileAmmount = 1;
+    [SerializeField] int ammount = 1;
     [SerializeField] PlayerCameraControl pCamera;
 
     Object projectilePrefab;
     Object clonedProjectile;
     RaycastHit attackHit;
     bool shouldAttack = true;
+    Vector3 position;
 
     public void Attack()
     {
         // Listen, checking the weapon every attack was the fastest way to implement this...
-        if(shouldAttack){
-            //Debug.Log("Attacking!");
-            switch (attackType)
-            {
-                case AttackTypes.Automatic:
-                    FireProtectile();
-                    break;
-                case AttackTypes.Hitscan:
-                    FireHitscan();
-                    break;
-                default:
-                    Debug.LogError("Invalid Projectile Value!");
-                    break;
-            }
+            if(shouldAttack){
+                //Debug.Log("Attacking!");
+                switch (attackType)
+                {
+                    case AttackTypes.Automatic:
+                        FireProtectile();
+                        break;
+                    case AttackTypes.Hitscan:
+                        FireHitscan();
+                        break;
+                    default:
+                        Debug.LogError("Invalid Projectile Value!");
+                        break;
+                }
 
             StartCoroutine(RunResetAttackCooldown());
         }
@@ -67,14 +69,29 @@ public class AttackController : MonoBehaviour
 
     void FireProtectile()
     {
-        Debug.Log("Firing projectile!");
-        clonedProjectile = Instantiate(projectilePrefab, pCamera.transform.position, pCamera.transform.rotation);
+        //Debug.Log("Firing projectile!");
+
+        for (int i = 0; i < ammount; i++)
+        {
+            position = new Vector3(
+                        pCamera.transform.position.x + Random.Range(-spread, spread),
+                        pCamera.transform.position.y + Random.Range(-spread, spread),
+                        pCamera.transform.position.z
+            );
+            //Debug.Log("Instatiating projectile!");
+            clonedProjectile = Instantiate(projectile, position, pCamera.transform.rotation);
+        }
     }
 
     void FireHitscan()
     {
-        Debug.Log("Firing hitscan!");
-        Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out attackHit, range);
+        //Debug.Log("Firing hitscan!");
+        position = new Vector3(
+                                pCamera.transform.position.x + Random.Range(-spread, spread),
+                                pCamera.transform.position.y + Random.Range(-spread, spread),
+                                pCamera.transform.position.z
+        );
+        Physics.Raycast(position, pCamera.transform.forward, out attackHit, range);
         attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage);
     }
 
