@@ -371,7 +371,6 @@ MonoBehaviour:
   range: 700
   cooldown: 0.07
   spread: 2.34
-  patternSteps: 0
   ammount: 12
   ownerTag: Player
   spawnOrigin: {fileID: 0}
@@ -1756,7 +1755,6 @@ MonoBehaviour:
   range: 1006.6
   cooldown: 0.03
   spread: 0
-  patternSteps: 0
   ammount: 1
   ownerTag: Player
   spawnOrigin: {fileID: 4261051292385738845}
@@ -5171,6 +5169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9dee5ef1ec08f147b422a59c5ab0e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 100
   godMode: 1
   max: 1210
   min: 968
