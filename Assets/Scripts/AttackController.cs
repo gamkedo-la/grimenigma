@@ -13,7 +13,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] float patternSteps = 0f;
     [SerializeField] int ammount = 1;
     [SerializeField] string ownerTag;
-    [SerializeField] PlayerCameraControl pCamera;
+    [SerializeField] GameObject spawnOrigin;
 
     ProjectilePooler poolerSingleton;
     Object projectilePrefab;
@@ -70,15 +70,15 @@ public class AttackController : MonoBehaviour
         for (int i = 0; i < ammount; i++)
         {
             position = new Vector3(
-                        pCamera.transform.position.x + Random.Range(-spread, spread),
-                        pCamera.transform.position.y + Random.Range(-spread, spread),
-                        pCamera.transform.position.z
+                        spawnOrigin.transform.position.x + Random.Range(-spread, spread),
+                        spawnOrigin.transform.position.y + Random.Range(-spread, spread),
+                        spawnOrigin.transform.position.z
             );
             //Debug.Log("Instatiating projectile!");
             GameObject rentedProjectile = poolerSingleton.GetObjectFromPool(projectile);
             rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
             rentedProjectile.transform.position = position;
-            rentedProjectile.transform.rotation = pCamera.transform.rotation;
+            rentedProjectile.transform.rotation = spawnOrigin.transform.rotation;
             rentedProjectile.gameObject.SetActive(true);
 
         }
@@ -88,11 +88,11 @@ public class AttackController : MonoBehaviour
     {
         //Debug.Log("Firing hitscan!");
         position = new Vector3(
-                                pCamera.transform.position.x + Random.Range(-spread, spread),
-                                pCamera.transform.position.y + Random.Range(-spread, spread),
-                                pCamera.transform.position.z
+                                spawnOrigin.transform.position.x + Random.Range(-spread, spread),
+                                spawnOrigin.transform.position.y + Random.Range(-spread, spread),
+                                spawnOrigin.transform.position.z
         );
-        Physics.Raycast(position, pCamera.transform.forward, out attackHit, range);
+        Physics.Raycast(position, spawnOrigin.transform.forward, out attackHit, range);
         attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage);
     }
 
