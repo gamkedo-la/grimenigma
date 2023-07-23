@@ -25,7 +25,10 @@ public class ProjectilePooler : MonoBehaviour
 
             if (prefab == type){
                 for (int i = 0; i < currPool.Count; i++) {
-                    if (!currPool[i].activeInHierarchy) { return currPool[i]; }
+                    if (!currPool[i].activeInHierarchy) {
+                        Debug.Log("Current pooled object: " + currPool[i]);
+                        return currPool[i];
+                    }
                 }
 
                 return MakeNewGameObject(prefab);
@@ -48,7 +51,7 @@ public class ProjectilePooler : MonoBehaviour
 
     private GameObject MakeNewGameObject(GameObject newGameObject)
     {
-        GameObject InstantiatedGameObject = Instantiate(newGameObject, parent:_allPools[newGameObject][0].transform);
+        GameObject InstantiatedGameObject = Instantiate(newGameObject, parent:this.transform);
         InstantiatedGameObject.SetActive(false);
         _allPools[newGameObject].Add(InstantiatedGameObject);
         _totalObjects++;
