@@ -10,7 +10,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] float range = 500;
     [SerializeField] float cooldown = 0.2f;
     [SerializeField] float spread = 0f;
-    [SerializeField] float patternSteps = 0f;
+    //[SerializeField] float patternSteps = 0f;
     [SerializeField] int ammount = 1;
     [SerializeField] string ownerTag;
     [SerializeField] GameObject spawnOrigin;
