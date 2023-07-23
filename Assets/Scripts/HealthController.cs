@@ -11,14 +11,14 @@ public class HealthController : MonoBehaviour
    {
         // Prevents hp > max
         hp = Mathf.Clamp(hp, min, max);
-        Debug.Log("Start HP: " + hp);
+        //Debug.Log("Start HP: " + hp);
    }
 
     public void Damage(int ammount)
     {
         if(!godMode){
             hp -= ammount;
-            Debug.Log("Recieved " + ammount + " damage!");
+            //Debug.Log("Recieved " + ammount + " damage!");
 
             if(hp < 1){
                 //Debug.Log("I am dead!");
@@ -31,6 +31,6 @@ public class HealthController : MonoBehaviour
     public void Heal(int ammount)
     {
         hp = Mathf.Clamp(hp+ammount, min, max);
-        Debug.Log("Recieved " + ammount + " healing!");
+        //Debug.Log("Recieved " + ammount + " healing!");
     }
 }
