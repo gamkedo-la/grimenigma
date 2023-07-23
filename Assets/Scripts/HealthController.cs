@@ -7,7 +7,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] int max = 1;
     [SerializeField] int min = 0;
 
-   private HealthController()
+   private void Start()
    {
         // Prevents hp > max
         hp = Mathf.Clamp(hp, min, max);
