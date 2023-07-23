@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class CollisionTrigger : MonoBehaviour
 {
+    Collider myCollider;
     EncounterTrigger myEvent;
 
     void Awake()
     {
         myEvent = GetComponent<EncounterTrigger>();
+        myCollider = GetComponent<Collider>();
     }
 
     void OnTriggerEnter(Collider other){
         if(other.tag == "Player"){
             Debug.Log("Spawn " + myEvent.label + " triggered!");
             myEvent.TriggerEvent();
-            this.gameObject.SetActive(false);
+            myCollider.enabled = false;
         }
     }
 }
