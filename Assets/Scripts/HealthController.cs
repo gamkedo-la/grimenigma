@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] public int hp{get; private set;}
+    [SerializeField] public int hp;//{get; private set;}
     [SerializeField] bool godMode = false;
     [SerializeField] int max = 1;
     [SerializeField] int min = 0;
@@ -11,6 +11,7 @@ public class HealthController : MonoBehaviour
    {
         // Prevents hp > max
         hp = Mathf.Clamp(hp, min, max);
+        Debug.Log("Start HP: " + hp);
    }
 
     public void Damage(int ammount)
