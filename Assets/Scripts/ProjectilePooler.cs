@@ -26,7 +26,7 @@ public class ProjectilePooler : MonoBehaviour
             if (prefab == type){
                 for (int i = 0; i < currPool.Count; i++) {
                     if (!currPool[i].activeInHierarchy) {
-                        Debug.Log("Current pooled object: " + currPool[i]);
+                        //Debug.Log("Current pooled object: " + currPool[i]);
                         return currPool[i];
                     }
                 }
