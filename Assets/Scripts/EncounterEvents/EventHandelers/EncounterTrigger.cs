@@ -9,6 +9,8 @@ using UnityEditor;
 public class EncounterTrigger : MonoBehaviour
 {
     [SerializeField] public string label = "LABEL_ME!(>:|)=";
+    [Header("!!!Make This <label>-end. I will automate this at some point.")]
+    [SerializeField] public string endLabel;
 
     public event System.Action<string> OnEventTrigger;
 
@@ -17,6 +19,7 @@ public class EncounterTrigger : MonoBehaviour
     void Awake()
     {
         if(label == "LABEL_ME!(>:|)="){ Debug.LogError("TRIGGER MISSING LABEL!!"); }
+        endLabel = "-end";
         sms = GameObject.Find("SpawnManagerSingleton").GetComponent<SpawnManagerSingleton>();
     }
 

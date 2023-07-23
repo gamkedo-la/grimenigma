@@ -14,9 +14,9 @@ public class EncounterListener : MonoBehaviour
 
     SpawnManagerSingleton sms;
 
-    public event System.Action onEvent;
+    public event System.Action<string> onEvent;
     
-        void Awake()
+    void Awake()
     {
         sms = GameObject.Find("SpawnManagerSingleton").GetComponent<SpawnManagerSingleton>();
     }
@@ -33,7 +33,7 @@ public class EncounterListener : MonoBehaviour
 
     void StartEncounter(string triggeredLabel)
     {
-        if(triggeredLabel == label){ onEvent?.Invoke(); }
+        if(triggeredLabel == label){ onEvent?.Invoke(triggeredLabel); }
     }
 }
 
@@ -47,9 +47,12 @@ public class EncounterListenerEditor : Editor
     void OnEnable()
     {
         EncounterTrigger[] sceneEncounters = FindObjectsOfType<EncounterTrigger>();
-        encounterLabels = new string[sceneEncounters.Length];
-        for (int i = 0; i < sceneEncounters.Length; i++){
-            encounterLabels[i] = sceneEncounters[i].label;
+        encounterLabels = new string[sceneEncounters.Length*2];
+        int j = 0;
+        for (int i = 0; i < encounterLabels.Length; i+=2){
+            encounterLabels[i] = sceneEncounters[j].label;
+            encounterLabels[i+1] = sceneEncounters[j].endLabel;
+            j++;
         }
     }
 

@@ -12,6 +12,8 @@ public class EntitySpawner : MonoBehaviour
     Object entityPrefab;
     EncounterListener listener;
 
+    public event System.Action<string, GameObject> OnSpawn;
+
     void Awake()
     {
         listener = GetComponent<EncounterListener>();
@@ -24,9 +26,10 @@ public class EntitySpawner : MonoBehaviour
         //TriggerSpawn();
     }
 
-    public void TriggerSpawn()
+    public void TriggerSpawn(string label)
     {
-        Instantiate(entityPrefab, transform.position, transform.rotation);
+        GameObject spawnedEnemy = Instantiate(entityPrefab, transform.position, transform.rotation) as GameObject;
+        OnSpawn.Invoke(label, spawnedEnemy);
     }
 }
 
