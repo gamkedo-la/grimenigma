@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: bacd45362b6688b40b115bdd02ab5bc8, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a35dee57c17ac0140b01dc5f9cd35b14, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.34439442, g: 0.11332289, b: 0.17026272, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1155,7 +1155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b121e2039fc9e7c479ba9f5ddadc1d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enounterLabel: prototype_encounter
+  label: LABEL_ME!(>:|)=
+  endLabel: 
 --- !u!64 &1416179009
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1871,7 +1872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b121e2039fc9e7c479ba9f5ddadc1d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enounterLabel: AnotherTestEncounter
+  label: LABEL_ME!(>:|)=
+  endLabel: 
 --- !u!64 &1975892560
 MeshCollider:
   m_ObjectHideFlags: 0
