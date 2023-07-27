@@ -8,10 +8,8 @@ public class HItScanEnemyAI : MonoBehaviour
     [SerializeField] float sightRange;
     Transform target;
     [SerializeField] LayerMask whatIsGround, whatIsTarget;
+    [SerializeField] AttackController weapon;
     [SerializeField] float attackRange;
-    [SerializeField] int damage;
-    [SerializeField] float drawTime;
-    [SerializeField] float attackCoolDown;
 
     NavMeshAgent agent;
 
@@ -80,21 +78,13 @@ public class HItScanEnemyAI : MonoBehaviour
         agent.SetDestination(target.position);
         IsTargetWithinAttackRange();
     }
-    
-    private void AttackStart()
+
+    void AttackStart()
     {
         //Debug.Log("Attacking!");
-        //Debug.Log("Checking attack at" + targetTransform.position);
         agent.SetDestination(transform.position);
         transform.LookAt(target);
-
-        StartCoroutine(ResetAttackCooldown());
-        
-        // DO SOMETHING TO CAUSE WAKE UP
-        if(Physics.Raycast(transform.position, transform.forward, out aimHit, attackRange)){
-            //Debug.Log("Hit info:" + hit.collider.gameObject.name);
-            StartCoroutine(HitCheck());
-        }
+        weapon.Attack();
 
         IsTargetWithinAttackRange();
     }
@@ -104,27 +94,4 @@ public class HItScanEnemyAI : MonoBehaviour
         else{ state = AIState.chase; }
     }
 
-    IEnumerator HitCheck()
-    {
-        yield return new WaitForSeconds(drawTime);
-        //Debug.Log("hit's transform:" +  hit.transform.position + " point of collision:" + positionOfCollision);
-        //Debug.DrawRay(transform.position, transform.forward, Color.green, 2f);
-        if (Physics.Raycast(transform.position, transform.forward, out attackHit, attackRange)){
-            //Debug.Log("Hit target:" + hit.transform.name);
-            attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(damage);
-        }
-    }
-
-    IEnumerator ResetAttackCooldown()
-    {
-        shouldAttack = false;
-        yield return new WaitForSeconds(attackCoolDown);
-        shouldAttack = true;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 }
