@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7630765295138871338}
   - component: {fileID: 7630765295138871339}
   - component: {fileID: 5287514736214092596}
+  - component: {fileID: 4043406814658916752}
   - component: {fileID: 7630765295138871349}
   - component: {fileID: -3741740768409257743}
   m_Layer: 0
@@ -190,10 +191,31 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 1073741824
+  weapon: {fileID: 4043406814658916752}
   attackRange: 40.5
   damage: 1
   drawTime: 2.39
   attackCoolDown: 3.19
+--- !u!114 &4043406814658916752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630765295138871340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d1c0a2adf9064f9fdbcc09164230f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackType: 3
+  projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
+  hitScanDamage: 1
+  range: 500
+  cooldown: 1.01
+  spread: 0
+  ammount: 1
+  ownerTag: 
 --- !u!114 &7630765295138871349
 MonoBehaviour:
   m_ObjectHideFlags: 0

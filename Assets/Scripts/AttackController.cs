@@ -7,17 +7,17 @@ public class AttackController : MonoBehaviour
     [SerializeField] AttackTypes attackType;
     [SerializeField] GameObject projectile;
     [SerializeField] int hitScanDamage = 1;
-    [SerializeField] float range = 500;
-    [SerializeField] float cooldown = 0.2f;
-    [SerializeField] float spread = 0f;
+    [SerializeField] float range, cooldown, spread, drawTime;
     //[SerializeField] float patternSteps = 0f;
     [SerializeField] int ammount = 1;
     [SerializeField] string ownerTag;
-    [SerializeField] GameObject spawnOrigin;
+
+    Transform spawnOrigin;
 
     ProjectilePooler poolerSingleton;
     Object projectilePrefab;
     Object clonedProjectile;
+
     RaycastHit attackHit;
     bool shouldAttack = true;
     Vector3 position;
@@ -30,10 +30,10 @@ public class AttackController : MonoBehaviour
                 switch (attackType)
                 {
                     case AttackTypes.Automatic:
-                        FireProtectile();
+                        StartCoroutine(RunFireProtectile());
                         break;
                     case AttackTypes.Hitscan:
-                        FireHitscan();
+                        StartCoroutine(RunFireHitscan());
                         break;
                     default:
                         Debug.LogError("Invalid Projectile Value!");
@@ -42,6 +42,10 @@ public class AttackController : MonoBehaviour
 
             StartCoroutine(RunResetAttackCooldown());
         }
+    } 
+
+    private void Awake() {
+        spawnOrigin = this.gameObject.transform;
     }
 
     // Start is called before the first frame update
@@ -63,36 +67,37 @@ public class AttackController : MonoBehaviour
         
     }
 
-    void FireProtectile()
+    IEnumerator RunFireProtectile()
     {
         //Debug.Log("Firing projectile!");
-
+        yield return new WaitForSeconds(drawTime);
         for (int i = 0; i < ammount; i++)
         {
             position = new Vector3(
-                        spawnOrigin.transform.position.x + Random.Range(-spread, spread),
-                        spawnOrigin.transform.position.y + Random.Range(-spread, spread),
-                        spawnOrigin.transform.position.z
+                        spawnOrigin.position.x + Random.Range(-spread, spread),
+                        spawnOrigin.position.y + Random.Range(-spread, spread),
+                        spawnOrigin.position.z
             );
             //Debug.Log("Instatiating projectile!");
             GameObject rentedProjectile = poolerSingleton.GetObjectFromPool(projectile);
             rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
             rentedProjectile.transform.position = position;
-            rentedProjectile.transform.rotation = spawnOrigin.transform.rotation;
+            rentedProjectile.transform.rotation = spawnOrigin.rotation;
             rentedProjectile.gameObject.SetActive(true);
 
         }
     }
 
-    void FireHitscan()
+    IEnumerator RunFireHitscan()
     {
         //Debug.Log("Firing hitscan!");
+        yield return new WaitForSeconds(drawTime);
         position = new Vector3(
-                                spawnOrigin.transform.position.x + Random.Range(-spread, spread),
-                                spawnOrigin.transform.position.y + Random.Range(-spread, spread),
-                                spawnOrigin.transform.position.z
+                                spawnOrigin.position.x + Random.Range(-spread, spread),
+                                spawnOrigin.position.y + Random.Range(-spread, spread),
+                                spawnOrigin.position.z
         );
-        Physics.Raycast(position, spawnOrigin.transform.forward, out attackHit, range);
+        Physics.Raycast(position, spawnOrigin.forward, out attackHit, range);
         attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage);
     }
 
