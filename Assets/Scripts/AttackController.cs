@@ -56,6 +56,7 @@ public class AttackController : MonoBehaviour
     public void AddAmmo(int ammount)
     {
         ammo = Mathf.Clamp(ammo+ammount, 0, maxAmmo);
+        //Debug.Log("Added " + ammount + " ammo to " + weaponName);
     }
 
     private void Awake()
