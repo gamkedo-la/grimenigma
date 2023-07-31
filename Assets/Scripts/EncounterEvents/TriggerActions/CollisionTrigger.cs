@@ -14,6 +14,7 @@ public class CollisionTrigger : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other){
+        //Debug.Log("Trigger collision with " + other.gameObject.name);
         if(other.tag == "Player"){
             Debug.Log("Spawn " + myEvent.label + " triggered!");
             myEvent.TriggerEvent();
