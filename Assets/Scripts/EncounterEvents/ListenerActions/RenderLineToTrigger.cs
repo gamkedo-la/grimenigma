@@ -4,8 +4,9 @@ using UnityEngine;
 public class RenderLineToTrigger : MonoBehaviour
 {
     [SerializeField] public GameObject TriggerLine;
-    EncounterListener listener;
     [SerializeField, HideInInspector] GameObject line;
+    LineRenderer[] existingLines;
+    EncounterListener listener;
 
     void Awake()
     {
@@ -21,15 +22,15 @@ public class RenderLineToTrigger : MonoBehaviour
     void DestroyExistingLine()
     {
         Debug.Log("Destroying line: " + line);
-        if(line){
-            if(Application.isPlaying){ Destroy(line); }
-            else{ DestroyImmediate(line); }
+        foreach(LineRenderer currentLine in GetComponentsInChildren<LineRenderer>()){
+            if(Application.isPlaying){ Destroy(currentLine.gameObject); }
+            else{ DestroyImmediate(currentLine.gameObject); }
         }
     }
 
     void DrawLineToTrigger()
     {
-        Debug.Log("Running in edit mode.");
+        //Debug.Log("Drawing line from " + this.gameObject.name + " to trigger.");
         foreach(EncounterTrigger trigger in FindObjectsOfType<EncounterTrigger>()){
             if(trigger.label == listener.label || trigger.endLabel == listener.label){
                 line = Instantiate(TriggerLine, parent:this.gameObject.transform);
