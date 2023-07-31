@@ -8,13 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4043406814658916752, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
+      propertyPath: piercingDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7630765295138871337, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 729fe23deb54b7c479b423ebf26ba1de, type: 2}
     - target: {fileID: 7630765295138871340, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: m_Name
-      value: HitscanEnemy (1) Variant
+      value: HitscanEnemyBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630765295138871349, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
+      propertyPath: hp
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630765295138871349, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
+      propertyPath: armour
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 7630765295138871351, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: m_RootOrder
