@@ -15,7 +15,6 @@ public class AttackController : MonoBehaviour
     [SerializeField] bool infiniteAmmmo;
     [SerializeField] int ammo, maxAmmo;
     [SerializeField] string ownerTag;
-    [SerializeField] Transform camera;
 
     Transform spawnOrigin;
 
