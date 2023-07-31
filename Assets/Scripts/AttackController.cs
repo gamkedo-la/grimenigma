@@ -7,6 +7,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] string weaponName;
     [SerializeField] AttackTypes attackType;
     [SerializeField] GameObject projectile;
+    [SerializeField] bool piercingDamage;
     [SerializeField] int hitScanDamage = 1;
     [SerializeField] float range, cooldown, spread, drawTime;
     //[SerializeField] float patternSteps = 0f;
@@ -114,7 +115,7 @@ public class AttackController : MonoBehaviour
                                 spawnOrigin.position.z
         );
         Physics.Raycast(position, spawnOrigin.forward, out attackHit, range);
-        attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage);
+        attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage, piercingDamage);
     }
 
     IEnumerator RunResetAttackCooldown()

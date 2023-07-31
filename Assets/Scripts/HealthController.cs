@@ -14,10 +14,10 @@ public class HealthController : MonoBehaviour
         //Debug.Log("Start HP: " + hp);
    }
 
-    public void Damage(int ammount)
+    public void Damage(int ammount, bool piercingDamage=false)
     {
         if(!godMode){
-            ammount = ArmourReduction(ammount);
+            if(!piercingDamage){ ammount = ArmourReduction(ammount); }
             hp -= ammount;
             //Debug.Log("Recieved " + ammount + " damage!");
 
