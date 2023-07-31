@@ -9,7 +9,9 @@ public class AttackController : MonoBehaviour
     [SerializeField] int hitScanDamage = 1;
     [SerializeField] float range, cooldown, spread, drawTime;
     //[SerializeField] float patternSteps = 0f;
-    [SerializeField] int ammount = 1;
+    [SerializeField] int projectileAmmount = 1;
+    [SerializeField] bool infiniteAmmmo;
+    [SerializeField] int ammo, maxAmmo;
     [SerializeField] string ownerTag;
 
     Transform spawnOrigin;
@@ -25,24 +27,35 @@ public class AttackController : MonoBehaviour
     public void Attack()
     {
         // Listen, checking the weapon every attack was the fastest way to implement this...
-            if(shouldAttack){
-                //Debug.Log("Attacking!");
-                switch (attackType)
-                {
-                    case AttackTypes.Automatic:
-                        StartCoroutine(RunFireProtectile());
-                        break;
-                    case AttackTypes.Hitscan:
-                        StartCoroutine(RunFireHitscan());
-                        break;
-                    default:
-                        Debug.LogError("Invalid Projectile Value!");
-                        break;
-                }
+        if(ammo < 1 && !infiniteAmmmo){
+            // Play no ammo sound on this line.
+            return;
+        }
 
+        if(shouldAttack){
+            //Debug.Log("Attacking!");
+            switch (attackType)
+            {
+                case AttackTypes.Automatic:
+                    StartCoroutine(RunFireProtectile());
+                    break;
+                case AttackTypes.Hitscan:
+                    StartCoroutine(RunFireHitscan());
+                    break;
+                default:
+                    Debug.LogError("Invalid Projectile Value!");
+                    break;
+            }
+        
+            if(!infiniteAmmmo){ ammo -= 1; }
             StartCoroutine(RunResetAttackCooldown());
         }
-    } 
+    }
+
+    public void AddAmmo(int ammount)
+    {
+        ammo = Mathf.Clamp(ammo+ammount, 0, maxAmmo);
+    }
 
     private void Awake() {
         spawnOrigin = this.gameObject.transform;
@@ -71,7 +84,7 @@ public class AttackController : MonoBehaviour
     {
         //Debug.Log("Firing projectile!");
         yield return new WaitForSeconds(drawTime);
-        for (int i = 0; i < ammount; i++)
+        for (int i = 0; i < projectileAmmount; i++)
         {
             position = new Vector3(
                         spawnOrigin.position.x + Random.Range(-spread, spread),
