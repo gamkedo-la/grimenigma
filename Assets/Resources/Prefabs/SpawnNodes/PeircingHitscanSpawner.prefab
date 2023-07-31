@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5601597582109007885}
   - component: {fileID: 3889096967604018364}
   m_Layer: 0
-  m_Name: SpawnNode
+  m_Name: PeircingHitscanSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,8 +64,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: e822a6557449a8a43a79dbe3745a5fae, type: 3}
-  - {fileID: -6478536213147159724, guid: e822a6557449a8a43a79dbe3745a5fae, type: 3}
+  - {fileID: 2100000, guid: f5c7a672b6e094c4faa1d8147bbe9674, type: 2}
+  - {fileID: 2100000, guid: d077dd34a2f88da4fb22501429bafb26, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
