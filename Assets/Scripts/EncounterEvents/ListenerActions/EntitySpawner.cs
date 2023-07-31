@@ -75,6 +75,7 @@ public class EntitySpawnEditor : Editor
             //Debug.Log(selectedEnemyIndex);
             selectedEnemyIndex = EditorGUILayout.Popup(selectedEnemyIndex, enemyNames);
             spawnNode.entityToSpawn = enemyNames[selectedEnemyIndex];
+            EditorUtility.SetDirty(spawnNode);
         }
         else{
             EditorGUILayout.Popup(0, new string[] {"No Objects Found!"});

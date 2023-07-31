@@ -58,19 +58,21 @@ public class EncounterListenerEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        EncounterListener trigger = (EncounterListener)target;
+        serializedObject.Update();
+        EncounterListener listener = (EncounterListener)target;
 
         base.OnInspectorGUI();
 
         GUILayout.BeginHorizontal();
         if(encounterLabels.Length > 0){
-            selectedEncounterIndex = System.Array.IndexOf(encounterLabels, trigger.label);
+            selectedEncounterIndex = System.Array.IndexOf(encounterLabels, listener.label);
             if(selectedEncounterIndex < 0 || selectedEncounterIndex > encounterLabels.Length){
                 Debug.LogError("Encounter index of " + selectedEncounterIndex + " out of bounds. Setting to 0!");
                 selectedEncounterIndex = 0;
             }
             selectedEncounterIndex = EditorGUILayout.Popup(selectedEncounterIndex, encounterLabels);
-            trigger.label = encounterLabels[selectedEncounterIndex];
+            listener.label = encounterLabels[selectedEncounterIndex];
+            EditorUtility.SetDirty(listener);
         }
         else{
             EditorGUILayout.Popup(0, new string[] {"No encounters found!"});
