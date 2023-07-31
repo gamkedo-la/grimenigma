@@ -60,6 +60,7 @@ public class ResourcePickup : MonoBehaviour
     }
 
     void HandleArmour(Collider other){
-        // To Do: Implement Armour.
+        other.transform.gameObject.GetComponent<HealthController>()?.AddArmour(ammount);
+        Debug.Log("Player HP:"  + other.transform.gameObject.GetComponent<HealthController>().hp);
     }
 }
