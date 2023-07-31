@@ -15,6 +15,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] bool infiniteAmmmo;
     [SerializeField] int ammo, maxAmmo;
     [SerializeField] string ownerTag;
+    [SerializeField] Transform camera;
 
     Transform spawnOrigin;
 
@@ -84,22 +85,30 @@ public class AttackController : MonoBehaviour
         
     }
 
+    Vector3 GetDirection()
+    {
+        Vector3 targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+        targetPosition = new Vector3(
+                                            targetPosition.x + Random.Range(-spread, spread),
+                                            targetPosition.y + Random.Range(-spread, spread),
+                                            targetPosition.z + Random.Range(-spread, spread)
+                                            );
+
+        
+        return (targetPosition - spawnOrigin.position).normalized;
+    }
+
     IEnumerator RunFireProtectile()
     {
         //Debug.Log("Firing projectile!");
         yield return new WaitForSeconds(drawTime);
         for (int i = 0; i < projectileAmmount; i++)
         {
-            position = new Vector3(
-                        spawnOrigin.position.x + Random.Range(-spread, spread),
-                        spawnOrigin.position.y + Random.Range(-spread, spread),
-                        spawnOrigin.position.z
-            );
             //Debug.Log("Instatiating projectile!");
             GameObject rentedProjectile = poolerSingleton.GetObjectFromPool(projectile);
             rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
-            rentedProjectile.transform.position = position;
-            rentedProjectile.transform.rotation = spawnOrigin.rotation;
+            rentedProjectile.transform.position = spawnOrigin.position;
+            rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
             rentedProjectile.gameObject.SetActive(true);
 
         }
@@ -109,12 +118,8 @@ public class AttackController : MonoBehaviour
     {
         //Debug.Log("Firing hitscan!");
         yield return new WaitForSeconds(drawTime);
-        position = new Vector3(
-                                spawnOrigin.position.x + Random.Range(-spread, spread),
-                                spawnOrigin.position.y + Random.Range(-spread, spread),
-                                spawnOrigin.position.z
-        );
-        Physics.Raycast(position, spawnOrigin.forward, out attackHit, range);
+
+        Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range);
         attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage, piercingDamage);
     }
 
