@@ -205,9 +205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68d1c0a2adf9064f9fdbcc09164230f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: 
   attackType: 3
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
-  hitScanDamage: 1
+  hitScanDamage: 10
   range: 500
   cooldown: 1.01
   spread: 0
@@ -229,10 +230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9dee5ef1ec08f147b422a59c5ab0e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
   godMode: 0
-  max: 1
-  min: 0
+  hp: 5
+  armour: 0
+  maxHP: 0
+  maxArmour: 0
+  armourReductionPercentage: 0
 --- !u!195 &-3741740768409257743
 NavMeshAgent:
   m_ObjectHideFlags: 0
