@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
+    [SerializeField] string weaponName;
     [SerializeField] AttackTypes attackType;
     [SerializeField] GameObject projectile;
     [SerializeField] int hitScanDamage = 1;
@@ -57,7 +58,8 @@ public class AttackController : MonoBehaviour
         ammo = Mathf.Clamp(ammo+ammount, 0, maxAmmo);
     }
 
-    private void Awake() {
+    private void Awake()
+    {
         spawnOrigin = this.gameObject.transform;
     }
 
