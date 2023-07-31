@@ -51,16 +51,19 @@ public class ResourcePickup : MonoBehaviour
     void HandleHealth(Collider other){
         other.transform.gameObject.GetComponent<HealthController>()?.Heal(ammount);
         Debug.Log("Player HP:"  + other.transform.gameObject.GetComponent<HealthController>().hp);
+        Destroy(this.gameObject);
     }
 
     
     void HandleAmmunition(Collider other){
         other.transform.gameObject.GetComponent<PlayerAttack>()?.CurrentWeapon.AddAmmo(ammount);
         Debug.Log("Ammo item picked up");
+        Destroy(this.gameObject);
     }
 
     void HandleArmour(Collider other){
         other.transform.gameObject.GetComponent<HealthController>()?.AddArmour(ammount);
         Debug.Log("Player Armour:"  + other.transform.gameObject.GetComponent<HealthController>().armour);
+        Destroy(this.gameObject);
     }
 }
