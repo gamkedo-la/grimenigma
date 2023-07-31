@@ -55,7 +55,8 @@ public class ResourcePickup : MonoBehaviour
 
     
     void HandleAmmunition(Collider other){
-        // To Do: Implement Ammo.
+        other.transform.gameObject.GetComponent<PlayerAttack>()?.CurrentWeapon.AddAmmo(ammount);
+        Debug.Log("Ammo item picked up");
     }
 
     void HandleArmour(Collider other){
