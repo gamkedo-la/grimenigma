@@ -35,6 +35,11 @@ public class HealthController : MonoBehaviour
         //Debug.Log("Recieved " + ammount + " healing!");
     }
 
+    public void AddArmour(int ammount)
+    {
+        armour = Mathf.Clamp(armour+ammount, 0, maxArmour);
+    }
+
     private int ArmourReduction(int ammount)
     {
         int armourDamage = (int)Mathf.Ceil(ammount*armourReductionPercentage);
