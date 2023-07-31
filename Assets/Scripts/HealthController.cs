@@ -2,21 +2,22 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] public int hp;//{get; private set;}
     [SerializeField] bool godMode = false;
-    [SerializeField] int max = 1;
+    [SerializeField] public int hp, armour, maxHP, maxArmour;//{get; private set;}
+    [Range(0f,1f)][SerializeField] float armourReductionPercentage;
     //[SerializeField] int min = 0;
 
    private void Start()
    {
-        // Prevents hp > max
-        hp = Mathf.Clamp(hp, 0, max);
+        // Prevents hp > maxHP
+        hp = Mathf.Clamp(hp, 0, maxHP);
         //Debug.Log("Start HP: " + hp);
    }
 
     public void Damage(int ammount)
     {
         if(!godMode){
+            ammount = ArmourReduction(ammount);
             hp -= ammount;
             //Debug.Log("Recieved " + ammount + " damage!");
 
@@ -30,7 +31,20 @@ public class HealthController : MonoBehaviour
 
     public void Heal(int ammount)
     {
-        hp = Mathf.Clamp(hp+ammount, 0, max);
+        hp = Mathf.Clamp(hp+ammount, 0, maxHP);
         //Debug.Log("Recieved " + ammount + " healing!");
+    }
+
+    private int ArmourReduction(int ammount)
+    {
+        int armourDamage = (int)Mathf.Ceil(ammount*armourReductionPercentage);
+        int remainingDamage = ammount - armourDamage;
+        Debug.Log("Health Damage: " + remainingDamage);
+        if(ammount < 0){ ammount = 0; }
+
+        armour -= armourDamage;
+        if(armour < 0){ armour = 0; }
+
+        return remainingDamage;
     }
 }
