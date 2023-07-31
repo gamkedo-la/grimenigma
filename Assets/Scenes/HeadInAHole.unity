@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38837433, g: 0.121094756, b: 0.16278732, a: 1}
+  m_IndirectSpecularColor: {r: 0.3879888, g: 0.121101506, b: 0.16259602, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -371,9 +371,12 @@ MonoBehaviour:
   range: 700
   cooldown: 0.07
   spread: 2.34
-  ammount: 12
+  drawTime: 0
+  projectileAmmount: 1
+  infiniteAmmmo: 0
+  ammo: 0
+  maxAmmo: 0
   ownerTag: Player
-  spawnOrigin: {fileID: 0}
 --- !u!1001 &309843716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1868,9 +1871,12 @@ MonoBehaviour:
   range: 1006.6
   cooldown: 0.03
   spread: 0
-  ammount: 1
+  drawTime: 0
+  projectileAmmount: 1
+  infiniteAmmmo: 1
+  ammo: 1000
+  maxAmmo: 10000
   ownerTag: Player
-  spawnOrigin: {fileID: 4261051292385738845}
 --- !u!1001 &1343125315
 PrefabInstance:
   m_ObjectHideFlags: 0

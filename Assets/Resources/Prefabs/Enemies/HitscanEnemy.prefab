@@ -193,9 +193,6 @@ MonoBehaviour:
     m_Bits: 1073741824
   weapon: {fileID: 4043406814658916752}
   attackRange: 40.5
-  damage: 1
-  drawTime: 2.39
-  attackCoolDown: 3.19
 --- !u!114 &4043406814658916752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +211,11 @@ MonoBehaviour:
   range: 500
   cooldown: 1.01
   spread: 0
-  ammount: 1
+  drawTime: 0
+  projectileAmmount: 1
+  infiniteAmmmo: 1
+  ammo: 0
+  maxAmmo: 0
   ownerTag: 
 --- !u!114 &7630765295138871349
 MonoBehaviour:
