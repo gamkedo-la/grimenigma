@@ -5,12 +5,12 @@ public class HealthController : MonoBehaviour
     [SerializeField] public int hp;//{get; private set;}
     [SerializeField] bool godMode = false;
     [SerializeField] int max = 1;
-    [SerializeField] int min = 0;
+    //[SerializeField] int min = 0;
 
    private void Start()
    {
         // Prevents hp > max
-        hp = Mathf.Clamp(hp, min, max);
+        hp = Mathf.Clamp(hp, 0, max);
         //Debug.Log("Start HP: " + hp);
    }
 
@@ -30,7 +30,7 @@ public class HealthController : MonoBehaviour
 
     public void Heal(int ammount)
     {
-        hp = Mathf.Clamp(hp+ammount, min, max);
+        hp = Mathf.Clamp(hp+ammount, 0, max);
         //Debug.Log("Recieved " + ammount + " healing!");
     }
 }
