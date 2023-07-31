@@ -368,15 +368,16 @@ MonoBehaviour:
   weaponName: 
   attackType: 0
   projectile: {fileID: 9028769795115557989, guid: 2937b29471083ac4686dce7fbc8968e9, type: 3}
+  piercingDamage: 0
   hitScanDamage: 1
   range: 700
-  cooldown: 0.07
-  spread: 2.34
+  cooldown: 1
+  spread: 2.5
   drawTime: 0
-  projectileAmmount: 1
+  projectileAmmount: 12
   infiniteAmmmo: 0
-  ammo: 0
-  maxAmmo: 0
+  ammo: 50
+  maxAmmo: 100
   ownerTag: Player
 --- !u!1001 &309843716
 PrefabInstance:
@@ -1869,6 +1870,7 @@ MonoBehaviour:
   weaponName: 
   attackType: 0
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
+  piercingDamage: 0
   hitScanDamage: 1
   range: 1006.6
   cooldown: 0.03
@@ -2588,7 +2590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f4b6f53eb74452f4b858e842a4e56593, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3706,7 +3708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfb7d90262508c45983f057ee519c85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 1137017526}
+  CurrentWeapon: {fileID: 257311699}
 --- !u!1 &4719128658916399081
 GameObject:
   m_ObjectHideFlags: 0
@@ -4318,7 +4320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b17f8e8a7798f14da56c5e1f9326290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: HitscanEnemy
+  entityToSpawn: PeircingHitscanEnemy
 --- !u!114 &5601597583305576722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4344,7 +4346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b17f8e8a7798f14da56c5e1f9326290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: HitscanEnemyBlue
+  entityToSpawn: PeircingHitscanEnemy
 --- !u!114 &5601597583541564983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5485,7 +5487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f4b6f53eb74452f4b858e842a4e56593, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
