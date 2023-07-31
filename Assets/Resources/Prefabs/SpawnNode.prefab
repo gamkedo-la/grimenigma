@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4940965672192630026}
   - component: {fileID: -6985026809836818430}
   - component: {fileID: 5601597582109007885}
+  - component: {fileID: 3889096967604018364}
   m_Layer: 0
   m_Name: SpawnNode
   m_TagString: Untagged
@@ -98,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367b8dbaa0508eb48858b64c452b043f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: 
+  label: Hello
+  wasTriggered: 0
 --- !u!114 &5601597582109007885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +114,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityToSpawn: HitscanEnemy
+--- !u!114 &3889096967604018364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4719128660127669596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5165bd358aad40e419677c3fe5c679a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggerLine: {fileID: 3243737631664681223, guid: e099b996b76633b4a9f65da7dae8e1ad, type: 3}
+  line: {fileID: 0}
