@@ -19,7 +19,7 @@ public class EncounterTrigger : MonoBehaviour
     void Awake()
     {
         if(label == "LABEL_ME!(>:|)="){ Debug.LogError("TRIGGER MISSING LABEL!!"); }
-        endLabel = "-end";
+        endLabel = label+"-end";
         sms = GameObject.Find("SpawnManagerSingleton").GetComponent<SpawnManagerSingleton>();
     }
 
