@@ -72,7 +72,7 @@ public class EncounterListenerEditor : Editor
             }
             selectedEncounterIndex = EditorGUILayout.Popup(selectedEncounterIndex, encounterLabels);
             listener.label = encounterLabels[selectedEncounterIndex];
-            EditorUtility.SetDirty(listener);
+            if(!EditorUtility.IsDirty(listener)){ EditorUtility.SetDirty(listener); }
         }
         else{
             EditorGUILayout.Popup(0, new string[] {"No encounters found!"});
