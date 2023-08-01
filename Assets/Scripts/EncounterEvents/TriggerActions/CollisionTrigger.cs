@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollisionTrigger : MonoBehaviour
 {
+    [SerializeField] bool disableOnTrigger = true;
+    
     Collider myCollider;
     EncounterTrigger myEvent;
 
@@ -18,7 +20,8 @@ public class CollisionTrigger : MonoBehaviour
         if(other.tag == "Player"){
             Debug.Log("Event " + myEvent.label + " triggered!");
             myEvent.TriggerEvent();
-            myCollider.enabled = false;
+            if(disableOnTrigger){ myCollider.enabled = false; }
+            
         }
     }
 }
