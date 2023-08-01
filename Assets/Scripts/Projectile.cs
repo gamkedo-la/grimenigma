@@ -26,8 +26,9 @@ public class Projectile : MonoBehaviour
         if(travelDistance <= 0) { gameObject.SetActive(false); }
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
+        Debug.Log(this.gameObject.name + " collided with " + other.gameObject.name);
         if(other.gameObject.tag != ownerTag){
             Debug.Log("Projectile collision!");
             other.transform.gameObject.GetComponent<HealthController>()?.Damage(damage);
