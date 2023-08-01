@@ -48,6 +48,7 @@ public class EncounterListenerEditor : Editor
     {
         EncounterTrigger[] sceneEncounters = FindObjectsOfType<EncounterTrigger>();
         encounterLabels = new string[sceneEncounters.Length*2];
+        EncounterListener listener = (EncounterListener)target;
         int j = 0;
         for (int i = 0; i < encounterLabels.Length; i+=2){
             encounterLabels[i] = sceneEncounters[j].label;
@@ -72,7 +73,7 @@ public class EncounterListenerEditor : Editor
             }
             selectedEncounterIndex = EditorGUILayout.Popup(selectedEncounterIndex, encounterLabels);
             listener.label = encounterLabels[selectedEncounterIndex];
-            if(!EditorUtility.IsDirty(listener)){ EditorUtility.SetDirty(listener); }
+            EditorUtility.SetDirty(listener);
         }
         else{
             EditorGUILayout.Popup(0, new string[] {"No encounters found!"});
