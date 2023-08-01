@@ -6,13 +6,13 @@ public class CollisionTrigger : MonoBehaviour
 {
     [SerializeField] bool disableOnTrigger = true;
     
-    Collider myCollider;
+    [SerializeField] Collider myCollider;
     EncounterTrigger myEvent;
 
     void Awake()
     {
         myEvent = GetComponent<EncounterTrigger>();
-        myCollider = GetComponent<Collider>();
+        if(myCollider == null) { myCollider = GetComponent<Collider>(); }
     }
 
     void OnTriggerEnter(Collider other){
