@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(input.Player.Attack.IsInProgress()){ pEquipment.currentEquipment.GetComponent<AttackController>().Attack(); }
+        if(input.Player.Attack.IsInProgress()){ pEquipment.currentEquipment?.GetComponent<AttackController>().Attack(); }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
         if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){ pHandeling.WeaponSway(input.Player.Camera.ReadValue<Vector2>().normalized, input.Player.Movement.ReadValue<Vector2>()); }
         else{ pHandeling.IdleAroundOrigin(); }
