@@ -36,7 +36,7 @@ public class OpenDoor : MonoBehaviour
     {
         if(isDoorClosed && label == listener.label){
             if(!requiresKey || "Player has key check" != null){
-                Debug.Log("We are opening the door " + this.gameObject.name + "!");
+                //Debug.Log("We are opening the door " + this.gameObject.name + "!");
                 sa.Twean(speed, openPosition);
                 isDoorClosed = false;
                 StartCoroutine(RunCloseDoor());
@@ -47,7 +47,7 @@ public class OpenDoor : MonoBehaviour
     IEnumerator RunCloseDoor()
     {
         yield return new WaitForSeconds(secondsBeforeAutoClose);
-        Debug.Log("We are closing the door " + this.gameObject.name + "!");
+        //Debug.Log("We are closing the door " + this.gameObject.name + "!");
         sa.Twean(speed, closedPosition);
         isDoorClosed = true;
     }
