@@ -9,6 +9,7 @@ public class ResourcePickup : MonoBehaviour
         ammunition,
         armour,
         health,
+        speed
     }
 
     [SerializeField] ResourceType pickupType = ResourceType.health;
@@ -41,6 +42,9 @@ public class ResourcePickup : MonoBehaviour
                 case ResourceType.health:
                     HandleHealth(other);
                     break;
+                case ResourceType.speed:
+                    HanndleSpeed(other);
+                    break;
                 default:
                     Debug.LogError("Invalid value for ResourceType enum!");
                     break;
@@ -65,6 +69,13 @@ public class ResourcePickup : MonoBehaviour
     void HandleArmour(Collider other){
         other.transform.gameObject.GetComponent<HealthController>()?.AddArmour(ammount);
         Debug.Log("Player Armour:"  + other.transform.gameObject.GetComponent<HealthController>().armour);
+        if(destroyOnPickup){ Destroy(this.gameObject); }
+    }
+
+    void HanndleSpeed(Collider other)
+    {
+        other.transform.gameObject.GetComponent<SpeedController>()?.ChangeSpeed((float) ammount);
+        Debug.Log("Player speed: " + other.gameObject.GetComponent<SpeedController>().speed);
         if(destroyOnPickup){ Destroy(this.gameObject); }
     }
 }
