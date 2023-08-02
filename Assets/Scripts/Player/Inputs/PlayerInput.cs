@@ -71,6 +71,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchToNextWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa79386a-a3a7-479c-bb15-18a3cd6a3bcb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -249,6 +258,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pause Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b461ac6-ad60-4b7b-9221-5b61b63f61fb"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchToNextWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59b23b91-851b-4358-855f-38381b94fd7e"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchToNextWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -273,6 +304,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_PauseMenu = m_Player.FindAction("Pause Menu", throwIfNotFound: true);
+        m_Player_SwitchToNextWeapon = m_Player.FindAction("SwitchToNextWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -339,6 +371,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_PauseMenu;
+    private readonly InputAction m_Player_SwitchToNextWeapon;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -348,6 +381,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @PauseMenu => m_Wrapper.m_Player_PauseMenu;
+        public InputAction @SwitchToNextWeapon => m_Wrapper.m_Player_SwitchToNextWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -372,6 +406,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @SwitchToNextWeapon.started += instance.OnSwitchToNextWeapon;
+            @SwitchToNextWeapon.performed += instance.OnSwitchToNextWeapon;
+            @SwitchToNextWeapon.canceled += instance.OnSwitchToNextWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -391,6 +428,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @SwitchToNextWeapon.started -= instance.OnSwitchToNextWeapon;
+            @SwitchToNextWeapon.performed -= instance.OnSwitchToNextWeapon;
+            @SwitchToNextWeapon.canceled -= instance.OnSwitchToNextWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -433,5 +473,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnSwitchToNextWeapon(InputAction.CallbackContext context);
     }
 }
