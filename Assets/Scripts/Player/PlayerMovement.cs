@@ -8,12 +8,12 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(SpeedController))]
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] float moveSpeed;
-    [SerializeField] float maxSpeed;
+    [SerializeField] SpeedController movement;
 
     [Header("Jump Properties")]
     [SerializeField] float jumpForce;
@@ -38,6 +38,26 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    public void JumpHandler(bool jumpIsPressed, bool jumpWasPressThisFrame)
+    {
+        if(jumpIsPressed){
+            if(grounded && canJump){ Jump(); }
+            else if (airJumpAvailable && jumpWasPressThisFrame){
+                airJumpAvailable = false;
+                Jump();
+            }
+            //else if(grounded && !canJump && input.Player.Jump.WasPressedThisFrame()){ Jump(); }
+        }
+        //Debug.Log("Jump input:" + input.Player.Jump.IsPressed());
+    }
+
+    
+    public void MovePlayer(Vector2 moveDirection)
+    {
+        // Move the player without modifying the up/down velocity. Modifying velocty it requires
+        rb.velocity =  (transform.right * moveDirection.x + transform.forward * moveDirection.y) * movement.speed + new Vector3(0f, rb.velocity.y);
+        //Debug.Log("Player velocity:" + rb.velocity);
+    }
 
     void Awake()
     {
@@ -60,13 +80,6 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
     }
 
-    public void MovePlayer(Vector2 moveDirection)
-    {
-        // Move the player without modifying the up/down velocity. Modifying velocty it requires
-        rb.velocity =  (transform.right * moveDirection.x + transform.forward * moveDirection.y) * moveSpeed + new Vector3(0f, rb.velocity.y);
-        //Debug.Log("Player velocity:" + rb.velocity);
-    }
-
     private void GroundCheck()
     {
         // Performs raycasts for 90, 45, and 135 degrees from player's facing position to check if player is gounded.
@@ -79,19 +92,6 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
         //Debug.Log("Grounded:" + grounded);
-    }
-
-    public void JumpHandler(bool jumpIsPressed, bool jumpWasPressThisFrame)
-    {
-        if(jumpIsPressed){
-            if(grounded && canJump){ Jump(); }
-            else if (airJumpAvailable && jumpWasPressThisFrame){
-                airJumpAvailable = false;
-                Jump();
-            }
-            //else if(grounded && !canJump && input.Player.Jump.WasPressedThisFrame()){ Jump(); }
-        }
-        //Debug.Log("Jump input:" + input.Player.Jump.IsPressed());
     }
 
     private void Jump()
