@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerMovement pBody;
-    [SerializeField] PlayerAttack pAttack;
     [SerializeField] PlayerCameraControl pCamera;
     [SerializeField] PlayerWeaponHandeling pHandeling;
     [SerializeField] HealthController pHealth;
