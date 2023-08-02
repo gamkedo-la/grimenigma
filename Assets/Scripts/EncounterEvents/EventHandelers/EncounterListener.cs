@@ -68,7 +68,7 @@ public class EncounterListenerEditor : Editor
         if(encounterLabels.Length > 0){
             selectedEncounterIndex = System.Array.IndexOf(encounterLabels, listener.label);
             if(selectedEncounterIndex < 0 || selectedEncounterIndex > encounterLabels.Length){
-                Debug.LogError("Encounter index of " + selectedEncounterIndex + " out of bounds. Setting to 0!");
+                Debug.LogWarning("Encounter index of " + selectedEncounterIndex + " out of bounds. Setting to 0!");
                 selectedEncounterIndex = 0;
             }
             selectedEncounterIndex = EditorGUILayout.Popup(selectedEncounterIndex, encounterLabels);
