@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
     {
         //Debug.Log(this.gameObject.name + " collided with " + other.gameObject.name);
         if(other.gameObject.tag != ownerTag){
-            //Debug.Log(this.gameObject.name + " collided with object " + other.gameObject.name + " with tag of " + ownerTag);
+            //Debug.Log(this.gameObject.name + " with ownerTag of " + ownerTag + " collided with object " + other.gameObject.name);
             other.transform.gameObject.GetComponent<HealthController>()?.Damage(damage);
             this.gameObject.SetActive(false);
         }
