@@ -32,11 +32,11 @@ public class ScriptedAnimations : MonoBehaviour
         // while true (oooh scary)
         while(true){
             if(Vector3.Distance(transform.position, targetPosition) < 0.1f){ 
-                Debug.Log("Bobbing to original location: " + originPosition + "!");
+                //Debug.Log("Bobbing to original location: " + originPosition + "!");
                 yield return StartCoroutine(RunMoveTowards(speed, originPosition));
             }
             else if(Vector3.Distance(transform.position, originPosition) < 0.1f){
-                Debug.Log("Bobbing to target location: " + targetPosition + "!");
+                //Debug.Log("Bobbing to target location: " + targetPosition + "!");
                 yield return StartCoroutine(RunMoveTowards(speed, targetPosition));
             }
             yield return null;
