@@ -16,7 +16,8 @@ public class ScriptedAnimations : MonoBehaviour
 
     public void Twean(float speed, float x=0, float y=0, float z=0)
     {
-        StartCoroutine(RunMoveTowards(speed, x, y, z));
+        Vector3 targetPosition = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z + z);
+        StartCoroutine(RunMoveTowards(speed, targetPosition));
     }
 
     public void Twean(float speed, Vector3 targetPosition)
