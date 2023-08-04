@@ -57,7 +57,6 @@ public class EncounterListenerEditor : Editor
         }
     }
 
-static EncounterListener lastUpdated = null;
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
