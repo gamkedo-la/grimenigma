@@ -66,6 +66,7 @@ public class EncounterListenerEditor : Editor
         base.OnInspectorGUI();
 
         GUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Listening for event");
         if(listener.gameObject.scene.name != null ){
             if(encounterLabels.Length > 0){
                 selectedEncounterIndex = System.Array.IndexOf(encounterLabels, listener.label);

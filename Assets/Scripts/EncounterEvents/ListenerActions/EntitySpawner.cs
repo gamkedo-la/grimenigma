@@ -66,7 +66,7 @@ public class EntitySpawnEditor : Editor
 
         base.OnInspectorGUI();
         GUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Spawner Custom Inspector");
+        EditorGUILayout.LabelField("Enemy to spawn");
         if(spawnNode.gameObject.scene.name != null ){
             if (enemyNames.Length > 0){
                 selectedEnemyIndex = enemyNameList.IndexOf(spawnNode.entityToSpawn);
