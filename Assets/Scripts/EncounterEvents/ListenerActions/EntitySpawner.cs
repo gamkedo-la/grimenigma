@@ -67,21 +67,25 @@ public class EntitySpawnEditor : Editor
         base.OnInspectorGUI();
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Spawner Custom Inspector");
-        if (enemyNames.Length > 0){
-            selectedEnemyIndex = enemyNameList.IndexOf(spawnNode.entityToSpawn);
-            if(selectedEnemyIndex < 0 || selectedEnemyIndex > enemyNames.Length){
-                Debug.LogError("Enemy Index of " + selectedEnemyIndex + " out of bounds. Resetting to 0!");
-                selectedEnemyIndex = 0;
+        if(spawnNode.gameObject.scene.name != null ){
+            if (enemyNames.Length > 0){
+                selectedEnemyIndex = enemyNameList.IndexOf(spawnNode.entityToSpawn);
+                if(selectedEnemyIndex < 0 || selectedEnemyIndex > enemyNames.Length){
+                    Debug.LogError("Enemy Index of " + selectedEnemyIndex + " out of bounds. Resetting to 0!");
+                    selectedEnemyIndex = 0;
+                }
+                //Debug.Log(selectedEnemyIndex);
+                selectedEnemyIndex = EditorGUILayout.Popup(selectedEnemyIndex, enemyNames);
+                spawnNode.entityToSpawn = enemyNames[selectedEnemyIndex];
+                if((lastSeclectedEnemy != spawnNode.entityToSpawn) && !Application.isPlaying) { EditorUtility.SetDirty(spawnNode); }
             }
-            //Debug.Log(selectedEnemyIndex);
-            selectedEnemyIndex = EditorGUILayout.Popup(selectedEnemyIndex, enemyNames);
-            spawnNode.entityToSpawn = enemyNames[selectedEnemyIndex];
-            if((lastSeclectedEnemy != spawnNode.entityToSpawn) && !Application.isPlaying) { EditorUtility.SetDirty(spawnNode); }
+            else{
+                EditorGUILayout.Popup(0, new string[] {"No Objects Found!"});
+            }
         }
         else{
-            EditorGUILayout.Popup(0, new string[] {"No Objects Found!"});
+            EditorGUILayout.Popup(0, new string[] {"Add object to a scene."});
         }
-
         EditorGUILayout.EndHorizontal();
         serializedObject.ApplyModifiedProperties();
     }

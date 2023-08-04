@@ -66,22 +66,24 @@ public class EncounterListenerEditor : Editor
         base.OnInspectorGUI();
 
         GUILayout.BeginHorizontal();
-
-        if(encounterLabels.Length > 0){
-            selectedEncounterIndex = System.Array.IndexOf(encounterLabels, listener.label);
-            if(selectedEncounterIndex < 0 || selectedEncounterIndex > encounterLabels.Length){
-                Debug.LogWarning("Encounter index of " + selectedEncounterIndex + " out of bounds. Setting to 0!");
-                selectedEncounterIndex = 0;
+        if(listener.gameObject.scene.name != null ){
+            if(encounterLabels.Length > 0){
+                selectedEncounterIndex = System.Array.IndexOf(encounterLabels, listener.label);
+                if(selectedEncounterIndex < 0 || selectedEncounterIndex > encounterLabels.Length){
+                    Debug.LogWarning("Encounter index of " + selectedEncounterIndex + " out of bounds. Setting to 0!");
+                    selectedEncounterIndex = 0;
+                }
+                selectedEncounterIndex = EditorGUILayout.Popup(selectedEncounterIndex, encounterLabels);
+                listener.label = encounterLabels[selectedEncounterIndex];
+                if(listener.label != lastLabel  && !Application.isPlaying){ EditorUtility.SetDirty(listener); }
             }
-            selectedEncounterIndex = EditorGUILayout.Popup(selectedEncounterIndex, encounterLabels);
-            listener.label = encounterLabels[selectedEncounterIndex];
-            if(listener.label != lastLabel){
-                EditorUtility.SetDirty(listener);
+            else{
+                EditorGUILayout.Popup(0, new string[] {"No encounters found!"});
+                Debug.LogWarning("No Enounters found in scene!");
             }
         }
         else{
-            EditorGUILayout.Popup(0, new string[] {"No encounters found!"});
-            Debug.LogWarning("No Enounters found in scene!");
+            EditorGUILayout.Popup(0, new string[] {"Add object to a scene."});
         }
         EditorGUILayout.EndHorizontal();
     }
