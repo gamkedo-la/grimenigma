@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -2658439877316388328}
   - component: {fileID: 6367831025654408809}
   - component: {fileID: 3123777663309394771}
+  - component: {fileID: 3869432597671844157}
   m_Layer: 27
   m_Name: projectile
   m_TagString: projectile
@@ -150,4 +151,20 @@ MonoBehaviour:
   damage: 1
   speed: 75
   range: 999
+  sa: {fileID: 3869432597671844157}
+  rotateX: 50
+  rotateY: 50
+  rotateZ: 50
   ownerTag: projectile
+--- !u!114 &3869432597671844157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9028769795115557989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc1502014adf9e4e86ffc654c98441c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
