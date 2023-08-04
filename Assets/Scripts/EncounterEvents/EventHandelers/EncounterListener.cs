@@ -57,14 +57,17 @@ public class EncounterListenerEditor : Editor
         }
     }
 
+static EncounterListener lastUpdated = null;
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
         EncounterListener listener = (EncounterListener)target;
+        string lastLabel = listener.label;
 
         base.OnInspectorGUI();
 
         GUILayout.BeginHorizontal();
+
         if(encounterLabels.Length > 0){
             selectedEncounterIndex = System.Array.IndexOf(encounterLabels, listener.label);
             if(selectedEncounterIndex < 0 || selectedEncounterIndex > encounterLabels.Length){
@@ -73,7 +76,9 @@ public class EncounterListenerEditor : Editor
             }
             selectedEncounterIndex = EditorGUILayout.Popup(selectedEncounterIndex, encounterLabels);
             listener.label = encounterLabels[selectedEncounterIndex];
-            EditorUtility.SetDirty(listener);
+            if(listener.label != lastLabel){
+                EditorUtility.SetDirty(listener);
+            }
         }
         else{
             EditorGUILayout.Popup(0, new string[] {"No encounters found!"});
