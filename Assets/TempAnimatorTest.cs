@@ -7,6 +7,7 @@ public class TempAnimatorTest : MonoBehaviour
     public Animator anim;
     private void Update()
     {
+        // These key presses act as a 'Weapon Switch'
         if (Input.GetKey(KeyCode.U))
         {
             TurnOffOtherBools();
@@ -33,6 +34,7 @@ public class TempAnimatorTest : MonoBehaviour
             anim.SetBool("noWeapon", true);
         }
 
+        //This indicates which attack to do based on which weapon is pulled
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(anim.GetBool("isFingerGun"))
@@ -48,6 +50,7 @@ public class TempAnimatorTest : MonoBehaviour
 
     void TurnOffOtherBools()
     {
+        //Just a helper function to not have any loose ends when switching between weapons
         anim.SetBool("noWeapon", false);
         anim.SetBool("isFingerGun", false);
         anim.SetBool("isFingerRoll", false);
