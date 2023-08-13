@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.34439442, g: 0.11332289, b: 0.17026272, a: 1}
+  m_IndirectSpecularColor: {r: 0.3927136, g: 0.12403648, b: 0.16566879, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -382,11 +382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8550b21ad56be4eb7f766f3e39e1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: prototype_encounter
-  linkedSpawns:
-  - {fileID: 1411895434}
-  - {fileID: 1991760561}
-  - {fileID: 1980446270}
 --- !u!4 &656865831
 Transform:
   m_ObjectHideFlags: 0
@@ -633,10 +628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8550b21ad56be4eb7f766f3e39e1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: AnotherTestEncounter
-  linkedSpawns:
-  - {fileID: 244067909}
-  - {fileID: 2004839013}
 --- !u!4 &809393843
 Transform:
   m_ObjectHideFlags: 0
@@ -1911,17 +1902,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1980446270 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5601597582109007885, guid: 0d88cbed37026ae47a8c53e3bced2d61, type: 3}
-  m_PrefabInstance: {fileID: 5289839559593279610}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b17f8e8a7798f14da56c5e1f9326290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1991760555
 GameObject:
   m_ObjectHideFlags: 0
