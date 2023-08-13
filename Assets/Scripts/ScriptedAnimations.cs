@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ScriptedAnimations : MonoBehaviour
 {
+    [Header("Rotation")]
+    [SerializeField] bool rotateObject;
+    [SerializeField] float rotateX;
+    [SerializeField] float rotateY;
+    [SerializeField] float rotateZ;
+
+
     public void Bob(float speed, float x=0, float y=0, float z=0)
     {
         StartCoroutine(RunBob(speed, x, y, z));
@@ -23,6 +30,11 @@ public class ScriptedAnimations : MonoBehaviour
     public void Twean(float speed, Vector3 targetPosition)
     {
         StartCoroutine(RunMoveTowards(speed, targetPosition));
+    }
+
+    void OnEnable()
+    {
+        Rotate(rotateX, rotateY, rotateZ);
     }
 
     IEnumerator RunBob(float speed, float x=0, float y=0, float z=0)
