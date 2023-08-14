@@ -39,6 +39,9 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag == "ignoreTrigger"){
+            return;
+        }
         //Debug.Log(this.gameObject.name + " collided with " + other.gameObject.name);
         if(other.gameObject.tag != ownerTag){
             //Debug.Log(this.gameObject.name + " with ownerTag of " + ownerTag + " collided with object " + other.gameObject.name);
