@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1026665341902231656}
   - component: {fileID: 2700610446360454651}
   - component: {fileID: 8176176072529183381}
+  - component: {fileID: 4253414834840933840}
   m_Layer: 0
   m_Name: BaseResource
   m_TagString: Untagged
@@ -121,3 +122,19 @@ MonoBehaviour:
   pickupType: 0
   ammount: 1
   destroyOnPickup: 1
+--- !u!114 &4253414834840933840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400513014605336469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc1502014adf9e4e86ffc654c98441c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateObject: 1
+  rotateX: 0
+  rotateY: 0
+  rotateZ: 10
