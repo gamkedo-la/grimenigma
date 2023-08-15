@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class ProjectileEnemyAI : MonoBehaviour
 {
 
@@ -10,38 +11,39 @@ public class ProjectileEnemyAI : MonoBehaviour
 
     [SerializeField] Transform eyeball;
     [SerializeField] Transform firePoint;
-    [SerializeField] Projectile projectile;
-    Transform player;
+    [SerializeField] GameObject projectile;
+    Transform target;
 
     [SerializeField] float fireRate = 2f;
-    [SerializeField] float detectionRange = 75f;
-    [SerializeField] float detectionAngleDegrees = 40f;
     [SerializeField] float searchSpeed = 40f;
     [SerializeField] float trackSpeed = 100f;
+    [SerializeField] float detectionRange = 20f;
+    [SerializeField] AttackController attackController;
 
     float fireTimer = 0f;
 
     ProjectileEnemyState projectileEnemyState;
 
-    Vector3 eyeballLookDirection;
-    Vector3 playerDirection;
-    float angleToPlayer;
-    float distanceToPlayer;
+    bool returning;
+    float returnTime = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         projectileEnemyState = ProjectileEnemyState.Searching;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GetComponent<SphereCollider>().radius = detectionRange;
 
         Search();
+    }
+
+    private void OnValidate() {
+        GetComponent<SphereCollider>().radius = detectionRange;
     }
 
     // Update is called once per frame
     void Update()
     {
         fireTimer += Time.deltaTime;
-        UpdatePlayerTracking();
 
         switch (projectileEnemyState)
         {
@@ -55,58 +57,68 @@ public class ProjectileEnemyAI : MonoBehaviour
 
     }
 
-    void UpdatePlayerTracking()
-    {
-        eyeballLookDirection = firePoint.forward;
-        eyeballLookDirection.y = 0;
-        playerDirection = (player.position - eyeball.position) + player.up * 1.5f;
-        playerDirection.y = 0;
-
-        angleToPlayer = Vector3.Angle(eyeballLookDirection, playerDirection);
-        distanceToPlayer = Vector3.Distance(eyeball.position, player.position);
-    }
-
     private void Track()
     {
-        
-        if (angleToPlayer > detectionAngleDegrees)
+
+        if (target == null)
         {
             projectileEnemyState = ProjectileEnemyState.Searching;
         }
 
-        if (angleToPlayer > detectionRange)
-        {
-            return;
-        }
-
-        eyeball.rotation = Quaternion.RotateTowards(eyeball.rotation, player.rotation,trackSpeed * Time.deltaTime);
+        Vector3 direction = target.position - transform.position;
+        Quaternion toRotation = Quaternion.FromToRotation(transform.forward, direction);
+        eyeball.rotation = Quaternion.Lerp(eyeball.rotation, toRotation, Time.deltaTime * trackSpeed);
 
         if (fireTimer > fireRate)
         {
             fireTimer = 0f;
-            Instantiate(projectile, firePoint.position, Quaternion.identity);
+            attackController.Attack();
         }
     }
 
     private void Search()
     {
-        if (angleToPlayer < detectionAngleDegrees)
+        if (returning)
         {
-            projectileEnemyState = ProjectileEnemyState.Tracking;
+            returnTime += Time.deltaTime;
+            Quaternion lookRotation = Quaternion.LookRotation(transform.forward, transform.up);
+            eyeball.rotation = Quaternion.Lerp(eyeball.rotation, lookRotation, 0.01f);
+
+            if (returnTime > 1f)
+            {
+                returning = false;
+            }
+
+            return;
         }
 
         eyeball.Rotate(new Vector3(0f, searchSpeed * Time.deltaTime, 0f));
-
     }
-
-    /* private void OnDrawGizmos() {
-        Debug.DrawLine(eyeball.position, eyeball.position + eyeballLookDirection, Color.red, 0.10f);
-        Debug.DrawLine(eyeball.position, playerDirection, Color.blue, 0.10f);
-    } */
-
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(0, 0, 100, 50), projectileEnemyState.ToString() + " : " + angleToPlayer + " : " + distanceToPlayer);
+        GUI.Label(new Rect(0, 0, 100, 50), projectileEnemyState.ToString());
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            target = other.transform;
+            projectileEnemyState = ProjectileEnemyState.Tracking;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform == target)
+        {
+            target = null;
+            returning = true;
+            returnTime = 0;
+            projectileEnemyState = ProjectileEnemyState.Searching;
+        }
+    }
+
+    
 }

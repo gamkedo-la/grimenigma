@@ -1,0 +1,43 @@
+# ProBuilder 5.0.7
+# https://unity3d.com/unity/features/worldbuilding/probuilder
+# 2023-08-14 4:32:00 PM
+
+mtllib ./dark-step-e.mtl
+o dark-step-e
+
+g dark-step-e
+v 0 0 4
+v -0.5 0 4
+v 0 0.5 4
+v -0.5 0.5 4
+v -0.5 0 0
+v -0.5 0.5 0
+v 0 0 0
+v 0 0.5 0
+
+vt 0 0.5
+vt -0.125 0.5
+vt 0 0.625
+vt -0.125 0.625
+vt 1 0.5
+vt 1 0.625
+vt 0.125 0.5
+vt 0.125 0.625
+vt -1 0.5
+vt -1 0.625
+
+vn 0 0 4
+vn -4 0 0
+vn 0 0 -4
+vn 4 0 0
+vn 0 4 0
+vn 0 -4 0
+
+usemtl dark-step-trim-cable
+f 3/3/1 4/4/1 2/2/1 1/1/1
+f 4/6/2 6/3/2 5/1/2 2/5/2
+f 6/8/3 8/3/3 7/1/3 5/7/3
+f 8/3/4 3/10/4 1/9/4 7/1/4
+f 8/3/5 6/1/5 4/5/5 3/6/5
+f 1/5/6 2/6/6 5/3/6 7/1/6
+
