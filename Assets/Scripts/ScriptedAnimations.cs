@@ -34,7 +34,7 @@ public class ScriptedAnimations : MonoBehaviour
 
     void OnEnable()
     {
-        Rotate(rotateX, rotateY, rotateZ);
+        if(rotateObject){ Rotate(rotateX, rotateY, rotateZ); }
     }
 
     IEnumerator RunBob(float speed, float x=0, float y=0, float z=0)
