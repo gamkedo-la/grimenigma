@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
-    [SerializeField] string weaponName;
+    [SerializeField] public string weaponName;
     [SerializeField] AttackTypes attackType;
     [SerializeField] GameObject projectile;
     [SerializeField] bool piercingDamage;
