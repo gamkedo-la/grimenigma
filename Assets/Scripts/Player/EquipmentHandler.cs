@@ -8,19 +8,27 @@ public class EquipmentHandler : MonoBehaviour
     public GameObject equipmentInventory;
     public GameObject[] equipment;
 
+    [SerializeField] Animator pWeaponAnimations;
+    
     [HideInInspector] public GameObject currentEquipment;
+    [HideInInspector] public string currentEquipmentName;
 
     int currentIndex;
 
 
     public void SelectNextEquipment()
     {
+        ReturnHandToIdle();
+
         currentIndex += 1;
         if(currentIndex >= equipment.Length){ currentIndex = 0; }
 
         if(currentEquipment != null){ currentEquipment.SetActive(false); }
         currentEquipment = equipment[currentIndex];
+        currentEquipmentName = currentEquipment.GetComponent<AttackController>().weaponName;
         currentEquipment.SetActive(true);
+
+        PickHandPosition();
     }
 
     public void SelectEquipment(int index)
@@ -33,6 +41,7 @@ public class EquipmentHandler : MonoBehaviour
 
         if(currentEquipment != null){ currentEquipment.SetActive(false); }
         currentEquipment = equipment[currentIndex];
+        currentEquipmentName = currentEquipment.GetComponent<AttackController>().weaponName;
         currentEquipment.SetActive(true);
     }
 
@@ -48,4 +57,35 @@ public class EquipmentHandler : MonoBehaviour
         SelectEquipment(currentIndex);
     }
 
+    void ReturnHandToIdle(){
+        switch (currentEquipmentName)
+        {
+            case "automatic":
+                pWeaponAnimations.SetBool("isFingerRoll", false);
+                break;
+            case "scatterShot":
+                pWeaponAnimations.SetBool("isFullHand", false);
+                break;
+            default:
+                pWeaponAnimations.SetBool("noWeapon", true);
+                Debug.LogWarning("Could not find animaton case for " + currentEquipmentName);
+                break;
+        }
+    }
+
+    void PickHandPosition(){
+        switch (currentEquipmentName)
+        {
+            case "automatic":
+                pWeaponAnimations.SetBool("isFingerRoll", true);
+                break;
+            case "scatterShot":
+                pWeaponAnimations.SetBool("isFullHand", true);
+                break;
+            default:
+                pWeaponAnimations.SetBool("noWeapon", true);
+                Debug.LogWarning("Could not find animaton case for " + currentEquipmentName);
+                break;
+        }
+    }
 }
