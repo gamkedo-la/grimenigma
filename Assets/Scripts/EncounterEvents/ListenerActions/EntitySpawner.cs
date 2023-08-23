@@ -1,93 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 public class EntitySpawner : MonoBehaviour
 {
-    [SerializeField, HideInInspector] public string entityToSpawn;
-    Object entityPrefab;
-    EncounterListener listener;
+    [SerializeField] bool spawnOnEnable;
+    [SerializeField] bool disableOnSpawn;
+    [SerializeField] GameObject thingToSpawn;
 
     public event System.Action<string, GameObject> OnSpawn;
 
-    void Awake()
+    EncounterListener listener;
+    GameObject spawnedEnemy;
+
+    void Start()
     {
         listener = GetComponent<EncounterListener>();
         listener.onEvent += TriggerSpawn;
     }
 
-    void Start()
+    void OnEnable()
     {
-        entityPrefab = Resources.Load("Prefabs/Enemies/" + entityToSpawn, typeof(GameObject));
-        //TriggerSpawn();
+        if(spawnOnEnable){ TriggerSpawn("OnEnable"); }
     }
 
     public void TriggerSpawn(string label)
     {
-        GameObject spawnedEnemy = Instantiate(entityPrefab, transform.position, transform.rotation) as GameObject;
-        OnSpawn.Invoke(label, spawnedEnemy);
+        spawnedEnemy = Instantiate(thingToSpawn, transform.position, transform.rotation);
+        if(!spawnOnEnable){ OnSpawn.Invoke(label, spawnedEnemy); }
+        if(disableOnSpawn){ this.gameObject.SetActive(false); }
     }
 }
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(EntitySpawner))]
-public class EntitySpawnEditor : Editor
-{
-    #region SerializedProperties
-    //SerializedProperty entityToSpawn;
-    #endregion
-
-    [SerializeField, HideInInspector] int selectedEnemyIndex;
-    List<string> enemyNameList = new List<string>();
-    string[] enemyNames;
-
-    void OnEnable()
-    {
-        //entityToSpawn = serializedObject.FindProperty("entityToSpawn");
-
-        Object[] enemies = Resources.LoadAll("Prefabs/Enemies", typeof(GameObject));
-
-        foreach(Object entity in enemies){
-            enemyNameList.Add(entity.name);
-        }
-
-        enemyNames = enemyNameList.ToArray();
-    }
-
-    public override void OnInspectorGUI()
-    {
-        serializedObject.Update();
-        EntitySpawner spawnNode = (EntitySpawner)target;
-        string lastSeclectedEnemy = spawnNode.entityToSpawn;
-
-        base.OnInspectorGUI();
-        GUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Enemy to spawn");
-        if(spawnNode.gameObject.scene.name != null ){
-            if (enemyNames.Length > 0){
-                selectedEnemyIndex = enemyNameList.IndexOf(spawnNode.entityToSpawn);
-                if(selectedEnemyIndex < 0 || selectedEnemyIndex > enemyNames.Length){
-                    Debug.LogError("Enemy Index of " + selectedEnemyIndex + " out of bounds. Resetting to 0!");
-                    selectedEnemyIndex = 0;
-                }
-                //Debug.Log(selectedEnemyIndex);
-                selectedEnemyIndex = EditorGUILayout.Popup(selectedEnemyIndex, enemyNames);
-                spawnNode.entityToSpawn = enemyNames[selectedEnemyIndex];
-                if((lastSeclectedEnemy != spawnNode.entityToSpawn) && !Application.isPlaying) { EditorUtility.SetDirty(spawnNode); }
-            }
-            else{
-                EditorGUILayout.Popup(0, new string[] {"No Objects Found!"});
-            }
-        }
-        else{
-            EditorGUILayout.Popup(0, new string[] {"Add object to a scene."});
-        }
-        EditorGUILayout.EndHorizontal();
-        serializedObject.ApplyModifiedProperties();
-    }
-}
-#endif
