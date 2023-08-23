@@ -21,7 +21,7 @@ public class RenderLineToTrigger : MonoBehaviour
 
     void DestroyExistingLine()
     {
-        Debug.Log("Destroying line: " + line);
+        //Debug.Log("Destroying line: " + line);
         foreach(LineRenderer currentLine in GetComponentsInChildren<LineRenderer>()){
             if(Application.isPlaying){ Destroy(currentLine.gameObject); }
             else{ DestroyImmediate(currentLine.gameObject); }
