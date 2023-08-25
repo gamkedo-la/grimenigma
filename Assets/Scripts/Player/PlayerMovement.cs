@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpCooldown;
     [Range(0f,500f)][SerializeField] float extraGravity;
 
+    [Header("Dash")]
+    [SerializeField] float dashForce;
+    [SerializeField] float dashCooldown;
+
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
     [SerializeField] float raycastPadding;
@@ -28,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
-    bool canJump = true;
+    bool canJump, canDash;
     bool airJumpAvailable;
     float airMoveSpeed;
 
@@ -37,6 +41,16 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
+
+    public void Dash(Vector2 moveInput)
+    {
+        if(canDash){
+            //Debug.Log("Dash:" + canDash);
+            Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
+            rb.AddForce(moveDirection * dashForce, ForceMode.Impulse);
+            StartCoroutine(DashTimer());
+        }
+    }
 
     public void JumpHandler(bool jumpIsPressed, bool jumpWasPressThisFrame)
     {
@@ -72,6 +86,12 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
     }
 
+    void OnEnable()
+    {
+        canDash = true;
+        canJump = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -98,6 +118,13 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         StartCoroutine(JumpTimer());
+    }
+
+    IEnumerator DashTimer()
+    {
+        canDash = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     IEnumerator JumpTimer()

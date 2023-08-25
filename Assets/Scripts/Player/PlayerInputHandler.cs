@@ -38,9 +38,10 @@ public class PlayerInputHanlder : MonoBehaviour
     {
         moveInput = input.Player.Movement.ReadValue<Vector2>();
         cameraInput = input.Player.Camera.ReadValue<Vector2>();
-        
+
         pCamera.UpdateCameraRotation(cameraInput, controlType, moveInput);
 
+        if(input.Player.Dash.IsInProgress()){ pBody.Dash(moveInput); }
         if(input.Player.Attack.IsInProgress()){ pEquipment.currentEquipment?.GetComponent<AttackController>().Attack(); }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
         if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){ pHandeling.WeaponSway(cameraInput.normalized, moveInput); }
