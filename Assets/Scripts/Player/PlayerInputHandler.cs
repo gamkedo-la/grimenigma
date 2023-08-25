@@ -42,6 +42,9 @@ public class PlayerInputHanlder : MonoBehaviour
         pCamera.UpdateCameraRotation(cameraInput, controlType, moveInput);
 
         if(input.Player.Dash.IsInProgress()){ pBody.Dash(moveInput); }
+        // TO DO: Touch up slide check logic.
+        if(input.Player.Slide.IsInProgress()){ pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame()); }
+        else if(input.Player.Slide.WasReleasedThisFrame()){ pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame());}
         if(input.Player.Attack.IsInProgress()){ pEquipment.currentEquipment?.GetComponent<AttackController>().Attack(); }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
         if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){ pHandeling.WeaponSway(cameraInput.normalized, moveInput); }

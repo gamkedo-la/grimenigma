@@ -6,6 +6,7 @@ SOME NOTES:
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(SpeedController))]
@@ -17,13 +18,20 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f,8f)][SerializeField] float rigidBodyDrag;
 
     [Header("Jump")]
-    [SerializeField] float jumpForce;
-    [SerializeField] float jumpCooldown;
-    [Range(0f,500f)][SerializeField] float extraGravity;
-
+    [Range(50f,150f)][SerializeField] float jumpForce;
+    [Range(0f,5f)][SerializeField] float jumpCooldown;
+    
     [Header("Dash")]
-    [SerializeField] float dashForce;
-    [SerializeField] float dashCooldown;
+    [Range(100f,500f)][SerializeField] float dashForce;
+    [Range(0f,5f)][SerializeField] float dashCooldown;
+
+    [Header("Slide")]
+    [Range(0f,10f)][SerializeField] float slideForce;
+    [Range(0f, 3f)][SerializeField] float allowedSlideTime;
+    [Range(0f,5f)][SerializeField] float slideCooldown;
+
+    [Header("Bodge Fixes")]
+    [Range(0f,300f)][SerializeField] float extraGravity;
 
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
@@ -32,9 +40,9 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
-    bool canJump, canDash;
+    bool canJump, canDash, slideAvailable;
     bool airJumpAvailable;
-    float airMoveSpeed;
+    float airMoveSpeed, slideTime;
 
     bool grounded;
     float maxDistance;
@@ -70,8 +78,28 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
         rb.AddForce(moveDirection * movement.speed, ForceMode.Acceleration);
-        if(!grounded){ rb.AddForce(new Vector3(0, -extraGravity, 0)); }
         //Debug.Log("Player velocity:" + rb.velocity);
+    }
+
+    public void Slide(Vector2 moveInput, bool wasSlideReleased){
+        ApplyExtraGravity();
+
+        if(wasSlideReleased){
+            slideTime = 0f;
+            //Debug.Log("Slide Time:" + slideTime);
+            StartCoroutine(SlideTimer());
+        }
+        else if(slideAvailable){
+            if(slideTime <= allowedSlideTime){
+                //Debug.Log("Slide Time:" + slideTime);
+                Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
+                rb.AddForce(moveDirection * slideForce, ForceMode.Impulse);
+                //Debug.Log("Sliding!");
+
+                slideTime += Time.deltaTime;
+            }
+        }
+
     }
 
     // Start is called before the first frame update
@@ -90,12 +118,18 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = true;
         canJump = true;
+        slideAvailable = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         GroundCheck();
+        ApplyExtraGravity();
+    }
+
+    private void ApplyExtraGravity()
+    {
+        if(!grounded){ rb.AddForce(new Vector3(0, -extraGravity, 0)); }
     }
 
     private void GroundCheck()
@@ -132,6 +166,13 @@ public class PlayerMovement : MonoBehaviour
         canJump = false;
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
+    }
+
+    IEnumerator SlideTimer()
+    {
+        slideAvailable = false;
+        yield return new WaitForSeconds(slideCooldown);
+        slideAvailable = true;
     }
 
 }
