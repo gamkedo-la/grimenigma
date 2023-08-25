@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: a35dee57c17ac0140b01dc5f9cd35b14, type: 2}
   m_HaloStrength: 0.5
@@ -188,7 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b17f8e8a7798f14da56c5e1f9326290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: HitscanEnemy
+  spawnOnEnable: 0
+  disableOnSpawn: 0
+  thingToSpawn: {fileID: 0}
 --- !u!23 &244067910
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1050,7 +1052,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b17f8e8a7798f14da56c5e1f9326290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: HitscanEnemy
+  spawnOnEnable: 0
+  disableOnSpawn: 0
+  thingToSpawn: {fileID: 0}
 --- !u!23 &1411895436
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1998,7 +2002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b17f8e8a7798f14da56c5e1f9326290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: HitscanEnemyBlue
+  spawnOnEnable: 0
+  disableOnSpawn: 0
+  thingToSpawn: {fileID: 0}
 --- !u!1 &2004839012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,7 +2036,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b17f8e8a7798f14da56c5e1f9326290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: HitscanEnemyBlue
+  spawnOnEnable: 0
+  disableOnSpawn: 0
+  thingToSpawn: {fileID: 0}
 --- !u!23 &2004839014
 MeshRenderer:
   m_ObjectHideFlags: 0
