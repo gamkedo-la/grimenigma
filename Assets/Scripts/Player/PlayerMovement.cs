@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump")]
     [SerializeField] float jumpForce;
     [SerializeField] float jumpCooldown;
+    [Range(0f,500f)][SerializeField] float extraGravity;
 
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
         rb.AddForce(moveDirection * movement.speed, ForceMode.Acceleration);
+        if(!grounded){ rb.AddForce(new Vector3(0, -extraGravity, 0)); }
         //Debug.Log("Player velocity:" + rb.velocity);
     }
 
