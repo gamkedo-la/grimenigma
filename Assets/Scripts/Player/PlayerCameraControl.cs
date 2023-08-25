@@ -11,8 +11,10 @@ public class PlayerCameraControl : MonoBehaviour
     [SerializeField] float cameraHeight = 32;
 
     [Header("Bob/Tilting")]
-    [SerializeField] float tiltStrength;
+    [Range(0f, 10f)][SerializeField] float tiltStrength;
+    [Range(0f, 1f)][SerializeField] float tiltSteps;
     [Range(0f, 5f)][SerializeField] float slideOffsetStrength;
+    [Range(0f, 1f)][SerializeField] float slideSteps;
 
     [Header("Game Object Dependencies")]
     [SerializeField] Transform player;
@@ -22,6 +24,10 @@ public class PlayerCameraControl : MonoBehaviour
     float xRotation, yRotation, mouseX, mouseY, horizontalSenseToUse, verticalSenseToUse, slideOffset;
     Vector2 lookDelta, lastMoveVector;
     Quaternion cameraRotationThisFrame;
+
+    float slideOffsetTarget;
+    Vector2 moveInputLast = Vector2.zero;
+    Quaternion moveInputRotation = new Quaternion();
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +39,14 @@ public class PlayerCameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         switch (isSliding)
         {
             case true:
-                slideOffset = slideOffsetStrength;
+                slideOffsetTarget = slideOffsetStrength;
                 break;
             default:
-                slideOffset = 0f;
+                slideOffsetTarget = 0f;
                 break;
         }
 
@@ -47,14 +54,19 @@ public class PlayerCameraControl : MonoBehaviour
         transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight - slideOffset), player.position.z);
     }
 
+    void FixedUpdate()
+    {
+        moveInputRotation = Quaternion.Slerp(moveInputRotation, MovementTilt(transform.localRotation, moveInputLast), tiltSteps);
+        slideOffset = Mathf.Lerp(slideOffset, slideOffsetTarget, slideSteps);
+    }
+
     public void UpdateCameraRotation(Vector2 cameraInput, string controlType, Vector2 moveInput)
     {
         Quaternion cameraInputRotation = new Quaternion();
-        Quaternion moveInputRotation = new Quaternion();
         cameraInputRotation = RotateCamera(transform.localRotation, cameraInput, controlType);
-        moveInputRotation = MovementTilt(transform.localRotation, moveInput);
+        
         transform.localRotation = cameraInputRotation * moveInputRotation;
-
+        moveInputLast = moveInput;
         lastMoveVector = moveInput;
     }
     
