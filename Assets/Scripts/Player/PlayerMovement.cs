@@ -13,8 +13,12 @@ using UnityEngine.SocialPlatforms;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [HideInInspector] public Vector3 moveInput;
+    [HideInInspector] public bool isSliding;
+
     [Header("Movement")]
     [SerializeField] SpeedController movement;
+    [Range(0.1f,1f)][SerializeField] float crouchModifier;
     [Range(0f,8f)][SerializeField] float rigidBodyDrag;
 
     [Header("Jump")]
@@ -40,15 +44,10 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
-    bool canJump, canDash, slideAvailable;
-    bool airJumpAvailable;
-    float airMoveSpeed, slideTime;
-
+    bool canJump, canDash, slideAvailable, airJumpAvailable;
+    float speed, airMoveSpeed, slideTime, maxDistance;
     bool grounded;
-    float maxDistance;
-
-    float horizontalInput;
-    float verticalInput;
+    float horizontalInput, verticalInput;
 
     public void Dash(Vector2 moveInput)
     {
@@ -74,10 +73,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    public void MovePlayer(Vector2 moveInput)
+    public void MovePlayer()
     {
+        if(isSliding){speed = movement.speed * crouchModifier; }
+        else{ speed = movement.speed; }
+
         Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
-        rb.AddForce(moveDirection * movement.speed, ForceMode.Acceleration);
+        rb.AddForce(moveDirection * speed, ForceMode.Acceleration);
         //Debug.Log("Player velocity:" + rb.velocity);
     }
 
@@ -99,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
                 slideTime += Time.deltaTime;
             }
         }
-
     }
 
     // Start is called before the first frame update
@@ -125,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GroundCheck();
         ApplyExtraGravity();
+        MovePlayer();
     }
 
     private void ApplyExtraGravity()

@@ -11,6 +11,7 @@ public class PlayerInputHanlder : MonoBehaviour
 
     PlayerInput input;
 
+    bool isSliding;
     Vector2 moveInput, cameraInput;
     string controlType;
 
@@ -39,12 +40,22 @@ public class PlayerInputHanlder : MonoBehaviour
         moveInput = input.Player.Movement.ReadValue<Vector2>();
         cameraInput = input.Player.Camera.ReadValue<Vector2>();
 
+        pBody.moveInput = moveInput;
         pCamera.UpdateCameraRotation(cameraInput, controlType, moveInput);
 
         if(input.Player.Dash.IsInProgress()){ pBody.Dash(moveInput); }
         // TO DO: Touch up slide check logic.
-        if(input.Player.Slide.IsInProgress()){ pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame()); }
-        else if(input.Player.Slide.WasReleasedThisFrame()){ pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame());}
+        if(input.Player.Slide.IsInProgress()){
+            pBody.isSliding = input.Player.Slide.IsInProgress();
+            pCamera.isSliding = input.Player.Slide.IsInProgress();
+            pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame());
+            
+        }
+        else if(input.Player.Slide.WasReleasedThisFrame()){
+            pBody.isSliding = input.Player.Slide.IsInProgress();
+            pCamera.isSliding = input.Player.Slide.IsInProgress();
+            pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame());
+        }
         if(input.Player.Attack.IsInProgress()){ pEquipment.currentEquipment?.GetComponent<AttackController>().Attack(); }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
         if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){ pHandeling.WeaponSway(cameraInput.normalized, moveInput); }
@@ -59,11 +70,6 @@ public class PlayerInputHanlder : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.K)){ pHealth.Damage(1); }
         if(Input.GetKeyDown(KeyCode.H)){ pHealth.Heal(1); }
-    }
-
-    void FixedUpdate()
-    {
-        pBody.MovePlayer(moveInput);
     }
 
     void GetCameraInput(InputAction.CallbackContext obj)

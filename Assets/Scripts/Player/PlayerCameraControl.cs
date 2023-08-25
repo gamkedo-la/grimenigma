@@ -12,12 +12,16 @@ public class PlayerCameraControl : MonoBehaviour
 
     [Header("Bob/Tilting")]
     [SerializeField] float tiltStrength;
+    [Range(0f, 5f)][SerializeField] float slideOffsetStrength;
 
     [Header("Game Object Dependencies")]
     [SerializeField] Transform player;
 
-    float xRotation, yRotation, mouseX, mouseY, horizontalSenseToUse, verticalSenseToUse;
+    [HideInInspector] public bool isSliding;
+
+    float xRotation, yRotation, mouseX, mouseY, horizontalSenseToUse, verticalSenseToUse, slideOffset;
     Vector2 lookDelta, lastMoveVector;
+    Quaternion cameraRotationThisFrame;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +33,18 @@ public class PlayerCameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch (isSliding)
+        {
+            case true:
+                slideOffset = slideOffsetStrength;
+                break;
+            default:
+                slideOffset = 0f;
+                break;
+        }
+
         // Move to player position.
-        transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight), player.position.z);
+        transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight - slideOffset), player.position.z);
     }
 
     public void UpdateCameraRotation(Vector2 cameraInput, string controlType, Vector2 moveInput)
