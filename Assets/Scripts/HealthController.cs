@@ -3,6 +3,7 @@ using UnityEngine;
 public class HealthController : MonoBehaviour
 {
     [SerializeField] bool godMode = false;
+    [SerializeField] bool destroyOnDeath = true;
     [SerializeField] public int hp, armour, maxHP, maxArmour;//{get; private set;}
     [Range(0f,1f)][SerializeField] float armourReductionPercentage;
     //[SerializeField] int min = 0;
@@ -23,7 +24,8 @@ public class HealthController : MonoBehaviour
 
             if(hp < 1){
                 //Debug.Log("I am dead!");
-                UnityEngine.Object.Destroy(this.gameObject);
+                if(destroyOnDeath){ UnityEngine.Object.Destroy(this.gameObject); }
+                else { this.gameObject.SetActive(false); }
             }
         }
         else{ Debug.Log("Reminder! God mode is enabled."); }
