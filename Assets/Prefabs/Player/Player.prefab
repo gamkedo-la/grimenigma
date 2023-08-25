@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3878097098548358380}
   - component: {fileID: 6560765391502243662}
   - component: {fileID: 5418429209777992258}
-  - component: {fileID: 1439378001873632980}
+  - component: {fileID: 2737548437008083493}
   m_Layer: 30
   m_Name: Body
   m_TagString: Player
@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   godMode: 0
+  destroyOnDeath: 1
   hp: 100
   armour: 50
   maxHP: 150
@@ -331,6 +332,8 @@ MonoBehaviour:
   extraGravity: 0
   dashForce: 0
   dashCooldown: 0
+  slideForce: 0
+  slideCooldown: 0
   playerHeight: 4.02
   raycastPadding: 0.2
   whatIsGround:
@@ -368,7 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWeapon: {fileID: 7337415794868004277}
---- !u!114 &1439378001873632980
+--- !u!114 &2737548437008083493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,7 +380,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3397135204919250846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c77d1d8f10e2fd46b57959f9190a41e, type: 3}
+  m_Script: {fileID: 11500000, guid: 38c5cd2f16bb6dc4a8153b5e16de2695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6931967038412721702
