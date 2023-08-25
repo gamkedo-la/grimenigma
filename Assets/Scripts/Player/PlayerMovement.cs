@@ -14,8 +14,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] SpeedController movement;
+    [Range(0f,8f)][SerializeField] float rigidBodyDrag;
 
-    [Header("Jump Properties")]
+    [Header("Jump")]
     [SerializeField] float jumpForce;
     [SerializeField] float jumpCooldown;
 
@@ -25,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask whatIsGround;
 
     Rigidbody rb;
-
-    Vector2 moveDirection;
 
     bool canJump = true;
     bool airJumpAvailable;
@@ -52,25 +51,22 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    public void MovePlayer(Vector2 moveDirection)
+    public void MovePlayer(Vector2 moveInput)
     {
-        // Move the player without modifying the up/down velocity. Modifying velocty it requires
-        rb.velocity =  (transform.right * moveDirection.x + transform.forward * moveDirection.y) * movement.speed + new Vector3(0f, rb.velocity.y);
+        Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
+        rb.AddForce(moveDirection * movement.speed, ForceMode.Acceleration);
         //Debug.Log("Player velocity:" + rb.velocity);
-    }
-
-    void Awake()
-    {
-        // Component handling
-        rb = GetComponent<Rigidbody>();
-
-        // Calculate constants on instatiation.
-        maxDistance = (playerHeight * 0.5f) + raycastPadding;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        // Component handling
+        rb = GetComponent<Rigidbody>();
+        rb.drag = rigidBodyDrag;
+
+        // Calculate constants on instatiation.
+        maxDistance = (playerHeight * 0.5f) + raycastPadding;
         rb.freezeRotation = true;
     }
 

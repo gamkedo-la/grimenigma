@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerInputHanlder : MonoBehaviour
 {
     [SerializeField] PlayerMovement pBody;
     [SerializeField] PlayerCameraControl pCamera;
@@ -10,14 +11,21 @@ public class PlayerController : MonoBehaviour
 
     PlayerInput input;
 
+    Vector2 moveInput, cameraInput;
+    string controlType;
+
     void OnEnable()
     {
         input.Enable();
+        input.Player.Camera.performed += GetCameraInput;
+        input.Player.Camera.canceled += GetCameraInput;
     }
 
     void OnDisable()
     {
         input.Disable();
+        input.Player.Camera.performed -= GetCameraInput;
+        input.Player.Camera.canceled -= GetCameraInput;
     }
 
     void Awake()
@@ -28,9 +36,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        moveInput = input.Player.Movement.ReadValue<Vector2>();
+        cameraInput = input.Player.Camera.ReadValue<Vector2>();
+        
+        pCamera.UpdateCameraRotation(cameraInput, controlType, moveInput);
+
         if(input.Player.Attack.IsInProgress()){ pEquipment.currentEquipment?.GetComponent<AttackController>().Attack(); }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
-        if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){ pHandeling.WeaponSway(input.Player.Camera.ReadValue<Vector2>().normalized, input.Player.Movement.ReadValue<Vector2>()); }
+        if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){ pHandeling.WeaponSway(cameraInput.normalized, moveInput); }
         else{ pHandeling.IdleAroundOrigin(); }
 
         if(input.Player.SwitchToNextWeapon.IsPressed()){ pEquipment.SelectNextEquipment(); }
@@ -46,6 +59,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        pBody.MovePlayer(input.Player.Movement.ReadValue<Vector2>());
+        pBody.MovePlayer(moveInput);
+    }
+
+    void GetCameraInput(InputAction.CallbackContext obj)
+    {
+        controlType = obj.control.parent.displayName;
     }
 }

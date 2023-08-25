@@ -103,10 +103,10 @@ GameObject:
   - component: {fileID: 7003490472044465064}
   - component: {fileID: 8011386032424203430}
   - component: {fileID: 4746745141495588509}
+  - component: {fileID: 5323037578449652153}
   - component: {fileID: 2828438361496921034}
   - component: {fileID: 674857546359026933}
   - component: {fileID: 3878097098548358380}
-  - component: {fileID: 5323037578449652153}
   - component: {fileID: 6560765391502243662}
   - component: {fileID: 5418429209777992258}
   - component: {fileID: 1439378001873632980}
@@ -262,6 +262,23 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5323037578449652153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3397135204919250846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1670e3dc38d6d445abc53abe38d43dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pBody: {fileID: 3878097098548358380}
+  pCamera: {fileID: 6656122339826601390}
+  pHandeling: {fileID: 6565614909547728820}
+  pHealth: {fileID: 2828438361496921034}
+  pEquipment: {fileID: 6560765391502243662}
 --- !u!114 &2828438361496921034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,9 +309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce08bd882aca1c4fa7885e72dfb3243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  minSpeed: 30
-  maxSpeed: 50
+  speed: 300
+  minSpeed: 80
+  maxSpeed: 300
 --- !u!114 &3878097098548358380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 674857546359026933}
+  rigidBodyDrag: 6
   jumpForce: 20.1
   jumpCooldown: 0.01
   playerHeight: 4.02
@@ -315,23 +333,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2147483648
---- !u!114 &5323037578449652153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3397135204919250846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1670e3dc38d6d445abc53abe38d43dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pBody: {fileID: 3878097098548358380}
-  pCamera: {fileID: 6656122339826601390}
-  pHandeling: {fileID: 6565614909547728820}
-  pHealth: {fileID: 2828438361496921034}
-  pEquipment: {fileID: 6560765391502243662}
 --- !u!114 &6560765391502243662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +349,9 @@ MonoBehaviour:
   equipment:
   - {fileID: 5656750776654833360}
   - {fileID: 9091669526634582599}
+  pWeaponAnimations: {fileID: 0}
   currentEquipment: {fileID: 0}
+  currentEquipmentName: 
 --- !u!114 &5418429209777992258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +403,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6931967038412721702}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -485,6 +488,7 @@ MonoBehaviour:
   stickVerticalSense: 200
   stickHorizontalSense: 200
   cameraHeight: 2.6
+  bobStrength: 49.7
   player: {fileID: 6837168361299740408}
 --- !u!1001 &4774300548518124417
 PrefabInstance:

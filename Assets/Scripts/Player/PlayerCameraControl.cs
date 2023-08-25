@@ -10,34 +10,15 @@ public class PlayerCameraControl : MonoBehaviour
     [SerializeField] float stickHorizontalSense = 200;
     [SerializeField] float cameraHeight = 32;
 
+    [Header("Bob/Tilting")]
+    [SerializeField] float tiltStrength;
+
     [Header("Game Object Dependencies")]
     [SerializeField] Transform player;
 
     float xRotation, yRotation, mouseX, mouseY, horizontalSenseToUse, verticalSenseToUse;
-    Vector2 cameraInput, lookDelta;
-    string controlType;
+    Vector2 lookDelta, lastMoveVector;
 
-    PlayerInput input;
-
-    void OnEnable()
-    {
-        input.Enable();
-        input.Player.Camera.performed += SetCameraVector;
-        input.Player.Camera.canceled += SetCameraVector;
-    }
-
-    void OnDisable()
-    {
-        input.Disable();
-        input.Player.Camera.performed -= SetCameraVector;
-        input.Player.Camera.canceled -= SetCameraVector;
-    }
-
-    void Awake()
-    {
-        input = new PlayerInput();
-    }
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -49,12 +30,29 @@ public class PlayerCameraControl : MonoBehaviour
     void Update()
     {
         // Move to player position.
-        
-        RotateCamera();
         transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight), player.position.z);
     }
 
-    public void RotateCamera()
+    public void UpdateCameraRotation(Vector2 cameraInput, string controlType, Vector2 moveInput)
+    {
+        Quaternion cameraInputRotation = new Quaternion();
+        Quaternion moveInputRotation = new Quaternion();
+        cameraInputRotation = RotateCamera(transform.localRotation, cameraInput, controlType);
+        moveInputRotation = MovementTilt(transform.localRotation, moveInput);
+        transform.localRotation = cameraInputRotation * moveInputRotation;
+
+        lastMoveVector = moveInput;
+    }
+    
+    private Quaternion MovementTilt(Quaternion rotation, Vector2 moveInput)
+    {
+        // Check if horizontal input has changed
+        if(moveInput.x != lastMoveVector.x){ }
+
+        return Quaternion.Euler(rotation.x, rotation.z, moveInput.x * tiltStrength);
+    }
+
+    private Quaternion RotateCamera(Quaternion rotation, Vector2 cameraInput, string controlType)
     {
         //Debug.Log(obj.control.parent.displayName);
         if(controlType == "Mouse"){ 
@@ -72,8 +70,8 @@ public class PlayerCameraControl : MonoBehaviour
         }
 
         lookDelta = new Vector2(
-                                (cameraInput.x * verticalSenseToUse),
-                                (cameraInput.y * horizontalSenseToUse)
+                                cameraInput.x * verticalSenseToUse,
+                                cameraInput.y * horizontalSenseToUse
                                 );
                                
         //Debug.Log(lookDelta);
@@ -82,14 +80,7 @@ public class PlayerCameraControl : MonoBehaviour
 
         yRotation += mouseX;
         xRotation = Mathf.Clamp((xRotation-mouseY), -90f, 90f);
-
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
-        player.rotation = Quaternion.Euler(0, yRotation, 0);
-    }
-
-    void SetCameraVector(InputAction.CallbackContext obj)
-    {
-        cameraInput = obj.ReadValue<Vector2>();
-        controlType = obj.control.parent.displayName;
+        player.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        return rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
 }
