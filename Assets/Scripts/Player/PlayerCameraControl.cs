@@ -18,6 +18,9 @@ public class PlayerCameraControl : MonoBehaviour
     [Header("Bob/Tilting")]
     [Range(0f,6f)][SerializeField] float landingOffsetStrength;
     [Range(0f, 1f)][SerializeField] float landingOffsetSteps;
+    [Range(0f, 100f)][SerializeField] float hardLandingThreshold;
+    [Range(0f,6f)][SerializeField] float hardLandingOffsetStrength;
+    [Range(0f, 1f)][SerializeField] float hardLandingOffsetSteps;
     [Range(0f, 10f)][SerializeField] float tiltStrength;
     [Range(0f, 1f)][SerializeField] float tiltSteps;
     [Range(0f, 5f)][SerializeField] float slideOffsetStrength;
@@ -76,7 +79,8 @@ public class PlayerCameraControl : MonoBehaviour
             switch (pStates.hasLandedThisCycle)
             {
                 case true:
-                    landingOffsetTarget = landingOffsetStrength;
+                    if(-pStates.landingVelocity.y >= hardLandingThreshold){ landingOffsetTarget = hardLandingOffsetStrength; }
+                    else{ landingOffsetTarget = landingOffsetStrength; }
                     isHandlingLanding = true;
                     break;
                 default:

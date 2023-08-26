@@ -131,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         ApplyExtraGravity();
         MovePlayer();
+        if(!grounded) { pStates.landingVelocity = rb.velocity; }
     }
 
     private void ApplyExtraGravity()
