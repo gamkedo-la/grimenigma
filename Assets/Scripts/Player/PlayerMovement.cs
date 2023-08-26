@@ -51,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
     [SerializeField] float raycastPadding;
-    [SerializeField] LayerMask whatIsGround;
 
     Rigidbody rb;
 
