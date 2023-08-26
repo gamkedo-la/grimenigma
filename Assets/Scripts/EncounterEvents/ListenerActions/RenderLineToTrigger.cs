@@ -3,6 +3,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class RenderLineToTrigger : MonoBehaviour
 {
+    [SerializeField] bool shouldDrawLine = true;
     [SerializeField] public GameObject TriggerLine;
     [SerializeField, HideInInspector] GameObject line;
     LineRenderer[] existingLines;
@@ -12,7 +13,7 @@ public class RenderLineToTrigger : MonoBehaviour
     {
         DestroyExistingLine();
         #if UNITY_EDITOR
-            if(!Application.isPlaying){
+            if(!Application.isPlaying && shouldDrawLine){
             listener = this.gameObject.GetComponent<EncounterListener>();
             DrawLineToTrigger();
             }
