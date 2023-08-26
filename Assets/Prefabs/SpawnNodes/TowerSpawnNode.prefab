@@ -37,6 +37,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 4ee4ca77a0699a84fb888e6c36be6452, type: 2}
     - target: {fileID: 5601597582109007885, guid: fa6f738e2ed2538469749b3d86760977, type: 3}
+      propertyPath: thingToSpawn
+      value: 
+      objectReference: {fileID: 2758265383247273254, guid: d2e4b2419c0b96743841b105925d4dac, type: 3}
+    - target: {fileID: 5601597582109007885, guid: fa6f738e2ed2538469749b3d86760977, type: 3}
       propertyPath: entityToSpawn
       value: ProjectileEnemy
       objectReference: {fileID: 0}
