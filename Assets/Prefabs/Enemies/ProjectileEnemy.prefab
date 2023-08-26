@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6650616579639069561}
-  - component: {fileID: 3992226184560799797}
   - component: {fileID: 7733405248186999741}
+  - component: {fileID: 3992226184560799797}
   - component: {fileID: 5150446890122714817}
   m_Layer: 0
   m_Name: ProjectileEnemy
@@ -35,26 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3992226184560799797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2758265383247273254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9c6af53048d1a04bbeeb558a6f3b863, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eyeball: {fileID: 8856463811047395247}
-  firePoint: {fileID: 9100387783517460266}
-  projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
-  fireRate: 2
-  searchSpeed: 40
-  trackSpeed: 100
-  detectionRange: 20
-  attackController: {fileID: 5150446890122714817}
 --- !u!135 &7733405248186999741
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -76,6 +56,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3992226184560799797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2758265383247273254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c6af53048d1a04bbeeb558a6f3b863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyeball: {fileID: 8856463811047395247}
+  firePoint: {fileID: 9100387783517460266}
+  projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
+  fireRate: 2
+  searchSpeed: 40
+  trackSpeed: 100
+  detectionRange: 20
+  attackController: {fileID: 5150446890122714817}
 --- !u!114 &5150446890122714817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +114,8 @@ GameObject:
   - component: {fileID: 7755527572830674010}
   - component: {fileID: 1249683525692049785}
   - component: {fileID: 4941133097124485531}
+  - component: {fileID: 8781720654592134451}
+  - component: {fileID: 4042098968357940906}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: enemy
@@ -208,6 +210,38 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8781720654592134451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636875598749040971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9dee5ef1ec08f147b422a59c5ab0e54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  godMode: 0
+  destroyOnDeath: 1
+  hp: 5
+  armour: 0
+  maxHP: 1
+  maxArmour: 0
+  armourReductionPercentage: 0
+--- !u!114 &4042098968357940906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636875598749040971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c5cd2f16bb6dc4a8153b5e16de2695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 2758265383247273254}
 --- !u!1 &3946566042880273193
 GameObject:
   m_ObjectHideFlags: 0
