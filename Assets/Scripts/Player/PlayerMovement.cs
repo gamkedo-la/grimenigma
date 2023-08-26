@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector] public Vector3 moveInput;
     [HideInInspector] public bool isSliding;
+    [HideInInspector] public bool hasLandedThisCycle;
+
+    [Header("Required Scripts")]
+    [SerializeField] PlayerStates pStates;
 
     [Header("Movement")]
     [SerializeField] SpeedController movement;
@@ -139,11 +143,14 @@ public class PlayerMovement : MonoBehaviour
         // Performs raycasts for 90, 45, and 135 degrees from player's facing position to check if player is gounded.
         // In theory, this should handle most slope cases, but the values may need tweeking.
         if(Physics.Raycast(transform.position, Vector3.down, maxDistance)){
+            if(!grounded){ pStates.hasLandedThisCycle = true; }
+            else{ pStates.hasLandedThisCycle = false; }
             grounded = true;
             airJumpAvailable = true;
         }
         else{
             grounded = false;
+            pStates.hasLandedThisCycle = false;
         }
         //Debug.Log("Grounded:" + grounded);
     }
