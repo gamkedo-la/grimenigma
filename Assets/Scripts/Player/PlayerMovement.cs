@@ -38,6 +38,13 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f, 3f)][SerializeField] float allowedSlideTime;
     [Range(0f,5f)][SerializeField] float slideCooldown;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource sourceAudio;
+    [SerializeField] AudioClip dashSound;
+    [SerializeField] AudioClip dashAvailableSound;
+    [SerializeField] AudioClip landingSound;
+    [SerializeField] AudioClip slidingSound;
+
     [Header("Bodge Fixes")]
     [Range(0f,300f)][SerializeField] float extraGravity;
 
@@ -48,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
-    bool canJump, canDash, slideAvailable, airJumpAvailable;
+    bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound;
     float speed, airMoveSpeed, slideTime, maxDistance;
     bool grounded;
     float horizontalInput, verticalInput;
@@ -59,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Dash:" + canDash);
             Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
             rb.AddForce(moveDirection * dashForce, ForceMode.Impulse);
+            PlayAudioClip(dashSound);
             StartCoroutine(DashTimer());
         }
     }
@@ -92,11 +100,16 @@ public class PlayerMovement : MonoBehaviour
 
         if(wasSlideReleased){
             slideTime = 0f;
+            shouldPlaySlideSound = true;
             //Debug.Log("Slide Time:" + slideTime);
             StartCoroutine(SlideTimer());
         }
         else if(slideAvailable){
             if(slideTime <= allowedSlideTime){
+                if(shouldPlaySlideSound){
+                    PlayAudioClip(slidingSound);
+                    shouldPlaySlideSound = false;
+                }
                 //Debug.Log("Slide Time:" + slideTime);
                 Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
                 rb.AddForce(moveDirection * slideForce, ForceMode.Impulse);
@@ -124,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
         canJump = true;
         slideAvailable = true;
+        shouldPlaySlideSound = true;
     }
 
     void FixedUpdate()
@@ -144,9 +158,12 @@ public class PlayerMovement : MonoBehaviour
         // Performs raycasts for 90, 45, and 135 degrees from player's facing position to check if player is gounded.
         // In theory, this should handle most slope cases, but the values may need tweeking.
         if(Physics.Raycast(transform.position, Vector3.down, maxDistance)){
-            if(!grounded){ pStates.hasLandedThisCycle = true; }
+            if(!grounded){
+                pStates.hasLandedThisCycle = true;
+                PlayAudioClip(landingSound);
+            }
             else{ pStates.hasLandedThisCycle = false; }
-            grounded = true;
+                        grounded = true;
             airJumpAvailable = true;
         }
         else{
@@ -164,10 +181,17 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(JumpTimer());
     }
 
+    private void PlayAudioClip(AudioClip sound)
+    {
+        sourceAudio.pitch = Random.Range(0.9f, 1.1f);
+        sourceAudio.PlayOneShot(sound);
+    }
+
     IEnumerator DashTimer()
     {
         canDash = false;
         yield return new WaitForSeconds(dashCooldown);
+        PlayAudioClip(dashAvailableSound);
         canDash = true;
     }
 
