@@ -147,7 +147,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3397135204919250846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -325,15 +325,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555d67c448458c94999157b686fd66a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0, z: 0}
+  isSliding: 0
   movement: {fileID: 674857546359026933}
+  crouchModifier: 0
   rigidBodyDrag: 6
   jumpForce: 20.1
   jumpCooldown: 0.01
-  extraGravity: 0
   dashForce: 0
   dashCooldown: 0
   slideForce: 0
+  allowedSlideTime: 0
   slideCooldown: 0
+  extraGravity: 0
   playerHeight: 4.02
   raycastPadding: 0.2
   whatIsGround:
@@ -496,7 +500,11 @@ MonoBehaviour:
   stickHorizontalSense: 200
   cameraHeight: 2.6
   tiltStrength: 0
+  tiltSteps: 0
+  slideOffsetStrength: 0
+  slideSteps: 0
   player: {fileID: 6837168361299740408}
+  isSliding: 0
 --- !u!1 &7064341735789155566
 GameObject:
   m_ObjectHideFlags: 0
