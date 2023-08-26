@@ -50,7 +50,7 @@ public class HealthController: MonoBehaviour
     {
         int armourDamage = (int)Mathf.Ceil(ammount*armourReductionPercentage);
         int remainingDamage = ammount - armourDamage;
-        Debug.Log("Health Damage: " + remainingDamage);
+        //Debug.Log("Health Damage: " + remainingDamage);
         if(ammount < 0){ ammount = 0; }
 
         armour -= armourDamage;
