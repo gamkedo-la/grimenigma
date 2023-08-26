@@ -14,6 +14,10 @@ public class AttackController : MonoBehaviour
     [SerializeField] int projectileAmmount = 1;
     [SerializeField] bool infiniteAmmmo;
     [SerializeField] int ammo, maxAmmo;
+    [Header("Audio")]
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip fxSound;
+    [Header("Owner")]
     [SerializeField] string ownerTag;
 
     Transform spawnOrigin;
@@ -35,6 +39,7 @@ public class AttackController : MonoBehaviour
         }
 
         if(shouldAttack){
+            PlaySoundFX();
             //Debug.Log("Attacking!");
             switch (attackType)
             {
@@ -95,6 +100,12 @@ public class AttackController : MonoBehaviour
 
         
         return (targetPosition - spawnOrigin.position).normalized;
+    }
+
+    void PlaySoundFX()
+    {
+        soundSource.pitch = Random.Range(0.9f, 1.1f);
+        soundSource.PlayOneShot(fxSound);
     }
 
     IEnumerator RunFireProtectile()
