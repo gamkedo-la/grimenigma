@@ -12,21 +12,13 @@ public class ResourcePickup : MonoBehaviour
         speed
     }
 
+    [Header("Resource Settings")]
     [SerializeField] ResourceType pickupType = ResourceType.health;
     [SerializeField] int ammount = 1;
     [SerializeField] bool destroyOnPickup = true;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Audio")]
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip fxSound;
 
     void OnTriggerEnter(Collider other)
     {
@@ -49,33 +41,40 @@ public class ResourcePickup : MonoBehaviour
                     Debug.LogError("Invalid value for ResourceType enum!");
                     break;
             }
+
+            PlaySoundFX();
+            if(destroyOnPickup){ Destroy(this.gameObject); }
         }
     }
 
-
-    void HandleHealth(Collider other){
+    void HandleHealth(Collider other)
+    {
         other.transform.gameObject.GetComponent<HealthController>()?.Heal(ammount);
         Debug.Log("Player HP:"  + other.transform.gameObject.GetComponent<HealthController>().hp);
-        if(destroyOnPickup){ Destroy(this.gameObject); }
     }
 
-    
-    void HandleAmmunition(Collider other){
+    void HandleAmmunition(Collider other)
+    {
         other.transform.gameObject.GetComponent<PlayerAttack>()?.CurrentWeapon.AddAmmo(ammount);
         Debug.Log("Ammo item picked up");
-        if(destroyOnPickup){ Destroy(this.gameObject); }
     }
 
-    void HandleArmour(Collider other){
+    void HandleArmour(Collider other)
+    {
         other.transform.gameObject.GetComponent<HealthController>()?.AddArmour(ammount);
         Debug.Log("Player Armour:"  + other.transform.gameObject.GetComponent<HealthController>().armour);
-        if(destroyOnPickup){ Destroy(this.gameObject); }
     }
 
     void HanndleSpeed(Collider other)
     {
         other.transform.gameObject.GetComponent<SpeedController>()?.ChangeSpeed((float) ammount);
         Debug.Log("Player speed: " + other.gameObject.GetComponent<SpeedController>().speed);
-        if(destroyOnPickup){ Destroy(this.gameObject); }
     }
+
+    void PlaySoundFX()
+    {
+        soundSource.pitch = Random.Range(0.9f, 1.1f);
+        soundSource.PlayOneShot(fxSound);
+    }
+
 }
