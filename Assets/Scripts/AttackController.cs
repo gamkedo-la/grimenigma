@@ -11,11 +11,14 @@ public class AttackController : MonoBehaviour
     [SerializeField] bool piercingDamage;
     [SerializeField] int hitScanDamage = 1;
     [SerializeField] float range, cooldown, spread, drawTime;
+    [Header("For Crosshar Shooting")]
+    [SerializeField] bool hasSourceOfTruth;
+    [SerializeField] GameObject sourceOfTruth;
     [Header("Projectile")]
     [SerializeField] GameObject projectile;
     [Header("Tracer")]
     [SerializeField] bool shouldRenderTracer;
-    [SerializeField] float tracerTimer;
+    [SerializeField] float tracerLifeSpan;
     [SerializeField] LineRenderer tracerRenderer;
     //[SerializeField] float patternSteps = 0f;
     [Header("Ammo")]
@@ -77,6 +80,7 @@ public class AttackController : MonoBehaviour
     {
         poolerSingleton = FindObjectOfType<ProjectilePooler>().gameObject.GetComponent<ProjectilePooler>();
         tracerRenderer = GetComponent<LineRenderer>();
+        if(!hasSourceOfTruth){ sourceOfTruth = this.gameObject; }
 
         spawnOrigin = this.gameObject.transform;
 
@@ -94,6 +98,11 @@ public class AttackController : MonoBehaviour
         
     }
 
+    void Update()
+    {
+        if(hasSourceOfTruth){ transform.LookAt(sourceOfTruth.transform ); }
+    }
+
     void DrawTracer()
     {
         targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
@@ -104,7 +113,8 @@ public class AttackController : MonoBehaviour
 
     Vector3 GetDirection()
     {
-        targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+        //targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+        targetPosition = sourceOfTruth.transform.position + sourceOfTruth.transform.forward *500f;
         targetPosition = new Vector3(
                                             targetPosition.x + Random.Range(-spread, spread),
                                             targetPosition.y + Random.Range(-spread, spread),
@@ -164,7 +174,7 @@ public class AttackController : MonoBehaviour
         tracerRenderer.SetPosition(1, targetPosition);
 
         tracerRenderer.enabled = true;
-        yield return new WaitForSeconds(tracerTimer);
+        yield return new WaitForSeconds(tracerLifeSpan);
         tracerRenderer.enabled = false;
     }
 }
