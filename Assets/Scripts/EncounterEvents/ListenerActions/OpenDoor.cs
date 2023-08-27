@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(ScriptedAnimations))]
 public class OpenDoor : MonoBehaviour
 {
+    [Header("Your Door Is In Another Game Object")]
+    [SerializeField] bool doorIsSeperateFromCollider;
+    [SerializeField] GameObject doorGameObject;
     [Header("Key Logic")]
     [SerializeField] bool requiresKey = false;
     [SerializeField] string keyName;
@@ -16,25 +19,30 @@ public class OpenDoor : MonoBehaviour
     [Header("Closing")]
     [SerializeField] bool autoClose = true;
     [SerializeField] float secondsBeforeAutoClose;
-    
+
+    ScriptedAnimations sa;
 
     Vector3 closedPosition;
     Vector3 openPosition;
     bool isDoorClosed = true;
     EncounterListener listener;
-    GameObject player;
-    ScriptedAnimations sa;
+    GameObject player, door;
 
     void Awake()
     {
         listener = GetComponent<EncounterListener>();
-        sa = GetComponent<ScriptedAnimations>();
         player = GameObject.Find("Player/Body");
-
-        closedPosition = transform.position;
-        openPosition = new Vector3(transform.position.x+distanceX, transform.position.y+distanceY, transform.position.z+distanceZ);
-
         listener.onEvent += CheckDoorOpen;
+    }
+
+    void Start()
+    {
+        if(doorIsSeperateFromCollider){ door = doorGameObject; }
+        else{ door = this.gameObject; }
+        sa = door.GetComponent<ScriptedAnimations>();
+
+        closedPosition = door.transform.position;
+        openPosition = new Vector3(door.transform.position.x+distanceX, door.transform.position.y+distanceY, door.transform.position.z+distanceZ);
     }
 
     void CheckDoorOpen(string label)
