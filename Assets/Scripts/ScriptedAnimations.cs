@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScriptedAnimations : MonoBehaviour
 {
     [Header("Rotation")]
-    [SerializeField] bool rotateObject;
+    [SerializeField] bool rotateObject = false;
     [SerializeField] float rotateX;
     [SerializeField] float rotateY;
     [SerializeField] float rotateZ;
