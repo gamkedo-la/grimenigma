@@ -2,33 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class AttackController : MonoBehaviour
 {
+    [Header("Attack Settings")]
     [SerializeField] public string weaponName;
     [SerializeField] AttackTypes attackType;
-    [SerializeField] GameObject projectile;
     [SerializeField] bool piercingDamage;
     [SerializeField] int hitScanDamage = 1;
     [SerializeField] float range, cooldown, spread, drawTime;
+    [Header("Projectile")]
+    [SerializeField] GameObject projectile;
+    [Header("Tracer")]
+    [SerializeField] bool shouldRenderTracer;
+    [SerializeField] float tracerTimer;
+    [SerializeField] LineRenderer tracerRenderer;
     //[SerializeField] float patternSteps = 0f;
+    [Header("Ammo")]
     [SerializeField] int projectileAmmount = 1;
     [SerializeField] bool infiniteAmmmo;
     [SerializeField] int ammo, maxAmmo;
     [Header("Audio")]
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip fxSound;
-    [Header("Owner")]
+    [Header("Bodge Settings")]
     [SerializeField] string ownerTag;
 
     Transform spawnOrigin;
-
     ProjectilePooler poolerSingleton;
-    Object projectilePrefab;
-    Object clonedProjectile;
 
-    RaycastHit attackHit;
     bool shouldAttack = true;
-    Vector3 position;
+    Vector3 targetPosition;
+    Object projectilePrefab, clonedProjectile;
+    GameObject hitscanTracer;
+    RaycastHit attackHit;
 
     public void Attack()
     {
@@ -65,15 +72,13 @@ public class AttackController : MonoBehaviour
         //Debug.Log("Added " + ammount + " ammo to " + weaponName);
     }
 
-    private void Awake()
-    {
-        spawnOrigin = this.gameObject.transform;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         poolerSingleton = FindObjectOfType<ProjectilePooler>().gameObject.GetComponent<ProjectilePooler>();
+        tracerRenderer = GetComponent<LineRenderer>();
+
+        spawnOrigin = this.gameObject.transform;
 
         switch (attackType)
         {
@@ -89,9 +94,17 @@ public class AttackController : MonoBehaviour
         
     }
 
+    void DrawTracer()
+    {
+        targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+
+        tracerRenderer.SetPosition(0, transform.position);
+        tracerRenderer.SetPosition(1, targetPosition);
+    }
+
     Vector3 GetDirection()
     {
-        Vector3 targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+        targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
         targetPosition = new Vector3(
                                             targetPosition.x + Random.Range(-spread, spread),
                                             targetPosition.y + Random.Range(-spread, spread),
@@ -120,6 +133,7 @@ public class AttackController : MonoBehaviour
             rentedProjectile.transform.position = spawnOrigin.position;
             rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
             rentedProjectile.gameObject.SetActive(true);
+            if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer()); }
 
         }
     }
@@ -130,6 +144,8 @@ public class AttackController : MonoBehaviour
         yield return new WaitForSeconds(drawTime);
 
         Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range);
+        if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer()); }
+        Debug.Log(attackHit.collider);
         attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage, piercingDamage);
     }
 
@@ -139,5 +155,16 @@ public class AttackController : MonoBehaviour
         shouldAttack = false;
         yield return new WaitForSeconds(cooldown);
         shouldAttack = true;
+    }
+
+    IEnumerator RunCreateAndDestroyTracer()
+    {
+        targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+        tracerRenderer.SetPosition(0, transform.position);
+        tracerRenderer.SetPosition(1, targetPosition);
+
+        tracerRenderer.enabled = true;
+        yield return new WaitForSeconds(tracerTimer);
+        tracerRenderer.enabled = false;
     }
 }
