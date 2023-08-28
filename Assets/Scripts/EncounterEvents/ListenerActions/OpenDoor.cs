@@ -52,7 +52,7 @@ public class OpenDoor : MonoBehaviour
                 //Debug.Log("We are opening the door " + this.gameObject.name + "!");
                 sa.Twean(speed, openPosition);
                 isDoorClosed = false;
-                StartCoroutine(RunCloseDoor());
+                if(autoClose){ StartCoroutine(RunCloseDoor()); }
             }
         }
     }
