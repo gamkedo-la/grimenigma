@@ -33,6 +33,7 @@ public class EquipmentHandler : MonoBehaviour
 
     public void SelectEquipment(int index)
     {
+        ReturnHandToIdle();
         currentIndex = index;
         if(currentIndex > 0 && currentIndex < equipment.Length){
             Debug.LogError("Equipment currentIndex " + currentIndex + " out of range for equipment list of size " + equipment.Length + ". Clamping value");
@@ -43,6 +44,7 @@ public class EquipmentHandler : MonoBehaviour
         currentEquipment = equipment[currentIndex];
         currentEquipmentName = currentEquipment.GetComponent<AttackController>().weaponName;
         currentEquipment.SetActive(true);
+        PickHandPosition();
     }
 
     // Start is called before the first frame update
