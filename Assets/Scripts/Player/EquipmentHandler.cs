@@ -68,6 +68,9 @@ public class EquipmentHandler : MonoBehaviour
             case "scatterShot":
                 pWeaponAnimations.SetBool("isFullHand", false);
                 break;
+            case "fireBall":
+                pWeaponAnimations.SetBool("isFullHand", false);
+                break;
             default:
                 pWeaponAnimations.SetBool("noWeapon", true);
                 Debug.LogWarning("Could not find animaton case for " + currentEquipmentName);
@@ -82,6 +85,9 @@ public class EquipmentHandler : MonoBehaviour
                 pWeaponAnimations.SetBool("isFingerRoll", true);
                 break;
             case "scatterShot":
+                pWeaponAnimations.SetBool("isFullHand", true);
+                break;
+            case "fireBall":
                 pWeaponAnimations.SetBool("isFullHand", true);
                 break;
             default:
