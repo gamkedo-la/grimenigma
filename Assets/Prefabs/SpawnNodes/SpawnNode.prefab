@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6253994620042696023}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: NodeModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: -6985026809836818430}
   - component: {fileID: 5601597582109007885}
   - component: {fileID: 3889096967604018364}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: SpawnNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,6 @@ MonoBehaviour:
   spawnOnEnable: 1
   disableOnSpawn: 1
   thingToSpawn: {fileID: 0}
-  entityToSpawn: HitscanEnemy
 --- !u!114 &3889096967604018364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5165bd358aad40e419677c3fe5c679a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shouldDrawLine: 1
   TriggerLine: {fileID: 3243737631664681223, guid: e099b996b76633b4a9f65da7dae8e1ad, type: 3}
   line: {fileID: 0}
 --- !u!1001 &4301298679707836844
@@ -178,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e822a6557449a8a43a79dbe3745a5fae, type: 3}
       propertyPath: m_Name
       value: SpawnNodeBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e822a6557449a8a43a79dbe3745a5fae, type: 3}
+      propertyPath: m_Layer
+      value: 29
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
