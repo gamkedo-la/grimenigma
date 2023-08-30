@@ -3,11 +3,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHanlder : MonoBehaviour
 {
+    [SerializeField] PlayerStates pStates;
     [SerializeField] PlayerMovement pBody;
     [SerializeField] PlayerCameraControl pCamera;
     [SerializeField] PlayerWeaponHandeling pHandeling;
     [SerializeField] HealthController pHealth;
     [SerializeField] EquipmentHandler pEquipment;
+    [SerializeField] PlayerSelectHandAnimations pHandAnims;
 
     PlayerInput input;
 
@@ -56,12 +58,23 @@ public class PlayerInputHanlder : MonoBehaviour
             pCamera.isSliding = input.Player.Slide.IsInProgress();
             pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame());
         }
-        if(input.Player.Attack.IsInProgress()){ pEquipment.currentEquipment?.GetComponent<AttackController>().Attack(); }
+        if(input.Player.LeftAttack.IsInProgress()){
+            pStates.leftItem?.GetComponent<AttackController>().Attack();
+            pHandAnims.PlayAttackAnim(Hand.Left);
+        }
+        if(input.Player.RightAttack.IsInProgress()){
+            pStates.rightItem?.GetComponent<AttackController>().Attack();
+            pHandAnims.PlayAttackAnim(Hand.Right);
+        }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
         if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){ pHandeling.WeaponSway(cameraInput.normalized, moveInput); }
         else{ pHandeling.IdleAroundOrigin(); }
 
-        if(input.Player.SwitchToNextWeapon.IsPressed()){ pEquipment.SelectNextEquipment(); }
+        if(input.Player.SwitchToNextWeapon.WasPressedThisFrame()){
+            pHandAnims.PickHandPosition(Hand.Left, pStates.leftItem.GetComponent<ItemIDController>().id, false);
+            pEquipment.SelectNextEquipment(Hand.Left);
+            pHandAnims.PickHandPosition(Hand.Left, pStates.leftItem.GetComponent<ItemIDController>().id, true);
+            }
 
         if(input.Player.PauseMenu.IsPressed()){
             Application.Quit();

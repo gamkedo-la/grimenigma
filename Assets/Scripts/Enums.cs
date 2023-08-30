@@ -11,3 +11,18 @@ public enum ProjectileTypes{
     ScatterShot,
     Fireball
 }
+
+public enum ItemID{
+    None,
+    Automatic,
+    ScatterShot,
+    Fireball,
+    KeyRed,
+    KeyBlue,
+    KeyYellow
+}
+
+public enum Hand{
+    Left,
+    Right
+}

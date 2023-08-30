@@ -6,7 +6,6 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     [Header("Attack Settings")]
-    [SerializeField] public string weaponName;
     [SerializeField] AttackTypes attackType;
     [SerializeField] bool piercingDamage;
     [SerializeField] int hitScanDamage = 1;
@@ -130,6 +129,7 @@ public class AttackController : MonoBehaviour
         soundSource.pitch = Random.Range(0.9f, 1.1f);
         soundSource.PlayOneShot(fxSound);
     }
+
 
     IEnumerator RunFireProtectile()
     {
