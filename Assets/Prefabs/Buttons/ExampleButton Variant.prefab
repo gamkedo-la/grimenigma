@@ -247,7 +247,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -327,6 +327,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -5568371526223589888, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4496052616692268381}
+    - targetCorrespondingSourceObject: {fileID: -5568371526223589888, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6946355214840726972}
   m_SourcePrefab: {fileID: 100100000, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
 --- !u!1 &861014889864914224 stripped
 GameObject:
@@ -397,8 +400,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b8e02701e24654fa87261170296017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchRange: 0.5
-  sourceAudio: {fileID: 0}
+  randomPitch: 0
+  pitchRange: 0.3
+  sourceAudio: {fileID: 4496052616692268381}
   soundClip: {fileID: 8300000, guid: c4c7d302e20febc4193b2b92c72c89d6, type: 3}
 --- !u!82 &4496052616692268381
 AudioSource:
@@ -409,9 +413,9 @@ AudioSource:
   m_GameObject: {fileID: 861014889864914224}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7258686454093273563, guid: d8b3922a9f8875d47b7c995d884f3f4f, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -496,6 +500,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6946355214840726972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861014889864914224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad15d07526c5f04f9a650d186f112f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseTexture: {fileID: 0}
+  secondaryTexture: {fileID: 2800000, guid: b5630c11703dbeb4fa5a8f8ce8de7551, type: 3}
 --- !u!4 &4522003936098258139 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
