@@ -12,10 +12,18 @@ public class OpenDoor : MonoBehaviour
     [SerializeField] bool requiresKey = false;
     [SerializeField] string keyName;
     [Header("Animation")]
+    [Header("Transform")]
+    [SerializeField] bool shouldTransform;
     [SerializeField] float distanceX;
     [SerializeField] float distanceY;
     [SerializeField] float distanceZ;
     [SerializeField] float speed;
+    [Header("Rotatation")]
+    [SerializeField] bool shouldRotate;
+    [SerializeField] float rotateX;
+    [SerializeField] float rotateY;
+    [SerializeField] float rotateZ;
+    [SerializeField] float rotateSpeed;
     [Header("Closing")]
     [SerializeField] bool autoClose = true;
     [SerializeField] float secondsBeforeAutoClose;
@@ -50,7 +58,8 @@ public class OpenDoor : MonoBehaviour
         if(isDoorClosed && label == listener.label){
             if(!requiresKey || "Player has key check" != null){
                 //Debug.Log("We are opening the door " + this.gameObject.name + "!");
-                sa.Twean(speed, openPosition);
+                if(shouldTransform){ sa.Twean(speed, openPosition); }
+                if(shouldRotate) { sa.Rwean(rotateSpeed, rotateX, rotateY, rotateZ); }
                 isDoorClosed = false;
                 if(autoClose){ StartCoroutine(RunCloseDoor()); }
             }
