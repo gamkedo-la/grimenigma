@@ -159,7 +159,8 @@ public class PlayerMovement : MonoBehaviour
         if(Physics.Raycast(transform.position, Vector3.down, maxDistance)){
             if(!grounded){
                 pStates.hasLandedThisCycle = true;
-                PlayAudioClip(landingSound);
+                if(-pStates.landingVelocity.y > pStates.hardLandingThreshold){ PlayAudioClip(landingSound, 0.8f); }
+                else{ PlayAudioClip(landingSound); }
             }
             else{ pStates.hasLandedThisCycle = false; }
                         grounded = true;
@@ -183,6 +184,12 @@ public class PlayerMovement : MonoBehaviour
     private void PlayAudioClip(AudioClip sound)
     {
         sourceAudio.pitch = Random.Range(0.9f, 1.1f);
+        sourceAudio.PlayOneShot(sound);
+    }
+
+    private void PlayAudioClip(AudioClip sound, float pitch)
+    {
+        sourceAudio.pitch = pitch;
         sourceAudio.PlayOneShot(sound);
     }
 
