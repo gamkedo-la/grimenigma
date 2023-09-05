@@ -21,6 +21,11 @@ public class ScriptedAnimations : MonoBehaviour
         StartCoroutine(RunRotate(x, y ,z));
     }
 
+    public void Rwean(float speed, float x=0, float y=0, float z=0)
+    {
+        StartCoroutine(RunRwean(speed, new Vector3(x,y,z)));
+    }
+
     public void Twean(float speed, float x=0, float y=0, float z=0)
     {
         Vector3 targetPosition = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z + z);
@@ -86,5 +91,16 @@ public class ScriptedAnimations : MonoBehaviour
             transform.Rotate(x * Time.deltaTime, y * Time.deltaTime, z * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    IEnumerator RunRwean(float speed, Vector3 distance)
+    {
+        Vector3 target = transform.localEulerAngles + distance;
+        while(Vector3.Distance(transform.localEulerAngles, target) > 0.01f){
+            transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, target, Time.deltaTime * speed);
+            yield return new WaitForEndOfFrame();
+        }
+
+        transform.eulerAngles = target;
     }
 }
