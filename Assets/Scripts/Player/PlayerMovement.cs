@@ -57,7 +57,10 @@ public class PlayerMovement : MonoBehaviour
     bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound;
     float speed, airMoveSpeed, slideTime, maxDistance;
     bool grounded;
-    float horizontalInput, verticalInput;
+    float horizontalInput, verticalInput, graceJumpCounter;
+    float graceJumpTime = 0.2f;
+
+    
 
     public void Dash(Vector2 moveInput)
     {
@@ -73,7 +76,10 @@ public class PlayerMovement : MonoBehaviour
     public void JumpHandler(bool jumpIsPressed, bool jumpWasPressThisFrame)
     {
         if(jumpIsPressed){
-            if(grounded && canJump){ Jump(); }
+            if(graceJumpCounter > 0 && canJump){ 
+                Jump(); 
+                graceJumpCounter = 0;
+            }
             else if (airJumpAvailable && jumpWasPressThisFrame){
                 airJumpAvailable = false;
                 Jump();
@@ -159,11 +165,13 @@ public class PlayerMovement : MonoBehaviour
         if(Physics.Raycast(transform.position, Vector3.down, maxDistance)){
             if(!grounded){
                 pStates.hasLandedThisCycle = true;
+                graceJumpCounter -= Time.deltaTime;
                 if(-pStates.landingVelocity.y > pStates.hardLandingThreshold){ PlayAudioClip(landingSound, 0.8f); }
                 else{ PlayAudioClip(landingSound); }
             }
             else{ pStates.hasLandedThisCycle = false; }
                         grounded = true;
+                        graceJumpCounter = graceJumpTime;
             airJumpAvailable = true;
         }
         else{
