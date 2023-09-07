@@ -29,7 +29,7 @@ public class HItScanEnemyAI : MonoBehaviour
 
     AIState state = AIState.idle;
 
-    void Awake()
+    void Start()
     {
         target = GameObject.Find("Player/Body").transform;
         agent = GetComponent<NavMeshAgent>();
