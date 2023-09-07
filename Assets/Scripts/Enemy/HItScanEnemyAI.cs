@@ -6,14 +6,17 @@ using GrimEnigma.EnemyStates;
 [RequireComponent(typeof(EnemyVision))]
 public class HItScanEnemyAI : MonoBehaviour
 {
-    [SerializeField] float sightRange;
-    Transform target;
     [SerializeField] LayerMask whatIsGround, whatIsTarget;
     [SerializeField] AttackController weapon;
     [SerializeField] float attackRange;
 
+
+    EnemyVision vision;
     NavMeshAgent agent;
 
+
+    float sightRange;
+    Transform target;
     Transform targetTransform;
     Vector3 positionOfCollision;
     bool shouldAttack = true;
@@ -32,6 +35,7 @@ public class HItScanEnemyAI : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player/Body").transform;
+        vision = GetComponent<EnemyVision>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -58,7 +62,7 @@ public class HItScanEnemyAI : MonoBehaviour
         //Debug.Log("Patroling!");
         if(!walkPointSet){ GetNewPosition(); }
         if(walkPointSet){ agent.SetDestination(walkPoint); }
-        if(Physics.CheckSphere(transform.position, sightRange, whatIsTarget)){ state = AIState.chase; }
+        if(vision.canSeeTarget){ state = AIState.chase; }
         if((transform.position - walkPoint).magnitude < 1){ walkPointSet = false; }
     }
 

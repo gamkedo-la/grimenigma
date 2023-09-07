@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7630765295138871338}
   - component: {fileID: 7630765295138871339}
   - component: {fileID: -3741740768409257743}
+  - component: {fileID: 3563412118372892493}
   - component: {fileID: 5287514736214092596}
   - component: {fileID: 4043406814658916752}
   - component: {fileID: 7630765295138871349}
@@ -197,6 +198,25 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3563412118372892493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630765295138871340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5b3d8fc53b50c4c854d4d3ac10cd76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 500
+  angle: 120
+  ObstructionMask:
+    serializedVersion: 2
+    m_Bits: 1006633015
+  canSeeTarget: 0
+  targetToFind: {fileID: 0}
 --- !u!114 &5287514736214092596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc513eff03dac24582c3fc595a4bf15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRange: 75
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2147483648
@@ -230,7 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68d1c0a2adf9064f9fdbcc09164230f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: 
   attackType: 3
   piercingDamage: 0
   hitScanDamage: 10
@@ -238,9 +256,11 @@ MonoBehaviour:
   cooldown: 2.1
   spread: 1.07
   drawTime: 1
+  hasSourceOfTruth: 0
+  sourceOfTruth: {fileID: 0}
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
   shouldRenderTracer: 1
-  tracerTimer: 0.11
+  tracerLifeSpan: 0
   tracerRenderer: {fileID: 8013133794697024812}
   projectileAmmount: 1
   infiniteAmmmo: 1
