@@ -17,7 +17,7 @@ public class HItScanEnemyAI : MonoBehaviour
 
     Transform target;
     Vector3 walkPoint;
-    bool walkPointSet;
+    bool hasWalkPoint;
     float walkPointRange = 100;
 
     void Start()
@@ -58,9 +58,9 @@ public class HItScanEnemyAI : MonoBehaviour
     {
         //Debug.Log("Patroling!");
 
-        if(!walkPointSet){ GetNewPosition(); }
-        if(walkPointSet){ agent.SetDestination(walkPoint); }
-        if((transform.position - walkPoint).magnitude < 1){ walkPointSet = false; }
+        if(!hasWalkPoint){ GetNewPosition(); }
+        if(hasWalkPoint){ agent.SetDestination(walkPoint); }
+        if((transform.position - walkPoint).magnitude < 1){ hasWalkPoint = false; }
         if(vision.canSeeTarget){ state = AIState.chase; }
     }
 
@@ -74,7 +74,7 @@ public class HItScanEnemyAI : MonoBehaviour
                                 transform.position.z + Random.Range(-walkPointRange, walkPointRange)
                                 );
         
-        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){ walkPointSet = true; }
+        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){ hasWalkPoint = true; }
     }
 
     void ChaseTarget()
