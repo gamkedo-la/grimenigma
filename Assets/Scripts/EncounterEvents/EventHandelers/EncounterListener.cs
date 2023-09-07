@@ -96,16 +96,20 @@ public class EncounterListenerEditor : Editor
 
     private void OnSceneGUI()
     {
+        myTrigger = null;
         EncounterListener listener = (EncounterListener)target;
         for (int i = 0; i < sceneEncounters.Length; i++){
-            if(sceneEncounters[i].label == listener.label){
+            if(sceneEncounters[i].label == listener.label || sceneEncounters[i].endLabel == listener.label){
                 myTrigger = sceneEncounters[i];
                 break;
             }
         }
 
-        Handles.color = Color.red;
-        Handles.DrawLine(listener.transform.position, myTrigger.transform.position, 10);
+        if(myTrigger){
+            Handles.color = Color.red;
+            Handles.DrawLine(listener.transform.position, myTrigger.transform.position, 10);
+        }
+
     }
 }
 #endif
