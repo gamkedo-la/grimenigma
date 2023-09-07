@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using GrimEnigma.EnemyStates;
 
+[RequireComponent(typeof(EnemyVision))]
 public class HItScanEnemyAI : MonoBehaviour
 {
     [SerializeField] float sightRange;
