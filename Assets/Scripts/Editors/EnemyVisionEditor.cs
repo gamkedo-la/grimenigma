@@ -17,6 +17,11 @@ public class EnemyVisionEditor : Editor
         Handles.color = Color.yellow;
         Handles.DrawLine(vision.transform.position, vision.transform.position + viewAngle01 * vision.radius);
         Handles.DrawLine(vision.transform.position, vision.transform.position + viewAngle02 * vision.radius);
+
+        if(vision.canSeeTarget){
+            Handles.color = Color.green;
+            Handles.DrawLine(vision.transform.position, vision.targetToFind.transform.position);
+        }
     }
 
     private Vector3 DirectionFromAngle(float eulerY, float angleInDegrees)
