@@ -4,19 +4,21 @@ using UnityEngine;
 public class EnemyVision : MonoBehaviour
 {
 
-    [Range(0f, 100f)][SerializeField] public float radius;
+    [Range(0f, 1000f)][SerializeField] public float radius;
     [Range(0f, 360f)][SerializeField] public float angle;
+    [SerializeField] LayerMask ObstructionMask;
 
-    GameObject targetToFind;
+    [HideInInspector] public bool canSeeTarget;
+    [HideInInspector] public GameObject targetToFind;
+
     LayerMask targetMask;
-    public LayerMask ObstructionMask;
-
-    public bool canSeeTarget;
 
     // Start is called before the first frame update
     void Start()
     {
+        targetMask = LayerMask.GetMask("Player");
         targetToFind = GameObject.FindGameObjectWithTag("Player");
+        
         StartCoroutine(RunSearchForTarget());
     }
 
