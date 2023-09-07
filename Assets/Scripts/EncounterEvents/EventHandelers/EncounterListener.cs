@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Net.Sockets;
+
 
 
 #if UNITY_EDITOR
@@ -34,6 +36,7 @@ public class EncounterListener : MonoBehaviour
     void StartEncounter(string triggeredLabel)
     {
         if(triggeredLabel == label){ onEvent?.Invoke(triggeredLabel); }
+        //else{ Debug.Log(this.gameObject.name + ", label " + triggeredLabel + " !=" + label); }
     }
 }
 
@@ -41,12 +44,14 @@ public class EncounterListener : MonoBehaviour
 [CustomEditor(typeof(EncounterListener))]
 public class EncounterListenerEditor : Editor
 {
+    EncounterTrigger[] sceneEncounters;
     string[] encounterLabels;
     int selectedEncounterIndex;
+    EncounterTrigger myTrigger;
 
     void OnEnable()
     {
-        EncounterTrigger[] sceneEncounters = FindObjectsOfType<EncounterTrigger>();
+        sceneEncounters = FindObjectsOfType<EncounterTrigger>();
         encounterLabels = new string[sceneEncounters.Length*2];
         EncounterListener listener = (EncounterListener)target;
         int j = 0;
@@ -87,6 +92,20 @@ public class EncounterListenerEditor : Editor
             EditorGUILayout.Popup(0, new string[] {"Add object to a scene."});
         }
         EditorGUILayout.EndHorizontal();
+    }
+
+    private void OnSceneGUI()
+    {
+        EncounterListener listener = (EncounterListener)target;
+        for (int i = 0; i < sceneEncounters.Length; i++){
+            if(sceneEncounters[i].label == listener.label){
+                myTrigger = sceneEncounters[i];
+                break;
+            }
+        }
+
+        Handles.color = Color.red;
+        Handles.DrawLine(listener.transform.position, myTrigger.transform.position, 10);
     }
 }
 #endif
