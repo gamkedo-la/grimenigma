@@ -29,10 +29,17 @@ public class HItScanEnemyAI : MonoBehaviour
         state = AIState.idle;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        CheckState();
+    }
+
+    void CheckState()
+    {
         //https://www.youtube.com/watch?v=UjkSFoLxesw
+
+        //Debug.Log(state);
+
         switch (state)
         {
             case(AIState.chase):
@@ -50,14 +57,17 @@ public class HItScanEnemyAI : MonoBehaviour
     void Patrol()
     {
         //Debug.Log("Patroling!");
+
         if(!walkPointSet){ GetNewPosition(); }
         if(walkPointSet){ agent.SetDestination(walkPoint); }
-        if(vision.canSeeTarget){ state = AIState.chase; }
         if((transform.position - walkPoint).magnitude < 1){ walkPointSet = false; }
+        if(vision.canSeeTarget){ state = AIState.chase; }
     }
 
     void GetNewPosition()
     {
+        //Debug.Log("Getting new position!");
+
         walkPoint  = new Vector3(
                                 transform.position.x + Random.Range(-walkPointRange, walkPointRange),
                                 transform.position.y + Random.Range(-walkPointRange, walkPointRange),
@@ -70,6 +80,7 @@ public class HItScanEnemyAI : MonoBehaviour
     void ChaseTarget()
     {
         //Debug.Log("Chasing!");
+
         agent.SetDestination(target.position);
         IsTargetWithinAttackRange();
     }
@@ -77,6 +88,7 @@ public class HItScanEnemyAI : MonoBehaviour
     void AttackStart()
     {
         //Debug.Log("Attacking!");
+        
         agent.SetDestination(transform.position);
         transform.LookAt(target);
         weapon.Attack();
@@ -88,5 +100,4 @@ public class HItScanEnemyAI : MonoBehaviour
         if(Physics.CheckSphere(transform.position, attackRange, whatIsTarget)){ state = AIState.attack; }
         else{ state = AIState.chase; }
     }
-
 }
