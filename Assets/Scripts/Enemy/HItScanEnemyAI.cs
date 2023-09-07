@@ -8,6 +8,7 @@ public class HItScanEnemyAI : MonoBehaviour
 {
     [SerializeField] LayerMask whatIsGround, whatIsTarget;
     [SerializeField] AttackController weapon;
+    [SerializeField] float patrolRange;
     [SerializeField] float attackRange;
 
     EnemyVision vision;
@@ -16,9 +17,8 @@ public class HItScanEnemyAI : MonoBehaviour
     AIState state;
 
     Transform target;
-    Vector3 walkPoint;
+    Vector3 spawnPosition, walkPoint;
     bool hasWalkPoint;
-    float walkPointRange = 100;
 
     void Start()
     {
@@ -26,6 +26,7 @@ public class HItScanEnemyAI : MonoBehaviour
         vision = GetComponent<EnemyVision>();
         agent = GetComponent<NavMeshAgent>();
 
+        spawnPosition = transform.position;
         state = AIState.idle;
     }
 
@@ -69,9 +70,9 @@ public class HItScanEnemyAI : MonoBehaviour
         //Debug.Log("Getting new position!");
 
         walkPoint  = new Vector3(
-                                transform.position.x + Random.Range(-walkPointRange, walkPointRange),
-                                transform.position.y + Random.Range(-walkPointRange, walkPointRange),
-                                transform.position.z + Random.Range(-walkPointRange, walkPointRange)
+                                spawnPosition.x + Random.Range(-patrolRange, patrolRange),
+                                spawnPosition.y + Random.Range(-patrolRange, patrolRange),
+                                spawnPosition.z + Random.Range(-patrolRange, patrolRange)
                                 );
         
         if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){ hasWalkPoint = true; }
