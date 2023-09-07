@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3403786482645005505
 MeshFilter:
@@ -123,7 +123,7 @@ MonoBehaviour:
   ammount: 1
   destroyOnPickup: 1
   soundSource: {fileID: 559900176708911054}
-  fxSound: {fileID: 8300000, guid: 3664d8ebd377e8f4d9c2b0aefcd4d524, type: 3}
+  fxSound: {fileID: 8300000, guid: d1621b78ec7384f4494e8ac144b41935, type: 3}
 --- !u!82 &559900176708911054
 AudioSource:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -7258686454093273563, guid: d8b3922a9f8875d47b7c995d884f3f4f, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d1621b78ec7384f4494e8ac144b41935, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

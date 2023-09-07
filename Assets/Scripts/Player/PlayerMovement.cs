@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioClip dashAvailableSound;
     [SerializeField] AudioClip landingSound;
     [SerializeField] AudioClip slidingSound;
+    [SerializeField] AudioClip footstepSound;
 
     [Header("Bodge Fixes")]
     [Range(0f,300f)][SerializeField] float extraGravity;
@@ -57,9 +58,8 @@ public class PlayerMovement : MonoBehaviour
     bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound;
     float speed, airMoveSpeed, slideTime, maxDistance;
     bool grounded;
-    float horizontalInput, verticalInput, graceJumpCounter;
+    float horizontalInput, verticalInput, graceJumpCounter, footstepCounter;
     float graceJumpTime = 0.2f;
-
     
 
     public void Dash(Vector2 moveInput)
@@ -170,9 +170,16 @@ public class PlayerMovement : MonoBehaviour
                 else{ PlayAudioClip(landingSound); }
             }
             else{ pStates.hasLandedThisCycle = false; }
-                        grounded = true;
-                        graceJumpCounter = graceJumpTime;
+
+            grounded = true;
+            graceJumpCounter = graceJumpTime;
             airJumpAvailable = true;
+        if(rb.velocity.x > 0.3f || rb.velocity.x < -0.3f || rb.velocity.z > 0.3f || rb.velocity.z < -0.3f){
+            if(footstepCounter <= 0){
+                PlayAudioClip(footstepSound);
+                footstepCounter = 0.35f;
+            } else { footstepCounter -= Time.deltaTime; }
+        }
         }
         else{
             grounded = false;

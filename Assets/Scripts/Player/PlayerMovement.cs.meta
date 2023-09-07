@@ -3,7 +3,15 @@ guid: 555d67c448458c94999157b686fd66a2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pStates: {instanceID: 0}
+  - movement: {instanceID: 0}
+  - sourceAudio: {instanceID: 0}
+  - dashSound: {instanceID: 0}
+  - dashAvailableSound: {instanceID: 0}
+  - landingSound: {instanceID: 0}
+  - slidingSound: {instanceID: 0}
+  - footstepSound: {fileID: 8300000, guid: 2794de459fc0dca45b76d6acb26d7f33, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

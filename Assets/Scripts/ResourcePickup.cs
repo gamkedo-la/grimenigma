@@ -20,6 +20,7 @@ public class ResourcePickup : MonoBehaviour
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip fxSound;
 
+
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player"){
@@ -43,13 +44,15 @@ public class ResourcePickup : MonoBehaviour
             }
 
             PlaySoundFX();
-            if(destroyOnPickup){ Destroy(this.gameObject); }
+            if(destroyOnPickup){ Destroy(this.gameObject, 0.1f); }
         }
     }
 
     void HandleHealth(Collider other)
     {
         other.transform.gameObject.GetComponent<HealthController>()?.Heal(ammount);
+        soundSource.pitch = Random.Range(0.9f, 1.1f);
+        soundSource.PlayOneShot(fxSound);
         Debug.Log("Player HP:"  + other.transform.gameObject.GetComponent<HealthController>().hp);
     }
 
