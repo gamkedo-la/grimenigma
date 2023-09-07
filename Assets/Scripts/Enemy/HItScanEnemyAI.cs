@@ -4,6 +4,7 @@ using UnityEngine.AI;
 using GrimEnigma.EnemyStates;
 
 [RequireComponent(typeof(EnemyVision))]
+[RequireComponent(typeof(AttackController))]
 public class HItScanEnemyAI : MonoBehaviour
 {
     [SerializeField] LayerMask whatIsGround, whatIsTarget;
