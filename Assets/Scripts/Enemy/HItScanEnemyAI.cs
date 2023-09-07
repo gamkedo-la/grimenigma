@@ -10,27 +10,15 @@ public class HItScanEnemyAI : MonoBehaviour
     [SerializeField] AttackController weapon;
     [SerializeField] float attackRange;
 
-
     EnemyVision vision;
     NavMeshAgent agent;
 
+    AIState state = AIState.idle;
 
-    float sightRange;
     Transform target;
-    Transform targetTransform;
-    Vector3 positionOfCollision;
-    bool shouldAttack = true;
-    RaycastHit aimHit;
-    RaycastHit attackHit;
-
-    bool targetInSightRange;
-    bool isInCombat;
-
     Vector3 walkPoint;
     bool walkPointSet;
     float walkPointRange = 100;
-
-    AIState state = AIState.idle;
 
     void Start()
     {
