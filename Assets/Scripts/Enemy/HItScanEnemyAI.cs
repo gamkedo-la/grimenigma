@@ -10,7 +10,7 @@ public class HItScanEnemyAI : MonoBehaviour
     [SerializeField] LayerMask whatIsGround, whatIsTarget;
     [SerializeField] AttackController weapon;
     [SerializeField] float patrolRange;
-    [SerializeField] float attackRange;
+float attackRange;
 
     EnemyVision vision;
     NavMeshAgent agent;
@@ -99,7 +99,7 @@ public class HItScanEnemyAI : MonoBehaviour
     }
 
     void IsTargetWithinAttackRange(){
-        if(Physics.CheckSphere(transform.position, attackRange, whatIsTarget)){ state = AIState.attack; }
+        if(Physics.CheckSphere(transform.position, weapon.range, whatIsTarget)){ state = AIState.attack; }
         else{ state = AIState.chase; }
     }
 }
