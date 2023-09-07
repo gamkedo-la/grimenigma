@@ -13,7 +13,7 @@ public class HItScanEnemyAI : MonoBehaviour
     EnemyVision vision;
     NavMeshAgent agent;
 
-    AIState state = AIState.idle;
+    AIState state;
 
     Transform target;
     Vector3 walkPoint;
@@ -25,6 +25,8 @@ public class HItScanEnemyAI : MonoBehaviour
         target = GameObject.Find("Player/Body").transform;
         vision = GetComponent<EnemyVision>();
         agent = GetComponent<NavMeshAgent>();
+
+        state = AIState.idle;
     }
 
     // Update is called once per frame
