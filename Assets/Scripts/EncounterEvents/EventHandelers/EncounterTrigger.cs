@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection.Emit;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -46,21 +48,26 @@ public class SpawnTriggerEditor : Editor
     public override void OnInspectorGUI()
     {
         EncounterTrigger trigger = (EncounterTrigger)target;
+        EncounterListener[] Linkedlisteners = FindObjectsOfType<EncounterListener>();
 
         base.OnInspectorGUI();
 
         ThisIsNotMadeByUnity.CustomInspector.Line(Color.grey);
         GUILayout.BeginHorizontal();
-        EncounterListener[] Linkedlisteners = FindObjectsOfType<EncounterListener>();
         if(Linkedlisteners.Length > 0){
-            foreach (EncounterListener listener in Linkedlisteners)
-            {
-                EditorGUILayout.ObjectField(listener, typeof(EncounterListener), true);
+            foreach (EncounterListener listener in Linkedlisteners){
+                if(listener.label == trigger.label){ EditorGUILayout.ObjectField(listener, typeof(EncounterListener), true); }
             }
         }
-        else{
-            EditorGUILayout.Popup(0, new string[] {"No encounters found!"});
-            Debug.LogWarning("No Enounters found in scene!");
+
+        EditorGUILayout.EndHorizontal();
+
+        ThisIsNotMadeByUnity.CustomInspector.Line(Color.grey);
+        GUILayout.BeginHorizontal();
+        if(Linkedlisteners.Length > 0){
+            foreach (EncounterListener listener in Linkedlisteners){
+                if(listener.label == trigger.endLabel){ EditorGUILayout.ObjectField(listener, typeof(EncounterListener), true); }
+            }
         }
         EditorGUILayout.EndHorizontal();
     }
