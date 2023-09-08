@@ -6,7 +6,7 @@ public class PlayerCameraControl : MonoBehaviour
     [HideInInspector] public bool isSliding, hasLanded;
 
     [Header("Required Scripts")]
-    [SerializeField] PlayerStates pStates;
+    [SerializeField] PlayerData pData;
 
     [Header("Camera Settings")]
     [SerializeField] float mouseVerticalSense = 5;
@@ -46,7 +46,7 @@ public class PlayerCameraControl : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        hardLandingThreshold = pStates.hardLandingThreshold;
+        hardLandingThreshold = pData.hardLandingThreshold;
     }
 
     // Update is called once per frame
@@ -79,10 +79,10 @@ public class PlayerCameraControl : MonoBehaviour
     void SetLandingOffset()
     {
         if(!isHandlingLanding){
-            switch (pStates.hasLandedThisCycle)
+            switch (pData.hasLandedThisCycle)
             {
                 case true:
-                    if(-pStates.landingVelocity.y >= hardLandingThreshold){ landingOffsetTarget = hardLandingOffsetStrength; }
+                    if(-pData.landingVelocity.y >= hardLandingThreshold){ landingOffsetTarget = hardLandingOffsetStrength; }
                     else{ landingOffsetTarget = landingOffsetStrength; }
                     isHandlingLanding = true;
                     break;

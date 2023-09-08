@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool hasLandedThisCycle;
 
     [Header("Required Scripts")]
-    [SerializeField] PlayerStates pStates;
+    [SerializeField] PlayerData pData;
 
     [Header("Movement")]
     [SerializeField] SpeedController movement;
@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         ApplyExtraGravity();
         MovePlayer();
-        if(!grounded) { pStates.landingVelocity = rb.velocity; }
+        if(!grounded) { pData.landingVelocity = rb.velocity; }
     }
 
     private void ApplyExtraGravity()
@@ -158,17 +158,17 @@ public class PlayerMovement : MonoBehaviour
         // In theory, this should handle most slope cases, but the values may need tweeking.
         if(Physics.Raycast(transform.position, Vector3.down, maxDistance)){
             if(!grounded){
-                pStates.hasLandedThisCycle = true;
-                if(-pStates.landingVelocity.y > pStates.hardLandingThreshold){ PlayAudioClip(landingSound, 0.8f); }
+                pData.hasLandedThisCycle = true;
+                if(-pData.landingVelocity.y > pData.hardLandingThreshold){ PlayAudioClip(landingSound, 0.8f); }
                 else{ PlayAudioClip(landingSound); }
             }
-            else{ pStates.hasLandedThisCycle = false; }
+            else{ pData.hasLandedThisCycle = false; }
                         grounded = true;
             airJumpAvailable = true;
         }
         else{
             grounded = false;
-            pStates.hasLandedThisCycle = false;
+            pData.hasLandedThisCycle = false;
         }
         //Debug.Log("Grounded:" + grounded);
     }

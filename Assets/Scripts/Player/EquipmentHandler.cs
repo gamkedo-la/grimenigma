@@ -8,7 +8,7 @@ public class EquipmentHandler : MonoBehaviour
     public GameObject[] equipment;
     public GameObject currentEquipment;
 
-    [SerializeField] PlayerStates pStates;
+    [SerializeField] PlayerData pData;
 
     int currentIndex;
 
@@ -29,8 +29,8 @@ public class EquipmentHandler : MonoBehaviour
         }
 
         currentEquipment = equipment[currentIndex];
-        if(whichHand == Hand.Left){ pStates.leftItem  = currentEquipment; }
-        else{ pStates.rightItem = currentEquipment; }
+        if(whichHand == Hand.Left){ pData.leftItem  = currentEquipment; }
+        else{ pData.rightItem = currentEquipment; }
     }
 
     // Start is called before the first frame update

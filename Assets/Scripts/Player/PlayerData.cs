@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStates : MonoBehaviour
+public class PlayerData : MonoBehaviour
 {
     [Range(0f, 100f)][SerializeField] public float hardLandingThreshold;
     [HideInInspector] public bool hasLandedThisCycle, isGrounded, isSliding;
