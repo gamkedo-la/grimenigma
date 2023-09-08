@@ -975,8 +975,10 @@ GameObject:
   - component: {fileID: 282890955}
   - component: {fileID: 282890954}
   - component: {fileID: 282890953}
+  - component: {fileID: 282890958}
   - component: {fileID: 282890952}
   - component: {fileID: 282890951}
+  - component: {fileID: 282890957}
   m_Layer: 0
   m_Name: Key-Blue
   m_TagString: Untagged
@@ -1107,6 +1109,119 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!82 &282890957
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282890950}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &282890958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282890950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4205d95732a13514d946104472738e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: 5
+  quantity: 1
+  onPickup: 2
+  soundSource: {fileID: 282890957}
+  fxSound: {fileID: 0}
 --- !u!4 &292898832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1454815240638692109, guid: 6764ad6652a4bcf4e96d3b483b4f88e0, type: 3}
@@ -9780,8 +9895,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3397135204919250846, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+      insertIndex: 12
+      addedObject: {fileID: 1578794492}
   m_SourcePrefab: {fileID: 100100000, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+--- !u!1 &1578794491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3397135204919250846, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+  m_PrefabInstance: {fileID: 1578794490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1578794492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578794491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7f0b13fb68e13439c911ca8d4780c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infiniteInventory: 1
+  size: 0
 --- !u!1 &1624399731
 GameObject:
   m_ObjectHideFlags: 0
@@ -10445,12 +10582,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 582286e2af3af0144b0bdea41b540845, type: 2}
     - target: {fileID: 2923561557382289292, guid: 420de10ee8501924c806110e97b517b4, type: 3}
+      propertyPath: item
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923561557382289292, guid: 420de10ee8501924c806110e97b517b4, type: 3}
       propertyPath: distanceX
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2923561557382289292, guid: 420de10ee8501924c806110e97b517b4, type: 3}
       propertyPath: distanceZ
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923561557382289292, guid: 420de10ee8501924c806110e97b517b4, type: 3}
+      propertyPath: requiresKey
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923561557382289292, guid: 420de10ee8501924c806110e97b517b4, type: 3}
+      propertyPath: requiresItem
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923561557382289292, guid: 420de10ee8501924c806110e97b517b4, type: 3}
+      propertyPath: shouldTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3832518478310203916, guid: 420de10ee8501924c806110e97b517b4, type: 3}
       propertyPath: label
@@ -11559,6 +11712,10 @@ PrefabInstance:
     - target: {fileID: 2923561557382289292, guid: 420de10ee8501924c806110e97b517b4, type: 3}
       propertyPath: distanceY
       value: 10.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923561557382289292, guid: 420de10ee8501924c806110e97b517b4, type: 3}
+      propertyPath: shouldTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3832518478310203916, guid: 420de10ee8501924c806110e97b517b4, type: 3}
       propertyPath: label
