@@ -10,13 +10,16 @@ public class HealthController: MonoBehaviour
     //[SerializeField] int min = 0;
 
     DeathController deathController;
+    public UIController UIController;
 
    private void Start()
    {
         deathController = GetComponent<DeathController>();
+        //UIController = GetComponent<UIController>();
 
         // Prevents hp > maxHP
         hp = Mathf.Clamp(hp, 0, maxHP);
+        UIController.SetHealth(hp);
         //Debug.Log("Start HP: " + hp);
    }
 
@@ -31,6 +34,7 @@ public class HealthController: MonoBehaviour
                 //Debug.Log("I am dead!");
                 deathController.HandleDeath(destroyOnDeath);
             }
+            UIController.SetHealth(hp);
         }
         else{ Debug.Log("Reminder! God mode is enabled."); }
     }
@@ -38,6 +42,7 @@ public class HealthController: MonoBehaviour
     public void Heal(int ammount)
     {
         hp = Mathf.Clamp(hp+ammount, 0, maxHP);
+        UIController.SetHealth(hp);
         //Debug.Log("Recieved " + ammount + " healing!");
     }
 

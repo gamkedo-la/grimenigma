@@ -164,12 +164,12 @@ public class PlayerMovement : MonoBehaviour
         // In theory, this should handle most slope cases, but the values may need tweeking.
         if(Physics.Raycast(transform.position, Vector3.down, maxDistance)){
             if(!grounded){
-                pStates.hasLandedThisCycle = true;
+                pData.hasLandedThisCycle = true;
                 graceJumpCounter -= Time.deltaTime;
-                if(-pStates.landingVelocity.y > pStates.hardLandingThreshold){ PlayAudioClip(landingSound, 0.8f); }
+                if(-pData.landingVelocity.y > pData.hardLandingThreshold){ PlayAudioClip(landingSound, 0.8f); }
                 else{ PlayAudioClip(landingSound); }
             }
-            else{ pStates.hasLandedThisCycle = false; }
+            else{ pData.hasLandedThisCycle = false; }
 
             grounded = true;
             graceJumpCounter = graceJumpTime;
