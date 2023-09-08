@@ -3,41 +3,45 @@ using UnityEngine;
 using UnityEngine.AI;
 using GrimEnigma.EnemyStates;
 
+[RequireComponent(typeof(EnemyVision))]
+[RequireComponent(typeof(AttackController))]
 public class HItScanEnemyAI : MonoBehaviour
 {
-    [SerializeField] float sightRange;
-    Transform target;
     [SerializeField] LayerMask whatIsGround, whatIsTarget;
     [SerializeField] AttackController weapon;
-    [SerializeField] float attackRange;
+    [SerializeField] float patrolRange;
+float attackRange;
 
+    EnemyVision vision;
     NavMeshAgent agent;
 
-    Transform targetTransform;
-    Vector3 positionOfCollision;
-    bool shouldAttack = true;
-    RaycastHit aimHit;
-    RaycastHit attackHit;
+    AIState state;
 
-    bool targetInSightRange;
-    bool isInCombat;
+    Transform target;
+    Vector3 spawnPosition, walkPoint;
+    bool hasWalkPoint;
 
-    Vector3 walkPoint;
-    bool walkPointSet;
-    float walkPointRange = 100;
-
-    AIState state = AIState.idle;
-
-    void Awake()
+    void Start()
     {
         target = GameObject.Find("Player/Body").transform;
+        vision = GetComponent<EnemyVision>();
         agent = GetComponent<NavMeshAgent>();
+
+        spawnPosition = transform.position;
+        state = AIState.idle;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        CheckState();
+    }
+
+    void CheckState()
+    {
         //https://www.youtube.com/watch?v=UjkSFoLxesw
+
+        //Debug.Log(state);
+
         switch (state)
         {
             case(AIState.chase):
@@ -55,26 +59,30 @@ public class HItScanEnemyAI : MonoBehaviour
     void Patrol()
     {
         //Debug.Log("Patroling!");
-        if(!walkPointSet){ GetNewPosition(); }
-        if(walkPointSet){ agent.SetDestination(walkPoint); }
-        if(Physics.CheckSphere(transform.position, sightRange, whatIsTarget)){ state = AIState.chase; }
-        if((transform.position - walkPoint).magnitude < 1){ walkPointSet = false; }
+
+        if(!hasWalkPoint){ GetNewPosition(); }
+        if(hasWalkPoint){ agent.SetDestination(walkPoint); }
+        if((transform.position - walkPoint).magnitude < 1){ hasWalkPoint = false; }
+        if(vision.canSeeTarget){ state = AIState.chase; }
     }
 
     void GetNewPosition()
     {
+        //Debug.Log("Getting new position!");
+
         walkPoint  = new Vector3(
-                                transform.position.x + Random.Range(-walkPointRange, walkPointRange),
-                                transform.position.y + Random.Range(-walkPointRange, walkPointRange),
-                                transform.position.z + Random.Range(-walkPointRange, walkPointRange)
+                                spawnPosition.x + Random.Range(-patrolRange, patrolRange),
+                                spawnPosition.y + Random.Range(-patrolRange, patrolRange),
+                                spawnPosition.z + Random.Range(-patrolRange, patrolRange)
                                 );
         
-        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){ walkPointSet = true; }
+        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){ hasWalkPoint = true; }
     }
 
     void ChaseTarget()
     {
         //Debug.Log("Chasing!");
+
         agent.SetDestination(target.position);
         IsTargetWithinAttackRange();
     }
@@ -82,6 +90,7 @@ public class HItScanEnemyAI : MonoBehaviour
     void AttackStart()
     {
         //Debug.Log("Attacking!");
+        
         agent.SetDestination(transform.position);
         transform.LookAt(target);
         weapon.Attack();
@@ -90,8 +99,7 @@ public class HItScanEnemyAI : MonoBehaviour
     }
 
     void IsTargetWithinAttackRange(){
-        if(Physics.CheckSphere(transform.position, attackRange, whatIsTarget)){ state = AIState.attack; }
+        if(Physics.CheckSphere(transform.position, weapon.range, whatIsTarget)){ state = AIState.attack; }
         else{ state = AIState.chase; }
     }
-
 }

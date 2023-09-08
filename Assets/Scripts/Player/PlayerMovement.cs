@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool hasLandedThisCycle;
 
     [Header("Required Scripts")]
-    [SerializeField] PlayerStates pStates;
+    [SerializeField] PlayerData pData;
 
     [Header("Movement")]
     [SerializeField] SpeedController movement;
@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         ApplyExtraGravity();
         MovePlayer();
-        if(!grounded) { pStates.landingVelocity = rb.velocity; }
+        if(!grounded) { pData.landingVelocity = rb.velocity; }
     }
 
     private void ApplyExtraGravity()
@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else{
             grounded = false;
-            pStates.hasLandedThisCycle = false;
+            pData.hasLandedThisCycle = false;
         }
         //Debug.Log("Grounded:" + grounded);
     }

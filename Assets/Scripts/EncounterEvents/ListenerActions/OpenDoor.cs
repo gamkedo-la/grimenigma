@@ -9,8 +9,8 @@ public class OpenDoor : MonoBehaviour
     [SerializeField] bool doorIsSeperateFromCollider;
     [SerializeField] GameObject doorGameObject;
     [Header("Key Logic")]
-    [SerializeField] bool requiresKey = false;
-    [SerializeField] string keyName;
+    [SerializeField] bool requiresItem = false;
+    [SerializeField] ItemID item;
     [Header("Animation")]
     [Header("Transform")]
     [SerializeField] bool shouldTransform;
@@ -56,7 +56,7 @@ public class OpenDoor : MonoBehaviour
     void CheckDoorOpen(string label)
     {
         if(isDoorClosed && label == listener.label){
-            if(!requiresKey || "Player has key check" != null){
+            if(!requiresItem || player.GetComponent<Inventory>().HasItem(item)){
                 //Debug.Log("We are opening the door " + this.gameObject.name + "!");
                 if(shouldTransform){ sa.Twean(speed, openPosition); }
                 if(shouldRotate) { sa.Rwean(rotateSpeed, rotateX, rotateY, rotateZ); }

@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHanlder : MonoBehaviour
 {
-    [SerializeField] PlayerStates pStates;
+    [SerializeField] PlayerData pData;
     [SerializeField] PlayerMovement pBody;
     [SerializeField] PlayerCameraControl pCamera;
     [SerializeField] PlayerWeaponHandeling pHandeling;
@@ -59,11 +59,11 @@ public class PlayerInputHanlder : MonoBehaviour
             pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame());
         }
         if(input.Player.LeftAttack.IsInProgress()){
-            pStates.leftItem?.GetComponent<AttackController>().Attack();
+            pData.leftItem?.GetComponent<AttackController>().Attack();
             pHandAnims.PlayAttackAnim(Hand.Left);
         }
         if(input.Player.RightAttack.IsInProgress()){
-            pStates.rightItem?.GetComponent<AttackController>().Attack();
+            pData.rightItem?.GetComponent<AttackController>().Attack();
             pHandAnims.PlayAttackAnim(Hand.Right);
         }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
@@ -71,9 +71,9 @@ public class PlayerInputHanlder : MonoBehaviour
         else{ pHandeling.IdleAroundOrigin(); }
 
         if(input.Player.SwitchToNextWeapon.WasPressedThisFrame()){
-            pHandAnims.PickHandPosition(Hand.Left, pStates.leftItem.GetComponent<ItemIDController>().id, false);
+            pHandAnims.PickHandPosition(Hand.Left, pData.leftItem.GetComponent<ItemIDController>().id, false);
             pEquipment.SelectNextEquipment(Hand.Left);
-            pHandAnims.PickHandPosition(Hand.Left, pStates.leftItem.GetComponent<ItemIDController>().id, true);
+            pHandAnims.PickHandPosition(Hand.Left, pData.leftItem.GetComponent<ItemIDController>().id, true);
             }
 
         if(input.Player.PauseMenu.IsPressed()){

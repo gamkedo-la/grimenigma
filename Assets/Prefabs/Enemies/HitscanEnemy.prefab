@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7630765295138871338}
   - component: {fileID: 7630765295138871339}
   - component: {fileID: -3741740768409257743}
+  - component: {fileID: 3563412118372892493}
   - component: {fileID: 5287514736214092596}
   - component: {fileID: 4043406814658916752}
   - component: {fileID: 7630765295138871349}
@@ -197,6 +198,25 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3563412118372892493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630765295138871340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5b3d8fc53b50c4c854d4d3ac10cd76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 100
+  angle: 120
+  ObstructionMask:
+    serializedVersion: 2
+    m_Bits: 1006633015
+  canSeeTarget: 0
+  targetToFind: {fileID: 0}
 --- !u!114 &5287514736214092596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc513eff03dac24582c3fc595a4bf15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRange: 75
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2147483648
@@ -217,7 +236,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1073741824
   weapon: {fileID: 4043406814658916752}
-  attackRange: 40.5
+  patrolRange: 75
 --- !u!114 &4043406814658916752
 MonoBehaviour:
   m_ObjectHideFlags: 0
