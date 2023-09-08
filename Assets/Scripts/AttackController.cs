@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -30,15 +29,22 @@ public class AttackController : MonoBehaviour
     [SerializeField] AudioClip fxSound;
     [Header("Bodge Settings")]
     [SerializeField] string ownerTag;
+    [SerializeField] LayerMask inclusionMasks;
+
+    enum AttackTypes{
+        Projectile,
+        Hitscan,
+    }
 
     Transform spawnOrigin;
     ProjectilePooler poolerSingleton;
 
     bool shouldAttack = true;
+    float targetRange;
     Vector3 targetPosition;
     Object projectilePrefab, clonedProjectile;
     GameObject hitscanTracer;
-    RaycastHit attackHit;
+    RaycastHit attackHit, pointingAt;
 
     public void Attack()
     {
@@ -53,7 +59,7 @@ public class AttackController : MonoBehaviour
             //Debug.Log("Attacking!");
             switch (attackType)
             {
-                case AttackTypes.Automatic:
+                case AttackTypes.Projectile:
                     StartCoroutine(RunFireProtectile());
                     break;
                 case AttackTypes.Hitscan:
@@ -82,20 +88,7 @@ public class AttackController : MonoBehaviour
         tracerRenderer = GetComponent<LineRenderer>();
         if(!hasSourceOfTruth){ sourceOfTruth = this.gameObject; }
 
-        spawnOrigin = this.gameObject.transform;
-
-        switch (attackType)
-        {
-            case AttackTypes.Automatic:
-                projectilePrefab = Resources.Load("Prefabs/Projectiles/Projectile", typeof(GameObject));
-                break;
-            case AttackTypes.Hitscan:
-                break;
-            default:
-                Debug.LogError("Invalid Projectile Value!");
-                break;
-        }
-        
+        spawnOrigin = this.gameObject.transform;        
     }
 
     void Update()
@@ -113,8 +106,17 @@ public class AttackController : MonoBehaviour
 
     Vector3 GetDirection()
     {
-        //targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
-        targetPosition = sourceOfTruth.transform.position + sourceOfTruth.transform.forward *500f;
+        targetRange = 9999;
+
+        if(Physics.Raycast(sourceOfTruth.transform.position, sourceOfTruth.transform.forward, out pointingAt, range, inclusionMasks)){
+            if(pointingAt.transform.gameObject.TryGetComponent<HealthController>(out var component)){
+                targetRange = Vector3.Distance(sourceOfTruth.transform.position, pointingAt.transform.position);
+            }
+        }
+
+        Debug.Log("targetRange:" + targetRange);
+
+        targetPosition = sourceOfTruth.transform.position + sourceOfTruth.transform.forward * targetRange;
         targetPosition = new Vector3(
                                             targetPosition.x + Random.Range(-spread, spread),
                                             targetPosition.y + Random.Range(-spread, spread),
@@ -130,7 +132,6 @@ public class AttackController : MonoBehaviour
         soundSource.pitch = Random.Range(0.9f, 1.1f);
         soundSource.PlayOneShot(fxSound);
     }
-
 
     IEnumerator RunFireProtectile()
     {
