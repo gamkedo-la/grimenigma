@@ -7,9 +7,8 @@ public enum AttackTypes{
 }
 
 public enum ProjectileTypes{
-    Automatic,
-    ScatterShot,
-    Fireball
+    Normal,
+    Explosive
 }
 
 public enum ItemID{
