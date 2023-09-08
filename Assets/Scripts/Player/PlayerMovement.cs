@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
             rb.AddForce(moveDirection * dashForce, ForceMode.Impulse);
             PlayAudioClip(dashSound);
-            StartCoroutine(DashTimer());
+            StartCoroutine(RunDashTimer());
         }
     }
 
@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             slideTime = 0f;
             shouldPlaySlideSound = true;
             //Debug.Log("Slide Time:" + slideTime);
-            StartCoroutine(SlideTimer());
+            StartCoroutine(RunSlideTimer());
         }
         else if(slideAvailable){
             if(slideTime <= allowedSlideTime){
@@ -193,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("Jump!");
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        StartCoroutine(JumpTimer());
+        StartCoroutine(RunJumpTimer());
     }
 
     private void PlayAudioClip(AudioClip sound)
@@ -208,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
         sourceAudio.PlayOneShot(sound);
     }
 
-    IEnumerator DashTimer()
+    IEnumerator RunDashTimer()
     {
         canDash = false;
         yield return new WaitForSeconds(dashCooldown);
@@ -216,14 +216,14 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    IEnumerator JumpTimer()
+    IEnumerator RunJumpTimer()
     {
         canJump = false;
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
     }
 
-    IEnumerator SlideTimer()
+    IEnumerator RunSlideTimer()
     {
         slideAvailable = false;
         yield return new WaitForSeconds(slideCooldown);
