@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -16,6 +17,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float exposionRadius;
     [SerializeField] int maxHits;
     [SerializeField] LayerMask masksToHit;
+    [SerializeField] LayerMask blockExplosionMasks;
     [Header("Animaton")]
     [SerializeField] ScriptedAnimations sa;
     [SerializeField] float rotateX;
@@ -66,7 +68,7 @@ public class Projectile : MonoBehaviour
         switch (type)
         {
             case ProjectileTypes.Normal:
-                target?.GetComponent<HealthController>()?.Damage(damage);
+                target.GetComponent<HealthController>()?.Damage(damage);
                 break;
             case ProjectileTypes.Explosive:
                 SpawnExplosion();
@@ -80,13 +82,14 @@ public class Projectile : MonoBehaviour
 
     void SpawnExplosion()
     {
-        int hits = Physics.OverlapSphereNonAlloc(transform.position, exposionRadius, explosiveHits);
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, exposionRadius, explosiveHits, masksToHit);
         for(int i = 0; i < hits; i++){
+            //Debug.Log(explosiveHits[i]);
             if(explosiveHits[i].TryGetComponent<Rigidbody>( out Rigidbody rb)){
                 float distance = Vector3.Distance(transform.position, explosiveHits[i].transform.position);
-                if(Physics.Raycast(transform.position, (explosiveHits[i].transform.position - transform.position).normalized, distance)){
-                    Debug.Log("yes.");
-                    explosiveHits[i]?.GetComponent<HealthController>().Damage(damage);
+                if(Physics.Raycast(transform.position, (explosiveHits[i].transform.position - transform.position).normalized, distance, blockExplosionMasks)){
+                    //Debug.Log("Expolsion can reach!");
+                    explosiveHits[i].GetComponent<HealthController>()?.Damage(damage);
                 }
             }
         }

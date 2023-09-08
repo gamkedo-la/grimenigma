@@ -1,11 +1,3 @@
-public enum AttackTypes{
-    Automatic,
-    Burst,
-    Melee,
-    Hitscan,
-    Explosive
-}
-
 public enum ProjectileTypes{
     Normal,
     Explosive

@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 9028769795115557989}
   m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +53,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9028769795115557989}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -151,6 +151,14 @@ MonoBehaviour:
   damage: 1
   speed: 100
   range: 700
+  exposionRadius: 0
+  maxHits: 0
+  masksToHit:
+    serializedVersion: 2
+    m_Bits: 0
+  blockExplosionMasks:
+    serializedVersion: 2
+    m_Bits: 0
   sa: {fileID: 1389633839998749523}
   rotateX: 100
   rotateY: 100
@@ -168,3 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc1502014adf9e4e86ffc654c98441c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateObject: 0
+  rotateX: 0
+  rotateY: 0
+  rotateZ: 0
