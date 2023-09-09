@@ -114,7 +114,7 @@ public class AttackController : MonoBehaviour
             }
         }
 
-        Debug.Log("targetRange:" + targetRange);
+        //Debug.Log("targetRange:" + targetRange);
 
         targetPosition = sourceOfTruth.transform.position + sourceOfTruth.transform.forward * targetRange;
         targetPosition = new Vector3(
