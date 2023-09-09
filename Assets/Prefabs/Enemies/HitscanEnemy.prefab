@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68d1c0a2adf9064f9fdbcc09164230f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 3
+  attackType: 1
   piercingDamage: 0
   hitScanDamage: 10
   range: 500
@@ -269,6 +269,9 @@ MonoBehaviour:
   soundSource: {fileID: 6749481306879995972}
   fxSound: {fileID: 8300000, guid: 20bd9343fb8a9d941bddd55aba9df192, type: 3}
   ownerTag: 
+  inclusionMasks:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &7630765295138871349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +318,7 @@ AudioSource:
   m_GameObject: {fileID: 7630765295138871340}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7258686454093273563, guid: d8b3922a9f8875d47b7c995d884f3f4f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
