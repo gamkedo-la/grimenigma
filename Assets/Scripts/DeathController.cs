@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DeathController: MonoBehaviour
 {
+    [Header("OnDeath")]
+    [SerializeField] bool destroyOnDeath = true;
     [Header("Optional Settings")]
     [SerializeField] GameObject owner;
 
@@ -9,7 +11,7 @@ public class DeathController: MonoBehaviour
     int randomItemDrop;
     RaycastHit hit;
     GameObject thingToKill;
-    public void HandleDeath(bool shouldDestory)
+    public void HandleDeath()
     {
         if(this.gameObject.tag == "enemy") {
             randomItemDrop = Random.Range(0, itemDrops.Length);
@@ -25,7 +27,7 @@ public class DeathController: MonoBehaviour
             }
         }
 
-        if(shouldDestory){ Destroy(thingToKill); }
+        if(destroyOnDeath){ Destroy(thingToKill); }
         else { thingToKill.SetActive(false); }
 
         //Debug.Log("Entity " + this + " has died!");
