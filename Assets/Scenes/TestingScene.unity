@@ -1531,7 +1531,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27576
+  m_Name: pb_Mesh25186
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -1830,7 +1830,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27300
+  m_Name: pb_Mesh24906
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -1995,7 +1995,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27316
+  m_Name: pb_Mesh24922
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2827,7 +2827,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27554
+  m_Name: pb_Mesh25164
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -3392,7 +3392,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27378
+  m_Name: pb_Mesh24988
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -4064,7 +4064,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27652
+  m_Name: pb_Mesh25264
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -4377,6 +4377,10 @@ PrefabInstance:
       propertyPath: attackType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4043406814658916752, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
+      propertyPath: tracerLifeSpan
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7630765295138871340, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: m_Name
       value: HitscanEnemy (3)
@@ -4630,7 +4634,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27594
+  m_Name: pb_Mesh25204
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -6125,7 +6129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27506
+  m_Name: pb_Mesh25116
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -9899,6 +9903,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2802415398294474879, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3397135204919250846, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
       propertyPath: m_Layer
       value: 30
@@ -9968,6 +9976,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5963523784171643368, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963523784171643368, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
@@ -9991,7 +10003,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8531047812806218736, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8531047812806218736, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+    - {fileID: 8637759547600367152, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+    - {fileID: 5963523784171643368, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -11010,7 +11029,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27538
+  m_Name: pb_Mesh25148
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -11660,6 +11679,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043406814658916752, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4043406814658916752, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: attackType
       value: 1
