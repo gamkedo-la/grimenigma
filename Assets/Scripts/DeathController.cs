@@ -28,7 +28,7 @@ public class DeathController: MonoBehaviour
         if(shouldDestory){ Destroy(thingToKill); }
         else { thingToKill.SetActive(false); }
 
-        Debug.Log("Entity " + this + " has died!");
+        //Debug.Log("Entity " + this + " has died!");
     }
 
     void Start(){
