@@ -1108,7 +1108,7 @@ Transform:
   - {fileID: 6837168361299740408}
   - {fileID: 5390537495299956796}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2540712024335374703
 GameObject:
@@ -1710,11 +1710,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 0
   destroyOnDeath: 0
-  hp: 100
-  armour: 50
+  baseHP: 100
   maxHP: 150
+  armour: 50
   maxArmour: 100
   armourReductionPercentage: 0.254
+  hp: 100
 --- !u!114 &674857546359026933
 MonoBehaviour:
   m_ObjectHideFlags: 0

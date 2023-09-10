@@ -5,9 +5,10 @@ public class HealthController: MonoBehaviour
 {
     [SerializeField] bool godMode = false;
     [SerializeField] bool destroyOnDeath = true;
-    [SerializeField] public int hp, armour, maxHP, maxArmour;//{get; private set;}
+    [SerializeField] public int baseHP, maxHP, armour, maxArmour;//{get; private set;}
     [Range(0f,1f)][SerializeField] float armourReductionPercentage;
-    //[SerializeField] int min = 0;
+
+    [HideInInspector] public int hp;
 
     DeathController deathController;
 
@@ -43,7 +44,7 @@ public class HealthController: MonoBehaviour
         deathController = GetComponent<DeathController>();
 
         // Prevents hp > maxHP
-        hp = Mathf.Clamp(hp, 0, maxHP);
+        hp = Mathf.Clamp(baseHP, 0, maxHP);
         //Debug.Log("Start HP: " + hp);
    }
     private int ArmourReduction(int ammount)

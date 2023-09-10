@@ -286,11 +286,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 0
   destroyOnDeath: 1
-  hp: 5
+  startingHP: 10
   armour: 0
   maxHP: 0
   maxArmour: 0
   armourReductionPercentage: 0
+  hp: 5
 --- !u!114 &1899428135238325818
 MonoBehaviour:
   m_ObjectHideFlags: 0
