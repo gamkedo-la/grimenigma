@@ -167,7 +167,7 @@ public class AttackController : MonoBehaviour
 
         Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range);
         if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer()); }
-        Debug.Log(attackHit.collider);
+        //Debug.Log(attackHit.collider);
         attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage, piercingDamage);
     }
 
