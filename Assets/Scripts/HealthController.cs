@@ -3,16 +3,22 @@ using UnityEngine;
 [RequireComponent(typeof(DeathController))]
 public class HealthController: MonoBehaviour
 {
+    [Header("Health Controller")]
     [SerializeField] bool godMode = false;
     [SerializeField] public int baseHP, maxHP, armour, maxArmour;//{get; private set;}
     [Range(0f,1f)][SerializeField] float armourReductionPercentage;
+    [Header("Audio")]
+    [SerializeField] bool hasAudioFX;
+    [SerializeField] AudioClip onDamageSound;
 
     [HideInInspector] public int hp;
 
     DeathController deathController;
+    AudioSource soundSource;
 
     public void Damage(int ammount, bool piercingDamage=false)
     {
+        if(hasAudioFX){ PlaySoundFX(onDamageSound); }
         if(!godMode){
             if(!piercingDamage){ ammount = ArmourReduction(ammount); }
             hp -= ammount;
@@ -41,6 +47,9 @@ public class HealthController: MonoBehaviour
    private void Start()
    {
         deathController = GetComponent<DeathController>();
+        if(hasAudioFX && !TryGetComponent<AudioSource>(out soundSource)){
+            soundSource = gameObject.AddComponent<AudioSource>();
+        }
 
         // Prevents hp > maxHP
         hp = Mathf.Clamp(baseHP, 0, maxHP);
@@ -57,5 +66,11 @@ public class HealthController: MonoBehaviour
         if(armour < 0){ armour = 0; }
 
         return remainingDamage;
+    }
+
+    void PlaySoundFX(AudioClip sound)
+    {
+        soundSource.pitch = Random.Range(0.9f, 1.1f);
+        soundSource.PlayOneShot(sound);
     }
 }
