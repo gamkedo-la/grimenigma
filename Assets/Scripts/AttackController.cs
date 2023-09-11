@@ -30,6 +30,7 @@ public class AttackController : MonoBehaviour
     [Header("Bodge Settings")]
     [SerializeField] string ownerTag;
     [SerializeField] LayerMask inclusionMasks;
+    [SerializeField] Transform customSpawnOrigin;
 
     enum AttackTypes{
         Projectile,
@@ -93,7 +94,8 @@ public class AttackController : MonoBehaviour
         }
         if(!hasSourceOfTruth){ sourceOfTruth = this.gameObject; }
 
-        spawnOrigin = this.gameObject.transform;        
+        spawnOrigin = customSpawnOrigin == null ? this.gameObject.transform : customSpawnOrigin;        
+        Debug.Log(spawnOrigin);
     }
 
     void Update()

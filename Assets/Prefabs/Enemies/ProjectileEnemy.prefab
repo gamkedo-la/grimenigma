@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6650616579639069561}
-  - component: {fileID: 7733405248186999741}
   - component: {fileID: 3992226184560799797}
+  - component: {fileID: 5411934404164613672}
   - component: {fileID: 5150446890122714817}
   - component: {fileID: 1610336116447369826}
-  - component: {fileID: 957082722891224897}
   m_Layer: 3
   m_Name: ProjectileEnemy
   m_TagString: ignoreTrigger
@@ -35,29 +34,8 @@ Transform:
   m_Children:
   - {fileID: 6549873664428050735}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7733405248186999741
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2758265383247273254}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 20
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3992226184560799797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,14 +48,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c6af53048d1a04bbeeb558a6f3b863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeball: {fileID: 8856463811047395247}
-  firePoint: {fileID: 9100387783517460266}
-  projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
-  fireRate: 2
-  searchSpeed: 40
-  trackSpeed: 100
-  detectionRange: 20
   attackController: {fileID: 5150446890122714817}
+--- !u!114 &5411934404164613672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2758265383247273254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5b3d8fc53b50c4c854d4d3ac10cd76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 50
+  angle: 100
+  ObstructionMask:
+    serializedVersion: 2
+    m_Bits: 1006633015
+  canSeeTarget: 0
+  targetToFind: {fileID: 0}
 --- !u!114 &5150446890122714817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,16 +83,16 @@ MonoBehaviour:
   attackType: 0
   piercingDamage: 0
   hitScanDamage: 0
-  range: 500
+  range: 100
   cooldown: 1.01
-  spread: 0
+  spread: 100
   drawTime: 0
   hasSourceOfTruth: 0
   sourceOfTruth: {fileID: 0}
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
   shouldRenderTracer: 0
-  tracerLifeSpan: 0
-  tracerRenderer: {fileID: 0}
+  tracer: {fileID: 3243737631664681223, guid: e099b996b76633b4a9f65da7dae8e1ad, type: 3}
+  tracerLifeSpan: 10
   projectileAmmount: 1
   infiniteAmmmo: 1
   ammo: 0
@@ -110,6 +100,10 @@ MonoBehaviour:
   soundSource: {fileID: 1610336116447369826}
   fxSound: {fileID: 8300000, guid: 20bd9343fb8a9d941bddd55aba9df192, type: 3}
   ownerTag: enemy
+  inclusionMasks:
+    serializedVersion: 2
+    m_Bits: 1073741824
+  customSpawnOrigin: {fileID: 9100387783517460266}
 --- !u!82 &1610336116447369826
 AudioSource:
   m_ObjectHideFlags: 0
@@ -206,110 +200,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!120 &957082722891224897
-LineRenderer:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2758265383247273254}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    serializedVersion: 3
-    widthMultiplier: 1
-    widthCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    colorGradient:
-      serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
-      key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 65535
-      ctime2: 0
-      ctime3: 0
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
-      atime0: 0
-      atime1: 65535
-      atime2: 0
-      atime3: 0
-      atime4: 0
-      atime5: 0
-      atime6: 0
-      atime7: 0
-      m_Mode: 0
-      m_ColorSpace: -1
-      m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
-    alignment: 0
-    textureMode: 0
-    textureScale: {x: 1, y: 1}
-    shadowBias: 0.5
-    generateLightingData: 0
-  m_MaskInteraction: 0
-  m_UseWorldSpace: 1
-  m_Loop: 0
-  m_ApplyActiveColorSpace: 1
 --- !u!1 &3636875598749040971
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,12 +321,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   godMode: 0
-  destroyOnDeath: 1
-  hp: 5
-  armour: 0
+  baseHP: 0
   maxHP: 1
+  armour: 0
   maxArmour: 0
   armourReductionPercentage: 0
+  hasAudioFX: 0
+  onDamageSound: {fileID: 0}
+  hp: 5
 --- !u!114 &4042098968357940906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c5cd2f16bb6dc4a8153b5e16de2695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnDeath: 1
+  dropItem: 0
+  itemDrops: []
   owner: {fileID: 2758265383247273254}
 --- !u!1 &3946566042880273193
 GameObject:
@@ -579,15 +474,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 302041664c2221a409aaf75f874bd9ca, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 302041664c2221a409aaf75f874bd9ca, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 302041664c2221a409aaf75f874bd9ca, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 302041664c2221a409aaf75f874bd9ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -595,7 +490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 302041664c2221a409aaf75f874bd9ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 302041664c2221a409aaf75f874bd9ca, type: 3}
       propertyPath: m_LocalPosition.z
