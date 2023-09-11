@@ -1,7 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
 public class AttackController : MonoBehaviour
 {
     [Header("Attack Settings")]
@@ -17,8 +17,8 @@ public class AttackController : MonoBehaviour
     [SerializeField] GameObject projectile;
     [Header("Tracer")]
     [SerializeField] bool shouldRenderTracer;
+    [SerializeField] GameObject tracer;
     [SerializeField] float tracerLifeSpan;
-    [SerializeField] LineRenderer tracerRenderer;
     //[SerializeField] float patternSteps = 0f;
     [Header("Ammo")]
     [SerializeField] int projectileAmmount = 1;
@@ -30,6 +30,7 @@ public class AttackController : MonoBehaviour
     [Header("Bodge Settings")]
     [SerializeField] string ownerTag;
     [SerializeField] LayerMask inclusionMasks;
+    [SerializeField] Transform customSpawnOrigin;
 
     enum AttackTypes{
         Projectile,
@@ -38,6 +39,7 @@ public class AttackController : MonoBehaviour
 
     Transform spawnOrigin;
     ProjectilePooler poolerSingleton;
+    LineRenderer tracerRenderer;
 
     bool shouldAttack = true;
     float targetRange;
@@ -85,15 +87,25 @@ public class AttackController : MonoBehaviour
     void Start()
     {
         poolerSingleton = FindObjectOfType<ProjectilePooler>().gameObject.GetComponent<ProjectilePooler>();
-        tracerRenderer = GetComponent<LineRenderer>();
+        if(attackType == AttackTypes.Hitscan){
+            tracerRenderer = this.AddComponent<LineRenderer>();
+            tracer = Instantiate(tracer, parent:this.gameObject.transform);
+            tracerRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        }
         if(!hasSourceOfTruth){ sourceOfTruth = this.gameObject; }
 
-        spawnOrigin = this.gameObject.transform;        
+        spawnOrigin = customSpawnOrigin == null ? this.gameObject.transform : customSpawnOrigin;        
+        Debug.Log(spawnOrigin);
     }
 
     void Update()
     {
         if(hasSourceOfTruth){ transform.LookAt(sourceOfTruth.transform ); }
+    }
+
+    void OnDestroy()
+    {
+        if(attackType == AttackTypes.Hitscan){ Destroy(this.tracerRenderer.material); }
     }
 
     void DrawTracer()
@@ -114,7 +126,7 @@ public class AttackController : MonoBehaviour
             }
         }
 
-        Debug.Log("targetRange:" + targetRange);
+        //Debug.Log("targetRange:" + targetRange);
 
         targetPosition = sourceOfTruth.transform.position + sourceOfTruth.transform.forward * targetRange;
         targetPosition = new Vector3(
@@ -157,8 +169,8 @@ public class AttackController : MonoBehaviour
 
         Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range);
         if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer()); }
-        Debug.Log(attackHit.collider);
-        attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(hitScanDamage, piercingDamage);
+        //Debug.Log(attackHit.collider);
+        attackHit.transform.gameObject?.GetComponent<HealthController>().Damage(hitScanDamage, piercingDamage);
     }
 
     IEnumerator RunResetAttackCooldown()
@@ -172,6 +184,9 @@ public class AttackController : MonoBehaviour
     IEnumerator RunCreateAndDestroyTracer()
     {
         targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+    
+        tracerRenderer.startColor = Color.red;
+        tracerRenderer.endColor = Color.white;
         tracerRenderer.SetPosition(0, transform.position);
         tracerRenderer.SetPosition(1, targetPosition);
 

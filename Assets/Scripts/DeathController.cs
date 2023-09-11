@@ -2,17 +2,34 @@ using UnityEngine;
 
 public class DeathController: MonoBehaviour
 {
+    [Header("OnDeath")]
+    [SerializeField] bool destroyOnDeath = true;
+    [SerializeField] bool dropItem;
+    [SerializeField] public GameObject[] itemDrops;
     [Header("Optional Settings")]
     [SerializeField] GameObject owner;
-
-    public GameObject[] itemDrops;
-    int randomItemDrop;
-    RaycastHit hit;
     GameObject thingToKill;
-    public void HandleDeath(bool shouldDestory)
+
+    public void HandleDeath()
     {
-        if(this.gameObject.tag == "enemy") {
-            randomItemDrop = Random.Range(0, itemDrops.Length);
+        if(dropItem){ DropResource(); }
+
+        if(destroyOnDeath){ Destroy(thingToKill); }
+        else { thingToKill.SetActive(false); }
+
+        //Debug.Log("Entity " + this + " has died!");
+    }
+
+    void Start(){
+        if(owner != null){ thingToKill = owner; }
+        else{ thingToKill = this.gameObject; }
+    }
+
+    void DropResource()
+    {
+            int randomItemDrop = Random.Range(0, itemDrops.Length);
+            RaycastHit hit;
+            
             if (Physics.Raycast(this.gameObject.transform.position + new Vector3(0, 4, 0), Vector3.down, out hit))
             {
                 // Calculate the item drop position based on the ground hit point
@@ -23,14 +40,5 @@ public class DeathController: MonoBehaviour
 
                 Instantiate(itemDrops[randomItemDrop], itemDropPosition, this.gameObject.transform.rotation);
             }
-        }
-
-        if(owner != null){ thingToKill = owner; }
-        else{ thingToKill = this.gameObject; }
-
-        if(shouldDestory){ Destroy(thingToKill); }
-        else { thingToKill.SetActive(false); }
-
-        Debug.Log("Entity " + this + " has died!");
     }
 }

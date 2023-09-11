@@ -21,7 +21,7 @@ public class PlaySoundEvent : MonoBehaviour
     void PlaySound(string label)
     {
         if(label == listener.label){
-            Debug.Log("Playing sound on " + gameObject.name);
+            //Debug.Log("Playing sound on " + gameObject.name);
             if(randomPitch){ sourceAudio.pitch = Random.Range(-pitchRange, pitchRange); }
             sourceAudio.PlayOneShot(soundClip);
         }

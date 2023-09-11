@@ -3,11 +3,15 @@ using UnityEngine;
 [RequireComponent(typeof(DeathController))]
 public class HealthController: MonoBehaviour
 {
+    [Header("Health Controller")]
     [SerializeField] bool godMode = false;
-    [SerializeField] bool destroyOnDeath = true;
-    [SerializeField] public int hp, armour, maxHP, maxArmour;//{get; private set;}
+    [SerializeField] public int baseHP, maxHP, armour, maxArmour;//{get; private set;}
     [Range(0f,1f)][SerializeField] float armourReductionPercentage;
-    //[SerializeField] int min = 0;
+    [Header("Audio")]
+    [SerializeField] bool hasAudioFX;
+    [SerializeField] AudioClip onDamageSound;
+
+    [HideInInspector] public int hp;
 
     DeathController deathController;
     public UIController UIController;
@@ -22,9 +26,11 @@ public class HealthController: MonoBehaviour
         UIController.SetHealth(hp);
         //Debug.Log("Start HP: " + hp);
    }
+    AudioSource soundSource;
 
     public void Damage(int ammount, bool piercingDamage=false)
     {
+        if(hasAudioFX){ PlaySoundFX(onDamageSound); }
         if(!godMode){
             if(!piercingDamage){ ammount = ArmourReduction(ammount); }
             hp -= ammount;
@@ -32,7 +38,7 @@ public class HealthController: MonoBehaviour
 
             if(hp < 1){
                 //Debug.Log("I am dead!");
-                deathController.HandleDeath(destroyOnDeath);
+                deathController.HandleDeath();
             }
             UIController.SetHealth(hp);
         }
@@ -51,6 +57,18 @@ public class HealthController: MonoBehaviour
         armour = Mathf.Clamp(armour+ammount, 0, maxArmour);
     }
 
+
+   private void Start()
+   {
+        deathController = GetComponent<DeathController>();
+        if(hasAudioFX && !TryGetComponent<AudioSource>(out soundSource)){
+            soundSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Prevents hp > maxHP
+        hp = Mathf.Clamp(baseHP, 0, maxHP);
+        //Debug.Log("Start HP: " + hp);
+   }
     private int ArmourReduction(int ammount)
     {
         int armourDamage = (int)Mathf.Ceil(ammount*armourReductionPercentage);
@@ -62,5 +80,11 @@ public class HealthController: MonoBehaviour
         if(armour < 0){ armour = 0; }
 
         return remainingDamage;
+    }
+
+    void PlaySoundFX(AudioClip sound)
+    {
+        soundSource.pitch = Random.Range(0.9f, 1.1f);
+        soundSource.PlayOneShot(sound);
     }
 }
