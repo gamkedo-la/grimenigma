@@ -21,6 +21,10 @@ public class HealthController: MonoBehaviour
         deathController = GetComponent<DeathController>();
         //UIController = GetComponent<UIController>();
 
+        if(hasAudioFX && !TryGetComponent<AudioSource>(out soundSource)){
+            soundSource = gameObject.AddComponent<AudioSource>();
+        }
+
         // Prevents hp > maxHP
         hp = Mathf.Clamp(hp, 0, maxHP);
         UIController.SetHealth(hp);
@@ -58,17 +62,6 @@ public class HealthController: MonoBehaviour
     }
 
 
-   private void Start()
-   {
-        deathController = GetComponent<DeathController>();
-        if(hasAudioFX && !TryGetComponent<AudioSource>(out soundSource)){
-            soundSource = gameObject.AddComponent<AudioSource>();
-        }
-
-        // Prevents hp > maxHP
-        hp = Mathf.Clamp(baseHP, 0, maxHP);
-        //Debug.Log("Start HP: " + hp);
-   }
     private int ArmourReduction(int ammount)
     {
         int armourDamage = (int)Mathf.Ceil(ammount*armourReductionPercentage);
