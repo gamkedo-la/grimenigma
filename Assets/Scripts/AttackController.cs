@@ -95,7 +95,7 @@ public class AttackController : MonoBehaviour
         if(!hasSourceOfTruth){ sourceOfTruth = this.gameObject; }
 
         spawnOrigin = customSpawnOrigin == null ? this.gameObject.transform : customSpawnOrigin;        
-        Debug.Log(spawnOrigin);
+        //Debug.Log(spawnOrigin);
     }
 
     void Update()
