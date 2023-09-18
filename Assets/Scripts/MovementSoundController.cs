@@ -14,9 +14,9 @@ public class MovementSoundData
 
 public class MovementSoundController : MonoBehaviour
 {
+    [SerializeField] float actorHeight;
     [SerializeField] AudioSource sourceAudio;
     [SerializeField] List<MovementSoundData> soundData;
-    [SerializeField] float actorHeight;
 
     RaycastHit hit;
 
@@ -31,7 +31,7 @@ public class MovementSoundController : MonoBehaviour
                 surfaceType = component.id;
             }
         }
-        
+
         AudioClip randomSound = sounds[movement][surfaceType][Random.Range(0,sounds[movement][surfaceType].Count)];
         PlayAudioClip(randomSound);
     }
@@ -52,6 +52,8 @@ public class MovementSoundController : MonoBehaviour
 
     void Start()
     {
+        actorHeight = actorHeight/2;
+
         sounds = new Dictionary<MovementStyle, Dictionary<MaterialSurfaceType, List<AudioClip>>>();
         PopulateSoundLookupDictionary();
     }
