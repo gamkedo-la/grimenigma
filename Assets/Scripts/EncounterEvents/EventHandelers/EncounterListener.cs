@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Net.Sockets;
 
 
 
@@ -85,7 +82,7 @@ public class EncounterListenerEditor : Editor
             }
             else{
                 EditorGUILayout.Popup(0, new string[] {"No encounters found!"});
-                Debug.LogWarning("No Enounters found in scene!");
+                //Debug.LogWarning("No Enounters found in scene!");
             }
         }
         else{
