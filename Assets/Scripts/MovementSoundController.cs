@@ -24,28 +24,14 @@ public class MovementSoundController : MonoBehaviour
 
     public void PlaySound(MovementStyle movement)
     {
-        MaterialSurfaceType surfaceType = MaterialSurfaceType.Hard;
-
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, actorHeight)){
-            if(hit.transform.gameObject.TryGetComponent<MaterialSurfaceID>(out var component)){
-                surfaceType = component.id;
-            }
-        }
-
+        MaterialSurfaceType surfaceType = GetMaterialSurfaceID();
         AudioClip randomSound = sounds[movement][surfaceType][Random.Range(0,sounds[movement][surfaceType].Count)];
         PlayAudioClip(randomSound);
     }
 
     public void PlaySound(MovementStyle movement, float pitch)
     {
-        MaterialSurfaceType surfaceType = MaterialSurfaceType.Hard;
-
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, actorHeight)){
-            if(hit.transform.gameObject.TryGetComponent<MaterialSurfaceID>(out var component)){
-                surfaceType = component.id;
-            }
-        }
-        
+        MaterialSurfaceType surfaceType = GetMaterialSurfaceID();
         AudioClip randomSound = sounds[movement][surfaceType][Random.Range(0,sounds[movement][surfaceType].Count)];
         PlayAudioClip(randomSound, pitch);
     }
@@ -56,6 +42,21 @@ public class MovementSoundController : MonoBehaviour
 
         sounds = new Dictionary<MovementStyle, Dictionary<MaterialSurfaceType, List<AudioClip>>>();
         PopulateSoundLookupDictionary();
+    }
+
+    MaterialSurfaceType GetMaterialSurfaceID()
+    {
+        MaterialSurfaceType surfaceType = MaterialSurfaceType.Hard;
+
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, actorHeight)){
+            if(hit.transform.gameObject.TryGetComponent<MaterialSurfaceID>(out var component)){
+                surfaceType = component.id;
+            }
+        }
+
+        //Debug.Log("surfaceType:" + surfaceType);
+
+        return surfaceType;
     }
 
     void PlayAudioClip(AudioClip sound)
