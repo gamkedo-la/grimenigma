@@ -14,12 +14,10 @@ public class HealthController: MonoBehaviour
     [HideInInspector] public int hp;
 
     DeathController deathController;
-    public UIController UIController;
 
    private void Start()
    {
         deathController = GetComponent<DeathController>();
-        //UIController = GetComponent<UIController>();
 
         if(hasAudioFX && !TryGetComponent<AudioSource>(out soundSource)){
             soundSource = gameObject.AddComponent<AudioSource>();
@@ -27,7 +25,6 @@ public class HealthController: MonoBehaviour
 
         // Prevents hp > maxHP
         hp = Mathf.Clamp(hp, 0, maxHP);
-        UIController.SetHealth(hp);
         //Debug.Log("Start HP: " + hp);
    }
     AudioSource soundSource;
@@ -44,7 +41,6 @@ public class HealthController: MonoBehaviour
                 //Debug.Log("I am dead!");
                 deathController.HandleDeath();
             }
-            UIController.SetHealth(hp);
         }
         else{ Debug.Log("Reminder! God mode is enabled."); }
     }
@@ -52,7 +48,6 @@ public class HealthController: MonoBehaviour
     public void Heal(int ammount)
     {
         hp = Mathf.Clamp(hp+ammount, 0, maxHP);
-        UIController.SetHealth(hp);
         //Debug.Log("Recieved " + ammount + " healing!");
     }
 

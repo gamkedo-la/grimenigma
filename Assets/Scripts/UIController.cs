@@ -5,19 +5,33 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-
-    float currentHealth;
     public Slider slider;
     public Text healthText, ammoText;
 
-    public void SetMaxHealth(int health)
+    HealthController healthData;
+
+    float currentHealth;
+
+    void OnEnable()
+    {
+        healthData = GameObject.Find("Player/Body").GetComponent<HealthController>();
+
+        SetMaxHealth(healthData.baseHP);
+    }
+
+    void Update()
+    {
+        if(currentHealth != healthData.hp){ SetHealth(healthData.hp); }
+    }
+
+    void SetMaxHealth(int health)
     {
         healthText.text = health.ToString();
         currentHealth = (float)health/100f;
         slider.value = currentHealth;
     }
 
-    public void SetHealth(int health) {
+    void SetHealth(int health) {
         healthText.text = health.ToString();
         currentHealth = (float)health/100f;
         slider.value = currentHealth;
