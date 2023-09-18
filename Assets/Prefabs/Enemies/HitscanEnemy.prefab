@@ -254,7 +254,7 @@ MonoBehaviour:
   range: 500
   cooldown: 2.1
   spread: 1.07
-  drawTime: 1
+  drawTime: 2
   hasSourceOfTruth: 0
   sourceOfTruth: {fileID: 0}
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
@@ -271,6 +271,7 @@ MonoBehaviour:
   inclusionMasks:
     serializedVersion: 2
     m_Bits: 4294967295
+  customSpawnOrigin: {fileID: 0}
 --- !u!114 &7630765295138871349
 MonoBehaviour:
   m_ObjectHideFlags: 0
