@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(moveDirection * speed, ForceMode.Acceleration);
         //Debug.Log("Player velocity:" + rb.velocity);
 
-        if(rb.velocity.x > 0.3f || rb.velocity.x < -0.3f || rb.velocity.z > 0.3f || rb.velocity.z < -0.3f){
+        if(grounded && (rb.velocity.x > 0.3f || rb.velocity.x < -0.3f || rb.velocity.z > 0.3f || rb.velocity.z < -0.3f)){
             if(footstepCounter <= 0){
                 moveSounds.PlaySound(MovementStyle.Running);
                 footstepCounter = 0.35f;
