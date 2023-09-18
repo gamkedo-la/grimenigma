@@ -157,7 +157,7 @@ public class AttackController : MonoBehaviour
             rentedProjectile.transform.position = spawnOrigin.position;
             rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
             rentedProjectile.gameObject.SetActive(true);
-            if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer()); }
+            if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer(range)); }
 
         }
     }
@@ -167,10 +167,22 @@ public class AttackController : MonoBehaviour
         //Debug.Log("Firing hitscan!");
         yield return new WaitForSeconds(drawTime);
 
-        Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range);
-        if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer()); }
+        float distance = range;
+
+        if(Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range)){
+            distance = Vector3.Distance(transform.position, attackHit.transform.position);
+            if(attackHit.transform.gameObject.TryGetComponent<HealthController>(out var component)){
+                component.Damage(hitScanDamage, piercingDamage);
+            }
+        }
+
+        //Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range);
+        if(shouldRenderTracer){
+            StartCoroutine(RunCreateAndDestroyTracer(distance));
+        }
         //Debug.Log(attackHit.collider);
-        attackHit.transform.gameObject?.GetComponent<HealthController>().Damage(hitScanDamage, piercingDamage);
+        
+        //attackHit.transform.gameObject?.GetComponent<HealthController>().Damage(hitScanDamage, piercingDamage);
     }
 
     IEnumerator RunResetAttackCooldown()
@@ -181,9 +193,9 @@ public class AttackController : MonoBehaviour
         shouldAttack = true;
     }
 
-    IEnumerator RunCreateAndDestroyTracer()
+    IEnumerator RunCreateAndDestroyTracer(float distance)
     {
-        targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+        targetPosition = spawnOrigin.position + spawnOrigin.forward * distance;
     
         tracerRenderer.startColor = Color.red;
         tracerRenderer.endColor = Color.white;
