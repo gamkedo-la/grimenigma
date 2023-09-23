@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float raycastPadding;
 
     Rigidbody rb;
+    [SerializeField] Transform cam;
 
     bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound;
     float speed, airMoveSpeed, slideTime, maxDistance;
@@ -157,8 +158,14 @@ public class PlayerMovement : MonoBehaviour
     {
         GroundCheck();
         ApplyExtraGravity();
-        MovePlayer();
+        
         if(!grounded) { pData.landingVelocity = rb.velocity; }
+        MovePlayer();
+    }
+
+    void Update()
+    {
+        transform.rotation = cam.transform.rotation;
     }
 
     private void ApplyExtraGravity()
