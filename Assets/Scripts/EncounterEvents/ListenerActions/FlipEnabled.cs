@@ -3,6 +3,7 @@ using UnityEngine;
 public class FlipEnabled : MonoBehaviour
 {
     [SerializeField] bool onlyOnce;
+    [SerializeField] GameObject[] objectsToFlip;
 
     EncounterListener listener;
 
@@ -16,8 +17,10 @@ public class FlipEnabled : MonoBehaviour
     void FlipState(string label)
     {
         if(listener.label == label){
-            gameObject.SetActive(!gameObject.activeInHierarchy);
-            if(onlyOnce){ this.enabled = !this.enabled; }
+            for(int i=0; i < objectsToFlip.Length; i++ ){
+                objectsToFlip[i].SetActive(!objectsToFlip[i].activeInHierarchy);
+                if(onlyOnce){ gameObject.SetActive(false); }
+            }
         }
 
     }
