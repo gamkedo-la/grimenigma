@@ -62,7 +62,7 @@ float attackRange;
 
         if(!hasWalkPoint){ GetNewPosition(); }
         if(hasWalkPoint){ agent.SetDestination(walkPoint); }
-        if((transform.position - walkPoint).magnitude < 1){ hasWalkPoint = false; }
+        if((transform.position - walkPoint).magnitude < 2f){ hasWalkPoint = false; }
         if(vision.canSeeTarget){ state = AIState.chase; }
     }
 
