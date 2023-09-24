@@ -55,15 +55,20 @@ public class PlayerCameraControl : MonoBehaviour
         CheckHandlingLanding();
         SetSlideOffset();
         SetLandingOffset();
+
+        moveInputRotation = Quaternion.Slerp(moveInputRotation, MovementTilt(transform.localRotation, moveInputLast), tiltSteps);
+        slideOffset = Mathf.Lerp(slideOffset, slideOffsetTarget, slideSteps);
+        landingOffset = Mathf.Lerp(landingOffset, landingOffsetTarget, landingOffsetSteps);
+
         // Move to player position.
         transform.position = new Vector3(player.position.x, (player.position.y + cameraHeight - slideOffset - landingOffset), player.position.z);
     }
 
     void FixedUpdate()
     {
-        moveInputRotation = Quaternion.Slerp(moveInputRotation, MovementTilt(transform.localRotation, moveInputLast), tiltSteps);
-        slideOffset = Mathf.Lerp(slideOffset, slideOffsetTarget, slideSteps);
-        landingOffset = Mathf.Lerp(landingOffset, landingOffsetTarget, landingOffsetSteps);
+        //moveInputRotation = Quaternion.Slerp(moveInputRotation, MovementTilt(transform.localRotation, moveInputLast), tiltSteps);
+        //slideOffset = Mathf.Lerp(slideOffset, slideOffsetTarget, slideSteps);
+        //landingOffset = Mathf.Lerp(landingOffset, landingOffsetTarget, landingOffsetSteps);
     }
 
     public void UpdateCameraRotation(Vector2 cameraInput, string controlType, Vector2 moveInput)
