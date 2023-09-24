@@ -160,12 +160,12 @@ public class PlayerMovement : MonoBehaviour
         ApplyExtraGravity();
         
         if(!grounded) { pData.landingVelocity = rb.velocity; }
+        transform.rotation = cam.transform.rotation;
         MovePlayer();
     }
 
     void Update()
     {
-        transform.rotation = cam.transform.rotation;
     }
 
     private void ApplyExtraGravity()
