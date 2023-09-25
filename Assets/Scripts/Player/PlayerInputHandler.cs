@@ -3,19 +3,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHanlder : MonoBehaviour
 {
-    [SerializeField] PlayerData pData;
     [SerializeField] PlayerMovement pBody;
     [SerializeField] PlayerCameraControl pCamera;
     [SerializeField] PlayerWeaponHandeling pHandeling;
     [SerializeField] HealthController pHealth;
-    [SerializeField] EquipmentHandler pEquipment;
-    [SerializeField] PlayerSelectHandAnimations pHandAnims;
+    [SerializeField] EquipmentHandler pLeftEquipment;
+    [SerializeField] EquipmentHandler pRightEquipment;
 
     PlayerInput input;
 
-    bool isSliding;
     Vector2 moveInput, cameraInput;
     string controlType;
+
+    void Awake()
+    {
+        input = new PlayerInput();
+    }
 
     void OnEnable()
     {
@@ -26,14 +29,9 @@ public class PlayerInputHanlder : MonoBehaviour
 
     void OnDisable()
     {
-        input.Disable();
         input.Player.Camera.performed -= GetCameraInput;
         input.Player.Camera.canceled -= GetCameraInput;
-    }
-
-    void Awake()
-    {
-        input = new PlayerInput();
+        input.Disable();
     }
 
     // Update is called once per frame
@@ -59,22 +57,18 @@ public class PlayerInputHanlder : MonoBehaviour
             pBody.Slide(moveInput, input.Player.Slide.WasReleasedThisFrame());
         }
         if(input.Player.LeftAttack.IsInProgress()){
-            pData.leftItem?.GetComponent<AttackController>().Attack();
-            pHandAnims.PlayAttackAnim(Hand.Left);
+            pLeftEquipment.currentEquipment.GetComponent<AttackController>().Attack();
         }
         if(input.Player.RightAttack.IsInProgress()){
-            pData.rightItem?.GetComponent<AttackController>().Attack();
-            pHandAnims.PlayAttackAnim(Hand.Right);
+            pRightEquipment.currentEquipment.GetComponent<AttackController>().Attack();
         }
         pBody.JumpHandler(input.Player.Jump.IsPressed(), input.Player.Jump.WasPressedThisFrame());
         if(input.Player.Camera.IsInProgress() || input.Player.Movement.IsInProgress()){ pHandeling.WeaponSway(cameraInput.normalized, moveInput); }
         else{ pHandeling.IdleAroundOrigin(); }
 
         if(input.Player.SwitchToNextWeapon.WasPressedThisFrame()){
-            pHandAnims.PickHandPosition(Hand.Left, pData.leftItem.GetComponent<ItemIDController>().id, false);
-            pEquipment.SelectNextEquipment(Hand.Left);
-            pHandAnims.PickHandPosition(Hand.Left, pData.leftItem.GetComponent<ItemIDController>().id, true);
-            }
+            pLeftEquipment.SelectNextEquipment();
+        }
 
         if(input.Player.PauseMenu.IsPressed()){
             Application.Quit();

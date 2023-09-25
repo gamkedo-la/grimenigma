@@ -29,11 +29,20 @@ public class PlayerSelectHandAnimations : MonoBehaviour
             case ItemID.Fireball:
                 anim.SetBool("isFullHand", isActive);
                 break;
+            case ItemID.Charge:
+                anim.SetBool("isFingerGun", isActive);
+                break;
             default:
                 anim.SetBool("noWeapon", true);
                 Debug.LogError("Could not find animaton case for " + name);
                 break;
         }
+    }
+
+void Start()
+    {
+        PickHandPosition(Hand.Left, ItemID.Automatic, true);
+        PickHandPosition(Hand.Right, ItemID.Automatic, true);
     }
 
     private Animator SetHand(Hand whichHand)
@@ -56,11 +65,5 @@ public class PlayerSelectHandAnimations : MonoBehaviour
         }
 
         return anim;
-    }
-
-    void Start()
-    {
-        PickHandPosition(Hand.Left, ItemID.Automatic, true);
-        PickHandPosition(Hand.Right, ItemID.Automatic, true);
     }
 }

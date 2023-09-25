@@ -2,6 +2,11 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
+enum AttackTypes{
+        Projectile,
+        Hitscan,
+    }
+
 public class AttackController : MonoBehaviour
 {
     [Header("Attack Settings")]
@@ -32,10 +37,9 @@ public class AttackController : MonoBehaviour
     [SerializeField] LayerMask inclusionMasks;
     [SerializeField] Transform customSpawnOrigin;
 
-    enum AttackTypes{
-        Projectile,
-        Hitscan,
-    }
+    public event System.Action onCharging;
+    public event System.Action onAttack;
+    public event System.Action onAttackStep;
 
     Transform spawnOrigin;
     ProjectilePooler poolerSingleton;
@@ -57,7 +61,6 @@ public class AttackController : MonoBehaviour
         }
 
         if(shouldAttack){
-            PlaySoundFX();
             //Debug.Log("Attacking!");
             switch (attackType)
             {
@@ -148,9 +151,13 @@ public class AttackController : MonoBehaviour
     IEnumerator RunFireProtectile()
     {
         //Debug.Log("Firing projectile!");
+        onCharging?.Invoke();
         yield return new WaitForSeconds(drawTime);
+        onAttack?.Invoke();
+        PlaySoundFX();
         for (int i = 0; i < projectileAmmount; i++)
         {
+            onAttackStep?.Invoke();
             //Debug.Log("Instatiating projectile!");
             GameObject rentedProjectile = poolerSingleton.GetObjectFromPool(projectile);
             rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
@@ -158,14 +165,17 @@ public class AttackController : MonoBehaviour
             rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
             rentedProjectile.gameObject.SetActive(true);
             if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer(range)); }
-
+            onAttackStep?.Invoke();
         }
     }
 
     IEnumerator RunFireHitscan()
     {
         //Debug.Log("Firing hitscan!");
+        onCharging?.Invoke();
         yield return new WaitForSeconds(drawTime);
+        onAttack?.Invoke();
+        PlaySoundFX();
 
         float distance = range;
 
