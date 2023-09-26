@@ -6204,62 +6204,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_Speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_Height
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_Radius
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_AutoRepath
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_BaseOffset
-      value: 0.87
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_AutoBraking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_Acceleration
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_ObstacleAvoidanceType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: -3741740768409257743, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_AutoTraverseOffMeshLink
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563412118372892493, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: radius
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563412118372892493, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: ObstructionMask.m_Bits
-      value: 3154116663
-      objectReference: {fileID: 0}
-    - target: {fileID: 7630765295138871339, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7630765295138871340, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: m_Name
       value: HitscanEnemy
@@ -6311,10 +6255,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7630765295138871340, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-      insertIndex: 7
-      addedObject: {fileID: 1253818558}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
 --- !u!43 &144754048
 Mesh:
@@ -18840,27 +18781,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1253818545 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7630765295138871340, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
-  m_PrefabInstance: {fileID: 69028378}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1253818558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1253818545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd1eb8e70cc3e44482e759ec21d00b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolRange: 75
-  maxDistanceFromCurrentPosition: 20
-  minWaitTime: 1
-  maxWaitTime: 3
 --- !u!1 &1273259295
 GameObject:
   m_ObjectHideFlags: 0
