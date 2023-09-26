@@ -13,6 +13,7 @@ public class HItScanEnemyAI : MonoBehaviour
 float attackRange;
 
     EnemyVision vision;
+    NavMeshAgentMovement agentMove;
     NavMeshAgent agent;
 
     AIState state;
@@ -26,6 +27,7 @@ float attackRange;
         target = GameObject.Find("Player/Body").transform;
         vision = GetComponent<EnemyVision>();
         agent = GetComponent<NavMeshAgent>();
+        agentMove = GetComponent<NavMeshAgentMovement>();
 
         spawnPosition = transform.position;
         state = AIState.idle;
@@ -51,7 +53,7 @@ float attackRange;
                 AttackStart();
                 break;
             default:
-                Patrol();
+                agentMove.Patrol();
                 break;
         }
     }
