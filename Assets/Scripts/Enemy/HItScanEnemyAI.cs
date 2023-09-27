@@ -1,26 +1,31 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using GrimEnigma.EnemyStates;
 
 [RequireComponent(typeof(EnemyVision))]
 [RequireComponent(typeof(AttackController))]
 public class HItScanEnemyAI : MonoBehaviour
 {
-    [SerializeField] LayerMask whatIsGround, whatIsTarget;
+    [Header("Attack")]
+    [Range(0,5)][SerializeField] int aggressionLevel;
+    [SerializeField] int maxAttacks;
+    [SerializeField] float maxAttackDelay;
     [SerializeField] AttackController weapon;
+    [SerializeField] LayerMask whatIsTarget;
+    [Header("Movement")]
     [SerializeField] float patrolRange;
-float attackRange;
+    [SerializeField] float maintainDistanceFromTarget;
+
+    [SerializeField] LayerMask whatIsGround;
 
     EnemyVision vision;
     NavMeshAgentMovement agentMove;
     NavMeshAgent agent;
-
     AIState state;
-
     Transform target;
     Vector3 spawnPosition, walkPoint;
-    bool hasWalkPoint;
+    
+    bool hasWalkPoint, isPerformingAction, isAlerted;
 
     void Start()
     {
@@ -31,11 +36,19 @@ float attackRange;
 
         spawnPosition = transform.position;
         state = AIState.idle;
+        isAlerted = false;
     }
 
     void Update()
     {
-        CheckState();
+        if(!isAlerted && vision.canSeeTarget){
+            state = AIState.alerted;
+            isAlerted = true;
+        }
+        if(!isPerformingAction){
+            CheckDistanceToTarget();
+            CheckState();
+        }
     }
 
     void CheckState()
@@ -46,15 +59,38 @@ float attackRange;
 
         switch (state)
         {
-            case(AIState.chase):
+            case AIState.alerted:
+                HandleAlerted();
+                break;
+            case AIState.chase:
                 ChaseTarget();
                 break;
-            case(AIState.attack):
-                AttackStart();
+            case AIState.attack:
+                StartCoroutine(RunAttack(target.position, Random.Range(1, maxAttacks+1), maxAttackDelay));
+                break;
+            case AIState.move:
+                // This does not really do what it says it does lol.
+                agentMove.MaintainDistacne(target.position, maintainDistanceFromTarget);
                 break;
             default:
                 agentMove.Patrol();
                 break;
+        }
+    }
+
+    void HandleAlerted()
+    {
+        isPerformingAction = false;
+        agentMove.ClearPath();
+        ChaseTarget();
+    }
+
+    void CheckDistanceToTarget(){
+        float distance = Vector3.Distance(transform.position, target.position);
+        if(distance - maintainDistanceFromTarget <= 0){
+            // Might cause the enemy to attack when out of range.
+            if(Random.Range(0, aggressionLevel) < aggressionLevel){ state = AIState.attack; }
+            else { state = AIState.move; }
         }
     }
 
@@ -84,9 +120,11 @@ float attackRange;
     void ChaseTarget()
     {
         //Debug.Log("Chasing!");
-
-        agent.SetDestination(target.position);
-        IsTargetWithinAttackRange();
+        CheckDistanceToTarget();
+        if(state != AIState.move){
+            agent.SetDestination(target.position);
+            IsTargetWithinAttackRange();
+        }
     }
 
     void AttackStart()
@@ -103,5 +141,18 @@ float attackRange;
     void IsTargetWithinAttackRange(){
         if(Physics.CheckSphere(transform.position, weapon.range, whatIsTarget)){ state = AIState.attack; }
         else{ state = AIState.chase; }
+    }
+
+    IEnumerator RunAttack(Vector3 targetPosition, int repeat, float delayTime)
+    {
+        isPerformingAction = true;
+        while(repeat > 0){
+            transform.LookAt(targetPosition);
+            weapon.Attack();
+            repeat--;
+            yield return new WaitForSeconds(delayTime);
+        }
+        state = AIState.move;
+        isPerformingAction = false;
     }
 }

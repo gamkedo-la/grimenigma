@@ -16,13 +16,25 @@ public class NavMeshAgentMovement : MonoBehaviour
 
     bool isFindingPath = false;
 
-
     public void Patrol()
     {
         if(agent.remainingDistance <= agent.stoppingDistance && !isFindingPath){
-            Debug.Log("Finding new path.");
+            Debug.Log("Finding new path!");
             StartCoroutine(RunSetNewValidPosition());
         }
+    }
+
+    public void MaintainDistacne(Vector3 position, float distance)
+    {
+        if(agent.remainingDistance <= agent.stoppingDistance && !isFindingPath){
+            Debug.Log("Moving away from player!");
+            StartCoroutine(RunMaintainDisance(position, distance));
+        }
+    }
+
+    public void ClearPath()
+    {
+        agent.ResetPath();
     }
 
     void Start()
@@ -42,6 +54,23 @@ public class NavMeshAgentMovement : MonoBehaviour
         
         do{
             nextPosition = transform.position + Random.insideUnitSphere * maxDistanceFromCurrentPosition;;
+        }while(NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas));
+
+        agent.SetDestination(nextPosition);
+        isFindingPath = false;
+    }
+
+    IEnumerator RunMaintainDisance(Vector3 position, float distance)
+    {
+        isFindingPath = true;
+        Vector3 nextPosition = new Vector3();
+        NavMeshHit hit;
+        float waitTime = Random.Range(minWaitTime, maxWaitTime);
+
+        yield return new WaitForSeconds(waitTime);
+        
+        do{
+            nextPosition = position + Random.insideUnitSphere * distance;
         }while(NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas));
 
         agent.SetDestination(nextPosition);
