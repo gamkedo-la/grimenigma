@@ -13,6 +13,8 @@ public class HealthController: MonoBehaviour
 
     [HideInInspector] public int hp;
 
+    public event System.Action<int> onDamage;
+
     DeathController deathController;
 
    private void Start()
@@ -31,6 +33,7 @@ public class HealthController: MonoBehaviour
 
     public void Damage(int ammount, bool piercingDamage=false)
     {
+        onDamage?.Invoke(ammount);
         if(hasAudioFX){ PlaySoundFX(onDamageSound); }
         if(!godMode){
             if(!piercingDamage){ ammount = ArmourReduction(ammount); }
