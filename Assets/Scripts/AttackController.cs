@@ -27,7 +27,7 @@ public class AttackController : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] int projectileAmmount = 1;
     [SerializeField] bool infiniteAmmmo;
-    [SerializeField] int ammo, maxAmmo;
+    [SerializeField] public int ammo, maxAmmo;
     [Header("Audio")]
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip fxSound;
