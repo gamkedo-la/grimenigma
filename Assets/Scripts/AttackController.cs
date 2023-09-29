@@ -13,8 +13,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] AttackTypes attackType;
     [SerializeField] bool piercingDamage;
     [SerializeField] int hitScanDamage = 1;
-    [SerializeField] public float range;
-    [SerializeField] float cooldown, spread, drawTime;
+    [SerializeField] public float range, cooldown, spread, drawTime;
     [Header("For Crosshar Shooting")]
     [SerializeField] bool hasSourceOfTruth;
     [SerializeField] GameObject sourceOfTruth;
