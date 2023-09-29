@@ -8,19 +8,17 @@ public class EquipmentHandler : MonoBehaviour
     public GameObject[] equipment;
     public GameObject currentEquipment;
 
-    [SerializeField] PlayerData pData;
-
     int currentIndex;
 
 
-    public void SelectNextEquipment(Hand whichHand)
+    public void SelectNextEquipment()
     {
         currentIndex += 1;
         if(currentIndex >= equipment.Length){ currentIndex = 0; }
-        SelectEquipment(whichHand, currentIndex);
+        SelectEquipment(currentIndex);
     }
 
-    public void SelectEquipment(Hand whichHand, int index)
+    public void SelectEquipment(int index)
     {
         currentIndex = index;
         if(currentIndex < 0 || currentIndex >= equipment.Length){
@@ -29,15 +27,12 @@ public class EquipmentHandler : MonoBehaviour
         }
 
         currentEquipment = equipment[currentIndex];
-        if(whichHand == Hand.Left){ pData.leftItem  = currentEquipment; }
-        else{ pData.rightItem = currentEquipment; }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         currentIndex = 0;
-        SelectEquipment(Hand.Left, currentIndex);
-        SelectEquipment(Hand.Right, currentIndex);
+        SelectEquipment(currentIndex);
     }
 }

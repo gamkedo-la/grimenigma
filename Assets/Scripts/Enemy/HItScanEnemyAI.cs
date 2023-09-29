@@ -1,39 +1,69 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using GrimEnigma.EnemyStates;
 
 [RequireComponent(typeof(EnemyVision))]
 [RequireComponent(typeof(AttackController))]
 public class HItScanEnemyAI : MonoBehaviour
 {
-    [SerializeField] LayerMask whatIsGround, whatIsTarget;
+    [Header("Attack")]
+    [Range(0,5)][SerializeField] int aggressionLevel;
+    [SerializeField] int maxAttacks;
+    [SerializeField] float initialSpreadPenalty;
+    [SerializeField] float imporoveSpreadIncrement;
     [SerializeField] AttackController weapon;
+    [SerializeField] LayerMask whatIsTarget;
+    [Header("Movement")]
     [SerializeField] float patrolRange;
-float attackRange;
+    [SerializeField] float maintainDistanceFromTarget;
+    [Header("Audio")]
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip alertSound;
+
+
+    [SerializeField] LayerMask whatIsGround;
 
     EnemyVision vision;
+    NavMeshAgentMovement agentMove;
     NavMeshAgent agent;
-
     AIState state;
-
     Transform target;
     Vector3 spawnPosition, walkPoint;
-    bool hasWalkPoint;
+    
+    bool hasWalkPoint, isPerformingAction, isAlerted;
+    float currentSpread;
 
     void Start()
     {
         target = GameObject.Find("Player/Body").transform;
         vision = GetComponent<EnemyVision>();
         agent = GetComponent<NavMeshAgent>();
+        agentMove = GetComponent<NavMeshAgentMovement>();
 
         spawnPosition = transform.position;
         state = AIState.idle;
+        isAlerted = false;
     }
 
     void Update()
     {
-        CheckState();
+        if(!isAlerted && vision.canSeeTarget){
+            state = AIState.alerted;
+            PlaySoundFX(alertSound);
+            isAlerted = true;
+            currentSpread = initialSpreadPenalty;
+        }
+        if(!isPerformingAction){
+            CheckDistanceToTarget();
+            CheckState();
+        }
+
+        if(vision.canSeeTarget && currentSpread > 0){
+           currentSpread -= imporoveSpreadIncrement;
+        }
+        else if(!vision.canSeeTarget && currentSpread != initialSpreadPenalty){
+            currentSpread = initialSpreadPenalty;
+        }
     }
 
     void CheckState()
@@ -44,15 +74,38 @@ float attackRange;
 
         switch (state)
         {
-            case(AIState.chase):
+            case AIState.alerted:
+                HandleAlerted();
+                break;
+            case AIState.chase:
                 ChaseTarget();
                 break;
-            case(AIState.attack):
-                AttackStart();
+            case AIState.attack:
+                StartCoroutine(RunAttack(target.position, Random.Range(1, maxAttacks+1), weapon.cooldown));
+                break;
+            case AIState.move:
+                // This does not really do what it says it does lol.
+                agentMove.MaintainDistacne(target.position, maintainDistanceFromTarget);
                 break;
             default:
-                Patrol();
+                agentMove.Patrol();
                 break;
+        }
+    }
+
+    void HandleAlerted()
+    {
+        isPerformingAction = false;
+        agentMove.ClearPath();
+        ChaseTarget();
+    }
+
+    void CheckDistanceToTarget(){
+        float distance = Vector3.Distance(transform.position, target.position);
+        if(distance - maintainDistanceFromTarget <= 0){
+            // Might cause the enemy to attack when out of range.
+            if(Random.Range(0, aggressionLevel) < aggressionLevel){ state = AIState.attack; }
+            else { state = AIState.move; }
         }
     }
 
@@ -62,7 +115,7 @@ float attackRange;
 
         if(!hasWalkPoint){ GetNewPosition(); }
         if(hasWalkPoint){ agent.SetDestination(walkPoint); }
-        if((transform.position - walkPoint).magnitude < 1){ hasWalkPoint = false; }
+        if((transform.position - walkPoint).magnitude < 2f){ hasWalkPoint = false; }
         if(vision.canSeeTarget){ state = AIState.chase; }
     }
 
@@ -82,9 +135,11 @@ float attackRange;
     void ChaseTarget()
     {
         //Debug.Log("Chasing!");
-
-        agent.SetDestination(target.position);
-        IsTargetWithinAttackRange();
+        CheckDistanceToTarget();
+        if(state != AIState.move){
+            agent.SetDestination(target.position);
+            IsTargetWithinAttackRange();
+        }
     }
 
     void AttackStart()
@@ -101,5 +156,27 @@ float attackRange;
     void IsTargetWithinAttackRange(){
         if(Physics.CheckSphere(transform.position, weapon.range, whatIsTarget)){ state = AIState.attack; }
         else{ state = AIState.chase; }
+    }
+
+    void PlaySoundFX(AudioClip clip)
+    {
+        soundSource.pitch = Random.Range(0.9f, 1.1f);
+        soundSource.PlayOneShot(clip);
+    }
+
+    IEnumerator RunAttack(Vector3 targetPosition, int repeat, float delayTime)
+    {
+        isPerformingAction = true;
+        float baseWeaponSpread = weapon.spread;
+        while(repeat > 0){
+            transform.LookAt(targetPosition);
+            weapon.spread = baseWeaponSpread + initialSpreadPenalty;
+            weapon.Attack();
+            repeat--;
+            yield return new WaitForSeconds(delayTime);
+        }
+        state = AIState.move;
+        weapon.spread = baseWeaponSpread;
+        isPerformingAction = false;
     }
 }

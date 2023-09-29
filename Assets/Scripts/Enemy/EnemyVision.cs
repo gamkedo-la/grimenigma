@@ -9,6 +9,7 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] LayerMask ObstructionMask;
 
     [HideInInspector] public bool canSeeTarget;
+    [HideInInspector] public float timeWithTarget;
     [HideInInspector] public GameObject targetToFind;
 
     LayerMask targetMask;
@@ -20,6 +21,12 @@ public class EnemyVision : MonoBehaviour
         targetToFind = GameObject.FindGameObjectWithTag("Player");
         
         StartCoroutine(RunSearchForTarget());
+    }
+
+    void Update()
+    {
+        if(canSeeTarget){ timeWithTarget += Time.deltaTime; }
+        else if(!canSeeTarget && timeWithTarget > 0.1f){ timeWithTarget = 0f; }
     }
 
     private void CheckForTarget()

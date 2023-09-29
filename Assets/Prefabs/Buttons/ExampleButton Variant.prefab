@@ -247,7 +247,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -323,9 +323,6 @@ PrefabInstance:
       addedObject: {fileID: 1868879440804978058}
     - targetCorrespondingSourceObject: {fileID: -5568371526223589888, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 936860532261253123}
-    - targetCorrespondingSourceObject: {fileID: -5568371526223589888, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4496052616692268381}
     - targetCorrespondingSourceObject: {fileID: -5568371526223589888, guid: 621d8fbd3618f5645865d30191420d40, type: 3}
       insertIndex: -1
@@ -348,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367b8dbaa0508eb48858b64c452b043f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: test-button
+  label: test-PressurePlate
   wasTriggered: 0
 --- !u!114 &1894633730899169228
 MonoBehaviour:
@@ -364,14 +361,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorIsSeperateFromCollider: 0
   doorGameObject: {fileID: 0}
-  requiresKey: 0
-  keyName: 
+  requiresItem: 0
+  item: 0
+  shouldTransform: 0
   distanceX: 1
   distanceY: 0
   distanceZ: 0
   speed: 1
+  shouldRotate: 0
+  rotateX: 0
+  rotateY: 0
+  rotateZ: 0
+  rotateSpeed: 0
   autoClose: 0
   secondsBeforeAutoClose: 0
+  soundSource: {fileID: 4496052616692268381}
+  fxSound: {fileID: 8300000, guid: c4c7d302e20febc4193b2b92c72c89d6, type: 3}
 --- !u!114 &1868879440804978058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,22 +393,6 @@ MonoBehaviour:
   rotateX: 0
   rotateY: 0
   rotateZ: 0
---- !u!114 &936860532261253123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861014889864914224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09b8e02701e24654fa87261170296017, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randomPitch: 0
-  pitchRange: 0.3
-  sourceAudio: {fileID: 4496052616692268381}
-  soundClip: {fileID: 8300000, guid: c4c7d302e20febc4193b2b92c72c89d6, type: 3}
 --- !u!82 &4496052616692268381
 AudioSource:
   m_ObjectHideFlags: 0

@@ -27,7 +27,9 @@ public class OpenDoor : MonoBehaviour
     [Header("Closing")]
     [SerializeField] bool autoClose = true;
     [SerializeField] float secondsBeforeAutoClose;
-
+    [Header("Audio")]
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip fxSound;
     ScriptedAnimations sa;
 
     Vector3 closedPosition;
@@ -60,10 +62,17 @@ public class OpenDoor : MonoBehaviour
                 //Debug.Log("We are opening the door " + this.gameObject.name + "!");
                 if(shouldTransform){ sa.Twean(speed, openPosition); }
                 if(shouldRotate) { sa.Rwean(rotateSpeed, rotateX, rotateY, rotateZ); }
+                PlaySoundFX();
                 isDoorClosed = false;
                 if(autoClose){ StartCoroutine(RunCloseDoor()); }
             }
         }
+    }
+
+    void PlaySoundFX()
+    {
+        soundSource.pitch = Random.Range(0.9f, 1.1f);
+        soundSource.PlayOneShot(fxSound);
     }
 
     IEnumerator RunCloseDoor()

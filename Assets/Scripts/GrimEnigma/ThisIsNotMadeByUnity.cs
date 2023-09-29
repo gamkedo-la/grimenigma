@@ -20,13 +20,3 @@ public class CustomInspector
 }
 #endif
 }
-
-namespace GrimEnigma{
-    namespace EnemyStates{ 
-        enum AIState{
-            idle,
-            chase,
-            attack
-        }
-    }
-}

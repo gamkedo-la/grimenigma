@@ -2,14 +2,18 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
+enum AttackTypes{
+        Projectile,
+        Hitscan,
+    }
+
 public class AttackController : MonoBehaviour
 {
     [Header("Attack Settings")]
     [SerializeField] AttackTypes attackType;
     [SerializeField] bool piercingDamage;
     [SerializeField] int hitScanDamage = 1;
-    [SerializeField] public float range;
-    [SerializeField] float cooldown, spread, drawTime;
+    [SerializeField] public float range, cooldown, spread, drawTime;
     [Header("For Crosshar Shooting")]
     [SerializeField] bool hasSourceOfTruth;
     [SerializeField] GameObject sourceOfTruth;
@@ -32,10 +36,9 @@ public class AttackController : MonoBehaviour
     [SerializeField] LayerMask inclusionMasks;
     [SerializeField] Transform customSpawnOrigin;
 
-    enum AttackTypes{
-        Projectile,
-        Hitscan,
-    }
+    public event System.Action onCharging;
+    public event System.Action onAttack;
+    public event System.Action onAttackStep;
 
     Transform spawnOrigin;
     ProjectilePooler poolerSingleton;
@@ -57,7 +60,6 @@ public class AttackController : MonoBehaviour
         }
 
         if(shouldAttack){
-            PlaySoundFX();
             //Debug.Log("Attacking!");
             switch (attackType)
             {
@@ -95,7 +97,7 @@ public class AttackController : MonoBehaviour
         if(!hasSourceOfTruth){ sourceOfTruth = this.gameObject; }
 
         spawnOrigin = customSpawnOrigin == null ? this.gameObject.transform : customSpawnOrigin;        
-        Debug.Log(spawnOrigin);
+        //Debug.Log(spawnOrigin);
     }
 
     void Update()
@@ -148,29 +150,48 @@ public class AttackController : MonoBehaviour
     IEnumerator RunFireProtectile()
     {
         //Debug.Log("Firing projectile!");
+        onCharging?.Invoke();
         yield return new WaitForSeconds(drawTime);
+        onAttack?.Invoke();
+        PlaySoundFX();
         for (int i = 0; i < projectileAmmount; i++)
         {
+            onAttackStep?.Invoke();
             //Debug.Log("Instatiating projectile!");
             GameObject rentedProjectile = poolerSingleton.GetObjectFromPool(projectile);
             rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
             rentedProjectile.transform.position = spawnOrigin.position;
             rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
             rentedProjectile.gameObject.SetActive(true);
-            if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer()); }
-
+            if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer(range)); }
+            onAttackStep?.Invoke();
         }
     }
 
     IEnumerator RunFireHitscan()
     {
         //Debug.Log("Firing hitscan!");
+        onCharging?.Invoke();
         yield return new WaitForSeconds(drawTime);
+        onAttack?.Invoke();
+        PlaySoundFX();
 
-        Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range);
-        if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer()); }
+        float distance = range;
+
+        if(Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range)){
+            distance = Vector3.Distance(transform.position, attackHit.transform.position);
+            if(attackHit.transform.gameObject.TryGetComponent<HealthController>(out var component)){
+                component.Damage(hitScanDamage, piercingDamage);
+            }
+        }
+
+        //Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range);
+        if(shouldRenderTracer){
+            StartCoroutine(RunCreateAndDestroyTracer(distance));
+        }
         //Debug.Log(attackHit.collider);
-        attackHit.transform.gameObject?.GetComponent<HealthController>().Damage(hitScanDamage, piercingDamage);
+        
+        //attackHit.transform.gameObject?.GetComponent<HealthController>().Damage(hitScanDamage, piercingDamage);
     }
 
     IEnumerator RunResetAttackCooldown()
@@ -181,9 +202,9 @@ public class AttackController : MonoBehaviour
         shouldAttack = true;
     }
 
-    IEnumerator RunCreateAndDestroyTracer()
+    IEnumerator RunCreateAndDestroyTracer(float distance)
     {
-        targetPosition = spawnOrigin.position + spawnOrigin.forward * range;
+        targetPosition = spawnOrigin.position + spawnOrigin.forward * distance;
     
         tracerRenderer.startColor = Color.red;
         tracerRenderer.endColor = Color.white;

@@ -8,7 +8,7 @@ public class SpawnManagerSingleton : MonoBehaviour
     EncounterTrigger[] events;
     EntitySpawner[] spawns;
     Dictionary<string, List<GameObject>> encounterTracker;
-    int encounterEndCheckRate = 5;
+    int encounterEndCheckRate = 1;
 
     //public delegate void AnnounceTrigger(string label);
     public static SpawnManagerSingleton sms;
@@ -56,7 +56,7 @@ public class SpawnManagerSingleton : MonoBehaviour
                     i--;
                 }
             }
-            Debug.Log("Remaining enemies in encounter " + label + " " + encounterTracker[label].Count);
+            //Debug.Log("Remaining enemies in encounter " + label + " " + encounterTracker[label].Count);
             yield return new WaitForSeconds(encounterEndCheckRate);
         }
         onSpawnTrigger.Invoke(label+"-end");

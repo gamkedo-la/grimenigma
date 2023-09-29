@@ -15,6 +15,8 @@ public class EntitySpawner : MonoBehaviour
     {
         listener = GetComponent<EncounterListener>();
         listener.onEvent += TriggerSpawn;
+
+        gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
     }
 
     void OnEnable()

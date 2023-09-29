@@ -53,7 +53,7 @@ public class ResourcePickup : MonoBehaviour
         other.transform.gameObject.GetComponent<HealthController>()?.Heal(ammount);
         soundSource.pitch = Random.Range(0.9f, 1.1f);
         soundSource.PlayOneShot(fxSound);
-        Debug.Log("Player HP:"  + other.transform.gameObject.GetComponent<HealthController>().hp);
+        //Debug.Log("Player HP:"  + other.transform.gameObject.GetComponent<HealthController>().hp);
     }
 
     void HandleAmmunition(Collider other)

@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Required Scripts")]
     [SerializeField] PlayerData pData;
+    [SerializeField] MovementSoundController moveSounds;
 
     [Header("Movement")]
     [SerializeField] SpeedController movement;
@@ -54,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float raycastPadding;
 
     Rigidbody rb;
+    [SerializeField] Transform cam;
 
     bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound;
     float speed, airMoveSpeed, slideTime, maxDistance;
@@ -98,6 +100,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDirection = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
         rb.AddForce(moveDirection * speed, ForceMode.Acceleration);
         //Debug.Log("Player velocity:" + rb.velocity);
+
+        if(grounded && (rb.velocity.x > 0.3f || rb.velocity.x < -0.3f || rb.velocity.z > 0.3f || rb.velocity.z < -0.3f)){
+            if(footstepCounter <= 0){
+                moveSounds.PlaySound(MovementStyle.Running);
+                footstepCounter = 0.35f;
+            } else { footstepCounter -= Time.deltaTime; }
+        }
     }
 
     public void Slide(Vector2 moveInput, bool wasSlideReleased){
@@ -149,8 +158,14 @@ public class PlayerMovement : MonoBehaviour
     {
         GroundCheck();
         ApplyExtraGravity();
-        MovePlayer();
+        
         if(!grounded) { pData.landingVelocity = rb.velocity; }
+        transform.rotation = cam.transform.rotation;
+        MovePlayer();
+    }
+
+    void Update()
+    {
     }
 
     private void ApplyExtraGravity()
@@ -166,20 +181,14 @@ public class PlayerMovement : MonoBehaviour
             if(!grounded){
                 pData.hasLandedThisCycle = true;
                 graceJumpCounter -= Time.deltaTime;
-                if(-pData.landingVelocity.y > pData.hardLandingThreshold){ PlayAudioClip(landingSound, 0.8f); }
-                else{ PlayAudioClip(landingSound); }
+                if(-pData.landingVelocity.y > pData.hardLandingThreshold){  moveSounds.PlaySound(MovementStyle.Landing, 0.8f); }
+                else{ moveSounds.PlaySound(MovementStyle.Landing); }
             }
             else{ pData.hasLandedThisCycle = false; }
 
             grounded = true;
             graceJumpCounter = graceJumpTime;
             airJumpAvailable = true;
-        if(rb.velocity.x > 0.3f || rb.velocity.x < -0.3f || rb.velocity.z > 0.3f || rb.velocity.z < -0.3f){
-            if(footstepCounter <= 0){
-                PlayAudioClip(footstepSound);
-                footstepCounter = 0.35f;
-            } else { footstepCounter -= Time.deltaTime; }
-        }
         }
         else{
             grounded = false;
