@@ -19,7 +19,7 @@ public class NavMeshAgentMovement : MonoBehaviour
     public void Patrol()
     {
         if(agent.remainingDistance <= agent.stoppingDistance && !isFindingPath){
-            Debug.Log("Finding new path!");
+            //Debug.Log("Finding new path!");
             StartCoroutine(RunSetNewValidPosition());
         }
     }
@@ -27,7 +27,7 @@ public class NavMeshAgentMovement : MonoBehaviour
     public void MaintainDistacne(Vector3 position, float distance)
     {
         if(agent.remainingDistance <= agent.stoppingDistance && !isFindingPath){
-            Debug.Log("Moving away from player!");
+            //Debug.Log("Moving away from player!");
             StartCoroutine(RunMaintainDisance(position, distance));
         }
     }
