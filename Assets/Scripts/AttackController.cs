@@ -89,7 +89,7 @@ public class AttackController : MonoBehaviour
     void Start()
     {
         poolerSingleton = FindObjectOfType<ProjectilePooler>().gameObject.GetComponent<ProjectilePooler>();
-        if(attackType == AttackTypes.Hitscan){
+        if(attackType == AttackTypes.Hitscan && shouldRenderTracer){
             tracerRenderer = this.AddComponent<LineRenderer>();
             tracer = Instantiate(tracer, parent:this.gameObject.transform);
             tracerRenderer.material = new Material(Shader.Find("Sprites/Default"));
@@ -107,7 +107,7 @@ public class AttackController : MonoBehaviour
 
     void OnDestroy()
     {
-        if(attackType == AttackTypes.Hitscan){ Destroy(this.tracerRenderer.material); }
+        if(attackType == AttackTypes.Hitscan && shouldRenderTracer){ Destroy(this.tracerRenderer.material); }
     }
 
     void DrawTracer()
