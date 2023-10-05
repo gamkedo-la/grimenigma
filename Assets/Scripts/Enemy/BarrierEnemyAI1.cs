@@ -160,7 +160,8 @@ public class BarrierEnemyAI : MonoBehaviour
 
     void RecievedDamage(int damage, GameObject damageSource)
     {
-        if(damageSource.gameObject != null){ target = damageSource.gameObject.transform; }
+        // Will allow infighting, but EnemyVision needs to be updated beforehand.
+        //if(damageSource.gameObject != null){ target = damageSource.gameObject.transform; }
         state = AIState.alerted;
     }
 
