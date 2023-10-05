@@ -68,6 +68,7 @@ public class BarrierEnemyAI : MonoBehaviour
 
     void Update()
     {
+        if(target == null){target = gameObject.transform; }
         if(!isAlerted && vision.canSeeTarget){
             state = AIState.alerted;
             PlaySoundFX(alertSound);
