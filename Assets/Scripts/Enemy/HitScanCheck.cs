@@ -40,7 +40,7 @@ public class HitScanCheck : MonoBehaviour
         //Debug.DrawRay(transform.position, transform.forward, Color.green, 2f);
         if (Physics.Raycast(transform.position, transform.forward, out attackHit, range)){
             //Debug.Log("Hit target:" + hit.transform.name);
-            attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(damage);
+            attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(damage, gameObject);
         }
     }
 

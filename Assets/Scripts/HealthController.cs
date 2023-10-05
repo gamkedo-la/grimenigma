@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(DeathController))]
@@ -13,7 +14,7 @@ public class HealthController: MonoBehaviour
 
     [HideInInspector] public int hp;
 
-    public event System.Action<int> onDamage;
+    public event System.Action<int, GameObject> onDamage;
 
     DeathController deathController;
 
@@ -31,9 +32,9 @@ public class HealthController: MonoBehaviour
    }
     AudioSource soundSource;
 
-    public void Damage(int ammount, bool piercingDamage=false)
+    public void Damage(int ammount, GameObject damageSource, bool piercingDamage=false)
     {
-        onDamage?.Invoke(ammount);
+        onDamage?.Invoke(ammount, damageSource);
         if(hasAudioFX){ PlaySoundFX(onDamageSound); }
         if(!godMode){
             if(!piercingDamage){ ammount = ArmourReduction(ammount); }

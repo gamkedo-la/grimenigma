@@ -25,6 +25,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float rotateZ;
 
     [HideInInspector] public string ownerTag;
+    [HideInInspector] public GameObject owner;
 
     float travelDistance;
     Vector3 direction;
@@ -68,7 +69,7 @@ public class Projectile : MonoBehaviour
         switch (type)
         {
             case ProjectileTypes.Normal:
-                target.GetComponent<HealthController>()?.Damage(damage);
+                target.GetComponent<HealthController>()?.Damage(damage, owner);
                 break;
             case ProjectileTypes.Explosive:
                 SpawnExplosion();
@@ -76,7 +77,6 @@ public class Projectile : MonoBehaviour
             default:
                 Debug.LogError("No case to handle damage for pojectile type of " + type + "!");
                 break;
-
         }
     }
 
@@ -89,7 +89,7 @@ public class Projectile : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, explosiveHits[i].transform.position);
                 if(Physics.Raycast(transform.position, (explosiveHits[i].transform.position - transform.position).normalized, distance, blockExplosionMasks)){
                     //Debug.Log("Expolsion can reach!");
-                    explosiveHits[i].GetComponent<HealthController>()?.Damage(damage);
+                    explosiveHits[i].GetComponent<HealthController>()?.Damage(damage, owner);
                 }
             }
         }

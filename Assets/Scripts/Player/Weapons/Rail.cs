@@ -50,7 +50,7 @@ public class Rail : MonoBehaviour
         yield return new WaitForSeconds(chargeTime);
         charging = false;
         Physics.Raycast(pCamera.transform.position, pCamera.transform.forward, out attackHit, range);
-        attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(damage);
+        attackHit.transform.gameObject.GetComponent<HealthController>()?.Damage(damage, gameObject);
     }
 
     IEnumerator RunResetAttackCooldown()

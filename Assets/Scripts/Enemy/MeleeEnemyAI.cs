@@ -178,7 +178,7 @@ public class MeleeEnemyAI : MonoBehaviour
         soundSource.PlayOneShot(clip);
     }
 
-    void RecievedDamage(int damage)
+    void RecievedDamage(int damage, GameObject dama)
     {
         state = AIState.alerted;
     }

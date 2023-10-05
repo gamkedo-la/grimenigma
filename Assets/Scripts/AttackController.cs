@@ -159,6 +159,8 @@ public class AttackController : MonoBehaviour
             onAttackStep?.Invoke();
             //Debug.Log("Instatiating projectile!");
             GameObject rentedProjectile = poolerSingleton.GetObjectFromPool(projectile);
+            // Don't call GetComponent twice like this. TO DO: fix that.
+            rentedProjectile.GetComponent<Projectile>().owner = gameObject;
             rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
             rentedProjectile.transform.position = spawnOrigin.position;
             rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
@@ -181,7 +183,7 @@ public class AttackController : MonoBehaviour
         if(Physics.Raycast(spawnOrigin.position, GetDirection(), out attackHit, range)){
             distance = Vector3.Distance(transform.position, attackHit.transform.position);
             if(attackHit.transform.gameObject.TryGetComponent<HealthController>(out var component)){
-                component.Damage(hitScanDamage, piercingDamage);
+                component.Damage(hitScanDamage, gameObject, piercingDamage);
             }
         }
 

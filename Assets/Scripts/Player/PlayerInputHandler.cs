@@ -75,7 +75,7 @@ public class PlayerInputHanlder : MonoBehaviour
             Debug.Log("Quit button clicked.");
         }
 
-        if(Input.GetKeyDown(KeyCode.K)){ pHealth.Damage(1); }
+        if(Input.GetKeyDown(KeyCode.K)){ pHealth.Damage(1, gameObject); }
         if(Input.GetKeyDown(KeyCode.H)){ pHealth.Heal(1); }
     }
 
