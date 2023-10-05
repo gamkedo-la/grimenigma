@@ -26,8 +26,7 @@ public class HealthController: MonoBehaviour
             soundSource = gameObject.AddComponent<AudioSource>();
         }
 
-        // Prevents hp > maxHP
-        hp = Mathf.Clamp(hp, 0, maxHP);
+        hp = baseHP;
         //Debug.Log("Start HP: " + hp);
    }
     AudioSource soundSource;
