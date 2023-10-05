@@ -38,8 +38,7 @@ public class BarrierEnemyAI : MonoBehaviour
     NavMeshAgent agent;
     AIState state;
     Transform target;
-    GameObject lastSourceOfDamage;
-    Vector3 spawnPosition, walkPoint;
+    Vector3 spawnPosition;
     
     bool isPerformingAction, isAlerted, barrierInUse;
     float currentSpread;
