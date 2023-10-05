@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 using Unity.AI.Navigation;
+using UnityEditor;
 
 public class NavMeshAgentMovement : MonoBehaviour
 {
@@ -20,15 +21,15 @@ public class NavMeshAgentMovement : MonoBehaviour
     {
         if(agent.remainingDistance <= agent.stoppingDistance && !isFindingPath){
             //Debug.Log("Finding new path!");
-            StartCoroutine(RunSetNewValidPosition());
+            StartCoroutine(RunSetNewValidPosition(transform.position, patrolRange, patrolRange, minWaitTime, maxWaitTime));
         }
     }
 
-    public void MaintainDistacne(Vector3 position, float distance)
+    public void MaintainDistacne(Vector3 targetPosition, float distance)
     {
         if(agent.remainingDistance <= agent.stoppingDistance && !isFindingPath){
             //Debug.Log("Moving away from player!");
-            StartCoroutine(RunMaintainDisance(position, distance));
+            StartCoroutine(RunSetNewValidPosition(targetPosition, distance, distance, minWaitTime, maxWaitTime));
         }
     }
 
@@ -43,20 +44,41 @@ public class NavMeshAgentMovement : MonoBehaviour
         spawnPosition = transform.position;
     }
 
-    IEnumerator RunSetNewValidPosition()
+    IEnumerator RunSetNewValidPosition(Vector3 position, float searchRadius, float maxDistance, float minHoldTime, float maxHoldTime)
     {
         isFindingPath = true;
-        Vector3 nextPosition = new Vector3();
-        NavMeshHit hit;
-        float waitTime = Random.Range(minWaitTime, maxWaitTime);
 
-        yield return new WaitForSeconds(waitTime);
-        
-        do{
-            nextPosition = transform.position + Random.insideUnitSphere * maxDistanceFromCurrentPosition;;
-        }while(NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas));
+        NavMeshPath path = new NavMeshPath();
+        Vector3 targetPosition;
 
-        agent.SetDestination(nextPosition);
+        bool searchingForValidPosition = true;
+        float yieldTime = 0.001f;
+        float totalPathDistance = 0.0f;
+        float holdTime = Random.Range(minHoldTime, maxHoldTime);
+
+        do{ 
+            targetPosition = transform.position + Random.insideUnitSphere * searchRadius;
+            NavMesh.CalculatePath(position, targetPosition, NavMesh.AllAreas, path);
+            if(path.status == NavMeshPathStatus.PathComplete){
+
+                for(int i = 1; i < path.corners.Length; i++){
+                    totalPathDistance += Vector3.Distance(path.corners[i-1], path.corners[i]);
+                }
+                
+                if(totalPathDistance <= maxDistance){ searchingForValidPosition = false; }
+            }
+            else{
+                searchRadius = searchRadius * 0.98f; 
+                holdTime -= yieldTime;
+                yield return new WaitForSeconds(yieldTime);
+            }
+            //Debug.Log(totalPathDistance);
+        }while(searchingForValidPosition);
+
+        yield return new WaitForSeconds(holdTime);
+
+        agent.SetDestination(targetPosition);
+
         isFindingPath = false;
     }
 
@@ -70,8 +92,9 @@ public class NavMeshAgentMovement : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         
         do{
+            yield return new WaitForSeconds(0.001f);
             nextPosition = position + Random.insideUnitSphere * distance;
-        }while(NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas));
+        }while(NavMesh.SamplePosition(nextPosition, out hit, 1f, NavMesh.AllAreas));
 
         agent.SetDestination(nextPosition);
         isFindingPath = false;
