@@ -38,9 +38,10 @@ public class BarrierEnemyAI : MonoBehaviour
     NavMeshAgent agent;
     AIState state;
     Transform target;
+    GameObject lastSourceOfDamage;
     Vector3 spawnPosition, walkPoint;
     
-    bool hasWalkPoint, isPerformingAction, isAlerted, barrierInUse;
+    bool isPerformingAction, isAlerted, barrierInUse;
     float currentSpread;
 
     void Start()
@@ -130,32 +131,9 @@ public class BarrierEnemyAI : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
         if(distance - maintainDistanceFromTarget <= 0){
             // Might cause the enemy to attack when out of range.
-            if(Random.Range(0, aggressionLevel) < aggressionLevel){ state = AIState.attack; }
+            if(Random.Range(0, aggressionLevel) >= aggressionLevel){ state = AIState.attack; }
             else { state = AIState.move; }
         }
-    }
-
-    void Patrol()
-    {
-        //Debug.Log("Patroling!");
-
-        if(!hasWalkPoint){ GetNewPosition(); }
-        if(hasWalkPoint){ agent.SetDestination(walkPoint); }
-        if((transform.position - walkPoint).magnitude < 2f){ hasWalkPoint = false; }
-        if(vision.canSeeTarget){ state = AIState.chase; }
-    }
-
-    void GetNewPosition()
-    {
-        //Debug.Log("Getting new position!");
-
-        walkPoint  = new Vector3(
-                                spawnPosition.x + Random.Range(-patrolRange, patrolRange),
-                                spawnPosition.y + Random.Range(-patrolRange, patrolRange),
-                                spawnPosition.z + Random.Range(-patrolRange, patrolRange)
-                                );
-        
-        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){ hasWalkPoint = true; }
     }
 
     void ChaseTarget()
@@ -166,17 +144,6 @@ public class BarrierEnemyAI : MonoBehaviour
             agent.SetDestination(target.position);
             IsTargetWithinAttackRange();
         }
-    }
-
-    void AttackStart()
-    {
-        //Debug.Log("Attacking!");
-        
-        agent.SetDestination(transform.position);
-        transform.LookAt(target);
-        weapon.Attack();
-
-        IsTargetWithinAttackRange();
     }
 
     void IsTargetWithinAttackRange()
@@ -191,8 +158,9 @@ public class BarrierEnemyAI : MonoBehaviour
         soundSource.PlayOneShot(clip);
     }
 
-    void RecievedDamage(int damage)
+    void RecievedDamage(int damage, GameObject damageSource)
     {
+        if(damageSource.gameObject != null){ target = damageSource.gameObject.transform; }
         state = AIState.alerted;
     }
 
@@ -221,10 +189,11 @@ public class BarrierEnemyAI : MonoBehaviour
         
         do{
             yield return new WaitForSeconds(0.001f);
-            position = transform.position + Random.insideUnitSphere * distance;
-        }while(NavMesh.SamplePosition(position, out hit, 1f, NavMesh.AllAreas));
+            position = target.transform.position + Random.insideUnitSphere * distance;
+        }while(!NavMesh.SamplePosition(position, out hit, 1f, NavMesh.AllAreas));
 
-        GameObject newBarrier = Instantiate(barrier, position, transform.rotation);
+        Debug.Log(hit.position);
+        Instantiate(barrier, hit.position, transform.rotation);
 
         yield return new WaitForSeconds(barrierCoolDown);
 
