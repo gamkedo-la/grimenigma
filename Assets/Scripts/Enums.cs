@@ -1,4 +1,4 @@
-enum AIState{
+public enum AIState{
     idle,
     alerted,
     chase,
