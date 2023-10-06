@@ -42,13 +42,16 @@ public class BarrierEnemyAI : EnemyBaseAI
     IEnumerator RunSpawnBarrier(float distance)
     {
         barrierInUse = true;
-
+        
+        int tries = 0;
         Vector3 position;
         NavMeshHit hit;
         
         do{
             yield return new WaitForSeconds(0.001f);
             position = target.transform.position + Random.insideUnitSphere * distance;
+            tries++;
+            if(tries > 100){ position = transform.position; }
         }while(!NavMesh.SamplePosition(position, out hit, 1f, NavMesh.AllAreas));
 
         Debug.Log(hit.position);
