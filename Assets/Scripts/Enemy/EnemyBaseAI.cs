@@ -93,7 +93,7 @@ public abstract class EnemyBaseAI : MonoBehaviour
     {
         //https://www.youtube.com/watch?v=UjkSFoLxesw
 
-        Debug.Log(state);
+        //Debug.Log(state);
 
         switch (state)
         {
