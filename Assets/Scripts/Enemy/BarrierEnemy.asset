@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415866d1597272b4890122910955aa23, type: 3}
+  m_Name: BarrierEnemy
+  m_EditorClassIdentifier: 
+  aggressionLevel: 0
+  maxAttacks: 0
+  initialSpreadPenalty: 0
+  imporoveSpreadIncrement: 0
+  weapon: {fileID: 0}
+  patrolRange: 0
+  maintainDistanceFromTarget: 0
+  soundSource: {fileID: 0}
+  alertSound: {fileID: 0}
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 0
+  hpController: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  vision: {fileID: 0}
+  agentMove: {fileID: 0}
+  agent: {fileID: 0}
+  state: 0
+  target: {fileID: 0}
+  spawnPosition: {x: 0, y: 0, z: 0}
+  isPerformingAction: 0
+  isAlerted: 0
+  currentSpread: 0

@@ -8,184 +8,42 @@ using UnityEngine.AI;
 [RequireComponent(typeof(HealthController))]
 [RequireComponent(typeof(DeathController))]
 [RequireComponent(typeof(AudioSource))]
-public class BarrierEnemyAI : MonoBehaviour
+public class BarrierEnemyAI : EnemyBaseAI
 {
-    [Header("Attack")]
-    [Range(0,5)][SerializeField] int aggressionLevel;
-    [SerializeField] int maxAttacks;
-    [SerializeField] float initialSpreadPenalty;
-    [SerializeField] float imporoveSpreadIncrement;
-    [SerializeField] AttackController weapon;
-    [Header("Barrier")]
-    [SerializeField] GameObject barrier;
+    [Header("BARRIER AI")]
     [SerializeField] float barrierCoolDown;
-    [Header("Movement")]
-    [SerializeField] float patrolRange;
-    [SerializeField] float maintainDistanceFromTarget;
-    [Header("Audio")]
-    [SerializeField] AudioSource soundSource;
-    [SerializeField] AudioClip alertSound;
-    [Header("Bodge Settings")]
-    [SerializeField] LayerMask whatIsTarget;
-    [SerializeField] HealthController hpController;
-
-
-    [SerializeField] LayerMask whatIsGround;
-
-
-    EnemyVision vision;
-    NavMeshAgentMovement agentMove;
-    NavMeshAgent agent;
-    AIState state;
-    Transform target;
-    Vector3 spawnPosition;
+    [SerializeField] GameObject barrier;
     
-    bool isPerformingAction, isAlerted, barrierInUse;
-    float currentSpread;
+    bool barrierInUse = false;
 
-    void Start()
-    {
-        target = GameObject.Find("Player/Body").transform;
-        vision = GetComponent<EnemyVision>();
-        agent = GetComponent<NavMeshAgent>();
-        agentMove = GetComponent<NavMeshAgentMovement>();
-
-        spawnPosition = transform.position;
-        state = AIState.idle;
-        isAlerted = false;
-    }
-
-    void OnEnable()
-    {
-        hpController.onDamage += RecievedDamage;
-    }
-
-    void OnDisable()
-    {
-        hpController.onDamage -= RecievedDamage;
-    }
-
-    void Update()
-    {
-        if(target == null){target = gameObject.transform; }
-        if(!isAlerted && vision.canSeeTarget){
-            state = AIState.alerted;
-            PlaySoundFX(alertSound);
-            isAlerted = true;
-            currentSpread = initialSpreadPenalty;
-        }
-        if(!isPerformingAction){
-            CheckDistanceToTarget();
-            CheckState();
-        }
-
-        if(vision.canSeeTarget && currentSpread > 0){
-           currentSpread -= imporoveSpreadIncrement;
-        }
-        else if(!vision.canSeeTarget && currentSpread != initialSpreadPenalty){
-            currentSpread = initialSpreadPenalty;
-        }
-    }
-
-    void CheckState()
-    {
-        //https://www.youtube.com/watch?v=UjkSFoLxesw
-
-        //Debug.Log(state);
-
-        switch (state)
-        {
-            case AIState.alerted:
-                HandleAlerted();
-                break;
-            case AIState.chase:
-                ChaseTarget();
-                break;
-            case AIState.attack:
-                HandleAttack();
-                break;
-            case AIState.move:
-                // This does not really do what it says it does lol.
-                state = AIState.chase;
-                break;
-            default:
-                agentMove.Patrol();
-                break;
-        }
-    }
-
-    void HandleAlerted()
+    public override void HandleAlerted()
     {
         isPerformingAction = false;
         agentMove.ClearPath();
-        ChaseTarget();
+        HandleChase();
     }
 
-    void HandleAttack()
+    public override void HandleAttack()
     {
+        Debug.Log("Attacking!");
         if(barrierInUse){ StartCoroutine(RunAttack(target.position, Random.Range(1, maxAttacks+1), weapon.cooldown)); }
         else{ StartCoroutine(RunSpawnBarrier(20)); }
     }
 
-    void CheckDistanceToTarget(){
-        float distance = Vector3.Distance(transform.position, target.position);
-        if(distance - maintainDistanceFromTarget <= 0){
-            // Might cause the enemy to attack when out of range.
-            if(Random.Range(0, aggressionLevel) >= aggressionLevel){ state = AIState.attack; }
-            else { state = AIState.move; }
-        }
-    }
-
-    void ChaseTarget()
+    public override void HandleChase()
     {
-        //Debug.Log("Chasing!");
-        CheckDistanceToTarget();
-        if(state != AIState.move){
-            agent.SetDestination(target.position);
-            IsTargetWithinAttackRange();
-        }
-    }
-
-    void IsTargetWithinAttackRange()
-    {
-        if(Physics.CheckSphere(transform.position, weapon.range, whatIsTarget)){ state = AIState.attack; }
-        else{ state = AIState.chase; }
-    }
-
-    void PlaySoundFX(AudioClip clip)
-    {
-        soundSource.pitch = Random.Range(0.9f, 1.1f);
-        soundSource.PlayOneShot(clip);
-    }
-
-    void RecievedDamage(int damage, GameObject damageSource)
-    {
-        // Will allow infighting, but EnemyVision needs to be updated beforehand.
-        //if(damageSource.gameObject != null){ target = damageSource.gameObject.transform; }
-        state = AIState.alerted;
-    }
-
-    IEnumerator RunAttack(Vector3 targetPosition, int repeat, float delayTime)
-    {
-        isPerformingAction = true;
-        float baseWeaponSpread = weapon.spread;
-        while(repeat > 0){
-            transform.LookAt(targetPosition);
-            weapon.spread = baseWeaponSpread + initialSpreadPenalty;
-            weapon.Attack();
-            repeat--;
-            yield return new WaitForSeconds(delayTime);
-        }
-        state = AIState.move;
-        weapon.spread = baseWeaponSpread;
-        isPerformingAction = false;
+        Debug.Log("Chasing!");
+        //CheckDistanceToTarget();
+            agentMove.MaintainDistacne(target.position, maintainDistanceFromTarget);
+            if(IsTargetWithinAttackRange()){ state = AIState.attack; }
+            else{ state = AIState.chase; }
     }
 
     IEnumerator RunSpawnBarrier(float distance)
     {
         barrierInUse = true;
 
-        Vector3 position = new Vector3();
+        Vector3 position;
         NavMeshHit hit;
         
         do{
