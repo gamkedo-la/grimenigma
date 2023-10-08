@@ -8,25 +8,56 @@ public class UIController : MonoBehaviour
     public Slider slider;
     public Text healthText, ammoText;
 
+    PlayerInputHanlder pInput;
     HealthController healthData;
-    PlayerAttack ammoData;
+    EquipmentHandler equipmentL, equipmentR;
+    AttackController ammoDataL, ammoDataR;
+
 
     float currentHealth;
     float currentAmmo;
 
     void OnEnable()
     {
-        healthData = GameObject.Find("Player/Body").GetComponent<HealthController>();
-        ammoData = GameObject.Find("Player/Body").GetComponent<PlayerAttack>();
+        GameObject pBody = GameObject.Find("Player/Body");
+        pInput = pBody.GetComponent<PlayerInputHanlder>();
+        healthData = pBody.GetComponent<HealthController>();
+        equipmentL = GameObject.Find("Player/Camera/Weapons/ArmL").GetComponent<EquipmentHandler>();
+        equipmentR = GameObject.Find("Player/Camera/Weapons/ArmR").GetComponent<EquipmentHandler>();
+        GetCurrentWeapon(0);
+        GetCurrentWeapon(1);
 
         SetMaxHealth(healthData.baseHP);
-        SetMaxAmmo(ammoData.CurrentWeapon.ammo);
+        SetMaxAmmo(ammoDataL.ammo);
+
+        pInput.onWeaponSwap += GetCurrentWeapon;
+    }
+
+    void OnDisable()
+    {
+        pInput.onWeaponSwap -= GetCurrentWeapon;
     }
 
     void Update()
     {
         if(currentHealth != healthData.hp){ SetHealth(healthData.hp); }
-        if(currentAmmo != ammoData.CurrentWeapon.ammo){ SetAmmo(ammoData.CurrentWeapon.ammo); }
+        if(currentAmmo != ammoDataL.ammo){ SetAmmo(ammoDataL.ammo); }
+    }
+
+    void  GetCurrentWeapon(int armID)
+    {
+        switch (armID)
+        {
+            case 0:
+                ammoDataL = equipmentL.currentEquipment.GetComponent<AttackController>();
+                break;
+            case 1:
+                ammoDataR = equipmentR.currentEquipment.GetComponent<AttackController>();
+                break;
+            default:
+                ammoDataL = equipmentL.currentEquipment.GetComponent<AttackController>();
+                break;
+        }
     }
 
     void SetMaxHealth(int health)

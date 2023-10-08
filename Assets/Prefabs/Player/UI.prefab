@@ -337,7 +337,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8749176702112348898}
   - component: {fileID: 8955874048019366489}
-  - component: {fileID: 3896709514782574626}
   m_Layer: 5
   m_Name: AmmoBar
   m_TagString: Untagged
@@ -419,21 +418,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3896709514782574626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4681586933821792112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb8d19f4d5717cc4a990059ab41d0a2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 8955874048019366489}
-  healthText: {fileID: 7780455255337892832}
-  ammoText: {fileID: 0}
 --- !u!1 &4955981810987772601
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +504,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1954029664973218932}
   - component: {fileID: 7912827750563657842}
-  - component: {fileID: 5355447249898755929}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -602,21 +585,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5355447249898755929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6809763101443233154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb8d19f4d5717cc4a990059ab41d0a2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 7912827750563657842}
-  healthText: {fileID: 7780455255337892832}
-  ammoText: {fileID: 0}
 --- !u!1 &7272047426554197413
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +749,7 @@ GameObject:
   - component: {fileID: 1170290911911123944}
   - component: {fileID: 3685276624505445651}
   - component: {fileID: 8552067861185013250}
+  - component: {fileID: 801715600031151468}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -807,7 +776,7 @@ RectTransform:
   - {fileID: 5343688378814452735}
   - {fileID: 8749176702112348898}
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -877,6 +846,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &801715600031151468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495661418805506994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8d19f4d5717cc4a990059ab41d0a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 8955874048019366489}
+  healthText: {fileID: 7780455255337892832}
+  ammoText: {fileID: 4014556252056399435}
 --- !u!1 &7787600857454855793
 GameObject:
   m_ObjectHideFlags: 0
