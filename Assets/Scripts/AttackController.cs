@@ -30,7 +30,10 @@ public class AttackController : MonoBehaviour
     [SerializeField] public int ammo, maxAmmo;
     [Header("Audio")]
     [SerializeField] AudioSource soundSource;
-    [SerializeField] AudioClip fxSound;
+    [SerializeField] AudioClip firingSFX;
+    [SerializeField] bool hasChargeSound;
+    [SerializeField] AudioClip chargeSFX;
+
     [Header("Bodge Settings")]
     [SerializeField] string ownerTag;
     [SerializeField] LayerMask inclusionMasks;
@@ -141,19 +144,20 @@ public class AttackController : MonoBehaviour
         return (targetPosition - spawnOrigin.position).normalized;
     }
 
-    void PlaySoundFX()
+    void PlaySoundFX(AudioClip sound)
     {
         soundSource.pitch = Random.Range(0.9f, 1.1f);
-        soundSource.PlayOneShot(fxSound);
+        soundSource.PlayOneShot(sound);
     }
 
     IEnumerator RunFireProtectile()
     {
         //Debug.Log("Firing projectile!");
         onCharging?.Invoke();
+        if(hasChargeSound){ PlaySoundFX(chargeSFX); }
         yield return new WaitForSeconds(drawTime);
         onAttack?.Invoke();
-        PlaySoundFX();
+        PlaySoundFX(firingSFX);
         for (int i = 0; i < projectileAmmount; i++)
         {
             onAttackStep?.Invoke();
@@ -174,9 +178,9 @@ public class AttackController : MonoBehaviour
     {
         //Debug.Log("Firing hitscan!");
         onCharging?.Invoke();
+        if(hasChargeSound){ PlaySoundFX(chargeSFX); }
         yield return new WaitForSeconds(drawTime);
         onAttack?.Invoke();
-        PlaySoundFX();
 
         float distance = range;
 
