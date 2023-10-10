@@ -216,6 +216,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3154116663
   canSeeTarget: 0
+  timeWithTarget: 0
   targetToFind: {fileID: 0}
 --- !u!114 &4509314407167385666
 MonoBehaviour:
@@ -245,14 +246,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc513eff03dac24582c3fc595a4bf15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 2147483649
+  aggressionLevel: 0
+  maxAttacks: 0
+  initialSpreadPenalty: 0
+  imporoveSpreadIncrement: 0
+  weapon: {fileID: 4043406814658916752}
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 1073741824
-  weapon: {fileID: 4043406814658916752}
   patrolRange: 75
+  maintainDistanceFromTarget: 0
+  soundSource: {fileID: 6749481306879995972}
+  alertSound: {fileID: 8300000, guid: b175fdb9eccddb241821bb46738a3cb8, type: 3}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 2147483649
 --- !u!114 &4043406814658916752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +291,9 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   soundSource: {fileID: 6749481306879995972}
-  fxSound: {fileID: 8300000, guid: 20bd9343fb8a9d941bddd55aba9df192, type: 3}
+  firingSFX: {fileID: 8300000, guid: 20bd9343fb8a9d941bddd55aba9df192, type: 3}
+  hasChargeSound: 0
+  chargeSFX: {fileID: 0}
   ownerTag: 
   inclusionMasks:
     serializedVersion: 2
