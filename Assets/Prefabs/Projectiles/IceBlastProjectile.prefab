@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7192509585016393559}
   m_Layer: 27
   m_Name: IceBlastProjectile
-  m_TagString: Untagged
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   blockExplosionMasks:
     serializedVersion: 2
     m_Bits: 0
-  sa: {fileID: 0}
+  sa: {fileID: 1314400279321514151}
   rotateX: 0
   rotateY: 0
   rotateZ: 0
