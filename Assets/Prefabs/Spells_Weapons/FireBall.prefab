@@ -65,7 +65,7 @@ MonoBehaviour:
   range: 700
   cooldown: 1.5
   spread: 0
-  drawTime: 0.2
+  drawTime: 0.33
   hasSourceOfTruth: 1
   sourceOfTruth: {fileID: 0}
   projectile: {fileID: 4389928036886805877, guid: 5f34b4e71cb085d47960e8678db8949c, type: 3}
@@ -77,9 +77,9 @@ MonoBehaviour:
   ammo: 50
   maxAmmo: 100
   soundSource: {fileID: 8064375528521418947}
-  firingSFX: {fileID: 8300000, guid: 671e5d0037caa4e46b3677a05943a79a, type: 3}
-  hasChargeSound: 0
-  chargeSFX: {fileID: 0}
+  firingSFX: {fileID: 8300000, guid: 855f6cfebd07e344bbc39223ec65c5a5, type: 3}
+  hasChargeSound: 1
+  chargeSFX: {fileID: 8300000, guid: 0755e28eac6b8da4694ca71c9651cb4b, type: 3}
   ownerTag: Player
   inclusionMasks:
     serializedVersion: 2
