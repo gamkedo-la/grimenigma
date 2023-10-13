@@ -120,8 +120,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(slideAvailable){
             if(slideTime <= allowedSlideTime){
-                if(shouldPlaySlideSound){
-                    PlayAudioClip(slidingSound);
+                if(shouldPlaySlideSound && grounded){
+                    PlayAudioClip(slidingSound, 1f);
                     shouldPlaySlideSound = false;
                 }
                 //Debug.Log("Slide Time:" + slideTime);
