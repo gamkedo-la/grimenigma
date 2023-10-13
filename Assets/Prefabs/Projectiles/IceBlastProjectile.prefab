@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2830791217596027600}
   - component: {fileID: 1314400279321514151}
   - component: {fileID: 7192509585016393559}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: IceBlastProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,6 +251,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 06b068d39df34524681429feadb321a4, type: 3}
       propertyPath: m_Name
       value: NotOptimized-IceBlastProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 06b068d39df34524681429feadb321a4, type: 3}
+      propertyPath: m_Layer
+      value: 27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
