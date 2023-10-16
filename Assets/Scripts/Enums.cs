@@ -16,7 +16,7 @@ public enum ItemID{
     None,
     Automatic,
     ScatterShot,
-    Charge,
+    IceBlast,
     Fireball,
     KeyRed,
     KeyBlue,

@@ -124,7 +124,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1946157119
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 134217728
@@ -164,6 +164,7 @@ MonoBehaviour:
   rotateY: 100
   rotateZ: 100
   ownerTag: projectile
+  owner: {fileID: 0}
 --- !u!114 &1389633839998749523
 MonoBehaviour:
   m_ObjectHideFlags: 0

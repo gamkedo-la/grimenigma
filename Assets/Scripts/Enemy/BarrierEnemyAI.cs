@@ -2,12 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(EnemyVision))]
-[RequireComponent(typeof(AttackController))]
-[RequireComponent(typeof(HealthController))]
-[RequireComponent(typeof(DeathController))]
-[RequireComponent(typeof(AudioSource))]
 public class BarrierEnemyAI : EnemyBaseAI
 {
     [Header("BARRIER AI")]

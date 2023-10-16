@@ -29,7 +29,7 @@ public class ArmAnimationHandler : MonoBehaviour
             case ItemID.Fireball:
                 animator.SetBool("isFullHand", isActive);
                 break;
-            case ItemID.Charge:
+            case ItemID.IceBlast:
                 animator.SetBool("isFingerGun", isActive);
                 break;
             default:

@@ -29,7 +29,7 @@ public class PlayerSelectHandAnimations : MonoBehaviour
             case ItemID.Fireball:
                 anim.SetBool("isFullHand", isActive);
                 break;
-            case ItemID.Charge:
+            case ItemID.IceBlast:
                 anim.SetBool("isFingerGun", isActive);
                 break;
             default:

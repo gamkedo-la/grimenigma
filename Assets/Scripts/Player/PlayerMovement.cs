@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Transform cam;
 
-    bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound;
+    bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound, isMoving;
     float speed, airMoveSpeed, slideTime, maxDistance;
     bool grounded;
     float horizontalInput, verticalInput, graceJumpCounter, footstepCounter;
@@ -120,8 +120,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(slideAvailable){
             if(slideTime <= allowedSlideTime){
-                if(shouldPlaySlideSound){
-                    PlayAudioClip(slidingSound);
+                
+                if(shouldPlaySlideSound && grounded && (Mathf.Abs(moveInput.x) > 0 || Mathf.Abs(moveInput.y) > 0)){
+                    PlayAudioClip(slidingSound, 1f);
                     shouldPlaySlideSound = false;
                 }
                 //Debug.Log("Slide Time:" + slideTime);

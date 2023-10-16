@@ -10,9 +10,11 @@ public class PlayerInputHanlder : MonoBehaviour
     [SerializeField] EquipmentHandler pLeftEquipment;
     [SerializeField] EquipmentHandler pRightEquipment;
 
-    PlayerInput input;
+    public event System.Action<int> onWeaponSwap;
 
+    PlayerInput input;
     Vector2 moveInput, cameraInput;
+
     string controlType;
 
     void Awake()
@@ -68,6 +70,7 @@ public class PlayerInputHanlder : MonoBehaviour
 
         if(input.Player.SwitchToNextWeapon.WasPressedThisFrame()){
             pLeftEquipment.SelectNextEquipment();
+            onWeaponSwap?.Invoke(0);
         }
 
         if(input.Player.PauseMenu.IsPressed()){
