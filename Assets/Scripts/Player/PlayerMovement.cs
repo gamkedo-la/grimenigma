@@ -57,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Transform cam;
 
+    public event System.Action<bool> onAirJumpAvailable;
+
     bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound, isMoving;
     float speed, airMoveSpeed, slideTime, maxDistance;
     bool grounded;
@@ -84,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (airJumpAvailable && jumpWasPressThisFrame){
                 airJumpAvailable = false;
+                onAirJumpAvailable?.Invoke(airJumpAvailable);
                 Jump();
             }
             //else if(grounded && !canJump && input.Player.Jump.WasPressedThisFrame()){ Jump(); }
@@ -189,7 +192,10 @@ public class PlayerMovement : MonoBehaviour
 
             grounded = true;
             graceJumpCounter = graceJumpTime;
-            airJumpAvailable = true;
+            if(!airJumpAvailable){
+                airJumpAvailable = true;
+                onAirJumpAvailable?.Invoke(true);
+            }
         }
         else{
             grounded = false;
