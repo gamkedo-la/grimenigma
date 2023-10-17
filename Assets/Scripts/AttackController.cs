@@ -14,8 +14,8 @@ public class AttackController : MonoBehaviour
     [SerializeField] bool piercingDamage;
     [SerializeField] int hitScanDamage = 1;
     [SerializeField] public float range, cooldown, spread, drawTime;
-    [Header("For Crosshar Shooting")]
-    [SerializeField] bool hasSourceOfTruth;
+    [Header("For Crosshair Shooting")]
+    [SerializeField] bool hasCrosshair;
     [SerializeField] GameObject sourceOfTruth;
     [Header("Projectile")]
     [SerializeField] GameObject projectile;
@@ -97,7 +97,7 @@ public class AttackController : MonoBehaviour
             tracer = Instantiate(tracer, parent:this.gameObject.transform);
             tracerRenderer.material = new Material(Shader.Find("Sprites/Default"));
         }
-        if(!hasSourceOfTruth){ sourceOfTruth = this.gameObject; }
+        if(!hasCrosshair){ sourceOfTruth = this.gameObject; }
 
         spawnOrigin = customSpawnOrigin == null ? this.gameObject.transform : customSpawnOrigin;        
         //Debug.Log(spawnOrigin);
@@ -105,7 +105,7 @@ public class AttackController : MonoBehaviour
 
     void Update()
     {
-        if(hasSourceOfTruth){ transform.LookAt(sourceOfTruth.transform ); }
+        if(hasCrosshair){ transform.LookAt(sourceOfTruth.transform ); }
     }
 
     void OnDestroy()
