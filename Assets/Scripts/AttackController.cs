@@ -123,7 +123,7 @@ public class AttackController : MonoBehaviour
 
     Vector3 GetDirection()
     {
-        targetRange = 9999;
+        targetRange = range;
 
         if(Physics.Raycast(sourceOfTruth.transform.position, sourceOfTruth.transform.forward, out pointingAt, range, inclusionMasks)){
             if(pointingAt.transform.gameObject.TryGetComponent<HealthController>(out var component)){
@@ -141,7 +141,7 @@ public class AttackController : MonoBehaviour
                                             );
 
         
-        return (targetPosition - spawnOrigin.position).normalized;
+        return targetPosition - spawnOrigin.position;
     }
 
     void PlaySoundFX(AudioClip sound)
