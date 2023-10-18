@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
         ApplyExtraGravity();
         
         if(!grounded) { pData.landingVelocity = rb.velocity; }
-        transform.rotation = cam.transform.rotation;
+        transform.rotation = Quaternion.Euler(0f, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
         MovePlayer();
     }
 
