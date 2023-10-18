@@ -1258,7 +1258,7 @@ Transform:
   - {fileID: 6837168361299740408}
   - {fileID: 5390537495299956796}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2921506522314420646
 GameObject:
@@ -1455,7 +1455,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3397135204919250846}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2713,8 +2713,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7064341735789155566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5390537495299956796}
@@ -3143,6 +3143,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1521760611456581742, guid: 4c95409bf15e6994e816f113504c73ae, type: 3}
+      propertyPath: hasCrosshair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521760611456581742, guid: 4c95409bf15e6994e816f113504c73ae, type: 3}
       propertyPath: sourceOfTruth
       value: 
       objectReference: {fileID: 7064341735789155566}
@@ -3222,6 +3226,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1521760611456581742, guid: 4c95409bf15e6994e816f113504c73ae, type: 3}
+      propertyPath: hasCrosshair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521760611456581742, guid: 4c95409bf15e6994e816f113504c73ae, type: 3}
       propertyPath: sourceOfTruth
       value: 
       objectReference: {fileID: 7064341735789155566}
@@ -3256,6 +3264,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6394266142216363397}
     m_Modifications:
+    - target: {fileID: 293411582469762588, guid: 83ae58583d2625541bf274b8220b98ba, type: 3}
+      propertyPath: hasCrosshair
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 293411582469762588, guid: 83ae58583d2625541bf274b8220b98ba, type: 3}
       propertyPath: sourceOfTruth
       value: 
@@ -3344,6 +3356,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4826044768663454991, guid: 9df7aa27e8987244dab66d26c705b0a3, type: 3}
+      propertyPath: hasCrosshair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826044768663454991, guid: 9df7aa27e8987244dab66d26c705b0a3, type: 3}
       propertyPath: sourceOfTruth
       value: 
       objectReference: {fileID: 7064341735789155566}
@@ -3414,6 +3430,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1775365860847598641}
     m_Modifications:
+    - target: {fileID: 293411582469762588, guid: 83ae58583d2625541bf274b8220b98ba, type: 3}
+      propertyPath: hasCrosshair
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 293411582469762588, guid: 83ae58583d2625541bf274b8220b98ba, type: 3}
       propertyPath: sourceOfTruth
       value: 
@@ -3493,6 +3513,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1775365860847598641}
     m_Modifications:
+    - target: {fileID: 603241975871539220, guid: 3d04c55f56360684a8b6617e5032d56e, type: 3}
+      propertyPath: hasCrosshair
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 603241975871539220, guid: 3d04c55f56360684a8b6617e5032d56e, type: 3}
       propertyPath: sourceOfTruth
       value: 
@@ -3585,6 +3609,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4826044768663454991, guid: 9df7aa27e8987244dab66d26c705b0a3, type: 3}
+      propertyPath: hasCrosshair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826044768663454991, guid: 9df7aa27e8987244dab66d26c705b0a3, type: 3}
       propertyPath: sourceOfTruth
       value: 
       objectReference: {fileID: 7064341735789155566}
@@ -3655,6 +3683,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6394266142216363397}
     m_Modifications:
+    - target: {fileID: 603241975871539220, guid: 3d04c55f56360684a8b6617e5032d56e, type: 3}
+      propertyPath: hasCrosshair
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 603241975871539220, guid: 3d04c55f56360684a8b6617e5032d56e, type: 3}
       propertyPath: sourceOfTruth
       value: 
