@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     AudioSource sourceAudio;
-    GameObject currentMenu, mainMenu, levelSelectMenu, settingsMenu;
+    GameObject currentMenu;
 
     public void Play()
     {
@@ -23,37 +22,24 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quit button clicked.");
     }
 
-    public void EnableMainMenu()
+    public void GoToMenu(GameObject menu)
     {
         currentMenu.SetActive(false);
-        currentMenu = mainMenu;
+        currentMenu = menu;
         currentMenu.SetActive(true);
-    }
-
-    public void EnableSettings()
-    {
-        currentMenu.SetActive(false);
-        currentMenu = settingsMenu;
-        currentMenu.SetActive(true);
-        
     }
 
     void Start()
     {
         sourceAudio = GetComponent<AudioSource>();
-        mainMenu = FindInChildren("MainMenu").gameObject;
-        settingsMenu = FindInChildren("SettingsMenu").gameObject;
-        currentMenu = mainMenu;
-
-        EnableMainMenu();
+        currentMenu = FindInChildren("MainMenu").gameObject;
+        GoToMenu(currentMenu);
     }
 
     GameObject FindInChildren(string name)
     {
         foreach(Transform child in GetComponentsInChildren<Transform>(true)){
-            if(child.gameObject.name == name){
-                return child.gameObject;
-            }
+            if(child.gameObject.name == name){ return child.gameObject; }
         }
 
         Debug.LogError("Did not find child with name " + name + "!");
