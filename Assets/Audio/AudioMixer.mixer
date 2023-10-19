@@ -67,7 +67,15 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 559f4f87812cfbc4d9b0a177988aae5b
+    name: FXVolume
+  - guid: 2a4dea8b1a30b9a41b8284d6a47bda3e
+    name: MasterVolume
+  - guid: 53563c379cc35384b8ee46082ad172e0
+    name: MusicVolume
+  - guid: 482e1a296f096d646998e1f20bd5e20d
+    name: WeaponsVolume
   m_AudioMixerGroupViews:
   - guids:
     - 05398e62d977bf04a85164b4fd06586e
@@ -123,7 +131,8 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: ae8e7d61cb3ac0b4ea0438213e6f33b1
   m_FloatValues:
-    53563c379cc35384b8ee46082ad172e0: -24.162655
+    53563c379cc35384b8ee46082ad172e0: 0
+    2a4dea8b1a30b9a41b8284d6a47bda3e: 0
   m_TransitionOverrides: {}
 --- !u!244 &5755838417788071443
 AudioMixerEffectController:
@@ -159,7 +168,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WeaponSounds
+  m_Name: Weapons
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 005ff9b6cd3ee4e458957238d9dcf812
   m_Children: []
