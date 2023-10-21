@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] GameObject initialMenu;
     AudioSource sourceAudio;
     GameObject currentMenu;
 
@@ -32,7 +33,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         sourceAudio = GetComponent<AudioSource>();
-        currentMenu = FindInChildren("MainMenu").gameObject;
+        currentMenu = initialMenu;
         GoToMenu(currentMenu);
     }
 
