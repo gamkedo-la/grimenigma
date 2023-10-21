@@ -5,7 +5,6 @@ using UnityEngine.Audio;
 public class VolumeSettings : MonoBehaviour
 {
     [SerializeField] AudioMixer mixer;
-    [SerializeField] ObjectToJSON jsonHandler;
 
     public void AppyVolumeSettings()
     {
@@ -20,7 +19,7 @@ public class VolumeSettings : MonoBehaviour
         PlayerPrefs.SetFloat("FXVolume", fx);
         PlayerPrefs.SetFloat("WeaponsVolume", weapons);
 
-        Debug.Log(PlayerPrefs.GetFloat("MasterVolume"));
+        //Debug.Log(PlayerPrefs.GetFloat("MasterVolume"));
     }
 
     public void SetVolumeSettings()
