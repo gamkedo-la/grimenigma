@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2317259122511994279}
   - component: {fileID: 3964356310046032878}
   - component: {fileID: 868204286246936855}
-  - component: {fileID: 4752779934629892648}
   - component: {fileID: 3334949743705642466}
   - component: {fileID: 1836002583030007176}
   - component: {fileID: 8483595876602664133}
@@ -124,32 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4205d95732a13514d946104472738e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: 5
+  item: 6
   quantity: 1
   onPickup: 2
   soundSource: {fileID: 1836002583030007176}
   fxSound: {fileID: 8300000, guid: 3664d8ebd377e8f4d9c2b0aefcd4d524, type: 3}
---- !u!114 &4752779934629892648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4608462721558435947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c7082f6217ed74fb33fa256188a464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: 
-  sa: {fileID: 3334949743705642466}
-  distanceX: 0
-  distanceY: 2
-  distanceZ: 0
-  speed: 0.5
-  rotateX: 0
-  rotateY: 0
-  rotateZ: 10
 --- !u!114 &3334949743705642466
 MonoBehaviour:
   m_ObjectHideFlags: 0
