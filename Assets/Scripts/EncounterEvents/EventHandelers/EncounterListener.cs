@@ -33,7 +33,7 @@ public class EncounterListener : MonoBehaviour
     void StartEncounter(string triggeredLabel)
     {
         if(triggeredLabel == label){ onEvent?.Invoke(triggeredLabel); }
-        //else{ Debug.Log(this.gameObject.name + ", label " + triggeredLabel + " !=" + label); }
+        else{ Debug.Log(this.gameObject.name + ", label " + triggeredLabel + " !=" + label); }
     }
 }
 
