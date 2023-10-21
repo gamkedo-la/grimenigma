@@ -9,6 +9,7 @@ public class PlayerCameraControl : MonoBehaviour
     [SerializeField] PlayerData pData;
 
     [Header("Camera Settings")]
+    [SerializeField] Camera pCamera;
     [SerializeField] float mouseVerticalSense = 5;
     [SerializeField] float mouseHorizontalSense = 5;
     [SerializeField] float stickVerticalSense = 200;
@@ -45,7 +46,7 @@ public class PlayerCameraControl : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        pCamera.fieldOfView = PlayerPrefs.GetFloat("fov", 90);
         hardLandingThreshold = pData.hardLandingThreshold;
     }
 

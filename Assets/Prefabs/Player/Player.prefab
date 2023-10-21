@@ -1258,7 +1258,7 @@ Transform:
   - {fileID: 6837168361299740408}
   - {fileID: 5390537495299956796}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2921506522314420646
 GameObject:
@@ -2673,6 +2673,7 @@ MonoBehaviour:
   isSliding: 0
   hasLanded: 0
   pData: {fileID: 3865243717588823144}
+  pCamera: {fileID: 3960198074201782845}
   mouseVerticalSense: 7.75
   mouseHorizontalSense: 7.75
   stickVerticalSense: 200
