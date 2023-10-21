@@ -59,13 +59,17 @@ public class OpenDoor : MonoBehaviour
     {
         if(isDoorClosed && label == listener.label){
             if(!requiresItem || player.GetComponent<Inventory>().HasItem(item)){
-                //Debug.Log("We are opening the door " + this.gameObject.name + "!");
+                Debug.Log("We are opening the door " + this.gameObject.name + "!");
                 if(shouldTransform){ sa.Twean(speed, openPosition); }
                 if(shouldRotate) { sa.Rwean(rotateSpeed, rotateX, rotateY, rotateZ); }
                 PlaySoundFX();
                 isDoorClosed = false;
                 if(autoClose){ StartCoroutine(RunCloseDoor()); }
+            } else {
+                Debug.Log("Door: we don't have required item! Staying closed.");
             }
+        } else {
+            Debug.Log("Door is already open or label: "+label+" isn't the same as the listener's: "+listener.label);
         }
     }
 

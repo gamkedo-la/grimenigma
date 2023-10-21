@@ -24572,6 +24572,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1753327346707404784, guid: f1158c3aa9451744baa9a7210918248a, type: 3}
+      propertyPath: item
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2355520047818323882, guid: f1158c3aa9451744baa9a7210918248a, type: 3}
       propertyPath: m_Name
       value: LockedBlueDoor
@@ -24580,6 +24584,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1267862357}
+    - target: {fileID: 7650555847075514946, guid: f1158c3aa9451744baa9a7210918248a, type: 3}
+      propertyPath: endLabel
+      value: blueDoor1-end
+      objectReference: {fileID: 0}
     - target: {fileID: 7846180601712058782, guid: f1158c3aa9451744baa9a7210918248a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -24627,6 +24635,10 @@ PrefabInstance:
     - target: {fileID: 8642262179795923894, guid: f1158c3aa9451744baa9a7210918248a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709085518918110262, guid: f1158c3aa9451744baa9a7210918248a, type: 3}
+      propertyPath: label
+      value: blueDoor1
       objectReference: {fileID: 0}
     - target: {fileID: 8883782096928647668, guid: f1158c3aa9451744baa9a7210918248a, type: 3}
       propertyPath: m_Mesh
@@ -36834,7 +36846,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-87182
+  m_Name: pb_Mesh-5502
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -42615,6 +42627,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 868204286246936855, guid: 4569b37a81605c14f888a73482af79a9, type: 3}
+      propertyPath: item
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1127230165817347560, guid: 4569b37a81605c14f888a73482af79a9, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -42662,6 +42678,10 @@ PrefabInstance:
     - target: {fileID: 4608462721558435947, guid: 4569b37a81605c14f888a73482af79a9, type: 3}
       propertyPath: m_Name
       value: Key-Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483595876602664133, guid: 4569b37a81605c14f888a73482af79a9, type: 3}
+      propertyPath: endLabel
+      value: blueKeyPickup-end
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -30,8 +30,11 @@ public class ItemPickup : MonoBehaviour
         if(other.tag != "Player"){ return; }
         
         if(other.gameObject.GetComponent<Inventory>()?.AddItem(item, quantity) == 1){
+            Debug.Log(this.name+ " Pickup Triggered!");
             PlaySoundFX();
             HandlePickup();
+        } else {
+            Debug.Log(this.name+ " Duplicate Pickup Ignored!");
         }
     }
 
