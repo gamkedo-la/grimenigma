@@ -46,7 +46,8 @@ public class ItemPickup : MonoBehaviour
                 gameObject.SetActive(false);
                 break;
             case PickupAction.destroy:
-                Destroy(gameObject);
+                Destroy(gameObject); //,1.0f); // a short delay would allow for sound to be played
+                // BUT we'd need to ensure player can't pick it up again during the delay
                 break;
             case PickupAction.nothing:
                 break;
