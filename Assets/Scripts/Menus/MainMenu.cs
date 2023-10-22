@@ -17,6 +17,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void Resume()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void Quit()
     {
         Application.Quit();
@@ -30,11 +35,25 @@ public class MainMenu : MonoBehaviour
         currentMenu.SetActive(true);
     }
 
+    void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+    }
+
     void Start()
     {
         sourceAudio = GetComponent<AudioSource>();
         currentMenu = initialMenu;
         GoToMenu(currentMenu);
+    }
+
+    void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1;
     }
 
     GameObject FindInChildren(string name)
