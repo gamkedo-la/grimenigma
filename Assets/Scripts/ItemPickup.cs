@@ -20,9 +20,12 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip fxSound;
 
+    Collider myCollider;
+
     void Start()
     {
-        GetComponent<Collider>().isTrigger = true;
+        myCollider = GetComponent<Collider>();
+        myCollider.isTrigger = true;
     }
 
     void OnTriggerEnter(Collider other)
@@ -46,8 +49,8 @@ public class ItemPickup : MonoBehaviour
                 gameObject.SetActive(false);
                 break;
             case PickupAction.destroy:
-                Destroy(gameObject); //,1.0f); // a short delay would allow for sound to be played
-                // BUT we'd need to ensure player can't pick it up again during the delay
+                myCollider.enabled = false;
+                Destroy(gameObject ,1.0f);
                 break;
             case PickupAction.nothing:
                 break;
@@ -59,6 +62,7 @@ public class ItemPickup : MonoBehaviour
 
     void PlaySoundFX()
     {
+        Debug.Log("Playing sound " + fxSound.name);
         soundSource.pitch = Random.Range(0.9f, 1.1f);
         soundSource.PlayOneShot(fxSound);
     }
