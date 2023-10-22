@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1836002583030007176, guid: 4569b37a81605c14f888a73482af79a9, type: 3}
+      propertyPath: MinDistance
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4608462721558435947, guid: 4569b37a81605c14f888a73482af79a9, type: 3}
       propertyPath: m_Name
       value: Key-Blue
@@ -961,6 +965,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6664487425851943942, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664487425851943942, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656131267670444282, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656131267670444282, guid: 4aa83f39e75f33340beeb27d7460bcef, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1091,7 +1111,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-70052
+  m_Name: pb_Mesh-58186
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
