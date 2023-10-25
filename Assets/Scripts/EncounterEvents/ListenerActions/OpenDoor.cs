@@ -49,7 +49,10 @@ public class OpenDoor : MonoBehaviour
     {
         if(doorIsSeperateFromCollider){ door = doorGameObject; }
         else{ door = this.gameObject; }
-        sa = door.GetComponent<ScriptedAnimations>();
+        
+        // bugfix: we still use this sa - the other objexts are empty
+        //sa = door.GetComponent<ScriptedAnimations>();
+        sa = GetComponent<ScriptedAnimations>();
 
         closedPosition = door.transform.position;
         openPosition = new Vector3(door.transform.position.x+distanceX, door.transform.position.y+distanceY, door.transform.position.z+distanceZ);
