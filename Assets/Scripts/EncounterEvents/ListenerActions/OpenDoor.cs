@@ -51,8 +51,10 @@ public class OpenDoor : MonoBehaviour
         else{ door = this.gameObject; }
         
         // bugfix: we still use this sa - the other objexts are empty
-        //sa = door.GetComponent<ScriptedAnimations>();
-        sa = GetComponent<ScriptedAnimations>();
+        sa = door.GetComponent<ScriptedAnimations>();
+        if (!sa) { // missing sa on it? try using the one built into this.
+            sa = GetComponent<ScriptedAnimations>();
+        }
 
         closedPosition = door.transform.position;
         openPosition = new Vector3(door.transform.position.x+distanceX, door.transform.position.y+distanceY, door.transform.position.z+distanceZ);
@@ -63,8 +65,8 @@ public class OpenDoor : MonoBehaviour
         if(isDoorClosed && label == listener.label){
             if(!requiresItem || player.GetComponent<Inventory>().HasItem(item)){
                 Debug.Log("We are opening the door " + this.gameObject.name + "!");
-                if(shouldTransform){ sa.Twean(speed, openPosition); }
-                if(shouldRotate) { sa.Rwean(rotateSpeed, rotateX, rotateY, rotateZ); }
+                if(shouldTransform && sa!=null){ sa.Twean(speed, openPosition); }
+                if(shouldRotate && sa!=null) { sa.Rwean(rotateSpeed, rotateX, rotateY, rotateZ); }
                 PlaySoundFX();
                 isDoorClosed = false;
                 if(autoClose){ StartCoroutine(RunCloseDoor()); }
@@ -86,7 +88,7 @@ public class OpenDoor : MonoBehaviour
     {
         yield return new WaitForSeconds(secondsBeforeAutoClose);
         //Debug.Log("We are closing the door " + this.gameObject.name + "!");
-        sa.Twean(speed, closedPosition);
+        if (sa!=null) sa.Twean(speed, closedPosition);
         isDoorClosed = true;
     }
 }
