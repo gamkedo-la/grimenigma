@@ -19,6 +19,7 @@ public class ItemPickup : MonoBehaviour
     [Header("Audio")]
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip fxSound;
+    [SerializeField] GameObject spawnPrefabOnPickup;
 
     Collider myCollider;
 
@@ -50,7 +51,8 @@ public class ItemPickup : MonoBehaviour
                 break;
             case PickupAction.destroy:
                 myCollider.enabled = false;
-                Destroy(gameObject ,1.0f);
+                if (spawnPrefabOnPickup) Instantiate(spawnPrefabOnPickup,transform.position,Quaternion.identity);
+                Destroy(gameObject);
                 break;
             case PickupAction.nothing:
                 break;
