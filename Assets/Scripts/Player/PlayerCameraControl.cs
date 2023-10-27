@@ -10,10 +10,10 @@ public class PlayerCameraControl : MonoBehaviour
 
     [Header("Camera Settings")]
     [SerializeField] Camera pCamera;
-    [SerializeField] float mouseVerticalSense = 5;
-    [SerializeField] float mouseHorizontalSense = 5;
-    [SerializeField] float stickVerticalSense = 200;
-    [SerializeField] float stickHorizontalSense = 200;
+    //[SerializeField] float mouseVerticalSense = 5;
+    //[SerializeField] float mouseHorizontalSense = 5;
+    //[SerializeField] float stickVerticalSense = 200;
+    //[SerializeField] float stickHorizontalSense = 200;
     [SerializeField] float cameraHeight = 32;
 
     [Header("Bob/Tilting")]
@@ -46,7 +46,7 @@ public class PlayerCameraControl : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        pCamera.fieldOfView = PlayerPrefs.GetFloat("fov", 90);
+        pCamera.fieldOfView = PlayerPrefs.GetFloat("fov", PlayerPrefsDefault.defaultFov);
         hardLandingThreshold = pData.hardLandingThreshold;
     }
 
@@ -127,19 +127,20 @@ public class PlayerCameraControl : MonoBehaviour
 
     private Quaternion RotateCamera(Quaternion rotation, Vector2 cameraInput, string controlType)
     {
+        //Debug.Log(pData.mouseHorizontalSensativity + " " + pData.mouseVerticleSensativity);
         //Debug.Log(obj.control.parent.displayName);
         if(controlType == "Mouse"){ 
-            horizontalSenseToUse = mouseHorizontalSense;
-            verticalSenseToUse = mouseVerticalSense;
+            horizontalSenseToUse = pData.mouseHorizontalSensativity;
+            verticalSenseToUse = pData.mouseVerticleSensativity;
         }
         else if(controlType == "whatever string gamepads have"){ 
-            horizontalSenseToUse = stickHorizontalSense;
-            verticalSenseToUse = stickVerticalSense;
+            horizontalSenseToUse = pData.gamepadHorizontalSensativity;
+            verticalSenseToUse = pData.gamepadVerticleSensativity;
         }
         // Else statement can be removed after gamepad string is added
         else{
-            horizontalSenseToUse = stickHorizontalSense;
-            verticalSenseToUse = stickVerticalSense;
+            horizontalSenseToUse = pData.gamepadHorizontalSensativity;
+            verticalSenseToUse = pData.gamepadVerticleSensativity;
         }
 
         lookDelta = new Vector2(
