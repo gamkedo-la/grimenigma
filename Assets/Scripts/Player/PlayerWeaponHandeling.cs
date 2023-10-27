@@ -12,7 +12,7 @@ public class PlayerWeaponHandeling : MonoBehaviour
 
     [Header("Rotation Sway")]
     [SerializeField] float rotationStep = 4f;
-    [SerializeField] float maxRotationStep = 10f;
+    //[SerializeField] float maxRotationStep = 10f;
     [SerializeField] float rotationSmoothing = 12f;
     Vector3 swayEulerRotation;
     float yRotation;
@@ -21,8 +21,8 @@ public class PlayerWeaponHandeling : MonoBehaviour
     [SerializeField] float moveDrag = 1f;
 
     [Header("Idle Sway")]
-    [SerializeField] float idlePositionMax = 10f;
-    [SerializeField] float idleRotationMax = 5f;
+    //[SerializeField] float idlePositionMax = 10f;
+    //[SerializeField] float idleRotationMax = 5f;
 
     Vector3 originPosition;
     Quaternion originRotation;
