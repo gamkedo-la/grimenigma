@@ -9,19 +9,26 @@ using UnityEngine.UI;
 
 public class VideoSetings : MonoBehaviour
 {
-
     public TMP_Dropdown windowModeDropdown;
     public TMP_Dropdown resolutionDropdown;
     public Slider fovSlider;
 
+    public event Action<float> onFovChange;
+    public event Action<float, float, float, float> onSensativityChange;
+
     int currentResolutionIndex, currentFullScreenModeIndex;
-    float fov;
+    float fov, mouseVerticleSensativity, gamepadVerticleSensativity, mouseHorizontalSensativity, gamepadHorizontalSensativity;
     Resolution[] resolutions;
     List<string> fullScreenModeOptions = new List<string> {"Full Screen", "Full Screen Window", "Maximized Window", "Windowed"};
 
     public void AppyVideoSettings()
     {
         PlayerPrefs.SetFloat("fov", fov);
+        onFovChange?.Invoke(fov);
+        PlayerPrefs.SetFloat("mouse_verticle_sensativity", mouseVerticleSensativity);
+        PlayerPrefs.SetFloat("mouse_horizontal_sensativity", mouseHorizontalSensativity);
+        PlayerPrefs.SetFloat("gamepad_verticle_sensativity", gamepadVerticleSensativity);
+        PlayerPrefs.SetFloat("gamepad_horizontal_sensativity", gamepadHorizontalSensativity);
         PlayerPrefs.SetInt("resolution_height", Screen.currentResolution.height);
         PlayerPrefs.SetInt("resolution_width", Screen.currentResolution.width);
         PlayerPrefs.SetInt("full_screen_mode", (int)Screen.fullScreenMode);
@@ -38,7 +45,12 @@ public class VideoSetings : MonoBehaviour
         FullScreenMode screenMode = (FullScreenMode) PlayerPrefs.GetInt("full_screen_mode", 1);
         SetScreen(resolution, screenMode);
 
-        fov = PlayerPrefs.GetFloat("fov", 90);
+        fov = PlayerPrefs.GetFloat("fov", PlayerPrefsDefault.defaultFov);
+        gamepadVerticleSensativity = PlayerPrefs.GetFloat("gamepad_verticle_sensativity", PlayerPrefsDefault.defaultGamepadVerticleSensativity);
+        gamepadHorizontalSensativity = PlayerPrefs.GetFloat("gamepad_horizontal_sensativity", PlayerPrefsDefault.defaultGamepadHorizontalSensativity);
+        mouseVerticleSensativity = PlayerPrefs.GetFloat("mouse_verticle_sensativity", PlayerPrefsDefault.defaultMouseVerticleSensativity);
+        mouseHorizontalSensativity = PlayerPrefs.GetFloat("mouse_horizonal_sensativity", PlayerPrefsDefault.defaultMouseHorizontalSensativity);
+        onSensativityChange?.Invoke(mouseHorizontalSensativity, mouseVerticleSensativity, gamepadHorizontalSensativity, gamepadVerticleSensativity);
 
         RefreshMenuValues();
     }
@@ -46,11 +58,35 @@ public class VideoSetings : MonoBehaviour
     public void SetFOV(float val)
     {
         fov = val;
+        onFovChange?.Invoke(fov);
+    }
+
+    public void SetMouseVerticleSensativity(float val)
+    {
+        mouseVerticleSensativity = val;
+        onSensativityChange?.Invoke(mouseHorizontalSensativity, mouseVerticleSensativity, gamepadHorizontalSensativity, gamepadVerticleSensativity);
+    }
+
+    public void SetGamepadVerticleSensativity(float val)
+    {
+        gamepadVerticleSensativity = val;
+        onSensativityChange?.Invoke(mouseHorizontalSensativity, mouseVerticleSensativity, gamepadHorizontalSensativity, gamepadVerticleSensativity);
+    }
+    public void SetMouseHorizontalSensativity(float val)
+    {
+        mouseHorizontalSensativity = val;
+        onSensativityChange?.Invoke(mouseHorizontalSensativity, mouseVerticleSensativity, gamepadHorizontalSensativity, gamepadVerticleSensativity);
+    }
+
+    public void SetGamepadHorizontalSensativity(float val)
+    {
+        gamepadHorizontalSensativity = val;
+        onSensativityChange?.Invoke(mouseHorizontalSensativity, mouseVerticleSensativity, gamepadHorizontalSensativity, gamepadVerticleSensativity);
     }
 
     public void SetResolution(int resolutionIndex)
     {
-        Debug.Log("New resotion selected:" + resolutionIndex);
+        Debug.Log("New resolution selected:" + resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         SetScreen(resolution, Screen.fullScreenMode);
     }
