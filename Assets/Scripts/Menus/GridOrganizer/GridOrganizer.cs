@@ -48,12 +48,12 @@ public class GridOrganizer : MonoBehaviour
                     GameObject subMenuItem = subMenuItems[j];
 
                     RectTransform subMenuItemRectTransform = subMenuItem.GetComponent<RectTransform>();
-                    Vector2 offset = CalculateOffset(subMenuItem, subMenuCellWidth, subMenuCellHeight);
-                    Vector2 position = offset + originPosition; //+ new Vector2(subMenuItemRectTransform.rect.width / 2, -subMenuItemRectTransform.rect.height / 2);
+                    Vector2 offset = CalculateOffset(subMenuItem, subMenuCellWidth, subMenuCellHeight, subMenu.ColumnCount);
+                    Vector2 position = offset + originPosition + subMenu.GridOffset; //+ new Vector2(subMenuItemRectTransform.rect.width / 2, -subMenuItemRectTransform.rect.height / 2);
                     subMenuItemRectTransform.anchoredPosition = position;
 
                     // Apply padding to the current submenu item
-                    ApplyGridItemDataPadding(subMenuItem);
+                    //ApplyGridItemDataPadding(subMenuItem);
                 }
 
                 // Update the number of rows required to fit all the items in the main grid
@@ -62,7 +62,7 @@ public class GridOrganizer : MonoBehaviour
             else
             {
                 RectTransform gridItemRectTransform = gridItem.GetComponent<RectTransform>();
-                Vector2 offset = CalculateOffset(gridItem, cellWidth, cellHeight);
+                Vector2 offset = CalculateOffset(gridItem, cellWidth, cellHeight, columnCount);
                 Vector2 position = offset + originPosition; //+ new Vector2(gridItemRectTransform.rect.width / 2, -gridItemRectTransform.rect.height / 2);
                 gridItemRectTransform.anchoredPosition = position;
             }
@@ -115,13 +115,13 @@ public class GridOrganizer : MonoBehaviour
         }
     }
 
-    internal Vector2 CalculateOffset(GameObject gridItem, float subMenuCellWidth, float subMenuCellHeight)
+    internal Vector2 CalculateOffset(GameObject gridItem, float cellWidth, float cellHeight, int columns)
     {
-        int column = (gridItem.transform.GetSiblingIndex() % columnCount);
-        int row = gridItem.transform.GetSiblingIndex() / columnCount;
+        int column = (gridItem.transform.GetSiblingIndex() % columns);
+        int row = gridItem.transform.GetSiblingIndex() / columns;
 
         RectTransform gridItemRectTransform = gridItem.GetComponent<RectTransform>();
-        Vector2 offset = new Vector2(column * (horizontalSpacing + subMenuCellWidth), -row * (verticalSpacing + subMenuCellHeight));
+        Vector2 offset = new Vector2(column * (horizontalSpacing + cellWidth), -row * (verticalSpacing + cellHeight));
         //Debug.Log(offset);
         return offset;
     }
