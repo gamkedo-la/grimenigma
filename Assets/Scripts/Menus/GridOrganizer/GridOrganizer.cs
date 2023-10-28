@@ -48,8 +48,8 @@ public class GridOrganizer : MonoBehaviour
                     GameObject subMenuItem = subMenuItems[j];
 
                     RectTransform subMenuItemRectTransform = subMenuItem.GetComponent<RectTransform>();
-                    Vector2 offset = CalculateGridItemOffset(subMenuItem, subMenuCellWidth, subMenuCellHeight);
-                    Vector2 position = gridItem.GetComponent<RectTransform>().anchoredPosition + offset + new Vector2(subMenuItemRectTransform.rect.width / 2, -subMenuItemRectTransform.rect.height / 2);
+                    Vector2 offset = CalculateOffset(subMenuItem, subMenuCellWidth, subMenuCellHeight);
+                    Vector2 position = offset + originPosition; //+ new Vector2(subMenuItemRectTransform.rect.width / 2, -subMenuItemRectTransform.rect.height / 2);
                     subMenuItemRectTransform.anchoredPosition = position;
 
                     // Apply padding to the current submenu item
@@ -62,8 +62,8 @@ public class GridOrganizer : MonoBehaviour
             else
             {
                 RectTransform gridItemRectTransform = gridItem.GetComponent<RectTransform>();
-                Vector2 offset = CalculateGridItemOffset(gridItem, cellWidth, cellHeight);
-                Vector2 position = new Vector2(originPosition.x, originPosition.y) + offset + new Vector2(gridItemRectTransform.rect.width / 2, -gridItemRectTransform.rect.height / 2);
+                Vector2 offset = CalculateOffset(gridItem, cellWidth, cellHeight);
+                Vector2 position = offset + originPosition; //+ new Vector2(gridItemRectTransform.rect.width / 2, -gridItemRectTransform.rect.height / 2);
                 gridItemRectTransform.anchoredPosition = position;
             }
         }
@@ -73,6 +73,7 @@ public class GridOrganizer : MonoBehaviour
         GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
     }
 
+    // BREAKS STUFF DO NOT USE RIGHT NOW!!!
     internal void ApplyGridItemDataPadding(GameObject gridItem)
     {
         // Check if the current menu item has GridItem data and apply padding if it does exist
@@ -83,10 +84,10 @@ public class GridOrganizer : MonoBehaviour
             if (!gridItemRectTransform.offsetMin.Equals(new Vector2(gridItemData.paddingLeft, gridItemData.paddingBottom)) && !gridItemRectTransform.offsetMax.Equals(new Vector2(-gridItemData.paddingRight, -gridItemData.paddingTop)))
             {
                 Vector2 offsetMin = new Vector2(gridItemData.paddingLeft, gridItemData.paddingBottom);
-                Vector2 offsetMax = new Vector2(-gridItemData.paddingRight, -gridItemData.paddingTop);
-                gridItemRectTransform.offsetMin = offsetMin;
-                gridItemRectTransform.offsetMax = offsetMax;
-                gridItemRectTransform.sizeDelta += offsetMin + offsetMax;
+                //Vector2 offsetMax = new Vector2(-gridItemData.paddingRight, -gridItemData.paddingTop);
+                //gridItemRectTransform.offsetMin = offsetMin;
+                //gridItemRectTransform.offsetMax = offsetMax;
+                //gridItemRectTransform.sizeDelta += offsetMin + offsetMax;
             }
 
             // Check if the current menu item has a submenu
@@ -114,13 +115,14 @@ public class GridOrganizer : MonoBehaviour
         }
     }
 
-    internal Vector2 CalculateGridItemOffset(GameObject gridItem, float subMenuCellWidth, float subMenuCellHeight)
+    internal Vector2 CalculateOffset(GameObject gridItem, float subMenuCellWidth, float subMenuCellHeight)
     {
-        int column = gridItem.transform.GetSiblingIndex() % columnCount;
+        int column = (gridItem.transform.GetSiblingIndex() % columnCount);
         int row = gridItem.transform.GetSiblingIndex() / columnCount;
 
         RectTransform gridItemRectTransform = gridItem.GetComponent<RectTransform>();
         Vector2 offset = new Vector2(column * (horizontalSpacing + subMenuCellWidth), -row * (verticalSpacing + subMenuCellHeight));
+        //Debug.Log(offset);
         return offset;
     }
 }
