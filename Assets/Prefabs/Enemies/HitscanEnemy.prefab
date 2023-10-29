@@ -74,7 +74,7 @@ Transform:
   m_Children:
   - {fileID: 510165056316791684}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7630765295138871336
 MeshFilter:
@@ -280,7 +280,7 @@ MonoBehaviour:
   cooldown: 2.1
   spread: 1.07
   drawTime: 2
-  hasSourceOfTruth: 0
+  hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
   shouldRenderTracer: 1
