@@ -100,7 +100,7 @@ public class PlayerInputHanlder : MonoBehaviour
         if(obj.action.WasPerformedThisFrame()){
             pauseMenu.gameObject.SetActive(!pauseMenu.gameObject.activeInHierarchy);
             isPaused = pauseMenu.gameObject.activeInHierarchy;
-            Debug.Log("Pause button clicked.");
+            //Debug.Log("Pause button clicked.");
         }
     }
 }

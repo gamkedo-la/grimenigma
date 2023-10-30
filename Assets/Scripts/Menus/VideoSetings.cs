@@ -86,7 +86,7 @@ public class VideoSetings : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Debug.Log("New resolution selected:" + resolutionIndex);
+        //Debug.Log("New resolution selected:" + resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         SetScreen(resolution, Screen.fullScreenMode);
     }
@@ -196,7 +196,7 @@ public class VideoSetings : MonoBehaviour
 
     void SetScreen(Resolution resolution, FullScreenMode screenMode)
     {
-        Debug.Log("Setting screen with values:" + "," + resolution.width + "," +resolution.height + "," +screenMode);
+        //Debug.Log("Setting screen with values:" + "," + resolution.width + "," +resolution.height + "," +screenMode);
         Screen.SetResolution(resolution.width, resolution.height, screenMode);
     }
 
