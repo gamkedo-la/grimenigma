@@ -13,7 +13,7 @@ public class ChangeUIImageColorOnEvent : MonoBehaviour
     [SerializeField] public Color altColor;
     [HideInInspector] public Color baseColor;
 
-    void Awake()
+    void Start()
     {
         baseColor = GetComponent<Image>().color;
     }
