@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class FlipDoubleJumpIconColor : ChangeUIImageColorOnEvent
+public class FlipDashIconColor : ChangeUIImageColorOnEvent
 {
     PlayerMovement pMovement;
 
@@ -13,11 +15,12 @@ public class FlipDoubleJumpIconColor : ChangeUIImageColorOnEvent
 
     void OnEnable()
     {
-        pMovement.onAirJumpAvailable += UpdateColor;
+        pMovement.onDashAvailable += UpdateColor;
     }
 
     void OnDisable()
     {
-        pMovement.onAirJumpAvailable -= UpdateColor;
+        pMovement.onDashAvailable -= UpdateColor;
     }
+
 }
