@@ -19,7 +19,6 @@ public class UIController : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log(healthSlider);
         GameObject pBody = GameObject.Find("Player/Body");
         pInput = pBody.GetComponent<PlayerInputHanlder>();
         healthData = pBody.GetComponent<HealthController>();
