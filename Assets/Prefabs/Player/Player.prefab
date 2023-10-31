@@ -1257,8 +1257,8 @@ Transform:
   m_Children:
   - {fileID: 6837168361299740408}
   - {fileID: 5390537495299956796}
-  - {fileID: 1711682864974971250}
   - {fileID: 1624699867429792895}
+  - {fileID: 1711682864974971250}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3664,10 +3664,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5675921759073615266}
     m_Modifications:
+    - target: {fileID: 801715600031151468, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 4526378503786650343}
     - target: {fileID: 2061754917684904611, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
       propertyPath: pHeathController
       value: 
       objectReference: {fileID: 2828438361496921034}
+    - target: {fileID: 4287541982088260217, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681586933821792112, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5011653464298557162, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3768,6 +3780,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7787600857454855793, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8105180345411960912, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3786,6 +3802,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5011653464298557162, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
   m_PrefabInstance: {fileID: 5981043836759696021}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4526378503786650343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7912827750563657842, guid: 08e38f509c1281f45a201275249b71cc, type: 3}
+  m_PrefabInstance: {fileID: 5981043836759696021}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6105421843764750141
 PrefabInstance:
   m_ObjectHideFlags: 0

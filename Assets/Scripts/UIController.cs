@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public Slider slider;
-    public Text healthText, ammoText;
+    [SerializeField] public Slider healthSlider, ammoSlider;
+    [SerializeField] public Text healthText, ammoText;
 
     PlayerInputHanlder pInput;
     HealthController healthData;
@@ -19,6 +19,7 @@ public class UIController : MonoBehaviour
 
     void OnEnable()
     {
+        Debug.Log(healthSlider);
         GameObject pBody = GameObject.Find("Player/Body");
         pInput = pBody.GetComponent<PlayerInputHanlder>();
         healthData = pBody.GetComponent<HealthController>();
@@ -64,25 +65,25 @@ public class UIController : MonoBehaviour
     {
         healthText.text = health.ToString();
         currentHealth = (float)health/100f;
-        slider.value = currentHealth;
+        healthSlider.value = currentHealth;
     }
 
     void SetHealth(int health) {
         healthText.text = health.ToString();
         currentHealth = (float)health/100f;
-        slider.value = currentHealth;
+        healthSlider.value = currentHealth;
     }
 
     void SetMaxAmmo(int ammo)
     {
         ammoText.text = ammo.ToString();
         currentAmmo = (float)ammo;
-        slider.value = currentAmmo;
+        ammoSlider.value = currentAmmo;
     }
 
     void SetAmmo(int ammo) {
         ammoText.text = ammo.ToString();
         currentAmmo = (float)ammo;
-        slider.value = currentAmmo;
+        ammoSlider.value = currentAmmo;
     }
 }
