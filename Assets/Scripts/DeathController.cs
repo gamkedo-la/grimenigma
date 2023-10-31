@@ -4,17 +4,21 @@ public class DeathController: MonoBehaviour
 {
     [Header("OnDeath")]
     [SerializeField] bool destroyOnDeath = true;
+    [SerializeField] float delay = 0;
     [SerializeField] bool dropItem;
     [SerializeField] public GameObject[] itemDrops;
     [Header("Optional Settings")]
     [SerializeField] GameObject owner;
+
+    public event System.Action<GameObject> onDeath;
+
     GameObject thingToKill;
 
     public void HandleDeath()
     {
+        onDeath?.Invoke(gameObject);
         if(dropItem){ DropResource(); }
-
-        if(destroyOnDeath){ Destroy(thingToKill); }
+        if(destroyOnDeath){ Destroy(thingToKill, delay); }
         else { thingToKill.SetActive(false); }
 
         //Debug.Log("Entity " + this + " has died!");
