@@ -31,6 +31,7 @@ public class VideoSetings : MonoBehaviour
             PlayerPrefs.GetFloat("gamepad_horizontal_sensativity", PlayerPrefsDefault.Floats["mouse_horizontal_sensativity"]),
             PlayerPrefs.GetFloat("gamepad_verticle_sensativity", PlayerPrefsDefault.Floats["mouse_horizontal_sensativity"])
             );
+        PlayerPrefs.SetFloat("scale_weapon", PlayerPrefs.GetFloat("scale_weapon", PlayerPrefsDefault.Floats["scale_weapon"]));
         PlayerPrefs.SetInt("resolution_height", Screen.currentResolution.height);
         PlayerPrefs.SetInt("resolution_width", Screen.currentResolution.width);
         PlayerPrefs.SetInt("full_screen_mode", (int)Screen.fullScreenMode);
@@ -45,6 +46,7 @@ public class VideoSetings : MonoBehaviour
     public void ClearPlayerPrefs()
     {
         PlayerPrefs.DeleteKey("fov");
+        PlayerPrefs.DeleteKey("scale_weapon");
         PlayerPrefs.DeleteKey("mouse_horizontal_sensativity");
         PlayerPrefs.DeleteKey("mouse_verticle_sensativity");
         PlayerPrefs.DeleteKey("gamepad_horizontal_sensativity");

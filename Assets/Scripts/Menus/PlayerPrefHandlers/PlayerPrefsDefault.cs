@@ -11,6 +11,7 @@ public static class PlayerPrefsDefault
     public static readonly Dictionary<string, float> Floats = new Dictionary<string, float>
     {
         { "fov", 90 },
+        { "scale_weapon", 97},
         { "mouse_verticle_sensativity", 7},
         { "mouse_horizontal_sensativity", 7},
         { "gamepad_verticle_sensativity", 100},
