@@ -945,6 +945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2143551317898252967}
   - component: {fileID: 1348680769915851245}
+  - component: {fileID: 1123139078736936964}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1038,6 +1039,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1123139078736936964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743776359159769875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca6346d784b0a34db744f16b7a97bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataType: 0
+  preffenceName: fx_volume
 --- !u!1 &3210006100928626608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,6 +1571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2539604127196224721}
   - component: {fileID: 5995620592591769678}
+  - component: {fileID: 4497016388035671513}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1649,6 +1665,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4497016388035671513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5013974538678720636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca6346d784b0a34db744f16b7a97bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataType: 0
+  preffenceName: weapon_volume
 --- !u!1 &5047803125488219403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,7 +2013,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1101670184567472193}
         m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
-        m_MethodName: SetVolumeSettings
+        m_MethodName: ClearPlayerPrefs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2003,6 +2033,7 @@ GameObject:
   m_Component:
   - component: {fileID: 777521509948970442}
   - component: {fileID: 1982090056132265009}
+  - component: {fileID: 8907606060674886697}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -2096,6 +2127,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8907606060674886697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6313717897793477601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca6346d784b0a34db744f16b7a97bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataType: 0
+  preffenceName: master_volume
 --- !u!1 &6426109068106167506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2354,6 +2399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3017827278452208121}
   - component: {fileID: 1206129436032697969}
+  - component: {fileID: 5779469100040604700}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -2447,6 +2493,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5779469100040604700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7080975820309605192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca6346d784b0a34db744f16b7a97bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataType: 0
+  preffenceName: music_volume
 --- !u!1 &7649715708489936074
 GameObject:
   m_ObjectHideFlags: 0

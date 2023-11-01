@@ -3536,6 +3536,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 4440369992697741013, guid: 8fa3a5bcd3e1e5c49bd59ca2acc450f1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AppyVideoSettings
+      objectReference: {fileID: 0}
     - target: {fileID: 5846477903158419688, guid: 8fa3a5bcd3e1e5c49bd59ca2acc450f1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3626,6 +3630,7 @@ PrefabInstance:
       objectReference: {fileID: 3865243717588823144}
     m_RemovedComponents:
     - {fileID: 8498011946436559957, guid: 8fa3a5bcd3e1e5c49bd59ca2acc450f1, type: 3}
+    - {fileID: 1688487140354311608, guid: 8fa3a5bcd3e1e5c49bd59ca2acc450f1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
