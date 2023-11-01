@@ -1583,6 +1583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hardLandingThreshold: 60
+  fovPref: {fileID: 2431546842342106199}
   videoSettings: {fileID: 4080527427729074987}
   hasLandedThisCycle: 0
   isGrounded: 0
@@ -2653,7 +2654,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 65.51965
+  field of view: 58.700863
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3634,6 +3635,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5846477903158419688, guid: 8fa3a5bcd3e1e5c49bd59ca2acc450f1, type: 3}
   m_PrefabInstance: {fileID: 5108140611213025690}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2431546842342106199 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7448201898150020557, guid: 8fa3a5bcd3e1e5c49bd59ca2acc450f1, type: 3}
+  m_PrefabInstance: {fileID: 5108140611213025690}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca6346d784b0a34db744f16b7a97bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4080527427729074987 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9098169277975808689, guid: 8fa3a5bcd3e1e5c49bd59ca2acc450f1, type: 3}

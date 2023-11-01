@@ -5,13 +5,14 @@ public class PlayerPrefsUI : MonoBehaviour
     [SerializeField] PlayerPrefType dataType;
     [SerializeField] string preffenceName;
 
+    public System.Action<object> onChange;
+
     PlayerPrefsHandler prefferenceHandler;
 
-    System.Action<object> onPrefChange;
 
     public void OnValueChange(object value)
     {
-        onPrefChange?.Invoke(value);
+        onChange?.Invoke(value);
         prefferenceHandler.SetValue(value);
         Debug.Log(prefferenceHandler.GetValue());
     }
