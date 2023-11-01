@@ -15,5 +15,9 @@ public static class PlayerPrefsDefault
         { "mouse_horizontal_sensativity", 7},
         { "gamepad_verticle_sensativity", 100},
         { "gamepad_horizontal_sensativity", 100},
+        { "master_volume", 0 },
+        { "music_volume", 0 },
+        { "fx_volume", 0 },
+        { "weapon_volume", 0 },
     };
 }
