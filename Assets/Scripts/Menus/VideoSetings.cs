@@ -38,11 +38,20 @@ public class VideoSetings : MonoBehaviour
         SetVideoSettings();
 
         RefreshMenuValues();
+
+        PlayerPrefs.Save();
     }
 
     public void ClearPlayerPrefs()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("fov");
+        PlayerPrefs.DeleteKey("mouse_horizontal_sensativity");
+        PlayerPrefs.DeleteKey("mouse_verticle_sensativity");
+        PlayerPrefs.DeleteKey("gamepad_horizontal_sensativity");
+        PlayerPrefs.DeleteKey("gamepad_verticle_sensativity");
+        PlayerPrefs.DeleteKey("resolution_height");
+        PlayerPrefs.DeleteKey("resolution_width");
+        PlayerPrefs.DeleteKey("full_screen_mode");
         PlayerPrefs.Save();
     }
 
@@ -193,8 +202,6 @@ public class VideoSetings : MonoBehaviour
         currentFullScreenModeIndex = GetCurrentFullScreenModeIndex();
         windowModeDropdown.value = currentFullScreenModeIndex;
         windowModeDropdown.RefreshShownValue();
-
-        fovSlider.value = PlayerPrefs.GetFloat("fov", PlayerPrefsDefault.Floats["fov"]);
     }
 
     void SetScreen(Resolution resolution, FullScreenMode screenMode)
