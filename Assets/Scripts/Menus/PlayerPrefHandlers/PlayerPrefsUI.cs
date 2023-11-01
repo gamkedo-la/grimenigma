@@ -14,7 +14,7 @@ public class PlayerPrefsUI : MonoBehaviour
     {
         onChange?.Invoke(value);
         prefferenceHandler.SetValue(value);
-        Debug.Log(prefferenceHandler.GetValue());
+        //Debug.Log(prefferenceHandler.GetValue());
     }
 
     void Awake()
