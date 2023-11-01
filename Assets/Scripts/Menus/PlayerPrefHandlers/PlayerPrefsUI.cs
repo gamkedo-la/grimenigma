@@ -7,7 +7,7 @@ public class PlayerPrefsUI : MonoBehaviour
 
     public System.Action<object> onChange;
 
-    PlayerPrefsHandler prefferenceHandler;
+    public PlayerPrefsHandler prefferenceHandler;
 
 
     public void OnValueChange(object value)
