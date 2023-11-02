@@ -25,6 +25,6 @@ public static class PlayerPrefsDefault
 
     public static readonly Dictionary<string, string> Strings = new Dictionary<string, string>
     {
-        { "crossair_style", "cross" }
+        { "crossair_style", "Cross" }
     };
 }
