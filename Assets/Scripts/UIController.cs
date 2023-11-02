@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] public Slider healthSlider, ammoSlider;
-    [SerializeField] public Text healthText, ammoText;
+    [SerializeField] public Slider healthSlider, armourSlider, ammoSlider;
+    [SerializeField] public Text healthText, armourText, ammoText;
 
     PlayerInputHanlder pInput;
     HealthController healthData;
@@ -14,7 +14,7 @@ public class UIController : MonoBehaviour
     AttackController ammoDataL, ammoDataR;
 
 
-    float currentHealth;
+    float currentHealth, currentArmour;
     float currentAmmo;
 
     void OnEnable()
@@ -28,6 +28,7 @@ public class UIController : MonoBehaviour
         GetCurrentWeapon(1);
 
         SetMaxHealth(healthData.baseHP);
+        SetMaxArmour(healthData.maxArmour);
         SetMaxAmmo(ammoDataL.ammo);
 
         pInput.onWeaponSwap += GetCurrentWeapon;
@@ -41,6 +42,7 @@ public class UIController : MonoBehaviour
     void Update()
     {
         if(currentHealth != healthData.hp){ SetHealth(healthData.hp); }
+        if(currentHealth != healthData.armour){ SetArmour(healthData.armour); }
         if(currentAmmo != ammoDataL.ammo){ SetAmmo(ammoDataL.ammo); }
     }
 
@@ -71,6 +73,19 @@ public class UIController : MonoBehaviour
         healthText.text = health.ToString();
         currentHealth = (float)health/100f;
         healthSlider.value = currentHealth;
+    }
+
+    void SetMaxArmour(int armour)
+    {
+        armourText.text = armour.ToString();
+        currentArmour = (float)armour/100f;
+        armourSlider.value = currentArmour;
+    }
+
+    void SetArmour(int armour) {
+        armourText.text = armour.ToString();
+        currentArmour = (float)armour/100f;
+        armourSlider.value = currentArmour;
     }
 
     void SetMaxAmmo(int ammo)
