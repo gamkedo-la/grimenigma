@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
     AudioSource sourceAudio;
     GameObject currentMenu;
 
+    public void ApplyPlayerPrefs()
+    {
+        PlayerPrefs.Save();
+    }
+
     public void Play()
     {
         // Uses scene order to load next scene after main menu.

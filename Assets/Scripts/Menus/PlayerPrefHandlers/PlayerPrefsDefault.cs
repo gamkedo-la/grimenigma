@@ -20,5 +20,11 @@ public static class PlayerPrefsDefault
         { "music_volume", 0 },
         { "fx_volume", 0 },
         { "weapon_volume", 0 },
+        { "crossair_scale", 0.5f },
+    };
+
+    public static readonly Dictionary<string, string> Strings = new Dictionary<string, string>
+    {
+        { "crossair_style", "cross" }
     };
 }
