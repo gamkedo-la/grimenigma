@@ -43,7 +43,11 @@ public class UIController : MonoBehaviour
     {
         if(currentHealth != healthData.hp){ SetHealth(healthData.hp); }
         if(currentHealth != healthData.armour){ SetArmour(healthData.armour); }
-        if(currentAmmo != ammoDataL.ammo){ SetAmmo(ammoDataL.ammo); }
+        if(ammoDataL.infiniteAmmmo){
+            ammoText.text = "Infin";
+            ammoSlider.value = ammoDataL.maxAmmo;
+        }
+        else if(currentAmmo != ammoDataL.ammo){ SetAmmo(ammoDataL.ammo); }
     }
 
     void  GetCurrentWeapon(int armID)
