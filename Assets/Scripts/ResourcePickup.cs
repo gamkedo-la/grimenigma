@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(UnityEngine.Collider))]
+[RequireComponent(typeof(Collider))]
 public class ResourcePickup : MonoBehaviour
 {
     enum ResourceType{
@@ -59,19 +59,19 @@ public class ResourcePickup : MonoBehaviour
     void HandleAmmunition(Collider other)
     {
         other.transform.gameObject.GetComponent<PlayerAttack>()?.CurrentWeapon.AddAmmo(ammount);
-        Debug.Log("Ammo item picked up");
+        //Debug.Log("Ammo item picked up");
     }
 
     void HandleArmour(Collider other)
     {
         other.transform.gameObject.GetComponent<HealthController>()?.AddArmour(ammount);
-        Debug.Log("Player Armour:"  + other.transform.gameObject.GetComponent<HealthController>().armour);
+        //Debug.Log("Player Armour:"  + other.transform.gameObject.GetComponent<HealthController>().armour);
     }
 
     void HanndleSpeed(Collider other)
     {
         other.transform.gameObject.GetComponent<SpeedController>()?.ChangeSpeed((float) ammount);
-        Debug.Log("Player speed: " + other.gameObject.GetComponent<SpeedController>().speed);
+        //Debug.Log("Player speed: " + other.gameObject.GetComponent<SpeedController>().speed);
     }
 
     void PlaySoundFX()

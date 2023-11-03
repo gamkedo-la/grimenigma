@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
         if(!inventory.ContainsKey(item)){ inventory.Add(item, 0); }
         inventory[item] += quantity;
 
-        Debug.Log("Gained inventory item!");
+        //Debug.Log("Gained inventory item!");
 
         return 1;
     }
