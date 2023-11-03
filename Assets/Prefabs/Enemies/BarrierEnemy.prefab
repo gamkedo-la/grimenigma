@@ -40,7 +40,7 @@ Transform:
   m_Children:
   - {fileID: 3724098021701184293}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1315843524423337076
 CapsuleCollider:
@@ -130,20 +130,29 @@ MonoBehaviour:
   maxAttacks: 3
   initialSpreadPenalty: 1
   imporoveSpreadIncrement: 0.01
-  weapon: {fileID: 5589411272721340120}
-  barrier: {fileID: 8318213029702555813, guid: 3f289973caf9a0843914884f8159d223, type: 3}
-  barrierCoolDown: 10
   patrolRange: 10
   maintainDistanceFromTarget: 50
-  soundSource: {fileID: 3389114392621468411}
   alertSound: {fileID: 8300000, guid: a22ffb80ad1b5b54fab1720c2830abc6, type: 3}
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 1073741824
-  hpController: {fileID: 8110927928644088323}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2147483649
+  soundSource: {fileID: 3389114392621468411}
+  hpController: {fileID: 8110927928644088323}
+  weapon: {fileID: 5589411272721340120}
+  vision: {fileID: 0}
+  agentMove: {fileID: 0}
+  agent: {fileID: 0}
+  state: 0
+  target: {fileID: 0}
+  spawnPosition: {x: 0, y: 0, z: 0}
+  isPerformingAction: 0
+  isAlerted: 0
+  currentSpread: 0
+  barrierCoolDown: 10
+  barrier: {fileID: 4549540104936307352, guid: 3f289973caf9a0843914884f8159d223, type: 3}
 --- !u!114 &1114925912610448396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5b3d8fc53b50c4c854d4d3ac10cd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 75
-  angle: 170
+  radius: 150
+  angle: 360
   ObstructionMask:
     serializedVersion: 2
     m_Bits: 4227858449
@@ -199,7 +208,7 @@ MonoBehaviour:
   cooldown: 5
   spread: 0
   drawTime: 1
-  hasSourceOfTruth: 0
+  hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
   projectile: {fileID: 0}
   shouldRenderTracer: 0
@@ -210,7 +219,9 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   soundSource: {fileID: 3389114392621468411}
-  fxSound: {fileID: 8300000, guid: 35ec5e4474ebf034ab5b03e81e213ae8, type: 3}
+  firingSFX: {fileID: 0}
+  hasChargeSound: 0
+  chargeSFX: {fileID: 0}
   ownerTag: 
   inclusionMasks:
     serializedVersion: 2
@@ -229,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnDeath: 1
+  delay: 0
   dropItem: 0
   itemDrops: []
   owner: {fileID: 0}
