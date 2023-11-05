@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 7630765295138871349}
   - component: {fileID: 1899428135238325818}
   - component: {fileID: 6749481306879995972}
+  - component: {fileID: 7531508779926904030}
   m_Layer: 3
   m_Name: HitscanEnemy
   m_TagString: enemy
@@ -437,6 +438,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7531508779926904030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630765295138871340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a12d60a4ee95f449b73eacd5604ad9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8201726889438968295
 GameObject:
   m_ObjectHideFlags: 0
