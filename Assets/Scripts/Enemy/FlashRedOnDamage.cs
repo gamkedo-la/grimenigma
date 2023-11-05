@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class FlashRedOnDamage : MonoBehaviour
 {
-    private HealthController healthController;
-    private Material material;
-    private Color originalColor;
+    [SerializeField] HealthController healthController;
+    Material material;
+    Color originalColor;
 
     void Start()
     {
-        healthController = GetComponent<HealthController>();
+        if(healthController == null){ healthController = GetComponent<HealthController>(); }
         material = GetComponent<Renderer>().material;
         originalColor = material.color;
 
