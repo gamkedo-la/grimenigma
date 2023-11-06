@@ -1,20 +1,33 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+
+[Serializable]
+public class AbilityCooldown: UnityEvent<bool>{}
 
 public class ChangeUIImageColorOnEvent : MonoBehaviour
 {
     [SerializeField] public Image icon;
     [SerializeField] public Color altColor;
-
     [HideInInspector] public Color baseColor;
 
-    void Awake()
+    void Start()
     {
         baseColor = GetComponent<Image>().color;
     }
 
-    public void SetColor(Color myColor)
+    public void UpdateColor(bool isAvailable)
     {
-        icon.color = myColor;
+        switch (isAvailable)
+        {
+            case true:
+                icon.color = baseColor;
+                break;
+            default:
+                icon.color = altColor;
+                break;
+        }
     }
 }

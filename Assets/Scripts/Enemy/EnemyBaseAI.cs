@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgentMovement))]
 [RequireComponent(typeof(EnemyVision))]
 [RequireComponent(typeof(AttackController))]
 [RequireComponent(typeof(HealthController))]
@@ -22,12 +23,12 @@ public abstract class EnemyBaseAI : MonoBehaviour
     [SerializeField] public float maintainDistanceFromTarget;
     [Header("Audio")]
     [SerializeField] public AudioClip alertSound;
+    [SerializeField] public AudioSource soundSource;
     [Header("Bodge Settings")]
     [SerializeField] public LayerMask whatIsTarget;
     
     [SerializeField] public LayerMask whatIsGround;
 
-    [HideInInspector] public AudioSource soundSource;
     [HideInInspector] public HealthController hpController;
     [HideInInspector] public AttackController weapon;
     [HideInInspector] public EnemyVision vision;
@@ -44,23 +45,23 @@ public abstract class EnemyBaseAI : MonoBehaviour
     public abstract void HandleAlerted();
     public abstract void HandleChase();
 
-    void Start()
+    void OnEnable()
     {
         vision = GetComponent<EnemyVision>();
         agent = GetComponent<NavMeshAgent>();
         agentMove = GetComponent<NavMeshAgentMovement>();
-        hpController = gameObject.GetComponent<HealthController>();
-
+        hpController = GetComponent<HealthController>();
+        weapon = GetComponent<AttackController>();
         target = GameObject.Find("Player/Body").transform;
 
+        hpController.onDamage += RecievedDamage;
+    }
+
+    void Start()
+    {
         spawnPosition = transform.position;
         state = AIState.idle;
         isAlerted = false;
-    }
-
-    void OnEnable()
-    {
-        hpController.onDamage += RecievedDamage;
     }
 
     void OnDisable()

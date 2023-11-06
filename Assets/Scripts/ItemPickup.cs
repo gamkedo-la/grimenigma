@@ -34,11 +34,11 @@ public class ItemPickup : MonoBehaviour
         if(other.tag != "Player"){ return; }
         
         if(other.gameObject.GetComponent<Inventory>()?.AddItem(item, quantity) == 1){
-            Debug.Log(this.name+ " Pickup Triggered!");
+            //Debug.Log(this.name+ " Pickup Triggered!");
             PlaySoundFX();
             HandlePickup();
         } else {
-            Debug.Log(this.name+ " Duplicate Pickup Ignored!");
+            //Debug.Log(this.name+ " Duplicate Pickup Ignored!");
         }
     }
 
@@ -64,7 +64,7 @@ public class ItemPickup : MonoBehaviour
 
     void PlaySoundFX()
     {
-        Debug.Log("Playing sound " + fxSound.name);
+        //Debug.Log("Playing sound " + fxSound.name);
         soundSource.pitch = Random.Range(0.9f, 1.1f);
         soundSource.PlayOneShot(fxSound);
     }

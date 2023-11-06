@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public Slider slider;
-    public Text healthText, ammoText;
+    [SerializeField] public Slider healthSlider, armourSlider, ammoSlider;
+    [SerializeField] public Text healthText, armourText, ammoText;
 
     PlayerInputHanlder pInput;
     HealthController healthData;
@@ -14,7 +14,7 @@ public class UIController : MonoBehaviour
     AttackController ammoDataL, ammoDataR;
 
 
-    float currentHealth;
+    float currentHealth, currentArmour;
     float currentAmmo;
 
     void OnEnable()
@@ -28,6 +28,7 @@ public class UIController : MonoBehaviour
         GetCurrentWeapon(1);
 
         SetMaxHealth(healthData.baseHP);
+        SetMaxArmour(healthData.maxArmour);
         SetMaxAmmo(ammoDataL.ammo);
 
         pInput.onWeaponSwap += GetCurrentWeapon;
@@ -41,7 +42,12 @@ public class UIController : MonoBehaviour
     void Update()
     {
         if(currentHealth != healthData.hp){ SetHealth(healthData.hp); }
-        if(currentAmmo != ammoDataL.ammo){ SetAmmo(ammoDataL.ammo); }
+        if(currentHealth != healthData.armour){ SetArmour(healthData.armour); }
+        if(ammoDataL.infiniteAmmmo){
+            ammoText.text = "Infin";
+            ammoSlider.value = ammoDataL.maxAmmo;
+        }
+        else if(currentAmmo != ammoDataL.ammo){ SetAmmo(ammoDataL.ammo); }
     }
 
     void  GetCurrentWeapon(int armID)
@@ -64,25 +70,38 @@ public class UIController : MonoBehaviour
     {
         healthText.text = health.ToString();
         currentHealth = (float)health/100f;
-        slider.value = currentHealth;
+        healthSlider.value = currentHealth;
     }
 
     void SetHealth(int health) {
         healthText.text = health.ToString();
         currentHealth = (float)health/100f;
-        slider.value = currentHealth;
+        healthSlider.value = currentHealth;
+    }
+
+    void SetMaxArmour(int armour)
+    {
+        armourText.text = armour.ToString();
+        currentArmour = (float)armour/100f;
+        armourSlider.value = currentArmour;
+    }
+
+    void SetArmour(int armour) {
+        armourText.text = armour.ToString();
+        currentArmour = (float)armour/100f;
+        armourSlider.value = currentArmour;
     }
 
     void SetMaxAmmo(int ammo)
     {
         ammoText.text = ammo.ToString();
         currentAmmo = (float)ammo;
-        slider.value = currentAmmo;
+        ammoSlider.value = currentAmmo;
     }
 
     void SetAmmo(int ammo) {
         ammoText.text = ammo.ToString();
         currentAmmo = (float)ammo;
-        slider.value = currentAmmo;
+        ammoSlider.value = currentAmmo;
     }
 }

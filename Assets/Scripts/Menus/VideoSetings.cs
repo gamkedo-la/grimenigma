@@ -23,17 +23,38 @@ public class VideoSetings : MonoBehaviour
 
     public void AppyVideoSettings()
     {
-        PlayerPrefs.SetFloat("fov", fov);
-        onFovChange?.Invoke(fov);
-        PlayerPrefs.SetFloat("mouse_verticle_sensativity", mouseVerticleSensativity);
-        PlayerPrefs.SetFloat("mouse_horizontal_sensativity", mouseHorizontalSensativity);
-        PlayerPrefs.SetFloat("gamepad_verticle_sensativity", gamepadVerticleSensativity);
-        PlayerPrefs.SetFloat("gamepad_horizontal_sensativity", gamepadHorizontalSensativity);
+        
+        onFovChange?.Invoke(PlayerPrefs.GetFloat("fov", PlayerPrefsDefault.Floats["fov"]));
+        onSensativityChange?.Invoke(
+            PlayerPrefs.GetFloat("mouse_horizontal_sensativity", PlayerPrefsDefault.Floats["mouse_horizontal_sensativity"]),
+            PlayerPrefs.GetFloat("mouse_verticle_sensativity", PlayerPrefsDefault.Floats["mouse_verticle_sensativity"]),
+            PlayerPrefs.GetFloat("gamepad_horizontal_sensativity", PlayerPrefsDefault.Floats["mouse_horizontal_sensativity"]),
+            PlayerPrefs.GetFloat("gamepad_verticle_sensativity", PlayerPrefsDefault.Floats["mouse_horizontal_sensativity"])
+            );
+        PlayerPrefs.SetFloat("scale_weapon", PlayerPrefs.GetFloat("scale_weapon", PlayerPrefsDefault.Floats["scale_weapon"]));
         PlayerPrefs.SetInt("resolution_height", Screen.currentResolution.height);
         PlayerPrefs.SetInt("resolution_width", Screen.currentResolution.width);
         PlayerPrefs.SetInt("full_screen_mode", (int)Screen.fullScreenMode);
 
         SetVideoSettings();
+
+        RefreshMenuValues();
+
+        PlayerPrefs.Save();
+    }
+
+    public void ClearPlayerPrefs()
+    {
+        PlayerPrefs.DeleteKey("fov");
+        PlayerPrefs.DeleteKey("scale_weapon");
+        PlayerPrefs.DeleteKey("mouse_horizontal_sensativity");
+        PlayerPrefs.DeleteKey("mouse_verticle_sensativity");
+        PlayerPrefs.DeleteKey("gamepad_horizontal_sensativity");
+        PlayerPrefs.DeleteKey("gamepad_verticle_sensativity");
+        PlayerPrefs.DeleteKey("resolution_height");
+        PlayerPrefs.DeleteKey("resolution_width");
+        PlayerPrefs.DeleteKey("full_screen_mode");
+        PlayerPrefs.Save();
     }
 
     public void SetVideoSettings()
@@ -44,13 +65,6 @@ public class VideoSetings : MonoBehaviour
         resolution.refreshRateRatio = Screen.currentResolution.refreshRateRatio;
         FullScreenMode screenMode = (FullScreenMode) PlayerPrefs.GetInt("full_screen_mode", 1);
         SetScreen(resolution, screenMode);
-
-        fov = PlayerPrefs.GetFloat("fov", PlayerPrefsDefault.defaultFov);
-        gamepadVerticleSensativity = PlayerPrefs.GetFloat("gamepad_verticle_sensativity", PlayerPrefsDefault.defaultGamepadVerticleSensativity);
-        gamepadHorizontalSensativity = PlayerPrefs.GetFloat("gamepad_horizontal_sensativity", PlayerPrefsDefault.defaultGamepadHorizontalSensativity);
-        mouseVerticleSensativity = PlayerPrefs.GetFloat("mouse_verticle_sensativity", PlayerPrefsDefault.defaultMouseVerticleSensativity);
-        mouseHorizontalSensativity = PlayerPrefs.GetFloat("mouse_horizonal_sensativity", PlayerPrefsDefault.defaultMouseHorizontalSensativity);
-        onSensativityChange?.Invoke(mouseHorizontalSensativity, mouseVerticleSensativity, gamepadHorizontalSensativity, gamepadVerticleSensativity);
 
         RefreshMenuValues();
     }
@@ -86,7 +100,7 @@ public class VideoSetings : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Debug.Log("New resolution selected:" + resolutionIndex);
+        //Debug.Log("New resolution selected:" + resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         SetScreen(resolution, Screen.fullScreenMode);
     }
@@ -190,13 +204,11 @@ public class VideoSetings : MonoBehaviour
         currentFullScreenModeIndex = GetCurrentFullScreenModeIndex();
         windowModeDropdown.value = currentFullScreenModeIndex;
         windowModeDropdown.RefreshShownValue();
-
-        fovSlider.value = fov;
     }
 
     void SetScreen(Resolution resolution, FullScreenMode screenMode)
     {
-        Debug.Log("Setting screen with values:" + "," + resolution.width + "," +resolution.height + "," +screenMode);
+        //Debug.Log("Setting screen with values:" + "," + resolution.width + "," +resolution.height + "," +screenMode);
         Screen.SetResolution(resolution.width, resolution.height, screenMode);
     }
 

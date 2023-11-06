@@ -13,11 +13,14 @@ public class Projectile : MonoBehaviour
     [SerializeField] public int damage = 1;
     [SerializeField] public float speed = 1f;
     [SerializeField] public float range = 5000f;
+    [SerializeField] public GameObject impactFxPrefab;
+
     [Header("Explosive Properties")]
     [SerializeField] float exposionRadius;
     [SerializeField] int maxHits;
     [SerializeField] LayerMask masksToHit;
     [SerializeField] LayerMask blockExplosionMasks;
+
     [Header("Animaton")]
     [SerializeField] ScriptedAnimations sa;
     [SerializeField] float rotateX;
@@ -61,6 +64,9 @@ public class Projectile : MonoBehaviour
             //Debug.Log(this.gameObject.name + " with ownerTag of " + ownerTag + " collided with object " + other.gameObject.name);
             HandleCollision(other.gameObject);
             gameObject.SetActive(false);
+            if (impactFxPrefab) {
+                Instantiate(impactFxPrefab,transform.position,transform.rotation);
+            }
         }
     }
 

@@ -17,7 +17,6 @@ public class PlayerInputHanlder : MonoBehaviour
     Vector2 moveInput, cameraInput;
 
     string controlType;
-    bool isPaused;
 
     void Awake()
     {
@@ -31,12 +30,7 @@ public class PlayerInputHanlder : MonoBehaviour
         input.Player.Camera.canceled += GetCameraInput;
         input.Player.PauseMenu.performed += PauseGame;
     }
-
-    void Start()
-    {
-        isPaused = false;
-    }
-
+    
     void OnDisable()
     {
         input.Player.Camera.performed -= GetCameraInput;
@@ -48,8 +42,7 @@ public class PlayerInputHanlder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isPaused){
-
+        if(Time.timeScale > 0){
             moveInput = input.Player.Movement.ReadValue<Vector2>();
             cameraInput = input.Player.Camera.ReadValue<Vector2>();
 
@@ -86,7 +79,6 @@ public class PlayerInputHanlder : MonoBehaviour
 
             if(Input.GetKeyDown(KeyCode.K)){ pHealth.Damage(1, gameObject); }
             if(Input.GetKeyDown(KeyCode.H)){ pHealth.Heal(1); }
-
         }
     }
 
@@ -99,8 +91,7 @@ public class PlayerInputHanlder : MonoBehaviour
     {
         if(obj.action.WasPerformedThisFrame()){
             pauseMenu.gameObject.SetActive(!pauseMenu.gameObject.activeInHierarchy);
-            isPaused = pauseMenu.gameObject.activeInHierarchy;
-            Debug.Log("Pause button clicked.");
+            //Debug.Log("Pause button clicked.");
         }
     }
 }

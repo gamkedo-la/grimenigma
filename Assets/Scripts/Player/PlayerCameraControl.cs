@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,12 +42,17 @@ public class PlayerCameraControl : MonoBehaviour
     Vector2 moveInputLast = Vector2.zero;
     Quaternion moveInputRotation = new Quaternion();
 
+    void OnEnable()
+    {
+        pData.onRefreshFOV += SetFOV;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        pCamera.fieldOfView = PlayerPrefs.GetFloat("fov", PlayerPrefsDefault.defaultFov);
+        pCamera.fieldOfView = PlayerPrefs.GetFloat("fov", PlayerPrefsDefault.Floats["fov"]);
         hardLandingThreshold = pData.hardLandingThreshold;
     }
 
@@ -156,5 +162,10 @@ public class PlayerCameraControl : MonoBehaviour
         xRotation = Mathf.Clamp((xRotation-mouseY), -90f, 90f);
         player.rotation = Quaternion.Euler(0f, yRotation, 0f);
         return rotation = Quaternion.Euler(xRotation, yRotation, 0);
+    }
+
+    void SetFOV(float fov)
+    {
+        pCamera.fieldOfView = fov;
     }
 }

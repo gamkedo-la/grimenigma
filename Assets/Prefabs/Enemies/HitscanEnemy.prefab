@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 7630765295138871349}
   - component: {fileID: 1899428135238325818}
   - component: {fileID: 6749481306879995972}
+  - component: {fileID: 7531508779926904030}
   m_Layer: 3
   m_Name: HitscanEnemy
   m_TagString: enemy
@@ -210,8 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5b3d8fc53b50c4c854d4d3ac10cd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 26
-  angle: 120
+  radius: 150
+  angle: 360
   ObstructionMask:
     serializedVersion: 2
     m_Bits: 3154116663
@@ -333,6 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnDeath: 1
+  delay: 0
   dropItem: 1
   itemDrops:
   - {fileID: 1400513014605336469, guid: bc1f69f0b5a936a4abde2a4cc40b6ad7, type: 3}
@@ -436,6 +438,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7531508779926904030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630765295138871340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a12d60a4ee95f449b73eacd5604ad9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8201726889438968295
 GameObject:
   m_ObjectHideFlags: 0

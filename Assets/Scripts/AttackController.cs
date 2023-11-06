@@ -26,7 +26,7 @@ public class AttackController : MonoBehaviour
     //[SerializeField] float patternSteps = 0f;
     [Header("Ammo")]
     [SerializeField] int projectileAmmount = 1;
-    [SerializeField] bool infiniteAmmmo;
+    [SerializeField] public bool infiniteAmmmo;
     [SerializeField] public int ammo, maxAmmo;
     [Header("Audio")]
     [SerializeField] AudioSource soundSource;

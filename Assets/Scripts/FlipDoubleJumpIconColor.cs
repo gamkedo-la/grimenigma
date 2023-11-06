@@ -13,20 +13,11 @@ public class FlipDoubleJumpIconColor : ChangeUIImageColorOnEvent
 
     void OnEnable()
     {
-        pMovement.onAirJumpAvailable += UpdateDoubleJumpColor;
+        pMovement.onAirJumpAvailable += UpdateColor;
     }
 
-    // Update is called once per frame
-    void UpdateDoubleJumpColor(bool isAvailable)
+    void OnDisable()
     {
-        switch (isAvailable)
-        {
-            case true:
-                SetColor(baseColor);
-                break;
-            default:
-                SetColor(altColor);
-                break;
-        }
+        pMovement.onAirJumpAvailable -= UpdateColor;
     }
 }

@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform cam;
 
     public event System.Action<bool> onAirJumpAvailable;
+    public event System.Action<bool> onDashAvailable;
 
     bool canJump, canDash, slideAvailable, airJumpAvailable, shouldPlaySlideSound, isMoving;
     float speed, airMoveSpeed, slideTime, maxDistance;
@@ -227,9 +228,11 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator RunDashTimer()
     {
         canDash = false;
+        onDashAvailable?.Invoke(canDash);
         yield return new WaitForSeconds(dashCooldown);
         PlayAudioClip(dashAvailableSound);
         canDash = true;
+        onDashAvailable?.Invoke(canDash);
     }
 
     IEnumerator RunJumpTimer()
