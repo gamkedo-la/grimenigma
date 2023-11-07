@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5352517406682721795}
   - component: {fileID: 603241975871539220}
   - component: {fileID: 4856882577855044660}
-  m_Layer: 30
+  m_Layer: 6
   m_Name: IceBlast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
   cooldown: 1.2
   spread: 0
   drawTime: 0.35
-  hasSourceOfTruth: 1
+  hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
   projectile: {fileID: 3329366906529079670, guid: 5c07a124f2d99c744929026b8503dd9e, type: 3}
   shouldRenderTracer: 0

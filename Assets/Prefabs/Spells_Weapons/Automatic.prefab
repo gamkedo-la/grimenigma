@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7474901568709499567}
   - component: {fileID: 4826044768663454991}
   - component: {fileID: 4512673606193196468}
-  m_Layer: 30
+  m_Layer: 6
   m_Name: Automatic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
   cooldown: 0.03
   spread: 0
   drawTime: 0
-  hasSourceOfTruth: 1
+  hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
   shouldRenderTracer: 0
