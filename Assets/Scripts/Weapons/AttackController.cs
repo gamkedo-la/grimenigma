@@ -20,6 +20,8 @@ public class AttackController : MonoBehaviour
     [Header("Projectile")]
     [SerializeField] int poolID = 0;
     [SerializeField] GameObject projectile;
+    [SerializeField] bool setProjectileLayer;
+    [Range(0,32)] [SerializeField] int projectileLayer;
     [Header("Tracer")]
     [SerializeField] bool shouldRenderTracer;
     [SerializeField] GameObject tracer;
@@ -92,6 +94,7 @@ public class AttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(projectileLayer);
         poolerSingleton = FindPoolerWithId(poolID);
 
         if (!poolerSingleton) { Debug.LogError("ERROR: AttackController was unable to find a ProjectilePooler!"); }
@@ -189,6 +192,7 @@ public class AttackController : MonoBehaviour
             // Don't call GetComponent twice like this. TO DO: fix that.
             rentedProjectile.GetComponent<Projectile>().owner = gameObject;
             rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
+            if(setProjectileLayer){ rentedProjectile.layer = projectileLayer; }
             rentedProjectile.transform.position = spawnOrigin.position;
             rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
             rentedProjectile.gameObject.SetActive(true);
