@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ProjectilePooler : MonoBehaviour
 {
+    [SerializeField] public int id = 0;
     [SerializeField] private List<GameObject> _bulletPrefabs = new List<GameObject>();
     private Dictionary<GameObject, List<GameObject>> _allPools;
     private int _totalObjects = 0;

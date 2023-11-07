@@ -18,6 +18,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] bool hasCrosshair;
     [SerializeField] GameObject sourceOfTruth;
     [Header("Projectile")]
+    [SerializeField] int poolID = 0;
     [SerializeField] GameObject projectile;
     [Header("Tracer")]
     [SerializeField] bool shouldRenderTracer;
@@ -91,7 +92,7 @@ public class AttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        poolerSingleton = FindObjectOfType<ProjectilePooler>()?.gameObject.GetComponent<ProjectilePooler>();
+        poolerSingleton = FindPoolerWithId(poolID);
 
         if (!poolerSingleton) { Debug.LogError("ERROR: AttackController was unable to find a ProjectilePooler!"); }
 
@@ -130,6 +131,17 @@ public class AttackController : MonoBehaviour
         tracerRenderer.SetPosition(1, targetPosition);
     }
 
+    ProjectilePooler FindPoolerWithId(int targetId)
+    {
+        ProjectilePooler[] poolers = FindObjectsOfType<ProjectilePooler>();
+
+        foreach (ProjectilePooler pooler in poolers){
+            if (pooler.id == targetId) { return pooler; }
+        }
+
+        return null;
+    }
+
     Vector3 GetDirection()
     {
         targetRange = range;
@@ -153,6 +165,7 @@ public class AttackController : MonoBehaviour
         
         return targetPosition - spawnOrigin.position;
     }
+
 
     void PlaySoundFX(AudioClip sound)
     {
