@@ -184,12 +184,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 872703157864583613}
+  - component: {fileID: 1258140528482472575}
+  - component: {fileID: 1903060680582749758}
+  - component: {fileID: 8398407681485766073}
   m_Layer: 0
   m_Name: brutal_lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &872703157864583613
 Transform:
@@ -203,15 +206,66 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 775311940104964260}
   - {fileID: 5405249763357361656}
   - {fileID: 5094966263587405178}
   - {fileID: 6662678961349260365}
   - {fileID: 7604188428033367756}
   - {fileID: 1283898265462610555}
-  - {fileID: 775311940104964260}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1258140528482472575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601807432939205745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1024, y: 8, z: 1024}
+  m_Center: {x: -88, y: 0, z: 104}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
+--- !u!114 &1903060680582749758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601807432939205745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
+--- !u!208 &8398407681485766073
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601807432939205745}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 512, y: 12, z: 512}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -88, y: -11.5, z: 104}
+  m_TimeToStationary: 0.5
 --- !u!1 &2927102701473285444
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +458,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &775311940104964260
 Transform:
@@ -454,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c33450f251976b42ba9c8e15f515e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerSecond: 1
-  PushBackStrength: {x: 0, y: -2000, z: 0}
+  damagePerSecond: 25
+  PushBackStrength: {x: 0, y: 0, z: 0}
   tagToMatch: Player
   tagToMatch2: enemy
 --- !u!82 &6578686639776936829
@@ -915,7 +969,6 @@ GameObject:
   - component: {fileID: 7604188428033367756}
   - component: {fileID: 2223213199910213915}
   - component: {fileID: 7507270349842328994}
-  - component: {fileID: 6463340346495092594}
   - component: {fileID: 7077726994408996810}
   m_Layer: 0
   m_Name: LavaOpaque
@@ -989,28 +1042,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6463340346495092594
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7610557079432527896}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &7077726994408996810
 MonoBehaviour:
   m_ObjectHideFlags: 0
