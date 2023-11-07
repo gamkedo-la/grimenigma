@@ -94,7 +94,7 @@ public class AttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(projectileLayer);
+        //Debug.Log(projectileLayer);
         poolerSingleton = FindPoolerWithId(poolID);
 
         if (!poolerSingleton) { Debug.LogError("ERROR: AttackController was unable to find a ProjectilePooler!"); }

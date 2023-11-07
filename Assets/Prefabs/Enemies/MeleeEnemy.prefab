@@ -252,7 +252,10 @@ MonoBehaviour:
   drawTime: 0.5
   hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
+  poolID: 0
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
+  setProjectileLayer: 0
+  projectileLayer: 0
   shouldRenderTracer: 1
   tracer: {fileID: 3243737631664681223, guid: e099b996b76633b4a9f65da7dae8e1ad, type: 3}
   tracerLifeSpan: 0
@@ -288,7 +291,7 @@ MonoBehaviour:
   maxArmour: 0
   armourReductionPercentage: 0
   hasAudioFX: 1
-  onDamageSound: {fileID: 8300000, guid: b175fdb9eccddb241821bb46738a3cb8, type: 3}
+  onDamageSound: {fileID: 8300000, guid: 73d4929421df1d240af1871f106aa712, type: 3}
   hp: 5
 --- !u!114 &7863566032408519593
 MonoBehaviour:

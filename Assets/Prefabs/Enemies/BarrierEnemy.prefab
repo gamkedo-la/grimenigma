@@ -210,7 +210,10 @@ MonoBehaviour:
   drawTime: 1
   hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
+  poolID: 0
   projectile: {fileID: 0}
+  setProjectileLayer: 0
+  projectileLayer: 0
   shouldRenderTracer: 0
   tracer: {fileID: 0}
   tracerLifeSpan: 0
@@ -263,7 +266,7 @@ MonoBehaviour:
   maxArmour: 0
   armourReductionPercentage: 0
   hasAudioFX: 0
-  onDamageSound: {fileID: 0}
+  onDamageSound: {fileID: 8300000, guid: 73d4929421df1d240af1871f106aa712, type: 3}
   hp: 0
 --- !u!82 &3389114392621468411
 AudioSource:

@@ -258,7 +258,7 @@ MonoBehaviour:
   patrolRange: 75
   maintainDistanceFromTarget: 0
   soundSource: {fileID: 6749481306879995972}
-  alertSound: {fileID: 8300000, guid: b175fdb9eccddb241821bb46738a3cb8, type: 3}
+  alertSound: {fileID: 8300000, guid: 73d4929421df1d240af1871f106aa712, type: 3}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2147483649
@@ -283,7 +283,10 @@ MonoBehaviour:
   drawTime: 2
   hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
+  poolID: 0
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
+  setProjectileLayer: 0
+  projectileLayer: 0
   shouldRenderTracer: 1
   tracer: {fileID: 3243737631664681223, guid: e099b996b76633b4a9f65da7dae8e1ad, type: 3}
   tracerLifeSpan: 0
@@ -450,6 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a12d60a4ee95f449b73eacd5604ad9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthController: {fileID: 0}
 --- !u!1 &8201726889438968295
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 729fe23deb54b7c479b423ebf26ba1de, type: 2}
     - target: {fileID: 7630765295138871340, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: m_Name
-      value: HitscanEnemyBlue
+      value: PeircingHitscanEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7630765295138871349, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: hp
@@ -28,9 +28,13 @@ PrefabInstance:
       propertyPath: armour
       value: 76
       objectReference: {fileID: 0}
+    - target: {fileID: 7630765295138871349, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
+      propertyPath: onDamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 73d4929421df1d240af1871f106aa712, type: 3}
     - target: {fileID: 7630765295138871351, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7630765295138871351, guid: e52d8e9af3c84a84fa57e80c865f1aaf, type: 3}
       propertyPath: m_LocalPosition.x

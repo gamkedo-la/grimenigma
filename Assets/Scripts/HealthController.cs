@@ -34,7 +34,7 @@ public class HealthController: MonoBehaviour
     public void Damage(int ammount, GameObject damageSource, bool piercingDamage=false)
     {
         onDamage?.Invoke(ammount, damageSource);
-        if(hasAudioFX){ PlaySoundFX(onDamageSound); }
+        if(hasAudioFX){ PlaySoundFX(onDamageSound); print("hit sfx should be playing"); }
         if(!godMode){
             if(!piercingDamage){ ammount = ArmourReduction(ammount); }
             hp -= ammount;
@@ -75,6 +75,7 @@ public class HealthController: MonoBehaviour
 
     void PlaySoundFX(AudioClip sound)
     {
+        print("audio clip: " + sound);
         soundSource.pitch = Random.Range(0.9f, 1.1f);
         soundSource.PlayOneShot(sound);
     }
