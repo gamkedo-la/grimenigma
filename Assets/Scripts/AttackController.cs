@@ -134,7 +134,8 @@ public class AttackController : MonoBehaviour
     {
         targetRange = range;
 
-        if(Physics.Raycast(sourceOfTruth.transform.position, sourceOfTruth.transform.forward, out pointingAt, range, inclusionMasks)){
+        // Shotguns were breaking when aiming at enemies. Hense the projectileAmmount check.
+        if(projectileAmmount == 1 && Physics.Raycast(sourceOfTruth.transform.position, sourceOfTruth.transform.forward, out pointingAt, range, inclusionMasks)){
             if(pointingAt.transform.gameObject.TryGetComponent<HealthController>(out var component)){
                 targetRange = Vector3.Distance(sourceOfTruth.transform.position, pointingAt.transform.position);
             }
