@@ -176,6 +176,18 @@ public class AttackController : MonoBehaviour
         soundSource.PlayOneShot(sound);
     }
 
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (null == obj){ return; }
+
+        obj.layer = newLayer;
+       
+        foreach (Transform child in obj.transform){
+            if (null == child) { continue; }
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
+
     IEnumerator RunFireProtectile()
     {
         //Debug.Log("Firing projectile!");
@@ -192,7 +204,7 @@ public class AttackController : MonoBehaviour
             // Don't call GetComponent twice like this. TO DO: fix that.
             rentedProjectile.GetComponent<Projectile>().owner = gameObject;
             rentedProjectile.GetComponent<Projectile>().ownerTag = ownerTag;
-            if(setProjectileLayer){ rentedProjectile.layer = projectileLayer; }
+            if(setProjectileLayer){ SetLayerRecursively(rentedProjectile, projectileLayer); }
             rentedProjectile.transform.position = spawnOrigin.position;
             rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
             rentedProjectile.gameObject.SetActive(true);
