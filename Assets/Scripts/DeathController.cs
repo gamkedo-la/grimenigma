@@ -10,14 +10,22 @@ public class DeathController: MonoBehaviour
     [Header("Optional Settings")]
     [SerializeField] GameObject owner;
 
+    [SerializeField] bool hasAudioFX;
+    [SerializeField] AudioClip onDeathSound;
+    AudioSource soundSource;
+
     public event System.Action<GameObject> onDeath;
 
     GameObject thingToKill;
 
+    [SerializeField] GameObject audioDebugGameObject;
+    AudioDebugScript audioDebugScript;
+
     public void HandleDeath()
     {
         onDeath?.Invoke(gameObject);
-        if(dropItem){ DropResource(); }
+        audioDebugScript.PlayDeathSound();
+        if (dropItem){ DropResource(); }
         if(destroyOnDeath){ Destroy(thingToKill, delay); }
         else { thingToKill.SetActive(false); }
 
@@ -27,6 +35,10 @@ public class DeathController: MonoBehaviour
     void Start(){
         if(owner != null){ thingToKill = owner; }
         else{ thingToKill = this.gameObject; }
+
+        soundSource = gameObject.AddComponent<AudioSource>();
+        audioDebugGameObject = GameObject.FindGameObjectWithTag("AudioDebug");
+        audioDebugScript = audioDebugGameObject.GetComponent<AudioDebugScript>();
     }
 
     void DropResource()
@@ -44,5 +56,11 @@ public class DeathController: MonoBehaviour
 
                 Instantiate(itemDrops[randomItemDrop], itemDropPosition, this.gameObject.transform.rotation);
             }
+    }
+
+    void PlaySoundFX(AudioClip sound)
+    {
+        soundSource.pitch = Random.Range(0.9f, 1.1f);
+        soundSource.PlayOneShot(sound);
     }
 }

@@ -19,4 +19,9 @@ public class AudioDebugScript : MonoBehaviour
             myAudioSource.PlayOneShot(myAudioSource.clip);
         }
     }
+
+    public void PlayDeathSound()
+    {
+        myAudioSource.PlayOneShot(myAudioSource.clip);
+    }
 }
