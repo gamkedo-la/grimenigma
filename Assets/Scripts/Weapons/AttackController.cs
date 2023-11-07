@@ -79,7 +79,7 @@ public class AttackController : MonoBehaviour
                     Debug.LogError("Invalid Projectile Value!");
                     break;
             }
-        
+
             if(!infiniteAmmmo){ ammo -= 1; }
             StartCoroutine(RunResetAttackCooldown());
         }
@@ -106,7 +106,7 @@ public class AttackController : MonoBehaviour
         }
         if(!hasCrosshair){ sourceOfTruth = this.gameObject; }
 
-        spawnOrigin = customSpawnOrigin == null ? this.gameObject.transform : customSpawnOrigin;        
+        spawnOrigin = customSpawnOrigin == null ? this.gameObject.transform : customSpawnOrigin;
         //Debug.Log(spawnOrigin);
     }
 
@@ -117,12 +117,12 @@ public class AttackController : MonoBehaviour
 
     void OnDestroy()
     {
-        if(attackType == AttackTypes.Hitscan 
-            && shouldRenderTracer 
+        if(attackType == AttackTypes.Hitscan
+            && shouldRenderTracer
             && this.tracerRenderer!=null
             && this.tracerRenderer.material!=null)
-        { 
-            Destroy(this.tracerRenderer.material); 
+        {
+            Destroy(this.tracerRenderer.material);
         }
     }
 
@@ -165,7 +165,7 @@ public class AttackController : MonoBehaviour
                                             targetPosition.z + Random.Range(-spread, spread)
                                             );
 
-        
+
         return targetPosition - spawnOrigin.position;
     }
 
@@ -181,7 +181,7 @@ public class AttackController : MonoBehaviour
         if (null == obj){ return; }
 
         obj.layer = newLayer;
-       
+
         foreach (Transform child in obj.transform){
             if (null == child) { continue; }
             SetLayerRecursively(child.gameObject, newLayer);
@@ -235,7 +235,7 @@ public class AttackController : MonoBehaviour
             StartCoroutine(RunCreateAndDestroyTracer(distance));
         }
         //Debug.Log(attackHit.collider);
-        
+
         //attackHit.transform.gameObject?.GetComponent<HealthController>().Damage(hitScanDamage, piercingDamage);
     }
 
@@ -250,7 +250,7 @@ public class AttackController : MonoBehaviour
     IEnumerator RunCreateAndDestroyTracer(float distance)
     {
         targetPosition = spawnOrigin.position + spawnOrigin.forward * distance;
-    
+
         tracerRenderer.startColor = Color.red;
         tracerRenderer.endColor = Color.white;
         tracerRenderer.SetPosition(0, transform.position);
