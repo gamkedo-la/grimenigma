@@ -23,6 +23,11 @@ public static class PlayerPrefsDefault
         { "crossair_scale", 0.5f },
     };
 
+    public static readonly Dictionary<string, int> Ints = new Dictionary<string, int>
+    {
+        { "crosshair_targeting", 1 }
+    };
+
     public static readonly Dictionary<string, string> Strings = new Dictionary<string, string>
     {
         { "crossair_style", "Cross" }
