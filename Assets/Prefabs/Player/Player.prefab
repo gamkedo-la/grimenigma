@@ -1750,6 +1750,9 @@ MonoBehaviour:
   dropItem: 0
   itemDrops: []
   owner: {fileID: 0}
+  hasAudioFX: 0
+  onDeathSound: {fileID: 0}
+  audioDebugGameObject: {fileID: 0}
 --- !u!114 &1494627183318121075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2055,14 +2058,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 30
   field of view: 65.17267
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2183,6 +2186,104 @@ Transform:
   m_Father: {fileID: 39223355903996957}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4689336898133079467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2163209434382211895}
+  - component: {fileID: 2888128547585240792}
+  - component: {fileID: 348679536673069118}
+  m_Layer: 30
+  m_Name: EmitterRCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2163209434382211895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689336898133079467}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3, y: 3, z: -11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5390537495299956796}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &2888128547585240792
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689336898133079467}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 4
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 1
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 65.17267
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!114 &348679536673069118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689336898133079467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c7e0fce52b7a04499eafb232c4d8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pData: {fileID: 3865243717588823144}
+  weaponCamera: {fileID: 2888128547585240792}
 --- !u!1 &4819001077394492298
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,6 +2444,104 @@ Transform:
   m_Father: {fileID: -5913172463669914825}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5733155868687320816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2169619368900141596}
+  - component: {fileID: 7553516266092497578}
+  - component: {fileID: 7727270769777807850}
+  m_Layer: 30
+  m_Name: EmitterLCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2169619368900141596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733155868687320816}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3, y: 3, z: -11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5390537495299956796}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &7553516266092497578
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733155868687320816}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 4
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 1
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 65.17267
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!114 &7727270769777807850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733155868687320816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c7e0fce52b7a04499eafb232c4d8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pData: {fileID: 3865243717588823144}
+  weaponCamera: {fileID: 7553516266092497578}
 --- !u!1 &5811098852990597675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,14 +2734,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 30
   field of view: 65.17267
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2730,7 +2929,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6799893196152397191}
+  - {fileID: 2169619368900141596}
   - {fileID: 5163968554520036269}
+  - {fileID: 2163209434382211895}
   - {fileID: 4588757781079463379}
   - {fileID: 5635743295626615849}
   m_Father: {fileID: 5675921759073615266}
@@ -3286,7 +3487,7 @@ PrefabInstance:
       objectReference: {fileID: 7064341735789155566}
     - target: {fileID: 1521760611456581742, guid: 4c95409bf15e6994e816f113504c73ae, type: 3}
       propertyPath: projectileLayer
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1521760611456581742, guid: 4c95409bf15e6994e816f113504c73ae, type: 3}
       propertyPath: setProjectileLayer
@@ -3377,7 +3578,7 @@ PrefabInstance:
       objectReference: {fileID: 7064341735789155566}
     - target: {fileID: 1521760611456581742, guid: 4c95409bf15e6994e816f113504c73ae, type: 3}
       propertyPath: projectileLayer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1521760611456581742, guid: 4c95409bf15e6994e816f113504c73ae, type: 3}
       propertyPath: setProjectileLayer
@@ -3424,7 +3625,7 @@ PrefabInstance:
       objectReference: {fileID: 7064341735789155566}
     - target: {fileID: 293411582469762588, guid: 83ae58583d2625541bf274b8220b98ba, type: 3}
       propertyPath: projectileLayer
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 293411582469762588, guid: 83ae58583d2625541bf274b8220b98ba, type: 3}
       propertyPath: setProjectileLayer
@@ -3523,7 +3724,7 @@ PrefabInstance:
       objectReference: {fileID: 7064341735789155566}
     - target: {fileID: 4826044768663454991, guid: 9df7aa27e8987244dab66d26c705b0a3, type: 3}
       propertyPath: projectileLayer
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4826044768663454991, guid: 9df7aa27e8987244dab66d26c705b0a3, type: 3}
       propertyPath: setProjectileLayer
@@ -3606,7 +3807,7 @@ PrefabInstance:
       objectReference: {fileID: 7064341735789155566}
     - target: {fileID: 293411582469762588, guid: 83ae58583d2625541bf274b8220b98ba, type: 3}
       propertyPath: projectileLayer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 293411582469762588, guid: 83ae58583d2625541bf274b8220b98ba, type: 3}
       propertyPath: setProjectileLayer
@@ -4282,7 +4483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 603241975871539220, guid: 3d04c55f56360684a8b6617e5032d56e, type: 3}
       propertyPath: projectileLayer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 603241975871539220, guid: 3d04c55f56360684a8b6617e5032d56e, type: 3}
       propertyPath: setProjectileLayer
@@ -4381,7 +4582,7 @@ PrefabInstance:
       objectReference: {fileID: 7064341735789155566}
     - target: {fileID: 4826044768663454991, guid: 9df7aa27e8987244dab66d26c705b0a3, type: 3}
       propertyPath: projectileLayer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4826044768663454991, guid: 9df7aa27e8987244dab66d26c705b0a3, type: 3}
       propertyPath: setProjectileLayer
@@ -4464,7 +4665,7 @@ PrefabInstance:
       objectReference: {fileID: 7064341735789155566}
     - target: {fileID: 603241975871539220, guid: 3d04c55f56360684a8b6617e5032d56e, type: 3}
       propertyPath: projectileLayer
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 603241975871539220, guid: 3d04c55f56360684a8b6617e5032d56e, type: 3}
       propertyPath: setProjectileLayer
