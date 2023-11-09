@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4e9c9005421494f812cff165f3eb9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggressionLevel: 3
+  aggressionLevel: 1
   maxAttacks: 3
   initialSpreadPenalty: 1
   imporoveSpreadIncrement: 0.01
@@ -247,6 +247,9 @@ MonoBehaviour:
   dropItem: 0
   itemDrops: []
   owner: {fileID: 0}
+  hasAudioFX: 0
+  onDeathSound: {fileID: 0}
+  audioDebugGameObject: {fileID: 0}
 --- !u!114 &8110927928644088323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +268,7 @@ MonoBehaviour:
   armour: 0
   maxArmour: 0
   armourReductionPercentage: 0
-  hasAudioFX: 0
+  hasAudioFX: 1
   onDamageSound: {fileID: 8300000, guid: 73d4929421df1d240af1871f106aa712, type: 3}
   hp: 0
 --- !u!82 &3389114392621468411
