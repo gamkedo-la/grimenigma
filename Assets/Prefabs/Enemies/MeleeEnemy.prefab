@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnDeath: 1
-  delay: 0
+  delay: 1
   dropItem: 1
   itemDrops:
   - {fileID: 1400513014605336469, guid: bc1f69f0b5a936a4abde2a4cc40b6ad7, type: 3}
@@ -316,6 +316,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   hasAudioFX: 0
   onDeathSound: {fileID: 0}
+  audioDebugGameObject: {fileID: 0}
 --- !u!82 &5626885041883218594
 AudioSource:
   m_ObjectHideFlags: 0
