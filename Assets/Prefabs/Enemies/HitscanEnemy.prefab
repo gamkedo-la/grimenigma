@@ -177,7 +177,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!195 &-3741740768409257743
 NavMeshAgent:
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc513eff03dac24582c3fc595a4bf15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggressionLevel: 0
+  aggressionLevel: 4
   maxAttacks: 0
   initialSpreadPenalty: 0
   imporoveSpreadIncrement: 0
