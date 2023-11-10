@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a12d60a4ee95f449b73eacd5604ad9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthController: {fileID: 0}
 --- !u!114 &8649248753321605113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +235,9 @@ MonoBehaviour:
   dropItem: 0
   itemDrops: []
   owner: {fileID: 2758265383247273254}
+  hasAudioFX: 0
+  onDeathSound: {fileID: 0}
+  audioDebugGameObject: {fileID: 0}
 --- !u!195 &8708071536758706591
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -297,7 +301,10 @@ MonoBehaviour:
   drawTime: 0
   hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
+  poolID: 0
   projectile: {fileID: 4389928036886805877, guid: 25417fa43de77504093e00abd793704e, type: 3}
+  setProjectileLayer: 0
+  projectileLayer: 0
   shouldRenderTracer: 0
   tracer: {fileID: 0}
   tracerLifeSpan: 0
@@ -309,7 +316,7 @@ MonoBehaviour:
   firingSFX: {fileID: 8300000, guid: 20bd9343fb8a9d941bddd55aba9df192, type: 3}
   hasChargeSound: 0
   chargeSFX: {fileID: 8300000, guid: 2794de459fc0dca45b76d6acb26d7f33, type: 3}
-  ownerTag: 
+  ownerTag: enemy
   inclusionMasks:
     serializedVersion: 2
     m_Bits: 0
