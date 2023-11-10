@@ -24,7 +24,7 @@ public class DeathController: MonoBehaviour
     public void HandleDeath()
     {
         onDeath?.Invoke(gameObject);
-        audioDebugScript.PlayDeathSound();
+        //audioDebugScript.PlayDeathSound();
         if (dropItem){ DropResource(); }
         if(destroyOnDeath){ Destroy(thingToKill, delay); }
         else { thingToKill.SetActive(false); }
@@ -37,8 +37,8 @@ public class DeathController: MonoBehaviour
         else{ thingToKill = this.gameObject; }
 
         soundSource = gameObject.AddComponent<AudioSource>();
-        audioDebugGameObject = GameObject.FindGameObjectWithTag("AudioDebug");
-        audioDebugScript = audioDebugGameObject.GetComponent<AudioDebugScript>();
+        //audioDebugGameObject = GameObject.FindGameObjectWithTag("AudioDebug");
+        //audioDebugScript = audioDebugGameObject.GetComponent<AudioDebugScript>();
     }
 
     void DropResource()
