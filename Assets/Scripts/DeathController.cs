@@ -26,7 +26,10 @@ public class DeathController: MonoBehaviour
         onDeath?.Invoke(gameObject);
         //audioDebugScript.PlayDeathSound();
         if (dropItem){ DropResource(); }
-        if(destroyOnDeath){ Destroy(thingToKill, delay); }
+        if(destroyOnDeath){ 
+            thingToKill.SetActive(false);
+            Destroy(thingToKill, delay);
+        }
         else { thingToKill.SetActive(false); }
 
         //Debug.Log("Entity " + this + " has died!");
