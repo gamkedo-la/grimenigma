@@ -123,7 +123,7 @@ public abstract class EnemyBaseAI : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
         if(distance - maintainDistanceFromTarget <= 0){
             // Might cause the enemy to attack when out of range.
-            if(Random.Range(0, aggressionLevel) >= aggressionLevel){ state = AIState.attack; }
+            if(Random.Range(0, aggressionLevel) <= aggressionLevel){ state = AIState.attack; }
             else { state = AIState.chase; }
         }
     }
