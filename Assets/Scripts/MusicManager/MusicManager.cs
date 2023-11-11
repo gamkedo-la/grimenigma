@@ -76,8 +76,7 @@ public class MusicManager : MonoBehaviour
 
             mixer.GetFloat(track.mixerChannel, out currentVolume);
             if(targetVolume < currentVolume){ direction = -1; }
-
-            Debug.LogFormat("Fading track {0} to volume {1} with direction of {2}.", track.audio.name, targetVolume, direction);
+            //Debug.LogFormat("Fading track {0} to volume {1} with direction of {2}.", track.audio.name, targetVolume, direction);
             if(snap){ mixer.SetFloat(track.mixerChannel, targetVolume); }
             else{ StartCoroutine(RunFadeMixerVolume(track.mixerChannel, targetVolume, step*direction, stepDelay)); }
         }
