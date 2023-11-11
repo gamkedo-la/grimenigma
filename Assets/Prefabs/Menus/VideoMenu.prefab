@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7791195646021293614}
   - component: {fileID: 7559205910621590703}
   - component: {fileID: 4447213346792376135}
+  - component: {fileID: 3569148173293778138}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -118,6 +119,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataType: 0
   preffenceName: scale_weapon
+--- !u!114 &3569148173293778138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35475030101599009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a79fe589de398246b64b8dec87e89ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &136134950558361574
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +217,7 @@ GameObject:
   - component: {fileID: 8070157866286815594}
   - component: {fileID: 5016670314141491936}
   - component: {fileID: 3091114198343073637}
+  - component: {fileID: 1216491915594594134}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -384,6 +398,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1216491915594594134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396628582761934419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3548ed5811eb9f4da0b400d4b6b7551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &409676715796082717
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,6 +981,7 @@ GameObject:
   - component: {fileID: 8234283550983935627}
   - component: {fileID: 2207175790070540389}
   - component: {fileID: 3819828586544598875}
+  - component: {fileID: 6757155385351621506}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1062,6 +1089,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataType: 0
   preffenceName: gamepad_horizontal_sensativity
+--- !u!114 &6757155385351621506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366570029980387032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a79fe589de398246b64b8dec87e89ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1386870190872027307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1724,7 @@ GameObject:
   - component: {fileID: 6243687974802951251}
   - component: {fileID: 5266078731772203975}
   - component: {fileID: 1879162765676752118}
+  - component: {fileID: 187048469135195814}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1792,6 +1832,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataType: 0
   preffenceName: gamepad_verticle_sensativity
+--- !u!114 &187048469135195814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2676213321252303611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a79fe589de398246b64b8dec87e89ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2724157871473013033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,6 +2176,7 @@ GameObject:
   - component: {fileID: 263249005461188994}
   - component: {fileID: 255357211445389644}
   - component: {fileID: 8010480698436567605}
+  - component: {fileID: 5360537987438888583}
   m_Layer: 5
   m_Name: Apply
   m_TagString: Untagged
@@ -2304,6 +2357,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5360537987438888583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2834776377601119771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3548ed5811eb9f4da0b400d4b6b7551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2854537102861377624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,6 +2607,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2148287175403031305}
   - component: {fileID: 4139564820554981904}
+  - component: {fileID: 2699137192977435341}
   m_Layer: 5
   m_Name: VideoMenu
   m_TagString: Untagged
@@ -2589,6 +2655,18 @@ MonoBehaviour:
   windowModeDropdown: {fileID: 8468984683076595948}
   resolutionDropdown: {fileID: 3400715161525032804}
   fovSlider: {fileID: 3196423283470003698}
+--- !u!114 &2699137192977435341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3318662996271684680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e853a235988749d46938df3c02da653d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3377510397753743483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,6 +2830,7 @@ GameObject:
   - component: {fileID: 8936701526779869943}
   - component: {fileID: 4276338434456610186}
   - component: {fileID: 2934499443935114224}
+  - component: {fileID: 1040219315501015247}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -2859,6 +2938,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataType: 0
   preffenceName: mouse_verticle_sensativity
+--- !u!114 &1040219315501015247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058738410905834818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a79fe589de398246b64b8dec87e89ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4078716475359248346
 GameObject:
   m_ObjectHideFlags: 0
@@ -4051,6 +4142,7 @@ GameObject:
   - component: {fileID: 5994849133353151133}
   - component: {fileID: 3196423283470003698}
   - component: {fileID: 2336476152893517164}
+  - component: {fileID: 7889620176930894199}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -4158,6 +4250,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataType: 0
   preffenceName: fov
+--- !u!114 &7889620176930894199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5374663566720750313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a79fe589de398246b64b8dec87e89ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5478836532839907043
 GameObject:
   m_ObjectHideFlags: 0
@@ -6494,6 +6598,7 @@ GameObject:
   - component: {fileID: 3391806740001661016}
   - component: {fileID: 4015683476555016222}
   - component: {fileID: 8840245560820733556}
+  - component: {fileID: 6696905778560033841}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -6674,6 +6779,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6696905778560033841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843013696262763891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3548ed5811eb9f4da0b400d4b6b7551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8949592050371384864
 GameObject:
   m_ObjectHideFlags: 0
@@ -7092,6 +7209,7 @@ GameObject:
   - component: {fileID: 2617868918398629938}
   - component: {fileID: 6460685995599963276}
   - component: {fileID: 213905819636199990}
+  - component: {fileID: 1236233459576903198}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -7199,3 +7317,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataType: 0
   preffenceName: mouse_horizontal_sensativity
+--- !u!114 &1236233459576903198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168331539578120176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a79fe589de398246b64b8dec87e89ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

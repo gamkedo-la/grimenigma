@@ -7,7 +7,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] List<MusicTrackData> music;
     [SerializeField] AudioSource[] sources;
 
-    public int intensity;
+    [SerializeField] public int intensity;
 
     int currentSource, nextSource;
 
@@ -17,7 +17,6 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        intensity = 1;
         currentSource = 1;
         nextSource = 0;
 

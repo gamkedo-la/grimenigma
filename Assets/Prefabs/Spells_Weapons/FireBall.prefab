@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3346441321641177573}
   - component: {fileID: 1521760611456581742}
   - component: {fileID: 8064375528521418947}
-  m_Layer: 30
+  m_Layer: 6
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,9 +66,12 @@ MonoBehaviour:
   cooldown: 1.5
   spread: 0
   drawTime: 0.33
-  hasSourceOfTruth: 1
+  hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
+  poolID: 1
   projectile: {fileID: 4389928036886805877, guid: 5f34b4e71cb085d47960e8678db8949c, type: 3}
+  setProjectileLayer: 0
+  projectileLayer: 0
   shouldRenderTracer: 0
   tracer: {fileID: 0}
   tracerLifeSpan: 0

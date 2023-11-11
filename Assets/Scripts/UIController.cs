@@ -6,8 +6,11 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     [SerializeField] public Slider healthSlider, armourSlider, ammoSlider;
+    [SerializeField] Image healthBarImage;
+    [SerializeField] Color healthOvercharge;
     [SerializeField] public Text healthText, armourText, ammoText;
 
+    Color hpBarBaseColor;
     PlayerInputHanlder pInput;
     HealthController healthData;
     EquipmentHandler equipmentL, equipmentR;
@@ -16,6 +19,11 @@ public class UIController : MonoBehaviour
 
     float currentHealth, currentArmour;
     float currentAmmo;
+
+    void Awake()
+    {
+        hpBarBaseColor = healthBarImage.color;
+    }
 
     void OnEnable()
     {
@@ -41,7 +49,10 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-        if(currentHealth != healthData.hp){ SetHealth(healthData.hp); }
+        if(currentHealth != healthData.hp){
+            SetHealth(healthData.hp);
+            SetHealthBarColor(healthData.hp);
+        }
         if(currentHealth != healthData.armour){ SetArmour(healthData.armour); }
         if(ammoDataL.infiniteAmmmo){
             ammoText.text = "Infin";
@@ -73,10 +84,17 @@ public class UIController : MonoBehaviour
         healthSlider.value = currentHealth;
     }
 
-    void SetHealth(int health) {
+    void SetHealth(int health)
+    {
         healthText.text = health.ToString();
         currentHealth = (float)health/100f;
         healthSlider.value = currentHealth;
+    }
+
+    void SetHealthBarColor(int health)
+    {
+        if(health > healthData.baseHP){ healthBarImage.color = healthOvercharge; }
+        else { healthBarImage.color = hpBarBaseColor; }
     }
 
     void SetMaxArmour(int armour)

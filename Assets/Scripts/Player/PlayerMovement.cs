@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("Grounded:" + grounded);
     }
 
-    private void Jump()
+    public void Jump()
     {
         //Debug.Log("Jump!");
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);

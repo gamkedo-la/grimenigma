@@ -659,6 +659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 316785770051923216}
+  - component: {fileID: 2406218276054221457}
   m_Layer: 0
   m_Name: CrossairMenu
   m_TagString: Untagged
@@ -690,6 +691,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2406218276054221457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403536434941763802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e853a235988749d46938df3c02da653d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2845483435294827087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1224,7 @@ GameObject:
   - component: {fileID: 5599455693123347025}
   - component: {fileID: 5543433082602645818}
   - component: {fileID: 2096481253871811879}
+  - component: {fileID: 979804079193105104}
   m_Layer: 0
   m_Name: Scale
   m_TagString: Untagged
@@ -1289,7 +1303,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 2
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0.556
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1307,6 +1321,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataType: 0
   preffenceName: crossair_scale
+--- !u!114 &979804079193105104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189295407349735643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a79fe589de398246b64b8dec87e89ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  increment: 0.1
 --- !u!1 &5189368275830459291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,6 +1961,7 @@ GameObject:
   - component: {fileID: 7408764600238053149}
   - component: {fileID: 8318736228910601472}
   - component: {fileID: 9195399510219094707}
+  - component: {fileID: 3300875472117420289}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -2114,6 +2142,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3300875472117420289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341465445583920341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3548ed5811eb9f4da0b400d4b6b7551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7894861422314532921
 GameObject:
   m_ObjectHideFlags: 0

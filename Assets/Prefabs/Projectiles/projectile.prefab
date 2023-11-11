@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7124420792621140696}
   - component: {fileID: 2682863075021714246}
   - component: {fileID: 962714737486538058}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4839,7 +4839,7 @@ GameObject:
   - component: {fileID: 2515345841315731047}
   - component: {fileID: 6836194529109294166}
   - component: {fileID: 4315089956776475649}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: AutomaticParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9803,7 +9803,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 134217728
+    m_Bits: 134219264
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -9827,7 +9827,7 @@ MonoBehaviour:
   damage: 1
   speed: 200
   range: 1000
-  impactFxPrefab: {fileID: 6078771135791350883, guid: 25678fafbaf4d6e4cb9b6ad24cd74db9, type: 3}
+  impactFxPrefab: {fileID: 6078771135791350883, guid: 0602fb9adb2b1b247941cd98baa4121b, type: 3}
   exposionRadius: 0
   maxHits: 0
   masksToHit:
