@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class MusicTrackData
 {
-    public int id;
-    [Range(0, 10)]public int intensity;
+    public string mixerChannel;
+    public List<int> intensities;
+    public List<float> volumes;
     public AudioClip audio;
 }

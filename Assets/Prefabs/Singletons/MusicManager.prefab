@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9024624144373528767
 MonoBehaviour:
@@ -46,15 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff216afeda470c640a651dee94da046d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music:
-  - intensity: 1
-    audio: {fileID: 8300000, guid: d9e06f0749021a54a88f8f883c02e5cd, type: 3}
-  - intensity: 10
-    audio: {fileID: 8300000, guid: 82e409ecc91e998418eb67384b649cdb, type: 3}
-  sources:
-  - {fileID: 8815855912437331962}
-  - {fileID: 9048396009354371463}
   intensity: 0
+  mixer: {fileID: 24100000, guid: d8b3922a9f8875d47b7c995d884f3f4f, type: 2}
+  music: {fileID: 11400000, guid: 33763f97ed5abbe4687a9d014e8d42cf, type: 2}
 --- !u!82 &8815855912437331962
 AudioSource:
   m_ObjectHideFlags: 0

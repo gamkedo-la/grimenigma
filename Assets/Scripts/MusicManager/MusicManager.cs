@@ -1,83 +1,100 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
+
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] List<MusicTrackData> music;
-    [SerializeField] AudioSource[] sources;
+    [SerializeField] public int intensity = 0;
+    [SerializeField] AudioMixer mixer;
+    [SerializeField] SOLevelMusic music;
 
-    [SerializeField] public int intensity;
+    float step = 10f;
+    float stepDelay = 0.01f;
+    int lastIntensity;
 
-    int currentSource, nextSource;
-
-    float updateRate = 0.2f;
-    bool lastCombatState;
+    List<string> channels = new List<string>{ "Music1", "Music2", "Music3", "Music4", "Music5" };
+    List<AudioSource> sources = new List<AudioSource>();
 
     // Start is called before the first frame update
     void Start()
     {
-        currentSource = 1;
-        nextSource = 0;
-
-        TransitionTrack();
-        StartCoroutine(RunCheckIntensity());
+        SafetyChecks();
+        PopulateMixer(music.data.Count);
+        UpdateMixer(intensity, true);
     }
 
-    void TransitionTrack()
+    void Update()
     {
-        foreach(MusicTrackData track in music){
-            if(track.intensity == intensity){
-                //Debug.Log(track.audio.name);
-                sources[currentSource].Stop();
+        if(intensity != lastIntensity){ UpdateMixer(intensity, false); }
+    }
 
-                sources[nextSource].clip = track.audio;
-                sources[nextSource].Play();
+    void PopulateMixer(int ammount)
+    {
+        for(int i = 0; i < ammount; i++){
+            // Create Audio Source
+            GameObject audioObject = new GameObject("AudioSource");
+            AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+            sources.Add(audioSource);
+
+            // Attach clip to source
+            audioSource.clip = music.data[i].audio;
+            audioSource.loop = true;
+            audioSource.Play();
+
+            // Assign to mixer track
+            AudioMixerGroup[] mixerGroups = mixer.FindMatchingGroups(music.data[i].mixerChannel);
+            audioSource.outputAudioMixerGroup = mixerGroups[0];
+        }
+    }
+
+    void SafetyChecks()
+    {
+        if(channels.Count == 0){ Debug.LogError("Channels list is empty!"); }
+        if(channels.Count < music.data.Count){ Debug.LogWarningFormat("channel count of {0} is less than to track count of {1}! This may cause strange behavor.", channels.Count, music.data.Count); }
+    }
+    
+    void UpdateMixer(int intensityLevel, bool snap)
+    {
+        //Debug.LogFormat("music data count: {0}", music.data.Count);
+        foreach(MusicTrackData track in music.data){
+            //Debug.LogFormat("track: {0}", track);
+            int index = track.intensities.IndexOf(intensityLevel); 
+            float targetVolume = -80f;
+            float currentVolume;
+            float direction = 1;
+
+            if(index != -1){
+                //mixer.SetFloat(track.mixerChannel, -80f);
+                //StartCoroutine(RunFadeMixerVolume(track.mixerChannel, -80f, step, stepDelay));
+                targetVolume =  track.volumes[index];
+                //continue;
             }
-        }
 
-        switch (currentSource)
-        {
-            case 0:
-                currentSource = 1;
-                nextSource = 0;
-                break;
-            case 1:
-                currentSource = 0;
-                nextSource = 1;
-                break;
-            default:
-                currentSource = 0;
-                nextSource = 1;
-                break;
+            mixer.GetFloat(track.mixerChannel, out currentVolume);
+            if(targetVolume < currentVolume){ direction = -1; }
+
+            Debug.LogFormat("Fading track {0} to volume {1} with direction of {2}.", track.audio.name, targetVolume, direction);
+            if(snap){ mixer.SetFloat(track.mixerChannel, targetVolume); }
+            else{ StartCoroutine(RunFadeMixerVolume(track.mixerChannel, targetVolume, step*direction, stepDelay)); }
         }
     }
 
-    IEnumerator RunCheckIntensity()
+    IEnumerator RunFadeMixerVolume(string channel, float target, float step, float delay)
     {
-        int lastIntensity = intensity;
+        float currentValue;
+        mixer.GetFloat(channel, out currentValue);
 
-        while(true){
-            if(lastIntensity != intensity){
-                lastIntensity = intensity;
-                TransitionTrack();
-            }
-            yield return new WaitForSeconds(updateRate);
+        int itterations = Mathf.Abs((int) MathF.Ceiling((target-currentValue)/step));
+
+        while(itterations > 0){
+            currentValue += step;
+            mixer.SetFloat(channel, currentValue);
+            yield return new WaitForSeconds(delay);
+            itterations--;
         }
-
-    }
-
-    IEnumerator RunFadeAudioSources()
-    {
-        float updateRate = 0.1f;
-        float step = 0.02f;
-        int increments = 50;
-
-        for(int i=0; i < increments; i++){
-            sources[currentSource].volume -= step;
-            sources[nextSource].volume += step;
-            yield return new WaitForSeconds(updateRate);
-        }
-        sources[currentSource].Stop();
     }
 }
