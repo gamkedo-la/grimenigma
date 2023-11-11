@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetValue : MonoBehaviour
+public class SetMusicManagerIntensity : MonoBehaviour
 {
     [SerializeField] int value;
 
