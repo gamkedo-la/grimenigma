@@ -38,6 +38,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] AudioClip chargeSFX;
 
     [Header("Bodge Settings")]
+    [SerializeField] bool bodge_isEnemy = false;
     [SerializeField] string ownerTag;
     [SerializeField] LayerMask inclusionMasks;
     [SerializeField] Transform customSpawnOrigin;
@@ -56,6 +57,7 @@ public class AttackController : MonoBehaviour
     Object projectilePrefab, clonedProjectile;
     GameObject hitscanTracer;
     RaycastHit attackHit, pointingAt;
+    Transform player;
 
     public void Attack()
     {
@@ -108,6 +110,8 @@ public class AttackController : MonoBehaviour
 
         spawnOrigin = customSpawnOrigin == null ? this.gameObject.transform : customSpawnOrigin;
         //Debug.Log(spawnOrigin);
+
+        if(bodge_isEnemy){ player = GameObject.Find("Player/Body").transform; }
     }
 
     void Update()
@@ -160,11 +164,16 @@ public class AttackController : MonoBehaviour
 
         targetPosition = sourceOfTruth.transform.position + sourceOfTruth.transform.forward * targetRange;
         targetPosition = new Vector3(
-                                            targetPosition.x + Random.Range(-spread, spread),
-                                            targetPosition.y + Random.Range(-spread, spread),
-                                            targetPosition.z + Random.Range(-spread, spread)
-                                            );
+                                    targetPosition.x + Random.Range(-spread, spread),
+                                    targetPosition.y + Random.Range(-spread, spread),
+                                    targetPosition.z + Random.Range(-spread, spread)
+                                    );
 
+        if(bodge_isEnemy){
+            Debug.DrawLine(transform.position, (targetPosition - spawnOrigin.position), Color.red, 1);
+            //targetPosition = sourceOfTruth.transform.forward;
+            //return targetPosition;
+        }
 
         return targetPosition - spawnOrigin.position;
     }
@@ -207,6 +216,7 @@ public class AttackController : MonoBehaviour
             if(setProjectileLayer){ SetLayerRecursively(rentedProjectile, projectileLayer); }
             rentedProjectile.transform.position = spawnOrigin.position;
             rentedProjectile.transform.rotation = Quaternion.LookRotation(GetDirection());
+            if(bodge_isEnemy){ rentedProjectile.transform.LookAt(player.transform); }
             rentedProjectile.gameObject.SetActive(true);
             if(shouldRenderTracer){ StartCoroutine(RunCreateAndDestroyTracer(range)); }
             onAttackStep?.Invoke();
