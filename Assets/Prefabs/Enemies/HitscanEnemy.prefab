@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggressionLevel: 4
-  maxAttacks: 0
+  maxAttacks: 4
   initialSpreadPenalty: 0
   imporoveSpreadIncrement: 0
   weapon: {fileID: 4043406814658916752}
@@ -291,7 +291,7 @@ MonoBehaviour:
   projectileLayer: 0
   shouldRenderTracer: 1
   tracer: {fileID: 3243737631664681223, guid: e099b996b76633b4a9f65da7dae8e1ad, type: 3}
-  tracerLifeSpan: 0
+  tracerLifeSpan: 0.2
   projectileAmmount: 1
   infiniteAmmmo: 1
   ammo: 0
@@ -300,6 +300,7 @@ MonoBehaviour:
   firingSFX: {fileID: 8300000, guid: 20bd9343fb8a9d941bddd55aba9df192, type: 3}
   hasChargeSound: 0
   chargeSFX: {fileID: 0}
+  bodge_isEnemy: 1
   ownerTag: 
   inclusionMasks:
     serializedVersion: 2

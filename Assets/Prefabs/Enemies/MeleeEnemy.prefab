@@ -256,7 +256,7 @@ MonoBehaviour:
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
   setProjectileLayer: 0
   projectileLayer: 0
-  shouldRenderTracer: 1
+  shouldRenderTracer: 0
   tracer: {fileID: 3243737631664681223, guid: e099b996b76633b4a9f65da7dae8e1ad, type: 3}
   tracerLifeSpan: 0
   projectileAmmount: 1
@@ -267,6 +267,7 @@ MonoBehaviour:
   firingSFX: {fileID: 0}
   hasChargeSound: 0
   chargeSFX: {fileID: 0}
+  bodge_isEnemy: 1
   ownerTag: 
   inclusionMasks:
     serializedVersion: 2
