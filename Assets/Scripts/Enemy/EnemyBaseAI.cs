@@ -21,6 +21,8 @@ public abstract class EnemyBaseAI : MonoBehaviour
     [Header("Movement")]
     [SerializeField] public float patrolRange;
     [SerializeField] public float maintainDistanceFromTarget;
+    [SerializeField] protected Animator animController;
+    
     [Header("Audio")]
     [SerializeField] public AudioClip alertSound;
     [SerializeField] public AudioSource soundSource;
@@ -56,6 +58,7 @@ public abstract class EnemyBaseAI : MonoBehaviour
         hpController = GetComponent<HealthController>();
         weapon = GetComponent<AttackController>();
         target = GameObject.Find("Player/Body").transform;
+        if (animController) animController.SetBool("HasTarget", target);
 
         hpController.onDamage += RecievedDamage;
     }
@@ -127,8 +130,16 @@ public abstract class EnemyBaseAI : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
         if(distance - maintainDistanceFromTarget <= 0){
             // Might cause the enemy to attack when out of range.
-            if(Random.Range(0, aggressionLevel) <= aggressionLevel){ state = AIState.attack; }
-            else { state = AIState.chase; }
+            if (Random.Range(0, aggressionLevel) <= aggressionLevel)
+            {
+                state = AIState.attack;
+                if (animController) animController.SetBool("InRange", true);
+            }
+            else
+            {
+                state = AIState.chase;
+                if (animController) animController.SetBool("InRange", false);
+            }
 
             // Sorry this is not very clean logic, but I couldn't find a better place for it.
             if (prevState == AIState.idle && state == AIState.attack)
@@ -164,6 +175,7 @@ public abstract class EnemyBaseAI : MonoBehaviour
             transform.LookAt(targetPosition);
             weapon.spread = baseWeaponSpread + initialSpreadPenalty;
             weapon.Attack();
+            if (animController) animController.SetTrigger("Attack");
             repeat--;
             yield return new WaitForSeconds(delayTime);
         }

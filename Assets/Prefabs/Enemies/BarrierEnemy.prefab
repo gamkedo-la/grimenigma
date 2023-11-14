@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 5582694452727715999}
   - component: {fileID: 659453119536370647}
   - component: {fileID: 8369445839810799100}
-  - component: {fileID: 4113429429312618195}
   m_Layer: 3
   m_Name: BarrierEnemy
   m_TagString: enemy
@@ -133,6 +132,7 @@ MonoBehaviour:
   imporoveSpreadIncrement: 0.01
   patrolRange: 10
   maintainDistanceFromTarget: 50
+  animController: {fileID: 1915095174096785818}
   alertSound: {fileID: 8300000, guid: 65b7f7a78215c2643a94279c09c8c02d, type: 3}
   soundSource: {fileID: 8369445839810799100}
   whatIsTarget:
@@ -152,6 +152,7 @@ MonoBehaviour:
   isPerformingAction: 0
   isAlerted: 0
   currentSpread: 0
+  debugMode: 0
   barrierCoolDown: 10
   barrier: {fileID: 4549540104936307352, guid: 3f289973caf9a0843914884f8159d223, type: 3}
   attackBark: {fileID: 8300000, guid: 672d2ee23e52fef469dfe1ba20b69c2f, type: 3}
@@ -371,27 +372,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &4113429429312618195
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3459897109317382457}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c34b5c53ac1c41249b4d021722db69bd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5497250190836999187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -446,12 +426,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: dbf51d0559766614c83d57b7d936f8ac, type: 3}
       propertyPath: m_Name
-      value: barrier_demon_low (1)
+      value: barrier_demon_low
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dbf51d0559766614c83d57b7d936f8ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1915095174096785818}
     - targetCorrespondingSourceObject: {fileID: 7125260848225527463, guid: dbf51d0559766614c83d57b7d936f8ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5817452483562152082}
@@ -702,6 +685,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthController: {fileID: 659453119536370647}
+--- !u!1 &4650897066879654210 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dbf51d0559766614c83d57b7d936f8ac, type: 3}
+  m_PrefabInstance: {fileID: 5497250190836999187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1915095174096785818
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650897066879654210}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c34b5c53ac1c41249b4d021722db69bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5310299563913947390 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8792188943303373587, guid: dbf51d0559766614c83d57b7d936f8ac, type: 3}
