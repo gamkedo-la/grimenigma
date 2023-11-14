@@ -41,9 +41,12 @@ public abstract class EnemyBaseAI : MonoBehaviour
     [HideInInspector] public bool isPerformingAction, isAlerted;
     [HideInInspector] public float currentSpread;
 
+    [SerializeField] public bool debugMode = false;
+
     public abstract void HandleAttack();
     public abstract void HandleAlerted();
     public abstract void HandleChase();
+    public abstract void OnBeginAttack();
 
     void OnEnable()
     {
@@ -120,11 +123,18 @@ public abstract class EnemyBaseAI : MonoBehaviour
 
     public void CheckDistanceToTarget()
     {
+        var prevState = state;
         float distance = Vector3.Distance(transform.position, target.position);
         if(distance - maintainDistanceFromTarget <= 0){
             // Might cause the enemy to attack when out of range.
             if(Random.Range(0, aggressionLevel) <= aggressionLevel){ state = AIState.attack; }
             else { state = AIState.chase; }
+
+            // Sorry this is not very clean logic, but I couldn't find a better place for it.
+            if (prevState == AIState.idle && state == AIState.attack)
+            {
+                OnBeginAttack();
+            }
         }
     }
 

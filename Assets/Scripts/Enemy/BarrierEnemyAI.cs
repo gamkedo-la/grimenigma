@@ -7,6 +7,11 @@ public class BarrierEnemyAI : EnemyBaseAI
     [Header("BARRIER AI")]
     [SerializeField] float barrierCoolDown;
     [SerializeField] GameObject barrier;
+    [SerializeField] private AudioClip attackBark;
+    [SerializeField]
+    [Range(0, 1)]
+    private float attackBarkChance;
+    private float attackBarkCooldown = 3f;
     
     bool barrierInUse = false;
 
@@ -20,6 +25,7 @@ public class BarrierEnemyAI : EnemyBaseAI
     public override void HandleAttack()
     {
         Debug.Log("Attacking!");
+        if (Random.Range(0f, 1f) < attackBarkChance) PlaySoundFX(attackBark);
         if(barrierInUse){ StartCoroutine(RunAttack(target.position, Random.Range(1, maxAttacks+1), weapon.cooldown)); }
         else{ StartCoroutine(RunSpawnBarrier(20)); }
     }
@@ -31,6 +37,21 @@ public class BarrierEnemyAI : EnemyBaseAI
             agentMove.MaintainDistacne(target.position, maintainDistanceFromTarget);
             if(IsTargetWithinAttackRange()){ state = AIState.attack; }
             else{ state = AIState.chase; }
+    }
+
+    public override void OnBeginAttack()
+    {
+        PlaySoundFX(alertSound);
+        StartCoroutine(BarkCooldown());
+    }
+
+    // Temporarily disables the attack bark by reducing its chance to zero.
+    IEnumerator BarkCooldown()
+    {
+        var tmp = attackBarkChance;
+        attackBarkChance = 0;
+        yield return new WaitForSeconds(attackBarkCooldown);
+        attackBarkChance = tmp;
     }
 
     IEnumerator RunSpawnBarrier(float distance)

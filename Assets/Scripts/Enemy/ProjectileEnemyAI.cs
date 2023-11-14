@@ -19,6 +19,10 @@ public class ProjectileEnemyAI : EnemyBaseAI
         HandleAttack();
     }
 
+    public override void OnBeginAttack()
+    {
+        // do nothing
+    }
 
     private void Awake()
     {
