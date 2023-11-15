@@ -24,7 +24,7 @@ public class BarrierEnemyAI : EnemyBaseAI
 
     public override void HandleAttack()
     {
-        Debug.Log("Attacking!");
+       //Debug.Log("Attacking!");
         if (Random.Range(0f, 1f) < attackBarkChance) PlaySoundFX(attackBark);
         if(barrierInUse){ StartCoroutine(RunAttack(target.position, Random.Range(1, maxAttacks+1), weapon.cooldown)); }
         else{ StartCoroutine(RunSpawnBarrier(20)); }
@@ -32,7 +32,7 @@ public class BarrierEnemyAI : EnemyBaseAI
 
     public override void HandleChase()
     {
-        Debug.Log("Chasing!");
+       //Debug.Log("Chasing!");
         //CheckDistanceToTarget();
             agentMove.MaintainDistacne(target.position, maintainDistanceFromTarget);
             if(IsTargetWithinAttackRange()){ state = AIState.attack; }
