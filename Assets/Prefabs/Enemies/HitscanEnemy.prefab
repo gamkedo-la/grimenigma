@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7630765295138871338}
   - component: {fileID: 7630765295138871339}
   - component: {fileID: -3741740768409257743}
+  - component: {fileID: 5229026248389391423}
   - component: {fileID: 3563412118372892493}
   - component: {fileID: 4509314407167385666}
   - component: {fileID: 5287514736214092596}
@@ -55,6 +56,7 @@ GameObject:
   - component: {fileID: 6749481306879995972}
   - component: {fileID: 7531508779926904030}
   - component: {fileID: 8141884384853240144}
+  - component: {fileID: 8515400715444556916}
   m_Layer: 3
   m_Name: HitscanEnemy
   m_TagString: enemy
@@ -201,6 +203,45 @@ NavMeshAgent:
   m_BaseOffset: 0.79
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5229026248389391423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630765295138871340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd560d7a45a76f4bb3e274a13faf409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggressionLevel: 4
+  maxAttacks: 4
+  initialSpreadPenalty: 0
+  imporoveSpreadIncrement: 0
+  patrolRange: 50
+  maintainDistanceFromTarget: 30
+  animController: {fileID: 8515400715444556916}
+  alertSound: {fileID: 8300000, guid: b175fdb9eccddb241821bb46738a3cb8, type: 3}
+  soundSource: {fileID: 6749481306879995972}
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 1073741824
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 3221225472
+  hpController: {fileID: 0}
+  weapon: {fileID: 0}
+  vision: {fileID: 0}
+  agentMove: {fileID: 0}
+  agent: {fileID: 0}
+  state: 0
+  target: {fileID: 0}
+  spawnPosition: {x: 0, y: 0, z: 0}
+  isPerformingAction: 0
+  isAlerted: 0
+  currentSpread: 0
+  debugMode: 0
 --- !u!114 &3563412118372892493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7630765295138871340}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bc513eff03dac24582c3fc595a4bf15, type: 3}
   m_Name: 
@@ -276,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68d1c0a2adf9064f9fdbcc09164230f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 1
+  attackType: 0
   piercingDamage: 0
   hitScanDamage: 10
   range: 500
@@ -289,7 +330,7 @@ MonoBehaviour:
   projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
   setProjectileLayer: 0
   projectileLayer: 0
-  shouldRenderTracer: 1
+  shouldRenderTracer: 0
   tracer: {fileID: 3243737631664681223, guid: e099b996b76633b4a9f65da7dae8e1ad, type: 3}
   tracerLifeSpan: 0.2
   projectileAmmount: 1
@@ -301,7 +342,7 @@ MonoBehaviour:
   hasChargeSound: 0
   chargeSFX: {fileID: 0}
   bodge_isEnemy: 1
-  ownerTag: 
+  ownerTag: enemy
   inclusionMasks:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -481,6 +522,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 3.5, z: 0.75}
   m_Center: {x: 0, y: 0.97, z: 0}
+--- !u!95 &8515400715444556916
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630765295138871340}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bcb7aa09020a38f488f91a23f62ca94d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8201726889438968295
 GameObject:
   m_ObjectHideFlags: 0
