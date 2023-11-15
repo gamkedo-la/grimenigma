@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5713546653506239464}
   - component: {fileID: 3920536718857196565}
   - component: {fileID: 8672723813333712379}
+  - component: {fileID: 6228434267642273395}
   m_Layer: 0
   m_Name: 1AR
   m_TagString: ignoreTrigger
@@ -221,6 +222,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6228434267642273395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7173751213996034829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c20f70a9c3b42c43b94231ca2182112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10
+  bobbingSpeed: 0.5
+  bobbingAmount: 0.5
+  rotationAxis: {x: 0, y: 1, z: 0}
 --- !u!1001 &7878584177325627118
 PrefabInstance:
   m_ObjectHideFlags: 0
