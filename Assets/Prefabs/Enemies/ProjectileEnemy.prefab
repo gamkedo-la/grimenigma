@@ -178,6 +178,7 @@ MonoBehaviour:
   imporoveSpreadIncrement: 0
   patrolRange: 0
   maintainDistanceFromTarget: 0
+  animController: {fileID: 0}
   alertSound: {fileID: 8300000, guid: 2794de459fc0dca45b76d6acb26d7f33, type: 3}
   soundSource: {fileID: 3442375213129906005}
   whatIsTarget:
@@ -197,6 +198,7 @@ MonoBehaviour:
   isPerformingAction: 0
   isAlerted: 0
   currentSpread: 0
+  debugMode: 0
 --- !u!114 &8781720654592134451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5b3d8fc53b50c4c854d4d3ac10cd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 250
+  radius: 150
   angle: 360
   ObstructionMask:
     serializedVersion: 2
@@ -295,7 +297,7 @@ MonoBehaviour:
   attackType: 0
   piercingDamage: 0
   hitScanDamage: 5
-  range: 250
+  range: 150
   cooldown: 1
   spread: 0
   drawTime: 0
