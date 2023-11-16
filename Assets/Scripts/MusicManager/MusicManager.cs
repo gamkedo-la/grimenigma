@@ -25,7 +25,7 @@ public class MusicManager : MonoBehaviour
     
     public void ChangeSong(SOLevelMusic newMusic, int newIntensity)
     {
-        Debug.LogFormat("Playing new music {0} at intensity {1}", newMusic.name, newIntensity);
+        //Debug.LogFormat("Playing new music {0} at intensity {1}", newMusic.name, newIntensity);
         lastMusic = music;
         music = newMusic;
         SetIntensity(newIntensity);
@@ -38,7 +38,7 @@ public class MusicManager : MonoBehaviour
 
     public void PlayOneShot(SOLevelMusic track, int newIntensity)
     {
-        Debug.LogFormat("Playing one shot {0} at intensity {1}", track.data[newIntensity].Track.name, newIntensity);
+        //Debug.LogFormat("Playing one shot {0} at intensity {1}", track.data[newIntensity].Track.name, newIntensity);
         nextState = MusicManagerState.OneShot;
         oneShot = track;
         oneShotIntensity = newIntensity;
@@ -121,7 +121,7 @@ public class MusicManager : MonoBehaviour
         double currentTrackEndTime = 0;
 
         if(currentSource.isPlaying){
-            Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
+            //Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
             remainder = currentSource.clip.samples / currentSource.clip.frequency;
             currentTrackEndTime = AudioSettings.dspTime + remainder;
             //Debug.LogFormat("Current track will end at: {0}. current time: {1}", currentTrackEndTime, AudioSettings.dspTime);
@@ -140,7 +140,7 @@ public class MusicManager : MonoBehaviour
         if(state != MusicManagerState.OneShot){ nextSource.loop = true; }
         else { nextSource.loop = false; }
 
-        //Debug.LogFormat("Queued clip:{0}", nextSource.clip.name);
+        Debug.LogFormat("Queued clip:{0}", nextSource.clip.name);
 
         currentTrackLength = nextTrack.Duration;
         currentTrackFequency = nextTrack.Track.frequency;
