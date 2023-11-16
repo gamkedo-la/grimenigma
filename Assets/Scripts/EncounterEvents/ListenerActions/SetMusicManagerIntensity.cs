@@ -20,6 +20,6 @@ public class SetMusicManagerIntensity : MonoBehaviour
 
     void SetIntensity(string label)
     {
-        if(listener.label == label){ musicManager.intensity =  value; }
+        if(listener.label == label){ musicManager.SetIntensity(value); }
     }
 }

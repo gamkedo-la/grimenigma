@@ -1,99 +1,165 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Audio;
-
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] public int intensity = 0;
-    [SerializeField] AudioMixer mixer;
-    [SerializeField] SOLevelMusic music;
+    [SerializeField] int id;
+    [SerializeField] public int intensity;
+    [SerializeField] AudioSource[] sources = new AudioSource[2];
 
-    float step = 10f;
-    float stepDelay = 0.01f;
-    int lastIntensity;
+    bool changeMusic, isPaused, queueOneShot, playingOneShot;
+    int lastIntensity, oneShotIntensity, sourceIndex, currentTrackFequency;
+    double startTime, remainder, currentTrackLength, nextEndTime;
+    double buffer = 0.5;
+    
+    MusicManagerState state, nextState, lastState;
+    SOLevelMusic music, lastMusic, oneShot;
 
-    List<string> channels = new List<string>{ "Music1", "Music2", "Music3", "Music4", "Music5" };
-    List<AudioSource> sources = new List<AudioSource>();
+    enum MusicManagerState{
+        ChangeTrack,
+        Init,
+        Playing,
+        OneShot,
+        Paused,
+        Resume
+    }
+    
+    public void ChangeSong(SOLevelMusic newMusic, int newIntensity)
+    {
+        Debug.LogFormat("Playing new music {0} at intensity {1}", newMusic.name, newIntensity);
+        lastMusic = music;
+        music = newMusic;
+        SetIntensity(newIntensity);
+    }
 
-    // Start is called before the first frame update
+    public void PauseMusic()
+    {
+        nextState = MusicManagerState.Paused;
+    }
+
+    public void PlayOneShot(SOLevelMusic track, int newIntensity)
+    {
+        Debug.LogFormat("Playing one shot {0} at intensity {1}", track.data[newIntensity].Track.name, newIntensity);
+        nextState = MusicManagerState.OneShot;
+        oneShot = track;
+        oneShotIntensity = newIntensity;
+    }
+
+    public void ResumeMusic()
+    {
+        nextState = MusicManagerState.Resume;
+    }
+
+    public void SetIntensity(int newIntensity)
+    {
+        nextState = MusicManagerState.ChangeTrack;
+        intensity = newIntensity;
+    }
+
+    #region Unity Callback Funtions
     void Start()
     {
-        SafetyChecks();
-        PopulateMixer(music.data.Count);
-        UpdateMixer(intensity, true);
+        state = MusicManagerState.Init;
     }
 
     void Update()
     {
-        if(intensity != lastIntensity){ UpdateMixer(intensity, false); }
+        // HEY! This is not an ideal way to handle state managment. I'm crunching right now, but don't do this if it can be avoided.
+        if(nextState != state){
+            //Debug.LogFormat("state: {0}, nextState: {1}", state, nextState);
+            TransitionState();
+        }
+        /*
+        else if(state == MusicManagerState.Playing){
+            QueueTrack(music.data[intensity]);
+        }
+        */
+
     }
+    #endregion
 
-    void PopulateMixer(int ammount)
+    void TransitionState()
     {
-        for(int i = 0; i < ammount; i++){
-            // Create Audio Source
-            GameObject audioObject = new GameObject("AudioSource");
-            AudioSource audioSource = audioObject.AddComponent<AudioSource>();
-            sources.Add(audioSource);
-
-            // Attach clip to source
-            audioSource.clip = music.data[i].audio;
-            audioSource.loop = true;
-            audioSource.Play();
-
-            // Assign to mixer track
-            AudioMixerGroup[] mixerGroups = mixer.FindMatchingGroups(music.data[i].mixerChannel);
-            audioSource.outputAudioMixerGroup = mixerGroups[0];
+        lastState = state;
+        state = nextState;
+        switch(state){
+            case MusicManagerState.ChangeTrack:
+                QueueTrack(music.data[intensity]);
+                break;
+            case MusicManagerState.OneShot:
+                QueueTrack(oneShot.data[oneShotIntensity]);
+                break;
+            case MusicManagerState.Paused:
+                Pause();
+                break;
+            case MusicManagerState.Resume:
+                Resume();
+                break;
+            default:
+                break;
         }
     }
 
-    void SafetyChecks()
+    AudioSource GetNextAudioSource()
     {
-        if(channels.Count == 0){ Debug.LogError("Channels list is empty!"); }
-        if(channels.Count < music.data.Count){ Debug.LogWarningFormat("channel count of {0} is less than to track count of {1}! This may cause strange behavor.", channels.Count, music.data.Count); }
+        sourceIndex = 1 - sourceIndex;
+        return sources[sourceIndex];
     }
-    
-    void UpdateMixer(int intensityLevel, bool snap)
+
+    void Pause(){ 
+        Debug.LogWarning("MusicManager Pause method was called, but is not implemented.");
+    }
+
+    void Resume()
     {
-        //Debug.LogFormat("music data count: {0}", music.data.Count);
-        foreach(MusicTrackData track in music.data){
-            //Debug.LogFormat("track: {0}", track);
-            int index = track.intensities.IndexOf(intensityLevel); 
-            float targetVolume = -80f;
-            float currentVolume;
-            float direction = 1;
+        Debug.LogWarning("MusicManager Resume method was called, but is not implemented.");
+    }
 
-            if(index != -1){
-                //mixer.SetFloat(track.mixerChannel, -80f);
-                //StartCoroutine(RunFadeMixerVolume(track.mixerChannel, -80f, step, stepDelay));
-                targetVolume =  track.volumes[index];
-                //continue;
-            }
+    void QueueTrack(MusicTrackData nextTrack)
+    {
+        AudioSource currentSource = sources[sourceIndex];
 
-            mixer.GetFloat(track.mixerChannel, out currentVolume);
-            if(targetVolume < currentVolume){ direction = -1; }
-            //Debug.LogFormat("Fading track {0} to volume {1} with direction of {2}.", track.audio.name, targetVolume, direction);
-            if(snap){ mixer.SetFloat(track.mixerChannel, targetVolume); }
-            else{ StartCoroutine(RunFadeMixerVolume(track.mixerChannel, targetVolume, step*direction, stepDelay)); }
+        double currentTrackEndTime = 0;
+
+        if(currentSource.isPlaying){
+            Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
+            remainder = currentSource.clip.samples / currentSource.clip.frequency;
+            currentTrackEndTime = AudioSettings.dspTime + remainder;
+            //Debug.LogFormat("Current track will end at: {0}. current time: {1}", currentTrackEndTime, AudioSettings.dspTime);
+            currentSource.SetScheduledEndTime(currentTrackEndTime);
         }
-    }
+        AudioSource nextSource = GetNextAudioSource();
 
-    IEnumerator RunFadeMixerVolume(string channel, float target, float step, float delay)
-    {
-        float currentValue;
-        mixer.GetFloat(channel, out currentValue);
-
-        int itterations = Mathf.Abs((int) MathF.Ceiling((target-currentValue)/step));
-
-        while(itterations > 0){
-            currentValue += step;
-            mixer.SetFloat(channel, currentValue);
-            yield return new WaitForSeconds(delay);
-            itterations--;
+        if(state == MusicManagerState.Paused || state == MusicManagerState.Init){
+            currentTrackEndTime = AudioSettings.dspTime + buffer;
         }
+
+
+        nextSource.clip = nextTrack.Track;
+        nextSource.PlayScheduled(currentTrackEndTime);
+
+        if(state != MusicManagerState.OneShot){ nextSource.loop = true; }
+        else { nextSource.loop = false; }
+
+        //Debug.LogFormat("Queued clip:{0}", nextSource.clip.name);
+
+        currentTrackLength = nextTrack.Duration;
+        currentTrackFequency = nextTrack.Track.frequency;
+
+        QueueTrackNextState();
     }
+
+    void QueueTrackNextState()
+    {
+        switch(state){
+            case MusicManagerState.Paused:
+                nextState = MusicManagerState.Paused;
+                break;
+            default:
+                nextState = MusicManagerState.Playing;
+                break;
+        }
+
+        //Debug.LogFormat("Next state {0}", nextState);
+    }
+
 }
