@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
     int lastIntensity, oneShotIntensity, sourceIndex, currentTrackFequency;
     double startTime, remainder, currentTrackLength, nextEndTime;
     double buffer = 0.2;
-    double bodge_delayCompensation = 0.5;
+    double bodge_delayCompensation = 0.5; // Prevents short delay in start time.
     
     MusicManagerState state, nextState, lastState;
     SOLevelMusic music, lastMusic, oneShot;
@@ -120,23 +120,27 @@ public class MusicManager : MonoBehaviour
         AudioSource currentSource = sources[sourceIndex];
 
         double currentTrackEndTime = 0;
+        double timeToNextTrack = 0;
 
         if(lastState == MusicManagerState.Paused || lastState == MusicManagerState.Init){
-            Debug.Log("yes");
-            currentTrackEndTime = AudioSettings.dspTime + buffer;
+            //Debug.Log("yes");
+            timeToNextTrack = AudioSettings.dspTime + buffer;
         }
         else if(currentSource.isPlaying){
             //Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
             remainder = currentSource.clip.samples / currentSource.clip.frequency;
             currentTrackEndTime = AudioSettings.dspTime + remainder;
+            double timeToNextBeat = currentTrackEndTime - music.data[sourceIndex].BeatLength;
+            Debug.Log(music.data[sourceIndex].BeatLength);
+            timeToNextTrack = timeToNextBeat;
             //Debug.LogFormat("Current track will end at: {0}. current time: {1}", currentTrackEndTime, AudioSettings.dspTime);
-            currentSource.SetScheduledEndTime(currentTrackEndTime);
+            currentSource.SetScheduledEndTime(timeToNextTrack);
         }
         AudioSource nextSource = GetNextAudioSource();
 
 
         nextSource.clip = nextTrack.Track;
-        nextSource.PlayScheduled(currentTrackEndTime-bodge_delayCompensation);
+        nextSource.PlayScheduled(timeToNextTrack-bodge_delayCompensation);
 
         if(state != MusicManagerState.OneShot){ nextSource.loop = true; }
         else { nextSource.loop = false; }

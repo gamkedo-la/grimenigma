@@ -5,6 +5,7 @@ using UnityEngine;
 public class SetMusicManagerIntensity : MonoBehaviour
 {
     [SerializeField] int value;
+    [SerializeField] bool triggerOnce = true;
 
     EncounterListener listener;
     MusicManager musicManager;
@@ -20,6 +21,9 @@ public class SetMusicManagerIntensity : MonoBehaviour
 
     void SetIntensity(string label)
     {
-        if(listener.label == label){ musicManager.SetIntensity(value); }
+        if(listener.label == label){
+            musicManager.SetIntensity(value);
+            if(triggerOnce){ Destroy(gameObject); }
+        }
     }
 }
