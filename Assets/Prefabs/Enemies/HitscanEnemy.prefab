@@ -254,11 +254,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5b3d8fc53b50c4c854d4d3ac10cd76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 150
+  radius: 50
   angle: 360
   ObstructionMask:
     serializedVersion: 2
-    m_Bits: 3154116663
+    m_Bits: 1006634999
   canSeeTarget: 0
   timeWithTarget: 0
   targetToFind: {fileID: 0}
@@ -320,7 +320,7 @@ MonoBehaviour:
   attackType: 0
   piercingDamage: 0
   hitScanDamage: 10
-  range: 500
+  range: 100
   cooldown: 2.1
   spread: 1.07
   drawTime: 2
