@@ -12,6 +12,7 @@ public class ProjectileEnemyAI : EnemyBaseAI
     }
     public override void HandleAlerted()
     {
+        isAlerted = true;
         HandleAttack();
     }
     public override void HandleChase()
