@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicTrackData
 {
     [SerializeField] AudioClip _track;
+    [SerializeField] public bool isInteruptable = true;
     public AudioClip Track {
         get { return _track; }
         private set
@@ -22,7 +23,6 @@ public class MusicTrackData
         private set
         {
             _beats = value;
-            CalculateTiming(BPM, _beats, Subdivision);
         }
     }
     [SerializeField] private int _subdivision;
@@ -31,7 +31,6 @@ public class MusicTrackData
         private set
         {
             _subdivision = value;
-            CalculateTiming(BPM, Beats, _subdivision);
         }
     }
     [SerializeField] private int _bpm;
@@ -40,7 +39,6 @@ public class MusicTrackData
         private set
         {
             _bpm = value;
-            CalculateTiming(_bpm, Beats, Subdivision);
         }
     }
 
@@ -48,6 +46,13 @@ public class MusicTrackData
     public double BeatLength { get; private set; }
     public double SemiquaverLength { get; private set; }
     public double BarLength { get; private set; }
+    public double BarDuration {get; private set;}
+
+    public void CalculateTimings()
+    {
+        CalculateDuration(Track);
+        CalculateTiming(BPM, Beats, Subdivision);
+    }
 
     void CalculateDuration(AudioClip track)
     {
@@ -63,5 +68,6 @@ public class MusicTrackData
         BeatLength = 60d/bpm;
         SemiquaverLength = BeatLength/beats;
         BarLength = BeatLength * beats * (beats/subdivision);
+        BarDuration = 60d/bpm * beats;
     }
 }

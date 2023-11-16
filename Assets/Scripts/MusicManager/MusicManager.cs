@@ -9,6 +9,8 @@ public class MusicManager : MonoBehaviour
     bool changeMusic, isPaused, queueOneShot, playingOneShot;
     int lastIntensity, oneShotIntensity, sourceIndex, currentTrackFequency;
     double startTime, remainder, currentTrackLength, nextEndTime;
+    double currentDuration, currentBPM, currentBeatLength, currentSemiquaverLength, currentBarLength, currentBarDuration;
+    bool currentIsInteruptable;
     double buffer = 0.2;
     double bodge_delayCompensation = 0.5; // Prevents short delay in start time.
     
@@ -115,32 +117,84 @@ public class MusicManager : MonoBehaviour
         Debug.LogWarning("MusicManager Resume method was called, but is not implemented.");
     }
 
+    void StoreTrackData(MusicTrackData track)
+    {
+        currentDuration = track.Duration;
+        currentBPM = track.BPM;
+        currentBeatLength = track.BeatLength;
+        currentSemiquaverLength = track.SemiquaverLength;
+        currentBarLength = track.BarLength;
+        currentBarDuration = track.BarDuration;
+        currentIsInteruptable = track.isInteruptable;
+
+        Debug.LogFormat("NewTimeData: Dur:{0}, BPM:{1}, BTL:{2}, SQL:{3}, BRL:{4}, BRD:{5}", currentDuration, currentBPM, currentBeatLength, currentSemiquaverLength, currentBarLength, currentBarDuration );
+    }
+
+    double CalculateScheduleTime()
+    {
+        AudioSource currentSource = sources[sourceIndex];
+
+        //Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
+
+        double timeToNextTrack;
+        double timeElapsed;
+        double timeToNext;
+        double time;
+        double interval;
+        
+        timeElapsed = currentSource.timeSamples / currentSource.clip.frequency;
+        time = AudioSettings.dspTime;
+
+        if(currentIsInteruptable){
+            interval = currentBarDuration;
+            remainder = timeElapsed % interval;
+            timeToNext = time + currentBarDuration - remainder;
+        }
+        else{
+            Debug.Log("yes");
+            interval = currentDuration;
+            remainder = currentDuration - timeElapsed;
+            timeToNext = time + remainder;
+        }
+        
+        remainder = interval - timeElapsed;
+
+        /*
+        remainder = timeElapsed % currentBarDuration;
+        timeToNext = time + currentBarDuration - remainder;
+        timeToNextTrack = time + currentBarDuration - remainder;
+        */
+
+        Debug.LogFormat("time:{0}, IntvlDur:{1}, Rem:{2}", time, interval, remainder);
+        //timeToNextTrack = time + currentBarDuration - remainder;
+
+        //Debug.LogFormat("NextDelta:{0}, Time:{1}, Remainder:{2}", timeToNextTrack, time, remainder);
+
+        //return timeToNextTrack;
+        return timeToNext;
+    }
+
     void QueueTrack(MusicTrackData nextTrack)
     {
         AudioSource currentSource = sources[sourceIndex];
 
-        double currentTrackEndTime = 0;
-        double timeToNextTrack = 0;
-
+        double nextTime = -1;
         if(lastState == MusicManagerState.Paused || lastState == MusicManagerState.Init){
-            //Debug.Log("yes");
-            timeToNextTrack = AudioSettings.dspTime + buffer;
+            nextTime = AudioSettings.dspTime + buffer;
         }
         else if(currentSource.isPlaying){
-            //Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
-            remainder = currentSource.clip.samples / currentSource.clip.frequency;
-            currentTrackEndTime = AudioSettings.dspTime + remainder;
-            double timeToNextBeat = currentTrackEndTime - music.data[sourceIndex].BeatLength;
-            Debug.Log(music.data[sourceIndex].BeatLength);
-            timeToNextTrack = timeToNextBeat;
-            //Debug.LogFormat("Current track will end at: {0}. current time: {1}", currentTrackEndTime, AudioSettings.dspTime);
-            currentSource.SetScheduledEndTime(timeToNextTrack);
+            nextTime = CalculateScheduleTime();
+            currentSource.SetScheduledEndTime(nextTime);
         }
+
+        StoreTrackData(nextTrack);
         AudioSource nextSource = GetNextAudioSource();
+        
 
-
+        Debug.LogFormat("nextTime: {0}", nextTime);
         nextSource.clip = nextTrack.Track;
-        nextSource.PlayScheduled(timeToNextTrack-bodge_delayCompensation);
+        //nextSource.PlayScheduled(nextTime-bodge_delayCompensation);
+        nextSource.PlayScheduled(nextTime);
 
         if(state != MusicManagerState.OneShot){ nextSource.loop = true; }
         else { nextSource.loop = false; }
