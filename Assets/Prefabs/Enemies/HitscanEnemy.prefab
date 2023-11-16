@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 6749481306879995972}
   - component: {fileID: 7531508779926904030}
   - component: {fileID: 8141884384853240144}
-  - component: {fileID: 8515400715444556916}
   m_Layer: 3
   m_Name: HitscanEnemy
   m_TagString: enemy
@@ -221,7 +220,7 @@ MonoBehaviour:
   imporoveSpreadIncrement: 0
   patrolRange: 50
   maintainDistanceFromTarget: 30
-  animController: {fileID: 8515400715444556916}
+  animController: {fileID: 0}
   alertSound: {fileID: 8300000, guid: b175fdb9eccddb241821bb46738a3cb8, type: 3}
   soundSource: {fileID: 6749481306879995972}
   whatIsTarget:
@@ -522,27 +521,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 3.5, z: 0.75}
   m_Center: {x: 0, y: 0.97, z: 0}
---- !u!95 &8515400715444556916
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7630765295138871340}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bcb7aa09020a38f488f91a23f62ca94d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8201726889438968295
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +676,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db363ae69f8bb9c47b917e16dab6e533, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4799560433882886245}
     - targetCorrespondingSourceObject: {fileID: -8283535546214742128, guid: db363ae69f8bb9c47b917e16dab6e533, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5783307580589431155}
@@ -725,3 +706,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthController: {fileID: 7630765295138871349}
+--- !u!1 &5619545873725196714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: db363ae69f8bb9c47b917e16dab6e533, type: 3}
+  m_PrefabInstance: {fileID: 4701136663263982843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4799560433882886245
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619545873725196714}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bcb7aa09020a38f488f91a23f62ca94d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
