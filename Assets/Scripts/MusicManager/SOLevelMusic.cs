@@ -6,4 +6,11 @@ using UnityEngine;
 public class SOLevelMusic : ScriptableObject
 {
     public List<MusicTrackData> data;
+
+    void OnValidate()
+    {
+        foreach(MusicTrackData track in data){
+            track.CalculateTimings();
+        }
+    }
 }
