@@ -9,7 +9,8 @@ public class MusicManager : MonoBehaviour
     bool changeMusic, isPaused, queueOneShot, playingOneShot;
     int lastIntensity, oneShotIntensity, sourceIndex, currentTrackFequency;
     double startTime, remainder, currentTrackLength, nextEndTime;
-    double buffer = 0.5;
+    double buffer = 0.2;
+    double bodge_delayCompensation = 0.5;
     
     MusicManagerState state, nextState, lastState;
     SOLevelMusic music, lastMusic, oneShot;
@@ -120,7 +121,11 @@ public class MusicManager : MonoBehaviour
 
         double currentTrackEndTime = 0;
 
-        if(currentSource.isPlaying){
+        if(lastState == MusicManagerState.Paused || lastState == MusicManagerState.Init){
+            Debug.Log("yes");
+            currentTrackEndTime = AudioSettings.dspTime + buffer;
+        }
+        else if(currentSource.isPlaying){
             //Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
             remainder = currentSource.clip.samples / currentSource.clip.frequency;
             currentTrackEndTime = AudioSettings.dspTime + remainder;
@@ -129,13 +134,9 @@ public class MusicManager : MonoBehaviour
         }
         AudioSource nextSource = GetNextAudioSource();
 
-        if(state == MusicManagerState.Paused || state == MusicManagerState.Init){
-            currentTrackEndTime = AudioSettings.dspTime + buffer;
-        }
-
 
         nextSource.clip = nextTrack.Track;
-        nextSource.PlayScheduled(currentTrackEndTime);
+        nextSource.PlayScheduled(currentTrackEndTime-bodge_delayCompensation);
 
         if(state != MusicManagerState.OneShot){ nextSource.loop = true; }
         else { nextSource.loop = false; }
