@@ -9,10 +9,10 @@ public class MusicManager : MonoBehaviour
     bool changeMusic, isPaused, queueOneShot, playingOneShot;
     int lastIntensity, oneShotIntensity, sourceIndex, currentTrackFequency;
     double startTime, remainder, currentTrackLength, nextEndTime;
-    double currentDuration, currentBPM, currentBeatLength, currentSemiquaverLength, currentBarLength, currentBarDuration;
+    double currentDuration, currentBPM, currentBeatLength, currentSemiquaverLength, currentBarLength, currentBarDuration, currentMeasureDuration;
     bool currentIsInteruptable;
     double buffer = 0.2;
-    double bodge_delayCompensation = 0.5; // Prevents short delay in start time.
+    double bodge_delayCompensation = .8d; // Prevents short delay in start time.
     
     MusicManagerState state, nextState, lastState;
     SOLevelMusic music, lastMusic, oneShot;
@@ -54,6 +54,7 @@ public class MusicManager : MonoBehaviour
 
     public void SetIntensity(int newIntensity)
     {
+        //Debug.LogFormat("newIntensity: {0}", newIntensity);
         nextState = MusicManagerState.ChangeTrack;
         intensity = newIntensity;
     }
@@ -104,7 +105,10 @@ public class MusicManager : MonoBehaviour
 
     AudioSource GetNextAudioSource()
     {
-        sourceIndex = 1 - sourceIndex;
+        if(sources[sourceIndex].timeSamples != 0){
+            sourceIndex = 1 - sourceIndex;
+        }
+        
         return sources[sourceIndex];
     }
 
@@ -125,9 +129,10 @@ public class MusicManager : MonoBehaviour
         currentSemiquaverLength = track.SemiquaverLength;
         currentBarLength = track.BarLength;
         currentBarDuration = track.BarDuration;
+        currentMeasureDuration = track.MeasureDuration;
         currentIsInteruptable = track.isInteruptable;
 
-        Debug.LogFormat("NewTimeData: Dur:{0}, BPM:{1}, BTL:{2}, SQL:{3}, BRL:{4}, BRD:{5}", currentDuration, currentBPM, currentBeatLength, currentSemiquaverLength, currentBarLength, currentBarDuration );
+        //Debug.LogFormat("NewTimeData: Dur:{0}, BPM:{1}, BTL:{2}, SQL:{3}, BRL:{4}, BRD:{5}", currentDuration, currentBPM, currentBeatLength, currentSemiquaverLength, currentBarLength, currentBarDuration );
     }
 
     double CalculateScheduleTime()
@@ -142,22 +147,22 @@ public class MusicManager : MonoBehaviour
         double time;
         double interval;
         
-        timeElapsed = currentSource.timeSamples / currentSource.clip.frequency;
+        timeElapsed = currentSource.timeSamples / currentSource.clip.frequency; //pitch shifting will impact this!
         time = AudioSettings.dspTime;
 
         if(currentIsInteruptable){
-            interval = currentBarDuration;
+            //Debug.LogFormat("{0}-{1}",currentBarDuration, currentMeasureDuration);
+            interval = currentBeatLength;
             remainder = timeElapsed % interval;
-            timeToNext = time + currentBarDuration - remainder;
+            timeToNext = AudioSettings.dspTime + currentBarDuration - remainder;
         }
         else{
-            Debug.Log("yes");
             interval = currentDuration;
             remainder = currentDuration - timeElapsed;
-            timeToNext = time + remainder;
+            timeToNext = AudioSettings.dspTime + remainder - bodge_delayCompensation;
         }
         
-        remainder = interval - timeElapsed;
+        //remainder = interval - timeElapsed;
 
         /*
         remainder = timeElapsed % currentBarDuration;
@@ -165,10 +170,10 @@ public class MusicManager : MonoBehaviour
         timeToNextTrack = time + currentBarDuration - remainder;
         */
 
-        Debug.LogFormat("time:{0}, IntvlDur:{1}, Rem:{2}", time, interval, remainder);
+        //Debug.LogFormat("time:{0}, IntvlDur:{1}, Rem:{2}", time, interval, remainder);
         //timeToNextTrack = time + currentBarDuration - remainder;
 
-        //Debug.LogFormat("NextDelta:{0}, Time:{1}, Remainder:{2}", timeToNextTrack, time, remainder);
+        Debug.LogFormat("NextDelta:{0}, Time:{1}, Remainder:{2}", timeToNext, time, remainder);
 
         //return timeToNextTrack;
         return timeToNext;
@@ -184,6 +189,7 @@ public class MusicManager : MonoBehaviour
         }
         else if(currentSource.isPlaying){
             nextTime = CalculateScheduleTime();
+            Debug.Log(nextTime);
             currentSource.SetScheduledEndTime(nextTime);
         }
 
@@ -191,15 +197,15 @@ public class MusicManager : MonoBehaviour
         AudioSource nextSource = GetNextAudioSource();
         
 
-        Debug.LogFormat("nextTime: {0}", nextTime);
+        //Debug.LogFormat("nextTime: {0}", nextTime);
         nextSource.clip = nextTrack.Track;
-        //nextSource.PlayScheduled(nextTime-bodge_delayCompensation);
         nextSource.PlayScheduled(nextTime);
+        //nextSource.PlayScheduled(nextTime);
 
         if(state != MusicManagerState.OneShot){ nextSource.loop = true; }
         else { nextSource.loop = false; }
 
-        Debug.LogFormat("Queued clip:{0}", nextSource.clip.name);
+        //Debug.LogFormat("Queued clip:{0}", nextSource.clip.name);
 
         currentTrackLength = nextTrack.Duration;
         currentTrackFequency = nextTrack.Track.frequency;

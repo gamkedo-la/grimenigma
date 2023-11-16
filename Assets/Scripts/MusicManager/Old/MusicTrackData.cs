@@ -47,6 +47,7 @@ public class MusicTrackData
     public double SemiquaverLength { get; private set; }
     public double BarLength { get; private set; }
     public double BarDuration {get; private set;}
+    public double MeasureDuration{ get; private set; }
 
     public void CalculateTimings()
     {
@@ -69,5 +70,6 @@ public class MusicTrackData
         SemiquaverLength = BeatLength/beats;
         BarLength = BeatLength * beats * (beats/subdivision);
         BarDuration = 60d/bpm * beats;
+        MeasureDuration = BarDuration * Beats;
     }
 }
