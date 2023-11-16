@@ -62,10 +62,10 @@ MonoBehaviour:
   attackType: 0
   piercingDamage: 0
   hitScanDamage: 1
-  range: 100
+  range: 150
   cooldown: 1.2
   spread: 0
-  drawTime: 0.35
+  drawTime: 0.15
   hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
   poolID: 1
@@ -76,13 +76,14 @@ MonoBehaviour:
   tracer: {fileID: 0}
   tracerLifeSpan: 0
   projectileAmmount: 1
-  infiniteAmmmo: 1
+  infiniteAmmmo: 0
   ammo: 50
   maxAmmo: 100
   soundSource: {fileID: 4856882577855044660}
   firingSFX: {fileID: 8300000, guid: ccd8c14e78ec6eb48b80432d2b05252c, type: 3}
   hasChargeSound: 1
   chargeSFX: {fileID: 8300000, guid: 90536601f96ccef4ebd2eb32c4d147e2, type: 3}
+  bodge_isEnemy: 0
   ownerTag: Player
   inclusionMasks:
     serializedVersion: 2
