@@ -114,14 +114,23 @@ public abstract class EnemyBaseAI : MonoBehaviour
                 HandleAttack();
                 break;
             case AIState.move:
-                // This does not really do what it says it does lol.
-                state = AIState.chase;
-                HandleChase();
                 break;
             default:
-                agentMove.Patrol();
+                HandlePatrol();
                 break;
         }
+
+        // Bodge, but should work
+        if(state != AIState.move){
+            if (animController) animController.SetBool("IsMoving", false);
+        }
+    }
+
+    public void HandlePatrol()
+    {
+        if (animController) animController.SetBool("IsMoving", true);
+        state = AIState.move;
+        agentMove.Patrol();
     }
 
     public void CheckDistanceToTarget()
@@ -134,11 +143,13 @@ public abstract class EnemyBaseAI : MonoBehaviour
             {
                 state = AIState.attack;
                 if (animController) animController.SetBool("InRange", true);
+                if (animController) animController.SetBool("IsMoving", false);
             }
             else
             {
                 state = AIState.chase;
                 if (animController) animController.SetBool("InRange", false);
+                if (animController) animController.SetBool("IsMoving", true);
             }
 
             // Sorry this is not very clean logic, but I couldn't find a better place for it.
