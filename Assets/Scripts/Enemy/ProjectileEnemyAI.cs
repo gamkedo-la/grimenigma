@@ -6,10 +6,13 @@ public class ProjectileEnemyAI : EnemyBaseAI
 {
     public override void HandleAttack()
     {
+        //Debug.DrawLine(transform.position, target.position, Color.red, 1);
+        //Debug.LogFormat("Target transform:{0}", target.position);
         StartCoroutine(RunAttack(target.position, Random.Range(1, maxAttacks+1), weapon.cooldown));
     }
     public override void HandleAlerted()
     {
+        isAlerted = true;
         HandleAttack();
     }
     public override void HandleChase()
@@ -17,6 +20,10 @@ public class ProjectileEnemyAI : EnemyBaseAI
         HandleAttack();
     }
 
+    public override void OnBeginAttack()
+    {
+        // do nothing
+    }
 
     private void Awake()
     {

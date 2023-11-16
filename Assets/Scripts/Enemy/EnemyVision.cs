@@ -12,7 +12,7 @@ public class EnemyVision : MonoBehaviour
     [Range(0f, 360f)][SerializeField] public float angle;
     [SerializeField] LayerMask ObstructionMask;
 
-    [HideInInspector] public bool canSeeTarget;
+    [HideInInspector] public bool canSeeTarget = false;
     [HideInInspector] public float timeWithTarget;
     [HideInInspector] public GameObject targetToFind;
 
@@ -24,6 +24,11 @@ public class EnemyVision : MonoBehaviour
         targetMask = LayerMask.GetMask("Player");
         
         StartCoroutine(RunSearchForTarget());
+    }
+
+    void OnEnable()
+    {
+        canSeeTarget = false;
     }
 
     void Update()

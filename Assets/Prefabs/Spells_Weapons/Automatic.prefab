@@ -63,13 +63,13 @@ MonoBehaviour:
   piercingDamage: 0
   hitScanDamage: 1
   range: 100
-  cooldown: 0.03
+  cooldown: 0.15
   spread: 0
   drawTime: 0
   hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
   poolID: 1
-  projectile: {fileID: 9028769795115557989, guid: 9262a13cdd2e99f49a108cb19ced4402, type: 3}
+  projectile: {fileID: 9028769795115557989, guid: 8053acc437bc40f4297cdf651e86cc27, type: 3}
   setProjectileLayer: 0
   projectileLayer: 0
   shouldRenderTracer: 0
@@ -83,6 +83,7 @@ MonoBehaviour:
   firingSFX: {fileID: 8300000, guid: 7fe85afc11d3df848a51080bdb401d5f, type: 3}
   hasChargeSound: 0
   chargeSFX: {fileID: 0}
+  bodge_isEnemy: 0
   ownerTag: Player
   inclusionMasks:
     serializedVersion: 2

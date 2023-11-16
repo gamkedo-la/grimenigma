@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8083f5595e7e2e547b8e5ffc4cd69f7b, type: 3}
+  m_Name: BrutalFortressMusic
+  m_EditorClassIdentifier: 
+  data:
+  - mixerChannel: Music1
+    intensities: 00000000
+    volumes:
+    - 0
+    audio: {fileID: 8300000, guid: 7be7498cadc06ac428225baf1d489f84, type: 3}
+  - mixerChannel: Music2
+    intensities: 01000000
+    volumes:
+    - 0
+    audio: {fileID: 8300000, guid: b36ffae5522d2404692fae16a0209d49, type: 3}

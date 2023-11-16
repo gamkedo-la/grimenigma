@@ -21,6 +21,8 @@ public abstract class EnemyBaseAI : MonoBehaviour
     [Header("Movement")]
     [SerializeField] public float patrolRange;
     [SerializeField] public float maintainDistanceFromTarget;
+    [SerializeField] protected Animator animController;
+    
     [Header("Audio")]
     [SerializeField] public AudioClip alertSound;
     [SerializeField] public AudioSource soundSource;
@@ -41,9 +43,12 @@ public abstract class EnemyBaseAI : MonoBehaviour
     [HideInInspector] public bool isPerformingAction, isAlerted;
     [HideInInspector] public float currentSpread;
 
+    [SerializeField] public bool debugMode = false;
+
     public abstract void HandleAttack();
     public abstract void HandleAlerted();
     public abstract void HandleChase();
+    public abstract void OnBeginAttack();
 
     void OnEnable()
     {
@@ -53,6 +58,7 @@ public abstract class EnemyBaseAI : MonoBehaviour
         hpController = GetComponent<HealthController>();
         weapon = GetComponent<AttackController>();
         target = GameObject.Find("Player/Body").transform;
+        if (animController) animController.SetBool("HasTarget", target);
 
         hpController.onDamage += RecievedDamage;
     }
@@ -108,23 +114,49 @@ public abstract class EnemyBaseAI : MonoBehaviour
                 HandleAttack();
                 break;
             case AIState.move:
-                // This does not really do what it says it does lol.
-                state = AIState.chase;
-                HandleChase();
                 break;
             default:
-                agentMove.Patrol();
+                HandlePatrol();
                 break;
         }
+
+        // Bodge, but should work
+        if(state != AIState.move){
+            if (animController) animController.SetBool("IsMoving", false);
+        }
+    }
+
+    public void HandlePatrol()
+    {
+        if (animController) animController.SetBool("IsMoving", true);
+        state = AIState.move;
+        agentMove.Patrol();
     }
 
     public void CheckDistanceToTarget()
     {
+        var prevState = state;
         float distance = Vector3.Distance(transform.position, target.position);
         if(distance - maintainDistanceFromTarget <= 0){
             // Might cause the enemy to attack when out of range.
-            if(Random.Range(0, aggressionLevel) <= aggressionLevel){ state = AIState.attack; }
-            else { state = AIState.chase; }
+            if (Random.Range(0, aggressionLevel) <= aggressionLevel)
+            {
+                state = AIState.attack;
+                if (animController) animController.SetBool("InRange", true);
+                if (animController) animController.SetBool("IsMoving", false);
+            }
+            else
+            {
+                state = AIState.chase;
+                if (animController) animController.SetBool("InRange", false);
+                if (animController) animController.SetBool("IsMoving", true);
+            }
+
+            // Sorry this is not very clean logic, but I couldn't find a better place for it.
+            if (prevState == AIState.idle && state == AIState.attack)
+            {
+                OnBeginAttack();
+            }
         }
     }
 
@@ -154,6 +186,7 @@ public abstract class EnemyBaseAI : MonoBehaviour
             transform.LookAt(targetPosition);
             weapon.spread = baseWeaponSpread + initialSpreadPenalty;
             weapon.Attack();
+            if (animController) animController.SetTrigger("Attack");
             repeat--;
             yield return new WaitForSeconds(delayTime);
         }

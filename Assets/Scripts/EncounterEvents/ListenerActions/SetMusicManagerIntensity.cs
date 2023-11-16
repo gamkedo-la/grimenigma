@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetValue : MonoBehaviour
+public class SetMusicManagerIntensity : MonoBehaviour
 {
     [SerializeField] int value;
+    [SerializeField] bool triggerOnce = true;
 
     EncounterListener listener;
     MusicManager musicManager;
@@ -20,6 +21,9 @@ public class SetValue : MonoBehaviour
 
     void SetIntensity(string label)
     {
-        if(listener.label == label){ musicManager.intensity =  value; }
+        if(listener.label == label){
+            musicManager.SetIntensity(value);
+            if(triggerOnce){ Destroy(gameObject); }
+        }
     }
 }
