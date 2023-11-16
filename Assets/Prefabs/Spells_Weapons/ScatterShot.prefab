@@ -64,7 +64,7 @@ MonoBehaviour:
   hitScanDamage: 1
   range: 700
   cooldown: 1
-  spread: 50
+  spread: 30
   drawTime: 0
   hasCrosshair: 0
   sourceOfTruth: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   shouldRenderTracer: 0
   tracer: {fileID: 0}
   tracerLifeSpan: 0
-  projectileAmmount: 12
+  projectileAmmount: 20
   infiniteAmmmo: 0
   ammo: 50
   maxAmmo: 100
@@ -83,6 +83,7 @@ MonoBehaviour:
   firingSFX: {fileID: 8300000, guid: e236fe3f873e17641bd345ff60926902, type: 3}
   hasChargeSound: 0
   chargeSFX: {fileID: 0}
+  bodge_isEnemy: 0
   ownerTag: Player
   inclusionMasks:
     serializedVersion: 2
