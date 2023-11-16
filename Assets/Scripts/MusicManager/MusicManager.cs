@@ -72,11 +72,6 @@ public class MusicManager : MonoBehaviour
             //Debug.LogFormat("state: {0}, nextState: {1}", state, nextState);
             TransitionState();
         }
-        /*
-        else if(state == MusicManagerState.Playing){
-            QueueTrack(music.data[intensity]);
-        }
-        */
 
     }
     #endregion
@@ -108,7 +103,7 @@ public class MusicManager : MonoBehaviour
         if(sources[sourceIndex].timeSamples != 0){
             sourceIndex = 1 - sourceIndex;
         }
-        
+
         return sources[sourceIndex];
     }
 
@@ -141,7 +136,6 @@ public class MusicManager : MonoBehaviour
 
         //Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
 
-        double timeToNextTrack;
         double timeElapsed;
         double timeToNext;
         double time;
@@ -162,20 +156,8 @@ public class MusicManager : MonoBehaviour
             timeToNext = AudioSettings.dspTime + remainder - bodge_delayCompensation;
         }
         
-        //remainder = interval - timeElapsed;
+        //Debug.LogFormat("NextDelta:{0}, Time:{1}, Remainder:{2}", timeToNext, time, remainder);
 
-        /*
-        remainder = timeElapsed % currentBarDuration;
-        timeToNext = time + currentBarDuration - remainder;
-        timeToNextTrack = time + currentBarDuration - remainder;
-        */
-
-        //Debug.LogFormat("time:{0}, IntvlDur:{1}, Rem:{2}", time, interval, remainder);
-        //timeToNextTrack = time + currentBarDuration - remainder;
-
-        Debug.LogFormat("NextDelta:{0}, Time:{1}, Remainder:{2}", timeToNext, time, remainder);
-
-        //return timeToNextTrack;
         return timeToNext;
     }
 
@@ -200,7 +182,6 @@ public class MusicManager : MonoBehaviour
         //Debug.LogFormat("nextTime: {0}", nextTime);
         nextSource.clip = nextTrack.Track;
         nextSource.PlayScheduled(nextTime);
-        //nextSource.PlayScheduled(nextTime);
 
         if(state != MusicManagerState.OneShot){ nextSource.loop = true; }
         else { nextSource.loop = false; }
