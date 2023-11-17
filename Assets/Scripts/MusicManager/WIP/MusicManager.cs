@@ -15,6 +15,11 @@ public class MusicManager : MonoBehaviour
     bool currentIsInteruptable;
     double buffer = 0.2;
     double bodge_delayCompensation = 0.2d; // Prevents short delay in start time.
+
+        double timeElapsed;
+        double timeToNext;
+        double time;
+        double interval;
     
     MusicManagerState state,nextState, lastState;
     SOLevelMusic music, lastMusic, oneShot;
@@ -154,11 +159,6 @@ public class MusicManager : MonoBehaviour
         AudioSource currentSource = sources[sourceIndex];
 
         //Debug.LogFormat("{0},{1}", currentSource.time, currentSource.clip.frequency);
-
-        double timeElapsed;
-        double timeToNext;
-        double time;
-        double interval;
         
         timeElapsed = currentSource.clip.samples / currentSource.clip.frequency; //pitch shifting will impact this!
         time = AudioSettings.dspTime;
