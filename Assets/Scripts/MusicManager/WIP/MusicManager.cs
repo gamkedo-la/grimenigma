@@ -176,7 +176,7 @@ public class MusicManager : MonoBehaviour
             timeToNext = AudioSettings.dspTime + remainder - bodge_delayCompensation;
         }
         
-        Debug.LogFormat("NextDelta:{0}, Time:{1}, Remainder:{2}, Interuptable: {3}", timeToNext, time, remainder, currentIsInteruptable);
+        //Debug.LogFormat("NextDelta:{0}, Time:{1}, Remainder:{2}, Interuptable: {3}", timeToNext, time, remainder, currentIsInteruptable);
 
         return timeToNext;
     }
