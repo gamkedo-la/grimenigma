@@ -19,7 +19,7 @@ public class ResourcePickup : MonoBehaviour
     [Header("Audio")]
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip fxSound;
-    [SerializeField] EquipmentHandler equipmentHandler;
+    EquipmentHandler equipmentHandler;
 
     void Start()
     {
