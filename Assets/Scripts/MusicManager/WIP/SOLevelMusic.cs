@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "NewLevelMusic", menuName = "LevelMusic")]
 public class SOLevelMusic : ScriptableObject
 {
-    public List<MusicTrackData> data;
+    [SerializeField] public List<MusicTrackData> data;
 
     void OnValidate()
     {
