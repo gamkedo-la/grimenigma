@@ -33,7 +33,9 @@ public class TriggerMusicOneShot : MonoBehaviour
 
     IEnumerator RunDelay()
     {
-        yield return new WaitForSeconds(delay);
+        if(hasDelay){
+            yield return new WaitForSeconds(delay);
+        }
         TriggerRequestOneShot();
     }
 }

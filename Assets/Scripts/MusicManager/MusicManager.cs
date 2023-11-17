@@ -186,7 +186,7 @@ public class MusicManager : MonoBehaviour
 
         //Debug.LogFormat("nextTime: {0}", nextTime);
         nextSource.clip = nextTrack.Track;
-        nextSource.PlayScheduled(nextTime);
+        nextSource.PlayScheduled(nextTime + buffer);
 
         if(state != MusicManagerState.OneShot){ nextSource.loop = true; }
         else { nextSource.loop = false; }
