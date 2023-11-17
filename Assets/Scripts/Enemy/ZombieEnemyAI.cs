@@ -16,12 +16,12 @@ public class ZombieEnemyAI : EnemyBaseAI
     {
         agentMove.MaintainDistacne(target.position, maintainDistanceFromTarget);
         if(IsTargetWithinAttackRange()){
-            if (animController) animController.SetBool("InRange", false);
+            if (animController) animController.SetBool("InRange", true);
             state = AIState.attack;
             }
         else{
             state = AIState.chase;
-            if (animController) animController.SetBool("InRange", true);
+            if (animController) animController.SetBool("InRange", false);
         }
     }
     public override void OnBeginAttack()
