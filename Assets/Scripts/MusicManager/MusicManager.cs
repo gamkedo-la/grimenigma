@@ -14,7 +14,7 @@ public class MusicManager : MonoBehaviour
     double buffer = 0.2;
     double bodge_delayCompensation = .8d; // Prevents short delay in start time.
     
-    MusicManagerState state, nextState, lastState;
+    MusicManagerState state,nextState, lastState;
     SOLevelMusic music, lastMusic, oneShot;
 
     enum MusicManagerState{
@@ -54,15 +54,17 @@ public class MusicManager : MonoBehaviour
 
     public void SetIntensity(int newIntensity)
     {
-        //Debug.LogFormat("newIntensity: {0}", newIntensity);
+        Debug.LogFormat("newIntensity: {0}", newIntensity);
         nextState = MusicManagerState.ChangeTrack;
         intensity = newIntensity;
     }
 
     #region Unity Callback Funtions
-    void Start()
+
+    void Awake()
     {
         state = MusicManagerState.Init;
+        nextState = MusicManagerState.Init;
     }
 
     void Update()
@@ -173,6 +175,9 @@ public class MusicManager : MonoBehaviour
             nextTime = CalculateScheduleTime();
             Debug.Log(nextTime);
             currentSource.SetScheduledEndTime(nextTime);
+        }
+        else{
+            nextTime = AudioSettings.dspTime + buffer;
         }
 
         StoreTrackData(nextTrack);

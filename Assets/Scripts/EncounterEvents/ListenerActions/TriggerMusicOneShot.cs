@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
 public class TriggerMusicOneShot : MonoBehaviour
 {
     [SerializeField] SOLevelMusic music;
+    [SerializeField] bool hasDelay = false;
+    [SerializeField] float delay = 2;
 
     int intensity = 0;
 
@@ -20,6 +23,17 @@ public class TriggerMusicOneShot : MonoBehaviour
 
     void RequestOneShot(string label)
     {
-        if(listener.label == label){ musicManager.PlayOneShot(music, intensity); }
+        if(listener.label == label){ StartCoroutine(RunDelay()); }
+    }
+
+    void TriggerRequestOneShot()
+    {
+        musicManager.PlayOneShot(music, intensity); 
+    }
+
+    IEnumerator RunDelay()
+    {
+        yield return new WaitForSeconds(delay);
+        TriggerRequestOneShot();
     }
 }
