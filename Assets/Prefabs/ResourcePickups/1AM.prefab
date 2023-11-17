@@ -52,6 +52,7 @@ MonoBehaviour:
   rotationSpeed: 10
   bobbingSpeed: 0.5
   bobbingAmount: 1
+  rotationAxis: {x: 0, y: 0, z: 1}
 --- !u!1 &1400513014605336469
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +177,8 @@ MonoBehaviour:
   ammount: 1
   destroyOnPickup: 1
   soundSource: {fileID: 3391612188775328514}
-  fxSound: {fileID: 8300000, guid: 3664d8ebd377e8f4d9c2b0aefcd4d524, type: 3}
+  fxSound: {fileID: 8300000, guid: a22ffb80ad1b5b54fab1720c2830abc6, type: 3}
+  equipmentHandler: {fileID: 0}
 --- !u!82 &3391612188775328514
 AudioSource:
   m_ObjectHideFlags: 0
