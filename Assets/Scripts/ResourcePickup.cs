@@ -19,7 +19,12 @@ public class ResourcePickup : MonoBehaviour
     [Header("Audio")]
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip fxSound;
+    [SerializeField] EquipmentHandler equipmentHandler;
 
+    void Start()
+    {
+        equipmentHandler = GameObject.Find("Player/Camera/Weapons/ArmL").GetComponent<EquipmentHandler>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -58,7 +63,8 @@ public class ResourcePickup : MonoBehaviour
 
     void HandleAmmunition(Collider other)
     {
-        other.transform.gameObject.GetComponent<PlayerAttack>()?.CurrentWeapon.AddAmmo(ammount);
+        //other.transform.gameObject.GetComponent<PlayerAttack>()?.CurrentWeapon.AddAmmo(ammount);
+        equipmentHandler.AddAmmo(ammount);
         //Debug.Log("Ammo item picked up");
     }
 

@@ -10,6 +10,10 @@ public class EquipmentHandler : MonoBehaviour
 
     int currentIndex;
 
+    public void AddAmmo(int ammount)
+    {
+        equipment[currentIndex]?.GetComponent<AttackController>().AddAmmo(ammount);
+    }
 
     public void SelectNextEquipment()
     {
