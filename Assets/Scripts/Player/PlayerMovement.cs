@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f,5f)][SerializeField] float dashCooldown;
 
     [Header("Slide")]
-    [Range(0f,10f)][SerializeField] float slideForce;
+    [Range(0f,800f)][SerializeField] float slideForce;
     [Range(0f, 3f)][SerializeField] float allowedSlideTime;
     [Range(0f,5f)][SerializeField] float slideCooldown;
 

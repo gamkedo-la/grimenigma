@@ -1649,9 +1649,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce08bd882aca1c4fa7885e72dfb3243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
-  minSpeed: 80
-  maxSpeed: 300
+  speed: 400
+  minSpeed: 300
+  maxSpeed: 500
 --- !u!114 &3878097098548358380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   jumpCooldown: 0.01
   dashForce: 200
   dashCooldown: 3
-  slideForce: 10
+  slideForce: 46
   allowedSlideTime: 0.25
   slideCooldown: 1.02
   sourceAudio: {fileID: 3935610433269987049}
