@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3346441321641177573
 MonoBehaviour:
@@ -77,12 +77,13 @@ MonoBehaviour:
   tracerLifeSpan: 0
   projectileAmmount: 1
   infiniteAmmmo: 0
-  ammo: 50
-  maxAmmo: 100
+  ammo: 1
+  maxAmmo: 5
   soundSource: {fileID: 8064375528521418947}
   firingSFX: {fileID: 8300000, guid: 855f6cfebd07e344bbc39223ec65c5a5, type: 3}
   hasChargeSound: 1
   chargeSFX: {fileID: 8300000, guid: 0755e28eac6b8da4694ca71c9651cb4b, type: 3}
+  bodge_isEnemy: 0
   ownerTag: Player
   inclusionMasks:
     serializedVersion: 2
