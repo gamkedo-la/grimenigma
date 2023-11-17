@@ -581,7 +581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 753828684328209992, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 165
+      value: 231
       objectReference: {fileID: 0}
     - target: {fileID: 753828684328209992, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
       propertyPath: m_LocalPosition.x
@@ -681,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2992053199885522196, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 203
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4563581303746654000, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -697,7 +697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5821757343943598172, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -214
+      value: -280
       objectReference: {fileID: 0}
     - target: {fileID: 6075856908165511131, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
       propertyPath: m_IsActive
@@ -748,7 +748,8 @@ PrefabInstance:
       value: Resume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6422446097907061509, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 753828684328209992, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
       insertIndex: 1
@@ -784,6 +785,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3548ed5811eb9f4da0b400d4b6b7551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSource: {fileID: 0}
+  selectSFX: {fileID: 0}
+  actionSFX: {fileID: 0}
 --- !u!1 &4331399200052215703 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 794065960651706919, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
@@ -828,6 +832,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3548ed5811eb9f4da0b400d4b6b7551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSource: {fileID: 0}
+  selectSFX: {fileID: 0}
+  actionSFX: {fileID: 0}
 --- !u!1 &9180951099889952491 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5219782155012803419, guid: 2d825648da8a81041a7a7f692d22cb84, type: 3}
@@ -845,6 +852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3548ed5811eb9f4da0b400d4b6b7551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSource: {fileID: 0}
+  selectSFX: {fileID: 0}
+  actionSFX: {fileID: 0}
 --- !u!1001 &5130022757357906081
 PrefabInstance:
   m_ObjectHideFlags: 0
