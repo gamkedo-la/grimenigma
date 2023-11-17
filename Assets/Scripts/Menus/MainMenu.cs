@@ -22,6 +22,13 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void Restart()
+    {
+        // Uses scene order to load next scene after main menu.
+        // Doc: https://docs.unity.cn/2019.1/Documentation/Manual/BuildSettings.html
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void Resume()
     {
         gameObject.SetActive(false);
