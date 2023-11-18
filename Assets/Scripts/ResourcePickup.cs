@@ -21,6 +21,8 @@ public class ResourcePickup : MonoBehaviour
     [SerializeField] AudioClip fxSound;
     EquipmentHandler equipmentHandler;
 
+    bool wasUsed;
+
     void Start()
     {
         equipmentHandler = GameObject.Find("Player/Camera/Weapons/ArmL").GetComponent<EquipmentHandler>();
@@ -48,29 +50,42 @@ public class ResourcePickup : MonoBehaviour
                     break;
             }
 
-            PlaySoundFX();
-            if(destroyOnPickup){ Destroy(this.gameObject, 0.1f); }
+            if(wasUsed){
+                PlaySoundFX();
+                if(destroyOnPickup){ Destroy(this.gameObject, 0.1f); }
+            }
         }
     }
 
     void HandleHealth(Collider other)
     {
-        other.transform.gameObject.GetComponent<HealthController>()?.Heal(ammount);
-        soundSource.pitch = Random.Range(0.9f, 1.1f);
-        soundSource.PlayOneShot(fxSound);
+        HealthController controller = other.transform.gameObject?.GetComponent<HealthController>();
+        if(controller && controller.hp < controller.maxHP){
+            controller.Heal(ammount);
+            wasUsed = true;
+        }
         //Debug.Log("Player HP:"  + other.transform.gameObject.GetComponent<HealthController>().hp);
     }
 
     void HandleAmmunition(Collider other)
     {
         //other.transform.gameObject.GetComponent<PlayerAttack>()?.CurrentWeapon.AddAmmo(ammount);
-        equipmentHandler.AddAmmo(ammount);
+        AttackController weapon = equipmentHandler.currentEquipment?.GetComponent<AttackController>();
+        if(weapon && weapon.ammo < weapon.maxAmmo && !weapon.infiniteAmmmo){
+            weapon.AddAmmo(ammount);
+            wasUsed = true;
+        }
+
         //Debug.Log("Ammo item picked up");
     }
 
     void HandleArmour(Collider other)
     {
-        other.transform.gameObject.GetComponent<HealthController>()?.AddArmour(ammount);
+        HealthController controller = other.transform.gameObject?.GetComponent<HealthController>();
+        if(controller && controller.armour < controller.maxArmour){
+            controller.AddArmour(ammount);
+            wasUsed = true;
+        }
         //Debug.Log("Player Armour:"  + other.transform.gameObject.GetComponent<HealthController>().armour);
     }
 
@@ -78,6 +93,7 @@ public class ResourcePickup : MonoBehaviour
     {
         other.transform.gameObject.GetComponent<SpeedController>()?.ChangeSpeed((float) ammount);
         //Debug.Log("Player speed: " + other.gameObject.GetComponent<SpeedController>().speed);
+        wasUsed = true;
     }
 
     void PlaySoundFX()
