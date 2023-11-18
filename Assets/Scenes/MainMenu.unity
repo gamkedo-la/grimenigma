@@ -31878,6 +31878,14 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.375
       objectReference: {fileID: 0}
+    - target: {fileID: 2120608378878023609, guid: 1be17a9c8cb0fb047b69bb05c3843447, type: 3}
+      propertyPath: m_text
+      value: Vertical
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137088507786979049, guid: 1be17a9c8cb0fb047b69bb05c3843447, type: 3}
+      propertyPath: m_text
+      value: Vertical
+      objectReference: {fileID: 0}
     - target: {fileID: 2148287175403031305, guid: 1be17a9c8cb0fb047b69bb05c3843447, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -32014,6 +32022,12 @@ PrefabInstance:
       propertyPath: fovSlider
       value: 
       objectReference: {fileID: 1529420505}
+    - target: {fileID: 4345304294558004001, guid: 1be17a9c8cb0fb047b69bb05c3843447, type: 3}
+      propertyPath: m_text
+      value: 'Sensitivity
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 5212621330057797553, guid: 1be17a9c8cb0fb047b69bb05c3843447, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.04522613
@@ -49247,7 +49261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Verticle
+  m_text: Vertical
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -60062,7 +60076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Verticle
+  m_text: Vertical
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -60714,46 +60728,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 4801498787351642821, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4869567172599599701, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4869567172599599701, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 337330556}
-    - target: {fileID: 4869567172599599701, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 4869567172599599701, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4869567172599599701, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4869567172599599701, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1489087723}
-    - target: {fileID: 4869567172599599701, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4875385258223243599, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 337330556}
-    - target: {fileID: 4875385258223243599, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5260998747792397164, guid: 8a786b769f105b240acc8b44eead887e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
