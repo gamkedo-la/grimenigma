@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BF
   m_EditorClassIdentifier: 
   data:
-  - _track: {fileID: 8300000, guid: 7ea20d939a6e2c445baf94b1f3319a38, type: 3}
+  - _track: {fileID: 8300000, guid: acbe32d90854c9d419cb77f643ea887a, type: 3}
     isInteruptable: 1
     mixerChannel: 
     intensity: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
     _beats: 4
     _subdivision: 4
     _bpm: 168
-  - _track: {fileID: 8300000, guid: fb9bee36d271bbc4d83da2886864f442, type: 3}
+  - _track: {fileID: 8300000, guid: d26352a2e233c9d4abad62dc5ae83d41, type: 3}
     isInteruptable: 1
     mixerChannel: 
     intensity: 1
@@ -29,7 +29,7 @@ MonoBehaviour:
     _beats: 4
     _subdivision: 4
     _bpm: 168
-  - _track: {fileID: 8300000, guid: 7be7498cadc06ac428225baf1d489f84, type: 3}
+  - _track: {fileID: 8300000, guid: e1463aec31c048c49b45caff2ddf3def, type: 3}
     isInteruptable: 1
     mixerChannel: 
     intensity: 2
@@ -37,7 +37,7 @@ MonoBehaviour:
     _beats: 4
     _subdivision: 4
     _bpm: 168
-  - _track: {fileID: 8300000, guid: b6fb9d260cb7f8f4393ae771d7791528, type: 3}
+  - _track: {fileID: 8300000, guid: c69be58c1e890b34b959761f8f28ed57, type: 3}
     isInteruptable: 1
     mixerChannel: 
     intensity: 3
@@ -45,7 +45,7 @@ MonoBehaviour:
     _beats: 4
     _subdivision: 4
     _bpm: 168
-  - _track: {fileID: 8300000, guid: cbd2e9fd773d0824d93f8770e4b1a715, type: 3}
+  - _track: {fileID: 8300000, guid: b5a7ce5a540568044b4e4a4f24d11432, type: 3}
     isInteruptable: 1
     mixerChannel: 
     intensity: 4
@@ -53,10 +53,26 @@ MonoBehaviour:
     _beats: 4
     _subdivision: 4
     _bpm: 168
-  - _track: {fileID: 8300000, guid: 291ade159beb2dc499251d73bee382a5, type: 3}
+  - _track: {fileID: 8300000, guid: 9dea26c91336ede43a6db814c8fe0477, type: 3}
     isInteruptable: 1
     mixerChannel: 
     intensity: 5
+    volume: 0
+    _beats: 4
+    _subdivision: 4
+    _bpm: 168
+  - _track: {fileID: 8300000, guid: 120ffbfe42ae70548b18164c2a66fde8, type: 3}
+    isInteruptable: 0
+    mixerChannel: 
+    intensity: 7
+    volume: 0
+    _beats: 4
+    _subdivision: 4
+    _bpm: 168
+  - _track: {fileID: 8300000, guid: c1c97038427e08c43b46f7f3d1f71870, type: 3}
+    isInteruptable: 0
+    mixerChannel: 
+    intensity: 6
     volume: 0
     _beats: 4
     _subdivision: 4
