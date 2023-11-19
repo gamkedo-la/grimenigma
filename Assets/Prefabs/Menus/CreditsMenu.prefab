@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7870738386958709669}
-  - component: {fileID: 635776545772150310}
   - component: {fileID: 7370269148952597358}
   - component: {fileID: 6699574396365215793}
   m_Layer: 5
@@ -42,25 +41,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 99}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &635776545772150310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388260349023570134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8206d17d1ede48f498810021f24383e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originPosition: {x: 0, y: 0}
-  horizontalSpacing: 300
-  verticalSpacing: 33
-  columnCount: 1
-  menuItems:
-  - {fileID: 3865211299729264666}
-  - {fileID: 5568617692891137686}
 --- !u!114 &7370269148952597358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,8 +160,6 @@ GameObject:
   - component: {fileID: 6225499893944563284}
   - component: {fileID: 2722110263813102502}
   - component: {fileID: 2949728979675186130}
-  - component: {fileID: 1648489833026172000}
-  - component: {fileID: 5512915506706711353}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -206,7 +184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 63.87, y: -404.3}
+  m_AnchoredPosition: {x: 63.87, y: -330}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2722110263813102502
@@ -237,7 +215,49 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <PUT CREDITS HERE!!!>
+  m_text: 'Brandon Paul: Project lead, core gameplay (player movement, weapons, splash
+    damage, resource pickups, inventory system, added pickup items), environment
+    development (spawners, game world design, additional level design), core gameplay
+    UI, audio (gameplay music composer, integration, music manager, additional sounds),
+    enemy AI (enemy types, enemy behavior, created encounter triggers and listeners,
+    scatter shot and piercing damage), main menu, pause menu, performance optimization,
+    save/load of player preferences
+
+    Christer "McFunkypants" Kaitila: Brutal
+    fortress level, vfx (scattershot, ice blast, steam, fire barrier, shot impacts),
+    pickup material improvements, lighting, environment pieces (animated lava, pipes,
+    railings, arches, ramps, small stairs, walls, doors, concrete barrier, keys,
+    light trim, walkways, rocks, ceiling lights, rocky walls, sharp corner, reusable
+    ceiling modules, gear, curved stairs), textures (pressure-plate, amber light,
+    amber trim, concrete, dark steps, tech greeble, stone tiles, grate walkway, warning
+    strip, several concrete texture variations), skybox, crosshair
+
+    Patrick J
+    Thompson: Quadruped model and materials, bonefrog enemy
+
+    Armando Navarrete:
+    Models and materials (item spawner, enemy tower, fireball, tower enemies, 3 health
+    pickup variants)
+
+    Cassidy Noble: Models (animated hands, key, ammo/potions,
+    beacon)
+
+    Tyler Funk: Barrier demon animated model, audio bark for barrier
+    enemy
+
+    Zach Rouhana: Sounds (pickups, attacks, doors, speed pickup, portal),
+    menu music, ammo UI, grace jumps and enemy drops
+
+    Stebs: Sounds (enemy explosion,
+    hitscan damage), audio bug fix, collider trigger fixes
+
+    Gabriel Cornish:
+    Shield and health models
+
+    Neil Urwin: Enemy initial projectile support
+
+    Loren
+    White (non-member): Gameplay music performance, used with permission'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -264,8 +284,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -306,74 +326,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1648489833026172000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3865211299729264666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 0.40784317, b: 0, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.9188481, b: 0, a: 1}
-    m_PressedColor: {r: 1, g: 0.6920089, b: 0.4764151, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 2949728979675186130}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: GoToMenu
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5512915506706711353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3865211299729264666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3548ed5811eb9f4da0b400d4b6b7551, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5568617692891137686
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,8 +566,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: 1024, y: 256}
+  m_AnchoredPosition: {x: 0, y: 342}
+  m_SizeDelta: {x: 1024, y: 121}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4988058309422612191
 CanvasRenderer:
